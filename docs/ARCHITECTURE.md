@@ -100,3 +100,16 @@ client components as props.
 22. **Preview scrolling:** right after `navigate`, a `scrollTo` in the same
     batch is often undone by load-time scroll restoration. Scroll in a
     separate call (or use the wheel) before screenshots.
+23. **Share image is `/og.png`, not `opengraph-image`.** The file convention
+    serves an extensionless URL, which `trailingSlash` 308-redirects (dev and
+    prod). `app/og.png/route.tsx` (static `ImageResponse`) avoids that; root
+    metadata points at `site.ogImage`. Metadata merges shallowly, so any page
+    that sets `openGraph`/`twitter` must include `site.ogImage` again (P3.2
+    helper does this). Satori needs TTF/OTF; no brand TTF is local, so the
+    image uses the bundled Geist font.
+24. **Every page goes in `src/content/pages.ts` first.** Sitemap, llms.txt,
+    stub breadcrumbs and `registryMetadata(path)` read it; `registryMetadata`
+    and `StubPage` throw if a path is missing. Replacing a stub: keep
+    `registryMetadata("/path/")` (or `pageMetadata()` for custom titles) and
+    swap `<StubPage>` for the real page. Check nested canonicals keep the
+    trailing slash (they do with `alternates.canonical: path`).

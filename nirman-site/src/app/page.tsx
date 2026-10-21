@@ -8,30 +8,30 @@ import { FreeTools } from "@/components/free-tools";
 import { Testimonials } from "@/components/testimonials";
 import { Faq } from "@/components/faq";
 import { FinalCta } from "@/components/final-cta";
-import { site } from "@/content/site";
+import { JsonLd } from "@/components/json-ld";
+import { localBusinessLd, organizationLd, registryMetadata, websiteLd } from "@/lib/seo";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: `${site.name} ${site.descriptor}`,
-  description: site.description,
-  url: site.url,
-  email: site.email,
-  areaServed: "IN",
-  makesOffer: [
-    "SEO services",
-    "Website design and development",
-    "CRM solutions",
-    "Custom software development",
-    "Mobile app development",
-    "WhatsApp and email marketing",
-  ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } })),
-};
+export const metadata = registryMetadata("/");
+
+const jsonLd = [
+  organizationLd(),
+  websiteLd(),
+  localBusinessLd({
+    offers: [
+      "SEO services",
+      "Website design and development",
+      "CRM solutions",
+      "Custom software development",
+      "Mobile app development",
+      "WhatsApp and email marketing",
+    ],
+  }),
+];
 
 export default function Home() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <Hero />
       <Services />
       <NirmanCrm />

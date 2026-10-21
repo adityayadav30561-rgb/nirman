@@ -1,21 +1,13 @@
 import { Plus } from "lucide-react";
 import { faqs } from "@/content/home";
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
+import { JsonLd } from "@/components/json-ld";
+import { faqPageLd } from "@/lib/seo";
 
 /** FAQ (handoff §4), followed on the page by the final CTA. Outputs FAQPage JSON-LD. */
 export function Faq() {
   return (
     <section id="faq" aria-labelledby="faq-title" className="scroll-mt-20 pb-24 lg:pb-32">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={faqPageLd(faqs)} />
       <div className="container-site grid gap-x-12 gap-y-10 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <h2 id="faq-title" className="display text-[clamp(2.6rem,5vw,4.4rem)] lg:sticky lg:top-28">

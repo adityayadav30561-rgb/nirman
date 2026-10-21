@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { site } from "@/content/site";
+import { JsonLd } from "@/components/json-ld";
+import { breadcrumbLd } from "@/lib/seo";
 
 export type Crumb = { label: string; href: string };
 
@@ -9,19 +10,9 @@ export type Crumb = { label: string; href: string };
  * including the current page last; the first item should be Home ("/").
  */
 export function Breadcrumbs({ items, className = "" }: { items: Crumb[]; className?: string }) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items.map((c, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: c.label,
-      item: new URL(c.href, site.url).toString(),
-    })),
-  };
   return (
     <nav aria-label="Breadcrumb" className={className}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={breadcrumbLd(items)} />
       <ol className="flex flex-wrap items-center gap-1.5 text-[0.875rem] text-ink-3">
         {items.map((c, i) => {
           const last = i === items.length - 1;

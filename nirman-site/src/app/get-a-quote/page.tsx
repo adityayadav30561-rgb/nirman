@@ -1,0 +1,9 @@
+import { StubPage } from "@/components/stub-page";
+import { registryMetadata } from "@/lib/seo";
+
+// Stub (P3.4). Replace with the real page.
+export const metadata = registryMetadata("/get-a-quote/");
+
+export default function Page() {
+  return <StubPage path="/get-a-quote/" />;
+}

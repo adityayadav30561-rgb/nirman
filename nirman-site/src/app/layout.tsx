@@ -27,11 +27,16 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
+  // Pages that set their own openGraph/twitter replace these objects whole
+  // (shallow merge), so they must pass site.ogImage again.
   openGraph: {
     title: site.name,
     description: site.description,
+    siteName: site.name,
     type: "website",
+    images: [site.ogImage],
   },
+  twitter: { card: "summary_large_image", images: [site.ogImage] },
 };
 
 export const viewport: Viewport = {
