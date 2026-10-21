@@ -2,6 +2,7 @@ import { Boxes, ChartColumn, ClipboardList, Code, Database, Factory, LayoutDashb
 import { Stage } from "../stage";
 import { Photo } from "../photo";
 import { ServiceCard } from "./service-copy";
+import { cardPillar } from "@/content/home";
 
 const stages = [
   {
@@ -39,6 +40,7 @@ export function SoftwareService() {
   return (
     <ServiceCard
       id="svc-software"
+      pillar={cardPillar.software}
       tone="ink"
       icon={Code}
       name="Custom software development"

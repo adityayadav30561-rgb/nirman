@@ -6,7 +6,8 @@ import { AppsService } from "./apps";
 import { MarketingService } from "./marketing";
 
 // Logos from Simple Icons (https://simpleicons.org), CC0. They name the
-// tools we build with; they do not imply a partnership.
+// tools we build with; they do not imply a partnership. Decision C2: no
+// Meta, WhatsApp, Instagram or Facebook logos, and no ads platforms.
 const stack = [
   ["nextdotjs", "Next.js"],
   ["react", "React"],
@@ -17,9 +18,6 @@ const stack = [
   ["shopify", "Shopify"],
   ["wordpress", "WordPress"],
   ["googleanalytics", "Google Analytics"],
-  ["googleads", "Google Ads"],
-  ["meta", "Meta"],
-  ["whatsapp", "WhatsApp"],
   ["razorpay", "Razorpay"],
   ["vercel", "Vercel"],
 ] as const;
@@ -33,7 +31,7 @@ export function Services() {
             Six disciplines. One team building them together.
           </h2>
           <p className="text-[1.075rem] leading-[1.65] text-ink-2 lg:col-span-4">
-            Most growth problems cross more than one specialism. A slow website hurts SEO; a missing CRM wastes ad spend. We plan
+            Most growth problems cross more than one specialism. A slow website hurts SEO; a missing CRM lets enquiries go cold. We plan
             the pieces together so each one makes the others work harder.
           </p>
         </div>

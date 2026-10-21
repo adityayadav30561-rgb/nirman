@@ -3,6 +3,7 @@ import { Stage } from "../stage";
 import { Device, PhoneFrame } from "../mockups/frames";
 import { ConceptSiteDesktop, ConceptSiteMobile } from "../mockups/concept-site";
 import { ServiceCard } from "./service-copy";
+import { cardPillar } from "@/content/home";
 
 const builtIn = ["Core Web Vitals budget", "WCAG 2.2 AA", "Schema markup", "CMS your team can edit"];
 
@@ -11,6 +12,7 @@ export function WebService() {
     <ServiceCard
       visualAlign="center"
       id="svc-web"
+      pillar={cardPillar.web}
       tone="coral"
       icon={MonitorSmartphone}
       name="Website design & development"

@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 import {
+  ArrowRight,
   Bell,
   CalendarCheck,
   ChartColumn,
@@ -9,6 +10,7 @@ import {
   Contact,
   FileText,
   Globe,
+  Inbox,
   KanbanSquare,
   LayoutDashboard,
   Mail,
@@ -17,15 +19,26 @@ import {
   Plus,
   Search,
   Settings,
-  ShieldCheck,
   SlidersHorizontal,
   Users,
   Video,
+  Workflow,
 } from "lucide-react";
 import { Stage } from "./stage";
 import { LogoMark } from "./logo";
-import { button } from "./ui/button";
+import { ButtonLink } from "./ui/button-link";
 import { Bars, Donut, LineChart } from "./mockups/charts";
+import { crm, crmCallouts, crmFeatures } from "@/content/home";
+
+// Generic icons only: no WhatsApp or other platform logos in our artwork.
+const featureIcons: Record<(typeof crmFeatures)[number]["icon"], typeof KanbanSquare> = {
+  leads: Inbox,
+  whatsapp: MessageCircle,
+  email: Mail,
+  pipeline: KanbanSquare,
+  automation: Workflow,
+  reports: ChartColumn,
+};
 
 type Tab = "dashboard" | "pipeline" | "leads" | "followups" | "reports";
 
@@ -71,23 +84,24 @@ export function NirmanCrm() {
               Nirman CRM, our own product
             </p>
             <h2 id="crm-title" className="display mt-6 text-[clamp(2.75rem,6.4vw,5.25rem)] text-paper">
-              Customer relationships.
-              <br />
-              Without the chaos.
+              {crm.title.split(/(?<=\.) /).map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="text-[1.1rem] leading-[1.65] text-paper/75">
-              Nirman CRM helps businesses organise leads, manage customer relationships, streamline sales activities, and
-              bring greater visibility to their sales pipeline.
-            </p>
+            <p className="text-[1.1rem] leading-[1.65] text-paper/75">{crm.subtitle}</p>
+            {/* Decision C5: the CRM's only call to action is "Book a demo". */}
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#contact" className={button("light", "lg")}>
-                Explore Nirman CRM
-              </a>
-              <a href="#contact" className={button("ghostLight", "lg")}>
-                Request a demo
-              </a>
+              <ButtonLink href={crm.primary.href} variant="light" size="lg">
+                {crm.primary.label}
+                <ArrowRight className="size-4.5" />
+              </ButtonLink>
+              <ButtonLink href={crm.secondary.href} variant="ghostLight" size="lg">
+                {crm.secondary.label}
+              </ButtonLink>
             </div>
           </div>
         </div>
@@ -154,22 +168,34 @@ export function NirmanCrm() {
           </Stage>
         </div>
 
-        <ul className="mt-14 grid gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { icon: Globe, t: "Capture every enquiry", d: "Website forms, calls, WhatsApp and ads flow straight into one list." },
-            { icon: MessageCircle, t: "Follow up where customers are", d: "Send WhatsApp and email from the lead's record, with templates." },
-            { icon: Bell, t: "Never miss a reminder", d: "Daily follow-up lists for each salesperson, and alerts for stalled deals." },
-            { icon: ShieldCheck, t: "Access by role", d: "Owners see everything; each team member sees what they need." },
-          ].map((f, i) => (
-            <li key={f.t} className={`pr-6 ${i > 0 ? "lg:border-l lg:border-white/12 lg:pl-6" : ""}`}>
-              <span className={`grid size-11 place-items-center rounded-2xl ${["bg-cobalt", "bg-coral", "bg-marigold text-ink", "bg-lilac text-ink"][i]}`}>
-                <f.icon className="size-5" strokeWidth={1.8} />
-              </span>
-              <p className="title mt-4 text-[1.1rem] text-paper">{f.t}</p>
-              <p className="mt-1.5 text-[0.925rem] leading-relaxed text-paper/60">{f.d}</p>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-14 grid gap-x-12 gap-y-10 lg:grid-cols-12">
+          <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-4 lg:grid-cols-1">
+            {crmCallouts.map((c) => (
+              <li key={c.title} className="rounded-2xl bg-white/6 p-6 ring-1 ring-white/10">
+                <p className="title text-[1.25rem] text-mint">{c.title}</p>
+                <p className="mt-2 text-[0.975rem] leading-relaxed text-paper/70">{c.body}</p>
+              </li>
+            ))}
+          </ul>
+          <ul className="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-3">
+            {crmFeatures.map((f, i) => {
+              const Icon = featureIcons[f.icon];
+              return (
+                <li key={f.title}>
+                  <span
+                    className={`grid size-11 place-items-center rounded-2xl ${
+                      ["bg-cobalt", "bg-coral", "bg-marigold text-ink", "bg-lilac text-ink", "bg-peacock", "bg-mint text-forest-deep"][i]
+                    }`}
+                  >
+                    <Icon className="size-5" strokeWidth={1.8} />
+                  </span>
+                  <p className="title mt-4 text-[1.1rem] text-paper">{f.title}</p>
+                  <p className="mt-1.5 text-[0.925rem] leading-relaxed text-paper/60">{f.body}</p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </section>
   );
@@ -405,7 +431,7 @@ const pipeline: {
     note: "Most come from the website form",
     deals: [
       { co: "Kestrel Foods", who: "Ritu Malhotra", value: "₹1.2L", owner: "PN", tag: "Website", next: "Call today, 3 pm" },
-      { co: "Vardhan Clinics", who: "Dr. Sameer V.", value: "₹80K", owner: "RK", tag: "Google Ads", next: "Send brochure" },
+      { co: "Vardhan Clinics", who: "Dr. Sameer V.", value: "₹80K", owner: "RK", tag: "Google search", next: "Send brochure" },
       { co: "Bluepine Schools", who: "Neha Joshi", value: "₹2.6L", owner: "PN", tag: "Referral", next: "First call" },
     ],
   },
@@ -447,7 +473,7 @@ const pipeline: {
     note: "7 deals closed this quarter",
     deals: [
       { co: "Saarthi Logistics", who: "Vikram Singh", value: "₹4.1L", owner: "RK", tag: "Referral", next: "Onboarding" },
-      { co: "Café Nilgiri", who: "Anita George", value: "₹1.5L", owner: "PN", tag: "Instagram", next: "Invoice paid" },
+      { co: "Café Nilgiri", who: "Anita George", value: "₹1.5L", owner: "PN", tag: "Email campaign", next: "Invoice paid" },
     ],
   },
 ];
@@ -597,7 +623,7 @@ const leads = [
   { name: "Neha Joshi", co: "Bluepine Schools", src: "Referral", owner: "PN", status: "New", score: 68, last: "Demo booked, 1h" },
   { name: "Farhan Ali", co: "Oakline Tiles", src: "Website", owner: "AS", status: "Contacted", score: 59, last: "Call logged, 1d" },
   { name: "Meena Pillai", co: "Ashoka School", src: "Website", owner: "AS", status: "Negotiation", score: 88, last: "Email sent, 3h" },
-  { name: "Dr. Sameer V.", co: "Vardhan Clinics", src: "Google Ads", owner: "RK", status: "New", score: 52, last: "Call missed, 4h" },
+  { name: "Dr. Sameer V.", co: "Vardhan Clinics", src: "Google search", owner: "RK", status: "New", score: 52, last: "Call missed, 4h" },
 ];
 
 const statusTone: Record<string, string> = {
@@ -944,7 +970,7 @@ function ReportsView() {
             {[
               ["#1f4d3a", "Website", "42%"],
               ["#6f8f72", "Referral", "24%"],
-              ["#c9a76a", "Google Ads", "18%"],
+              ["#c9a76a", "Google search", "18%"],
               ["#c3cfbd", "WhatsApp", "16%"],
             ].map(([c, l, v]) => (
               <li key={l} className="flex items-center gap-6">

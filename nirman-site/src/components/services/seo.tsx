@@ -3,6 +3,7 @@ import { Stage } from "../stage";
 import { Photo } from "../photo";
 import { LineChart } from "../mockups/charts";
 import { ServiceCard } from "./service-copy";
+import { cardPillar } from "@/content/home";
 
 const clicks = [410, 430, 420, 470, 460, 520, 610, 640, 700, 690, 760, 820, 850, 940, 1020, 1080, 1060, 1180, 1240, 1310, 1290, 1420, 1490, 1560, 1610, 1720];
 const impressions = [16, 17, 16.5, 18, 18.5, 19, 21, 22, 23.5, 23, 25, 26, 27, 29, 31, 32, 31.5, 34, 35, 36.5, 36, 38, 39, 40, 41, 43].map((v) => v * 40);
@@ -19,6 +20,7 @@ export function SeoService() {
   return (
     <ServiceCard
       id="svc-seo"
+      pillar={cardPillar.seo}
       tone="cobalt"
       dots
       icon={Search}

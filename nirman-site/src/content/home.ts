@@ -84,7 +84,7 @@ export const crm = {
 } as const;
 
 export const crmFeatures = [
-  { icon: "leads", title: "Lead capture", body: "Every form, ad and WhatsApp chat lands in one list." },
+  { icon: "leads", title: "Lead capture", body: "Every form, call and WhatsApp chat lands in one list." },
   { icon: "whatsapp", title: "WhatsApp inbox", body: "Your whole team replies from one shared number." },
   { icon: "email", title: "Email campaigns", body: "Newsletters and drip sequences, no extra tool." },
   { icon: "pipeline", title: "Sales pipeline", body: "See every deal by stage and who owns it." },

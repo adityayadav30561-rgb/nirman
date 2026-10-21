@@ -4,12 +4,14 @@ import { Photo } from "../photo";
 import { PhoneFrame } from "../mockups/frames";
 import { Bars, LineChart } from "../mockups/charts";
 import { ServiceCard } from "./service-copy";
+import { cardPillar } from "@/content/home";
 
 export function AppsService() {
   return (
     <ServiceCard
       visualAlign="center"
       id="svc-apps"
+      pillar={cardPillar.apps}
       tone="marigold"
       icon={Smartphone}
       name="Mobile app development"

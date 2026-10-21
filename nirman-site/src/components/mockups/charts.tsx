@@ -46,7 +46,7 @@ export function LineChart({
   const hi = max ?? Math.max(...series.flatMap((s) => s.values));
   return (
     <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" className={`block h-full w-full ${className}`} aria-hidden>
-      {Array.from({ length: gridLines + 1 }, (_, i) => (
+      {Array.from({ length: gridLines > 0 ? gridLines + 1 : 0 }, (_, i) => (
         <line
           key={i}
           x1="0"

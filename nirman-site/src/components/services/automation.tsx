@@ -3,11 +3,13 @@ import type { LucideIcon } from "lucide-react";
 import { Stage } from "../stage";
 import { Photo } from "../photo";
 import { ServiceCard } from "./service-copy";
+import { cardPillar } from "@/content/home";
 
 export function AutomationService() {
   return (
     <ServiceCard
       id="svc-crm"
+      pillar={cardPillar.crm}
       tone="mint"
       icon={Workflow}
       name="CRM & business automation"

@@ -5,10 +5,9 @@ Keep it under ~80 lines: it is read at the start of every session.
 
 ## Current position
 
-- **Phase:** 2 (Homepage aligned to the handoff), not started.
-- **Next task:** P2.1 hero CTAs from `content/home.ts` `hero` (decision C4).
-  Then P2.2 services grid (C1 marketing card rebuild, C2 remove Meta/WhatsApp
-  logos, C3 pillar tags + hub links).
+- **Phase:** 2 (Homepage aligned to the handoff), in progress.
+- **Next task:** P2.4 case studies section from `content/home.ts`
+  `caseStudies` (SAMPLE), 4 items, 2 metrics each, "See all our work" → `/work/`.
 - **Blockers:** none for Phases 2–4. Client inputs pending (list at the end of
   PLAN.md) block parts of Phases 5, 7, 9, 11.
 
@@ -39,9 +38,16 @@ Keep it under ~80 lines: it is read at the start of every session.
 
 ## Current phase tasks
 
-- [ ] P2.1 Hero: "Get a free SEO audit" + "Book a consultation" + note (C4)
-- [ ] P2.2 Services grid: C1 WhatsApp & email card, C2 logos, C3 pillar tags/links
-- [ ] P2.3 Nirman CRM section: "Book a demo" + "Need a custom CRM?" (C5), features/callouts
+- [x] P2.1 Hero: "Get a free SEO audit" + "Book a consultation" + note (C4).
+  `hero.tsx` reads `content/home.ts` `hero`; links 404 until P3.4 stubs.
+- [x] P2.2 Services grid: C1 WhatsApp & email card, C2 logos, C3 pillar tags/links.
+  `ServiceCard` takes `pillar` (tag + "Explore …" hub link via `cardPillar`);
+  `marketing.tsx` rebuilt; ads/Meta/WhatsApp logos gone; JSON-LD offer renamed.
+  Also fixed `LineChart` NaN with `gridLines={0}` (console errors).
+- [x] P2.3 Nirman CRM section: "Book a demo" + "Need a custom CRM?" (C5), features/callouts.
+  `nirman-crm.tsx` reads `crm`, `crmFeatures` (6), `crmCallouts` (2). Mockup
+  lead sources "Google Ads"/"Instagram" → "Google search"/"Email campaign";
+  "Lead capture" copy drops "ad" (hard rule: no PPC/social hints).
 - [ ] P2.4 Case studies section from `content/home.ts` (SAMPLE), "See all our work"
 - [ ] P2.5 Process: handoff's 5 stages (C6), keep horizontal scroll
 - [ ] P2.6 New sections: Team, Free tools strip, Testimonials, FAQ + CTA (FAQPage JSON-LD)

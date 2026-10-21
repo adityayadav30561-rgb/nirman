@@ -4,10 +4,11 @@ import type { CSSProperties } from "react";
 import { Stage } from "./stage";
 import { Photo } from "./photo";
 import { LogoMark } from "./logo";
-import { button } from "./ui/button";
+import { ButtonLink } from "./ui/button-link";
 import { Device, PhoneFrame } from "./mockups/frames";
 import { ConceptSiteDesktop } from "./mockups/concept-site";
 import { heroPhoto } from "@/content/devices";
+import { hero } from "@/content/home";
 
 export function Hero() {
   return (
@@ -15,22 +16,26 @@ export function Hero() {
       <div className="container-site relative z-10 pt-28 sm:pt-32 lg:flex lg:h-full lg:items-center lg:pb-0 lg:pt-16">
         <div className="max-w-[38rem] lg:w-[42%] lg:max-w-none">
           <h1 className="display text-[clamp(2.9rem,10.5vw,4.8rem)] text-ink lg:text-[min(5.4vw,8.5rem)]">
-            <span className="block lg:whitespace-nowrap">Build better.</span>
-            <span className="block lg:whitespace-nowrap">Grow smarter.</span>
+            {hero.headline.map((line) => (
+              <span key={line} className="block lg:whitespace-nowrap">
+                {line}
+              </span>
+            ))}
           </h1>
           <p className="mt-7 max-w-[31rem] text-[1.2rem] leading-[1.55] text-ink-2 lg:mt-[1.6vw] lg:max-w-[34vw] lg:text-[clamp(1.2rem,1.25vw,1.75rem)]">
-            Websites, SEO, CRM systems and digital products designed to move your business forward.
+            {hero.intro}
           </p>
           <div className="mt-10 flex flex-wrap gap-3 lg:mt-[2.4vw] 2xl:[&>a]:h-16 2xl:[&>a]:px-8 2xl:[&>a]:text-[1.15rem]">
-            <a href="#services" className={button("primary", "lg")}>
-              Explore our services
+            <ButtonLink href={hero.primary.href} variant="primary" size="lg">
+              {hero.primary.label}
               <ArrowRight className="size-4.5" />
-            </a>
-            <a href="#contact" className={button("secondary", "lg")}>
-              Discuss your project
+            </ButtonLink>
+            <ButtonLink href={hero.secondary.href} variant="secondary" size="lg">
+              {hero.secondary.label}
               <ArrowRight className="size-4.5" />
-            </a>
+            </ButtonLink>
           </div>
+          <p className="mt-4 text-[0.95rem] text-ink-3 lg:mt-[1vw] lg:text-[clamp(0.95rem,0.9vw,1.25rem)]">{hero.note}</p>
         </div>
       </div>
 

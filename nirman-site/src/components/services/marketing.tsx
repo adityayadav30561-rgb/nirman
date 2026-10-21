@@ -1,30 +1,35 @@
-import { Bookmark, Heart, Megaphone, MessageCircle, MoreHorizontal, Send } from "lucide-react";
+import { CheckCheck, Clock, Mail, MessageCircle, Send, Users } from "lucide-react";
 import { Stage } from "../stage";
 import { Photo } from "../photo";
 import { ServiceCard } from "./service-copy";
+import { cardPillar } from "@/content/home";
 
-const channels = [
-  { name: "Meta ads", leads: 284, w: 100, c: "bg-[#d9668f]" },
-  { name: "Google Search", leads: 198, w: 70, c: "bg-cobalt" },
-  { name: "Email", leads: 96, w: 34, c: "bg-marigold" },
-  { name: "Organic social", leads: 64, w: 23, c: "bg-peacock" },
+// Decision C1: this card is WhatsApp & email marketing run from Nirman CRM.
+// No ads, no social media, no platform logos (generic chat icons only).
+
+const campaigns = [
+  { name: "Monsoon broadcast", replies: 124, w: 100, c: "bg-[#d9668f]" },
+  { name: "Monsoon email", replies: 46, w: 37, c: "bg-marigold" },
+  { name: "Enquiry drip", replies: 31, w: 25, c: "bg-forest-2" },
+  { name: "Cart reminder", replies: 13, w: 11, c: "bg-peacock" },
 ];
 
 export function MarketingService() {
   return (
     <ServiceCard
       id="svc-marketing"
+      pillar={cardPillar.marketing}
       tone="rose"
-      icon={Megaphone}
-      name="Digital marketing"
-      title="Campaigns built around one number: qualified leads."
-      body="Creative, copy and media planned together across search, social and email, with every rupee traced back to enquiries in your CRM rather than likes and impressions."
-      points={["Paid search and social ads", "Campaign creative and copy", "Email and WhatsApp campaigns", "Landing pages and tracking"]}
+      icon={Send}
+      name="WhatsApp & email marketing"
+      title="Messages your customers open, sent from your own CRM."
+      body="We plan and run WhatsApp and email campaigns from Nirman CRM: broadcasts to opted-in customers, drip sequences after every enquiry and automatic follow-ups, with delivery, read and reply numbers for each one."
+      points={["WhatsApp broadcasts to opted-in lists", "Email campaigns and newsletters", "Drip sequences and follow-ups", "Delivery, read and reply reports"]}
       visual={
-        <Stage w={480} h={330} wLg={820} hLg={535} label="Campaign creatives for a cold brew brand and a skincare brand across Instagram, stories, search and email, with performance by channel">
-          <InstagramPost />
-          <StoryAd />
-          <SearchAd />
+        <Stage w={480} h={330} wLg={820} hLg={535} label="A ceramics brand's WhatsApp broadcast, follow-up sequence, audience and newsletter in Nirman CRM, with delivery, read and reply numbers by campaign">
+          <Broadcast />
+          <Sequence />
+          <Audience />
           <EmailPreview />
           <Performance />
         </Stage>
@@ -33,72 +38,94 @@ export function MarketingService() {
   );
 }
 
-function InstagramPost() {
+function Broadcast() {
   return (
-    <div className="absolute left-0 top-0 w-250 overflow-hidden rounded-xl bg-surface shadow-scene lg:w-300">
-      <div className="flex items-center gap-8 px-12 py-9">
-        <span className="grid size-24 place-items-center rounded-full bg-coral fs-9 font-semibold text-white">K</span>
+    <div className="absolute left-0 top-0 w-250 overflow-hidden rounded-xl bg-[#efeae0] shadow-scene lg:w-300">
+      <div className="flex items-center gap-8 bg-forest px-12 py-9 text-white">
+        <span className="grid size-24 place-items-center rounded-full bg-mint fs-9 font-semibold text-forest">M</span>
         <span className="flex-1 leading-tight">
-          <span className="block fs-10 font-semibold">kaapi.co</span>
-          <span className="block fs-8 text-ink-3">Sponsored</span>
+          <span className="block fs-10 font-semibold">Mitti Ceramics</span>
+          <span className="block fs-8 text-white/70">Broadcast to 2,140 customers</span>
         </span>
-        <MoreHorizontal className="size-14 text-ink-3" />
       </div>
-      <div className="relative h-230 lg:h-280">
-        <Photo name="coldBrew" sizes="320px" decorative />
-        <span className="mock-display absolute left-12 top-12 rounded-full bg-ink px-10 py-5 fs-11 text-marigold">New: 250 ml</span>
-      </div>
-      <div className="flex items-center justify-between bg-coral px-12 py-8 fs-10 font-medium text-white">
-        Order now
-        <span className="fs-9 font-normal text-white/80">kaapi.co/shop</span>
-      </div>
-      <div className="px-12 pb-12 pt-8">
-        <div className="flex items-center gap-10">
-          <Heart className="size-15 fill-[#d9668f] text-[#d9668f]" />
-          <MessageCircle className="size-15" />
-          <Send className="size-15" />
-          <Bookmark className="ml-auto size-15" />
+      <div className="p-10">
+        <div className="overflow-hidden rounded-lg bg-surface shadow-[0_1px_2px_rgb(22_24_27/0.1)]">
+          <div className="relative h-140 lg:h-170">
+            <Photo name="bowlsPink" sizes="320px" decorative />
+          </div>
+          <p className="px-10 pt-8 fs-10 leading-snug">
+            Hi Priya, the monsoon edit is here: 12 new glazes, hand-thrown in Khurja. Free delivery in Pune this week.
+          </p>
+          <p className="flex items-center justify-end gap-3 px-10 pb-6 pt-2 fs-8 text-ink-3">
+            11:02
+            <CheckCheck className="size-11 text-peacock" />
+          </p>
+          {["See the collection", "Stop updates"].map((b) => (
+            <span key={b} className="block border-t border-ink/8 py-7 text-center fs-10 font-medium text-peacock">
+              {b}
+            </span>
+          ))}
         </div>
-        <p className="mt-6 fs-10 leading-snug">
-          <span className="font-semibold">kaapi.co</span> Steeped for 18 hours, bottled the same morning. Free delivery across Pune this week.
-        </p>
+        <div className="ml-auto mt-8 w-fit max-w-[80%] rounded-lg bg-mint-soft px-10 py-7 fs-10 leading-snug">
+          Is the blue set back in stock?
+          <span className="mt-2 block text-right fs-8 text-ink-3">11:14</span>
+        </div>
       </div>
     </div>
   );
 }
 
-function StoryAd() {
+const steps = [
+  { icon: MessageCircle, when: "Right away", title: "WhatsApp: thanks + brochure" },
+  { icon: Mail, when: "Day 2", title: "Email: how we work" },
+  { icon: Clock, when: "Day 5, no reply", title: "WhatsApp: book a visit?" },
+  { icon: Users, when: "Replied", title: "Assign to sales team" },
+];
+
+function Sequence() {
   return (
-    <div className="absolute left-266 top-30 h-370 w-214 overflow-hidden rounded-2xl bg-ink shadow-scene lg:left-320 lg:top-50 lg:h-390 lg:w-210">
-      <Photo name="serum" sizes="240px" decorative />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
-      <div className="absolute inset-x-10 top-10 flex gap-3">
-        <span className="h-2 flex-1 rounded-full bg-white/90" />
-        <span className="h-2 flex-1 rounded-full bg-white/35" />
-        <span className="h-2 flex-1 rounded-full bg-white/35" />
-      </div>
-      <div className="absolute inset-x-14 bottom-16 text-white">
-        <p className="mock-display fs-22">
-          Glow that
-          <br />
-          lasts all day.
-        </p>
-        <p className="mt-6 fs-9 text-white/80">Vitamin C serum, from ₹649</p>
-        <span className="mt-12 block rounded-full bg-white py-8 text-center fs-10 font-semibold text-ink">Shop now</span>
-      </div>
+    <div className="absolute left-266 top-30 w-214 rounded-2xl bg-surface p-14 shadow-scene lg:left-320 lg:top-50 lg:w-210">
+      <p className="mock-display fs-14">Follow-up sequence</p>
+      <p className="mt-2 fs-9 text-ink-3">Starts when a new enquiry arrives</p>
+      <ol className="relative mt-14 space-y-12 before:absolute before:bottom-12 before:left-[calc(var(--spacing)*11)] before:top-12 before:w-1 before:bg-ink/10">
+        {steps.map(({ icon: Icon, when, title }, i) => (
+          <li key={title} className="relative flex items-start gap-8">
+            <span
+              className={`grid size-22 shrink-0 place-items-center rounded-full ${i === steps.length - 1 ? "bg-forest text-mint" : "bg-[#f8dde6] text-[#b23f69]"}`}
+            >
+              <Icon className="size-11" />
+            </span>
+            <span className="leading-tight">
+              <span className="block fs-8 text-ink-3">{when}</span>
+              <span className="block fs-10 font-medium">{title}</span>
+            </span>
+          </li>
+        ))}
+      </ol>
+      <p className="mt-14 rounded-lg bg-paper px-8 py-6 fs-9 text-ink-2">
+        <span className="font-semibold text-ink tnum">38</span> enquiries in this sequence
+      </p>
     </div>
   );
 }
 
-function SearchAd() {
+function Audience() {
   return (
     <div className="absolute left-0 top-410 w-480 rounded-xl bg-surface p-14 shadow-scene lg:left-550 lg:top-0 lg:w-270">
-      <p className="fs-9">
-        <span className="font-semibold">Sponsored</span>
+      <div className="flex items-center justify-between">
+        <p className="fs-9 text-ink-3">Audience</p>
+        <p className="fs-9 text-ink-3">Send Thu, 11:00</p>
+      </div>
+      <p className="mt-2 fs-13 font-semibold">
+        <span className="tnum">2,140</span> opted-in customers
       </p>
-      <p className="fs-9 text-ink-2">kaapi.co › cold-brew</p>
-      <p className="mt-4 fs-13 leading-snug text-cobalt">Cold Brew Coffee in Pune, Delivered Before Noon</p>
-      <p className="mt-4 fs-10 leading-[1.5] text-ink-2">Small-batch cold brew, steeped 18 hours. Subscribe and save 15%.</p>
+      <div className="mt-8 flex flex-wrap gap-4">
+        {["Bought in 90 days", "Pune", "Not: unsubscribed"].map((s) => (
+          <span key={s} className="rounded-full bg-paper px-7 py-3 fs-8 text-ink-2">
+            {s}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -111,12 +138,12 @@ function EmailPreview() {
         <p className="fs-11 font-semibold">The monsoon edit is here</p>
       </div>
       <div className="relative h-120">
-        <Photo name="bowlsPink" sizes="300px" decorative />
+        <Photo name="cups" sizes="300px" decorative />
       </div>
       <div className="px-14 py-12">
-        <p className="mock-display fs-15">Bowls for slow mornings</p>
+        <p className="mock-display fs-15">Cups for slow mornings</p>
         <p className="mt-4 fs-10 text-ink-2">Hand-thrown in Khurja. 12 new glazes.</p>
-        <span className="mt-10 inline-block rounded-full bg-ink px-12 py-5 fs-9 text-white">Shop bowls</span>
+        <span className="mt-10 inline-block rounded-full bg-ink px-12 py-5 fs-9 text-white">See the collection</span>
       </div>
     </div>
   );
@@ -126,16 +153,16 @@ function Performance() {
   return (
     <div className="absolute left-0 top-530 w-480 rounded-2xl bg-surface p-16 shadow-scene lg:top-460 lg:w-820 lg:p-20">
       <div className="flex items-center justify-between">
-        <p className="mock-display fs-15">Campaign performance</p>
-        <p className="fs-10 text-ink-3">October, all channels</p>
+        <p className="mock-display fs-15">Campaign results</p>
+        <p className="fs-10 text-ink-3">October, WhatsApp and email</p>
       </div>
       <div className="mt-14 grid gap-16 lg:grid-cols-[1fr_1.1fr]">
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
           {[
-            ["Spend", "₹1.8L", "bg-paper"],
-            ["Leads", "642", "bg-[#f8dde6]"],
-            ["Cost per lead", "₹280", "bg-paper"],
-            ["Return on spend", "4.2×", "bg-marigold-soft"],
+            ["Sent", "2,140", "bg-paper"],
+            ["Delivered", "97%", "bg-paper"],
+            ["Read", "78%", "bg-[#f8dde6]"],
+            ["Replies", "214", "bg-marigold-soft"],
           ].map(([k, v, c]) => (
             <div key={k} className={`rounded-lg p-10 ${c}`}>
               <p className="fs-9 text-ink-3">{k}</p>
@@ -144,13 +171,13 @@ function Performance() {
           ))}
         </div>
         <ul className="space-y-8 border-ink/8 lg:border-l lg:pl-16">
-          {channels.map((c) => (
+          {campaigns.map((c) => (
             <li key={c.name} className="grid items-center gap-8 fs-10 [grid-template-columns:calc(var(--spacing)*96)_1fr_calc(var(--spacing)*36)]">
               <span className="text-ink-2">{c.name}</span>
               <span className="h-10 rounded-full bg-paper">
                 <span className={`block h-full rounded-full ${c.c}`} style={{ width: `${c.w}%` }} />
               </span>
-              <span className="text-right font-semibold tnum">{c.leads}</span>
+              <span className="text-right font-semibold tnum">{c.replies}</span>
             </li>
           ))}
         </ul>

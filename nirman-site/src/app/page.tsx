@@ -21,7 +21,7 @@ const jsonLd = {
     "CRM solutions",
     "Custom software development",
     "Mobile app development",
-    "Digital marketing",
+    "WhatsApp and email marketing",
   ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } })),
 };
 

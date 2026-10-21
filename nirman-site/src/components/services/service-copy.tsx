@@ -1,5 +1,7 @@
+import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
-import { Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
+import { servicePillars, type PillarId } from "@/content/home";
 
 export type Tone = "cobalt" | "coral" | "mint" | "ink" | "marigold" | "rose";
 
@@ -14,10 +16,12 @@ const tones: Record<Tone, { panel: string; name: string; body: string; check: st
 
 /**
  * One service as an equal-size card in the services grid: copy on top, a
- * mockup pinned to the bottom that bleeds off the card's lower edge.
+ * mockup pinned to the bottom that bleeds off the card's lower edge. Each card
+ * is tagged with its pillar and links to that pillar's hub (decision C3).
  */
 export function ServiceCard({
   id,
+  pillar,
   tone,
   icon: Icon,
   name,
@@ -30,6 +34,7 @@ export function ServiceCard({
   visualAlign = "top",
 }: {
   id: string;
+  pillar: PillarId;
   tone: Tone;
   icon: LucideIcon;
   name: string;
@@ -43,14 +48,18 @@ export function ServiceCard({
   visualAlign?: "top" | "center";
 }) {
   const t = tones[tone];
+  const hub = servicePillars.find((p) => p.id === pillar)!;
   return (
     <article id={id} className={`relative flex scroll-mt-24 flex-col overflow-hidden rounded-[2rem] ${t.panel}`}>
       {dots && <div className="dot-grid-light absolute inset-0" aria-hidden />}
       <div className="relative px-6 pt-7 sm:px-10 sm:pt-10 2xl:px-12 2xl:pt-12">
-        <p className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[0.9rem] font-medium ${t.chip}`}>
-          <Icon className={`size-4 ${t.name}`} strokeWidth={2} />
-          {name}
-        </p>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <p className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[0.9rem] font-medium ${t.chip}`}>
+            <Icon className={`size-4 ${t.name}`} strokeWidth={2} />
+            {name}
+          </p>
+          {hub.title !== name && <p className={`text-[0.85rem] ${t.body}`}>Part of {hub.title}</p>}
+        </div>
         <h3 className="heading mt-5 max-w-[36rem] text-[clamp(1.8rem,2.6vw,3rem)]">{title}</h3>
         <p className={`mt-4 max-w-[40rem] text-[1rem] leading-[1.6] 2xl:text-[1.075rem] ${t.body}`}>{body}</p>
         <ul className="mt-6 grid max-w-[40rem] gap-x-6 gap-y-2.5 sm:grid-cols-2">
@@ -64,6 +73,13 @@ export function ServiceCard({
           ))}
         </ul>
         {extra}
+        <Link
+          href={hub.href}
+          className="group mt-6 inline-flex items-center gap-2 text-[0.95rem] font-medium underline decoration-current/30 underline-offset-4 transition-colors hover:decoration-current"
+        >
+          Explore {hub.title === "SEO" ? "SEO services" : hub.title}
+          <ArrowRight className={`size-4 transition-transform group-hover:translate-x-0.5 ${t.name}`} />
+        </Link>
       </div>
       {/* The mockup is positioned absolutely, so this area grows to fill the
           card (rows share one height) and simply reveals more of it. */}
