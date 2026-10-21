@@ -74,7 +74,7 @@ export function FinalCta() {
                 <a href={mailto} className={button("primary", "lg")}>
                   Start a project inquiry
                 </a>
-                <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className={button("ghostLight", "lg")}>
+                <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" className={button("ghostLight", "lg")}>
                   <MessageCircle className="size-4" />
                   Chat on WhatsApp
                 </a>
@@ -90,7 +90,7 @@ export function FinalCta() {
                 </a>
                 <ul className="mt-6 divide-y divide-ink/8 border-t border-ink/8 text-[0.95rem]">
                   <ContactRow icon={Mail} label="Email" value={site.email} href={`mailto:${site.email}`} />
-                  <ContactRow icon={Phone} label="Phone" value={site.phone} href={`tel:${site.phone.replace(/\s/g, "")}`} />
+                  <ContactRow icon={Phone} label="Phone" value={site.phone} href={site.phoneHref} />
                   <ContactRow icon={MapPin} label="Office" value={site.address} />
                 </ul>
                 <p className="mt-4 text-[0.8rem] text-ink-3">Contact details shown are placeholders.</p>

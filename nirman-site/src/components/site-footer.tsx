@@ -4,7 +4,6 @@ import { Logo } from "./logo";
 const stripe = ["bg-cobalt", "bg-coral", "bg-forest-2", "bg-peacock", "bg-marigold", "bg-[#d9668f]"];
 
 export function SiteFooter() {
-  const year = 2026;
   return (
     <footer className="pb-5">
       <div className="container-site">
@@ -50,7 +49,7 @@ export function SiteFooter() {
 
             <FooterCol title="Get in touch" className="lg:col-span-2">
               <FooterLink href={`mailto:${site.email}`}>{site.email}</FooterLink>
-              <FooterLink href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phone}</FooterLink>
+              <FooterLink href={site.phoneHref}>{site.phone}</FooterLink>
               <li className="text-paper/65">{site.address}</li>
               <li className="flex flex-wrap gap-2 pt-2">
                 {site.social.map((s) => (
@@ -68,7 +67,7 @@ export function SiteFooter() {
 
           <div className="mx-6 flex flex-col gap-3 border-t border-white/10 py-6 text-[0.875rem] text-paper/50 sm:mx-12 sm:flex-row sm:items-center sm:justify-between lg:mx-16">
             <p>
-              © {year} {site.name} {site.descriptor}. All rights reserved.
+              © {site.copyrightYear} {site.name} {site.descriptor}. All rights reserved.
             </p>
             <ul className="flex gap-6">
               <li>

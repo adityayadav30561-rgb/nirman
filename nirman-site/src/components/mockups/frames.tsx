@@ -93,10 +93,3 @@ export function PhoneFrame({
     </Device>
   );
 }
-
-/** Small window-like panel used for floating UI in compositions. */
-export function Panel({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return (
-    <div className={`rounded-md bg-surface ring-1 ring-ink/8 shadow-scene ${className}`}>{children}</div>
-  );
-}

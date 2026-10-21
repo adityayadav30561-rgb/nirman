@@ -84,16 +84,6 @@ export function LineChart({
   );
 }
 
-export function Sparkline({ values, color = "currentColor", className = "" }: { values: number[]; color?: string; className?: string }) {
-  const { d } = toPath(values, 100, 30, 3);
-  return (
-    <svg viewBox="0 0 100 30" preserveAspectRatio="none" className={`block ${className}`} aria-hidden>
-      <path d={`${d} L100,30 L0,30 Z`} fill={color} fillOpacity="0.12" />
-      <path d={d} fill="none" stroke={color} strokeWidth="1.6" vectorEffect="non-scaling-stroke" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 export function Bars({
   values,
   className = "",
