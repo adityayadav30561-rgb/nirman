@@ -12,7 +12,9 @@ import { hero } from "@/content/home";
 
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden lg:h-svh lg:min-h-[36rem]">
+    // Desktop: one screen tall, but never much taller than the photo (whose
+    // bottom sits at ~46vw), so tall screens get no empty band under the hero.
+    <section id="top" className="relative overflow-hidden lg:h-svh lg:max-h-[calc(46vw+15rem)] lg:min-h-[36rem]">
       <div className="container-site relative z-10 pt-28 sm:pt-32 lg:flex lg:h-full lg:items-center lg:pb-0 lg:pt-16">
         <div className="max-w-[38rem] lg:w-[42%] lg:max-w-none">
           <h1 className="display text-[clamp(2.9rem,10.5vw,4.8rem)] text-ink lg:text-[min(5.4vw,8.5rem)]">
@@ -25,14 +27,15 @@ export function Hero() {
           <p className="mt-7 max-w-[31rem] text-[1.2rem] leading-[1.55] text-ink-2 lg:mt-[1.6vw] lg:max-w-[34vw] lg:text-[clamp(1.2rem,1.25vw,1.75rem)]">
             {hero.intro}
           </p>
-          <div className="mt-10 flex flex-wrap gap-3 lg:mt-[2.4vw] 2xl:[&>a]:h-16 2xl:[&>a]:px-8 2xl:[&>a]:text-[1.15rem]">
+          {/* Phones: both buttons share one row (smaller type, no arrows). */}
+          <div className="mt-10 flex gap-2 sm:flex-wrap sm:gap-3 lg:mt-[2.4vw] max-sm:[&>a]:h-12 max-sm:[&>a]:min-w-0 max-sm:[&>a]:flex-1 max-sm:[&>a]:px-3 max-sm:[&>a]:text-[0.9rem] 2xl:[&>a]:h-16 2xl:[&>a]:px-8 2xl:[&>a]:text-[1.15rem]">
             <ButtonLink href={hero.primary.href} variant="primary" size="lg">
               {hero.primary.label}
-              <ArrowRight className="size-4.5" />
+              <ArrowRight className="size-4.5 max-sm:hidden" />
             </ButtonLink>
             <ButtonLink href={hero.secondary.href} variant="secondary" size="lg">
               {hero.secondary.label}
-              <ArrowRight className="size-4.5" />
+              <ArrowRight className="size-4.5 max-sm:hidden" />
             </ButtonLink>
           </div>
           <p className="mt-4 text-[0.95rem] text-ink-3 lg:mt-[1vw] lg:text-[clamp(0.95rem,0.9vw,1.25rem)]">{hero.note}</p>
