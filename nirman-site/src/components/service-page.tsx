@@ -76,7 +76,7 @@ export function ServicePage({ path }: { path: string }) {
       <Process content={c} accent={a} />
       <ResultsAndStack content={c} accent={a} />
       <Engagement content={c} accent={a} />
-      <Faq items={c.faqs} title={`${service.name} questions`} />
+      <Faq items={c.faqs} />
       <Related service={service} />
       <QuoteBand />
     </>

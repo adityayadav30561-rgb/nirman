@@ -6,9 +6,8 @@ Keep it under ~80 lines: it is read at the start of every session.
 ## Current position
 
 - **Phase:** 4 (Service pages; really 19: 4 hubs + 15, handoff says 18), in progress.
-- **Next task:** P4.3 write SEO pillar content (hub + 4): add `content`
-  to each entry in `src/content/services/seo.ts` (shape in `types.ts`).
-  Pages switch from stub to the full template as soon as `content` exists.
+- **Next task:** P4.4 web pillar content (hub + 5) in
+  `src/content/services/web.ts`, same shape as `seo.ts` (written in P4.3).
 - **Blockers:** none for Phase 4. Client inputs pending (list at the end of
   PLAN.md) block parts of Phases 5, 7, 9, 11.
 
@@ -50,7 +49,7 @@ Keep it under ~80 lines: it is read at the start of every session.
   4 pillar files with structure only, index with build-time link checks)
 - [x] P4.2 Service page template + hub variant (`components/service-page.tsx`;
   all 19 routes use it, stub until content exists)
-- [ ] P4.3 SEO pillar content (hub + 4)
+- [x] P4.3 SEO pillar content (hub + 4)
 - [ ] P4.4 Web pillar (hub + 5)
 - [ ] P4.5 Software pillar (hub + 4)
 - [ ] P4.6 Marketing pillar (hub + 2)
@@ -61,6 +60,10 @@ Keep it under ~80 lines: it is read at the start of every session.
 None.
 
 ## Notes for the next session
+
+- Service page copy (SEO pillar so far) is my draft; the user has not
+  reviewed it. Results are all `sample: true`. "Platforms and tools" lists
+  (e.g. Screaming Frog, Justdial) are my guesses: confirm with the client.
 
 - Page descriptions in `pages.ts` are my drafts; user has not reviewed them.
 - Organization JSON-LD has no `logo` yet (needs a square PNG ≥ 112px).
