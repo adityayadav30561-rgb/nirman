@@ -68,6 +68,36 @@ not scale. Media-query breakpoints still use the browser default rem, so
   variants `primary` (ink→cobalt hover), `accent` (marigold), `secondary`,
   `light`, `ghostLight`.
 
+## Shared building blocks (`src/components/ui/`, Phase 1)
+
+| Component | Use |
+|---|---|
+| `Container` | `container-site` wrapper; `as` prop for the tag |
+| `Section` | page band: `tone` paper/surface/lilac/mint/ink/forest, `space` none/md/lg, `labelledBy` |
+| `Heading` | `level` 1-4, `size` hero/section/sub/card (Mona Sans voices) |
+| `ButtonLink` | link styled by `button(variant,size)`; next/link for internal paths |
+| `Card` | rounded colour block, `tone` = service colours, surface, paper, ink, forest |
+| `Chip` | pill label with optional colour `dot` |
+| `Breadcrumbs` | visible trail + BreadcrumbList JSON-LD; Home first, current page last |
+
+Pillar colours in menus/footer: SEO cobalt, Web coral, Software peacock,
+Marketing `#d9668f` (`pillarDots` arrays in header and footer).
+
+## Site chrome (every page, from `layout.tsx`)
+
+- **Header**: floating pill; transparent at top, frosted after 24px scroll or
+  when a menu is open. Services opens a 4-column mega menu + "Not sure" strip;
+  Free tools opens a list. Hover (80ms open / 180ms close) or click; Escape and
+  outside click close. "Free SEO audit" shows from 1280px, "Get a quote" from
+  640px. Phones: full-screen sheet with nested accordions + 3 buttons.
+- **Footer**: ink panel, six-colour stripe; columns brand, Services (pillar +
+  3 children), Product & tools, Company, Contact; bottom bar legal links.
+- **Widgets**: WhatsApp button (forest circle, generic chat icon, md and up),
+  phone sticky bar (Call / WhatsApp / Get a quote), consult card (after 90% of
+  the first screen, hidden while the cookie banner shows, dismissal stored),
+  cookie banner (ink card, Accept all / Only necessary, key `nirman-consent`).
+- Menus fade in with `.anim-pop` (0.18s).
+
 ## Mockup system
 
 - **`Stage`** (`src/components/stage.tsx`): container that scales a fixed-size

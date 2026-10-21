@@ -142,7 +142,7 @@ export function NirmanCrm() {
               <CrmSidebar tab={tab} />
               <div className="flex min-w-0 flex-1 flex-col">
                 <CrmTopbar />
-                <div key={tab} className="anim-fade min-h-0 flex-1 [animation-duration:0.4s]">
+                <div key={tab} className="anim-pop min-h-0 flex-1">
                   {tab === "dashboard" && <DashboardView />}
                   {tab === "pipeline" && <PipelineView />}
                   {tab === "leads" && <LeadsView />}

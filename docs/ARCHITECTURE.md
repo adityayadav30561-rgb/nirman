@@ -6,17 +6,22 @@
 E:\nirman2\
   CLAUDE.md                 session instructions (auto-loaded)
   docs\                     plan, status, decisions, design, this file, handoff copy
-  tools\shots\              headless-Edge screenshot scripts (see README)
+  tools\shots\              headless-Edge screenshot scripts: shotsec, shotjs, eval, evalasync (see README)
   .claude\launch.json       dev server config for the app preview
   nirman-site\              the Next.js app
-    src\app\                layout.tsx (fonts, metadata), page.tsx (homepage + JSON-LD), globals.css
-    src\components\         hero, site-header, site-footer, nirman-crm, work, process, why-us,
-                            final-cta, logo, photo, stage
+    src\app\                layout.tsx (fonts, metadata, header/footer/widgets for every page),
+                            page.tsx (homepage sections + JSON-LD), not-found.tsx (404), globals.css
+    src\components\         hero, nirman-crm, work, process, why-us, final-cta, logo, photo, stage,
+                            site-header (dropdowns + mobile menu), site-footer, site-widgets
+                            (cookie banner, consult pop-up, WhatsApp button, phone sticky bar)
     src\components\services services grid: services.tsx (grid + intro), service-copy.tsx
                             (ServiceCard + tones), seo/web/automation/software/apps/marketing.tsx
-    src\components\mockups\ frames.tsx (Device, PhoneFrame, Panel), concept-site.tsx, charts.tsx, art.tsx
-    src\components\ui\      button.ts
-    src\content\            site.ts (brand, contact placeholders, nav), photos.ts, devices.ts
+    src\components\mockups\ frames.tsx (Device, PhoneFrame), concept-site.tsx, charts.tsx, art.tsx
+    src\components\ui\      button.ts (helper), button-link, container, section, heading, card, chip,
+                            breadcrumbs
+    src\content\            site.ts (brand, contact placeholders, all nav data), home.ts (homepage
+                            copy, SAMPLE data), photos.ts, devices.ts
+    src\lib\stored.ts       localStorage hook (consent, dismissed pop-ups)
     scripts\                make-device-cutouts.py
     design-assets\raw\      original device photos (not served)
     public\photos\          self-hosted Unsplash photos
@@ -36,7 +41,7 @@ TypeScript, ESLint 9 flat config, lucide-react icons. Node 24. Images via
 
 ## Client vs server components
 
-Client (`"use client"`): site-header, nirman-crm, process, final-cta.
+Client (`"use client"`): site-header, site-widgets, nirman-crm, process, final-cta, lib/stored.
 Everything else is a server component. Server components can pass JSX to
 client components as props.
 
@@ -70,3 +75,17 @@ client components as props.
     Python turns into a newline. Edit docs with the Edit tool, or use `/` paths
     (`E:/nirman`) in scripts.
 13. Git: repo at `E:\nirman2`, `.gitattributes` forces LF; `core.autocrlf=false`.
+14. **Unlayered CSS beats Tailwind utilities.** The `.anim-*` classes in
+    globals.css are unlayered, so `[animation-duration:..]` on the same element
+    does nothing. Use `.anim-pop` (0.18s) for menus, or add a new class.
+15. **`hidden` loses to `button()`'s `inline-flex`.** To hide a button below a
+    breakpoint use `max-xl:hidden` (etc.), not `hidden xl:inline-flex`.
+16. **Header uses `usePathname`** and sits in `<Suspense>` in `layout.tsx`
+    (Next 16 + cacheComponents: dynamic routes would otherwise block
+    prerendering). Fallback = `<SiteHeader pathname={null} />`.
+17. **localStorage state** uses `useStored()` (`src/lib/stored.ts`,
+    `useSyncExternalStore`); ESLint here rejects setState inside effects.
+    `writeStored` fires a `nirman-storage` event so all hooks update.
+18. Screenshot scripts: `shotjs.mjs` loads a URL, runs a JS file (open a menu,
+    set localStorage), screenshots. Don't `location.reload()` inside the JS file;
+    the evaluation context dies.

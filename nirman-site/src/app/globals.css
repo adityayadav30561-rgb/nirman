@@ -284,6 +284,9 @@
 .anim-settle-up { animation: settle-up 1s var(--ease-settle) both; }
 .anim-rise { animation: rise-line 0.9s var(--ease-settle) both; }
 .anim-fade { animation: fade-in 1.1s ease-out both; }
+/* Quick fade for menus and pop-overs. Unlayered rules beat Tailwind
+   utilities, so use this instead of overriding .anim-fade durations. */
+.anim-pop { animation: fade-in 0.18s ease-out both; }
 .anim-draw {
   stroke-dasharray: var(--len, 1000);
   animation: draw-line 1.6s var(--ease-settle) both;
@@ -308,6 +311,7 @@
   .anim-settle-up,
   .anim-rise,
   .anim-fade,
+  .anim-pop,
   .anim-draw,
   .anim-bar,
   .anim-ken {

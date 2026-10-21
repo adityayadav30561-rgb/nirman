@@ -5,26 +5,27 @@ Keep it under ~80 lines: it is read at the start of every session.
 
 ## Current position
 
-- **Phase:** 1 (Design system and layout shell), not started.
-- **Next task:** P1.1 extract UI primitives into `src/components/ui/`
-  (Container, Section, Heading, Button, Card, Chip, Breadcrumbs). Read
-  `docs/DESIGN.md` "Tokens", "Type", "Layout" first.
-- **Blockers:** none for Phases 1–4. Client inputs pending (list at the end of
+- **Phase:** 2 (Homepage aligned to the handoff), not started.
+- **Next task:** P2.1 hero CTAs from `content/home.ts` `hero` (decision C4).
+  Then P2.2 services grid (C1 marketing card rebuild, C2 remove Meta/WhatsApp
+  logos, C3 pillar tags + hub links).
+- **Blockers:** none for Phases 2–4. Client inputs pending (list at the end of
   PLAN.md) block parts of Phases 5, 7, 9, 11.
 
 ## Done so far
 
 - Homepage design complete and approved (see `docs/DESIGN.md`).
-- Phase 0 complete: git repo, handoff nav/contact data and homepage copy
-  ported, trailing slashes on, conflicts C1–C9 decided, unused files removed.
-- The homepage components do NOT use `content/home.ts` yet and still show
-  the pre-decision content (marketing ads card, Meta/WhatsApp logos, old hero
-  buttons, 6 process stages, "Request a demo"). Phase 2 applies C1–C6.
+- Phase 0: git, handoff data ported, trailing slashes, decisions C1–C9.
+- Phase 1: UI primitives, multi-page header with Services mega menu + Tools
+  dropdown + mobile accordion menu, 4-column footer, WhatsApp button, phone
+  sticky bar, consult pop-up, cookie banner, 404 page. All mounted in
+  `layout.tsx` for every page. Checked at 390 / 1024 / 1440.
+- Homepage sections still show pre-decision content (Phase 2 fixes it).
 
 ## Phase checklist
 
-- [x] Phase 0: Alignment and setup (P0.1–P0.6)
-- [ ] Phase 1: Design system and layout shell
+- [x] Phase 0: Alignment and setup
+- [x] Phase 1: Design system and layout shell
 - [ ] Phase 2: Homepage aligned to handoff
 - [ ] Phase 3: SEO foundation
 - [ ] Phase 4: Service pages (18)
@@ -38,14 +39,13 @@ Keep it under ~80 lines: it is read at the start of every session.
 
 ## Current phase tasks
 
-- [ ] P1.1 UI primitives in `src/components/ui/` (+ document in DESIGN.md)
-- [ ] P1.2 Header with Services/Tools dropdowns + mobile full-screen menu
-      (data: `serviceGroups`, `toolLinks`, `mainNav` in `content/site.ts`)
-- [ ] P1.3 Footer, 4 columns + bottom bar (`companyLinks`, `legalLinks`)
-- [ ] P1.4 Floating WhatsApp button (generic chat icon) + mobile sticky bar
-- [ ] P1.5 ConsultCard pop-up (after hero, dismissal in localStorage)
-- [ ] P1.6 Cookie consent banner
-- [ ] P1.7 not-found.tsx (404)
+- [ ] P2.1 Hero: "Get a free SEO audit" + "Book a consultation" + note (C4)
+- [ ] P2.2 Services grid: C1 WhatsApp & email card, C2 logos, C3 pillar tags/links
+- [ ] P2.3 Nirman CRM section: "Book a demo" + "Need a custom CRM?" (C5), features/callouts
+- [ ] P2.4 Case studies section from `content/home.ts` (SAMPLE), "See all our work"
+- [ ] P2.5 Process: handoff's 5 stages (C6), keep horizontal scroll
+- [ ] P2.6 New sections: Team, Free tools strip, Testimonials, FAQ + CTA (FAQPage JSON-LD)
+- [ ] P2.7 Final section order (see PLAN.md Phase 2)
 
 ## Half-finished work
 
@@ -53,21 +53,18 @@ None.
 
 ## Notes for the next session
 
-- `content/site.ts` now has the handoff nav data (`serviceGroups`, `toolLinks`,
-  `mainNav`, `companyLinks`, `legalLinks`) plus the old homepage anchors
-  (`nav`, `services`) that the current header/footer still use. Remove the old
-  ones when P1.2/P1.3 replace them.
-- `site.bookingUrl` is still `#contact`; switch to `/book-a-call/` once that
-  route exists (P3.4 stub).
-- Linked pages (`/services/...`, `/tools/...`, `/crm/`) don't exist until the
-  P3.4 stubs, so new header links will 404 until then. That is expected.
+- Lighthouse accessibility score (Phase 1 acceptance, target ≥ 95) was not
+  measured; check it in Phase 11 or with Chrome DevTools.
+- Header/footer links to `/services/...`, `/tools/...`, `/crm/` etc. 404 until
+  the P3.4 stub pages exist. Expected.
+- `site.bookingUrl` is still `#contact`; switch to `/book-a-call/` after P3.4.
+- Old homepage-only anchor nav (`nav`, `services` in site.ts) has been removed.
 
 ## Last session (2026-10-21)
 
-Phase 0 finished. P0.1 git (c18f9d2). P0.5 decisions (see DECISIONS.md).
-P0.2 `content/site.ts` merged with handoff nav data, `NEXT_PUBLIC_SITE_URL`,
-`.env.example`, `phoneHref`/`whatsappHref`/`copyrightYear`. P0.3
-`content/home.ts` (hero, pillars, cardPillar map, crm, features, journey,
-SAMPLE case studies/team/testimonials, FAQs). P0.4 `trailingSlash: true`
-(verified /about -> 308 /about/). P0.6 removed starter SVGs, unused drawn art,
-`Panel`, `Sparkline`. tsc, lint, build pass.
+Phase 1 done. New: `src/components/ui/*` primitives, `site-header.tsx`
+rewrite (mega menu, tools dropdown, mobile accordions, Suspense-wrapped
+`usePathname`), `site-footer.tsx` rewrite, `site-widgets.tsx`,
+`lib/stored.ts`, `app/not-found.tsx`, `.anim-pop` CSS class,
+`tools/shots/shotjs.mjs` + `evalasync.mjs`. Gotchas 14–18 added.
+tsc, lint, build pass.

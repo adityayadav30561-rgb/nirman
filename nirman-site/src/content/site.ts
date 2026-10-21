@@ -108,25 +108,3 @@ export const legalLinks: NavLink[] = [
   { label: "Terms", href: "/terms/" },
   { label: "Sitemap", href: "/sitemap.xml" },
 ];
-
-// ---------------------------------------------------------------------------
-// Homepage-only anchors used by the current single-page header and footer.
-// Phase 1 (P1.2/P1.3) replaces these with the multi-page navigation above.
-// ---------------------------------------------------------------------------
-
-export const nav = [
-  { label: "Services", href: "#services" },
-  { label: "Our Products", href: "#nirman-crm" },
-  { label: "Our Work", href: "#work" },
-  { label: "About Us", href: "#about" },
-  { label: "Contact", href: "#contact" },
-] as const;
-
-export const services = [
-  { id: "seo", label: "SEO & organic growth" },
-  { id: "web", label: "Website design & development" },
-  { id: "crm", label: "CRM & automation" },
-  { id: "software", label: "Custom software" },
-  { id: "apps", label: "Mobile apps" },
-  { id: "marketing", label: "WhatsApp & email marketing" },
-] as const;
