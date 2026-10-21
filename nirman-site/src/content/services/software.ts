@@ -10,8 +10,6 @@ export const softwareServices: Service[] = [
     name: "Custom software",
     serviceType: "Custom software development",
     visual: "software",
-    related: ["/services/web/", "/services/marketing/"],
-    tools: ["/tools/seo-audit/"],
   },
   {
     path: "/services/software/crm-development/",
@@ -20,8 +18,6 @@ export const softwareServices: Service[] = [
     name: "CRM development",
     serviceType: "CRM development",
     visual: "automation",
-    related: ["/services/software/automation-integrations/", "/services/marketing/"],
-    tools: ["/tools/whatsapp-link/"],
   },
   {
     path: "/services/software/web-apps/",
@@ -30,8 +26,6 @@ export const softwareServices: Service[] = [
     name: "Web apps and SaaS",
     serviceType: "Web application and SaaS development",
     visual: "software",
-    related: ["/services/software/mobile-apps/", "/services/web/website-development/"],
-    tools: ["/tools/seo-audit/"],
   },
   {
     path: "/services/software/mobile-apps/",
@@ -40,8 +34,6 @@ export const softwareServices: Service[] = [
     name: "Mobile apps",
     serviceType: "Mobile app development",
     visual: "apps",
-    related: ["/services/software/web-apps/", "/services/software/automation-integrations/"],
-    tools: ["/tools/whatsapp-link/"],
   },
   {
     path: "/services/software/automation-integrations/",
@@ -50,7 +42,5 @@ export const softwareServices: Service[] = [
     name: "Automation and integrations",
     serviceType: "Business process automation and software integration",
     visual: "automation",
-    related: ["/services/software/crm-development/", "/services/marketing/whatsapp-marketing/"],
-    tools: ["/tools/whatsapp-link/"],
   },
 ];

@@ -113,3 +113,10 @@ client components as props.
     `registryMetadata("/path/")` (or `pageMetadata()` for custom titles) and
     swap `<StubPage>` for the real page. Check nested canonicals keep the
     trailing slash (they do with `alternates.canonical: path`).
+25. **Arbitrary px values do not scale inside a `Stage`.** Only Tailwind
+    spacing (and `fs-*`, radii) resolve to design px there; `w-[70px]` or
+    `grid-cols-[1fr_70px]` stay real px and break the composition when it
+    scales. Use spacing numbers (`w-70`) or `fr` ratios in grid templates.
+26. **Service page mockups** (`components/service-art.tsx`) are all 640 × 420
+    design px so one mockup works in the process panel and the reports viewer.
+    Server-render them and pass them to the client sections as `visual` props.

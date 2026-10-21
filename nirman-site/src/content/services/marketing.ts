@@ -11,8 +11,6 @@ export const marketingServices: Service[] = [
     name: "Marketing automation",
     serviceType: "Marketing automation via CRM",
     visual: "marketing",
-    related: ["/services/software/crm-development/", "/services/seo/"],
-    tools: ["/tools/whatsapp-link/"],
   },
   {
     path: "/services/marketing/whatsapp-marketing/",
@@ -21,8 +19,6 @@ export const marketingServices: Service[] = [
     name: "WhatsApp marketing",
     serviceType: "WhatsApp Business API marketing",
     visual: "marketing",
-    related: ["/services/marketing/email-marketing/", "/services/software/automation-integrations/"],
-    tools: ["/tools/whatsapp-link/"],
   },
   {
     path: "/services/marketing/email-marketing/",
@@ -31,7 +27,5 @@ export const marketingServices: Service[] = [
     name: "Email marketing",
     serviceType: "Email marketing automation",
     visual: "marketing",
-    related: ["/services/marketing/whatsapp-marketing/", "/services/software/crm-development/"],
-    tools: ["/tools/seo-audit/"],
   },
 ];

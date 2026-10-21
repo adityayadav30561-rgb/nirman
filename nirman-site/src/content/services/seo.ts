@@ -1,7 +1,8 @@
 import type { Service } from "./types";
 
-// SEO pillar: hub + 4 (P4.3). Results are SAMPLE figures until real client
-// results are supplied. Never promise rankings or name a price.
+// SEO pillar: hub + 4 (P4.3, reworked in the 2026-10-21 redesign). Results
+// and report figures are SAMPLE data until real client results are supplied.
+// Never promise rankings or name a price.
 
 export const seoServices: Service[] = [
   {
@@ -11,22 +12,58 @@ export const seoServices: Service[] = [
     name: "SEO",
     serviceType: "Search engine optimization",
     visual: "seo",
-    related: ["/services/web/", "/services/marketing/"],
-    tools: ["/tools/seo-audit/", "/tools/serp-preview/"],
     content: {
       outcome:
         "More of the right people find you on Google, in Maps and in AI answers, and you can see which pages bring enquiries.",
-      audience: [
-        "Businesses whose website gets visits but few enquiries",
-        "Local businesses that want to show up in Google Maps",
-        "Online stores that depend on product and category searches",
-        "Companies selling in India and abroad from one English site",
-      ],
-      changes: [
-        "Your pages rank for the searches customers actually type",
-        "Google can crawl and index every page that matters",
-        "Your business appears in Maps and in AI answers",
-        "A monthly report ties rankings to calls and enquiries",
+      segments: [
+        {
+          title: "Local shops, clinics and services",
+          photo: "barber",
+          search: "best men's salon near me",
+          problem:
+            "People nearby search for exactly what you do, and Google shows three competitors in the map before your name appears.",
+          outcomes: [
+            "Your profile shows in the map pack for your main services",
+            "Reviews and photos that make people call",
+            "Calls and direction requests tracked every month",
+          ],
+        },
+        {
+          title: "Online stores",
+          photo: "packingLabel",
+          search: "handmade ceramic mugs online",
+          problem:
+            "Most orders come through marketplaces that take a cut, and your own product pages rarely show up in Google.",
+          outcomes: [
+            "Category and product pages that rank for buying searches",
+            "Ratings and stock shown in search results",
+            "Revenue from search tracked to the order",
+          ],
+        },
+        {
+          title: "Service firms and B2B",
+          photo: "consultant",
+          search: "industrial automation consultant pune",
+          problem:
+            "Buyers research for weeks before they get in touch. If they never find you while researching, you never make the shortlist.",
+          outcomes: [
+            "Pages that answer what buyers actually ask",
+            "Your name in AI answers and comparisons",
+            "Enquiries from search, not only referrals",
+          ],
+        },
+        {
+          title: "Businesses selling abroad",
+          photo: "videoCall",
+          search: "software development company for startups",
+          problem:
+            "You serve clients in the US, UAE or UK, but your site only shows up, if at all, for searches made in India.",
+          outcomes: [
+            "Pages planned for buyers in each country you sell to",
+            "Proof and examples that international clients look for",
+            "Reports that split traffic and enquiries by country",
+          ],
+        },
       ],
       deliverables: [],
       process: [
@@ -34,36 +71,68 @@ export const seoServices: Service[] = [
           title: "Audit",
           body: "We crawl the site, read Search Console and Analytics, and study the competitors ranking above you.",
           duration: "Week 1",
+          photo: "analyticsLaptop",
+          art: "seo-audit",
         },
         {
           title: "Plan",
           body: "A prioritised list: fixes first, then pages to improve, then new content. You approve it before we start.",
           duration: "Week 2",
+          photo: "whiteboard",
+          art: "seo-plan",
         },
         {
           title: "Fix the foundations",
           body: "Technical fixes, page titles, internal links and structured data, done or handed to your developer.",
           duration: "Weeks 2–6",
+          photo: "codeScreen",
+          art: "seo-schema",
         },
         {
           title: "Content and local",
           body: "New and improved pages, Google Business Profile work and listings, in the order the plan sets.",
           duration: "Month 2 onwards",
+          photo: "writingNotes",
+          art: "seo-content",
         },
         {
           title: "Report and adjust",
           body: "A plain-language report each month, and more effort on whatever is bringing enquiries.",
           duration: "Monthly",
+          photo: "laptopDashboard",
+          art: "seo-report",
         },
       ],
-      stack: [
-        "Google Search Console",
-        "Google Analytics 4",
-        "Google Business Profile",
-        "Bing Webmaster Tools",
-        "PageSpeed Insights",
-        "Screaming Frog",
-        "Schema.org",
+      reports: [
+        {
+          art: "seo-report",
+          title: "Monthly report",
+          body: "One report at the start of every month, in plain language. The first page is a summary you can read in two minutes.",
+          points: [
+            "Clicks, enquiries and calls from search",
+            "Rankings for the searches you care about",
+            "What we did this month, and why",
+            "What we will do next month",
+          ],
+        },
+        {
+          art: "seo-plan",
+          title: "Improvement plan",
+          body: "A living list of every fix and new page, ranked by the difference it will make. You always see what is done, in progress and planned.",
+          points: ["Each task with its impact and effort", "A month-by-month schedule", "Reviewed with you every month"],
+        },
+        {
+          art: "seo-audit",
+          title: "Site audit",
+          body: "A full crawl of your site at the start and every quarter, with each issue explained and ranked by severity.",
+          points: ["Health score and issues by severity", "Why each issue matters, in plain words", "How to fix it, or a ticket for your developer"],
+        },
+        {
+          art: "seo-ranks",
+          title: "Rank tracking",
+          body: "Daily positions for the searches that bring you customers, so you can see progress between reports.",
+          points: ["Position and change for every target search", "Clicks per search from Search Console", "Tracking by city or country"],
+        },
       ],
       results: [
         {
@@ -79,17 +148,16 @@ export const seoServices: Service[] = [
           context: "Sample figure for a clinic with three branches. Not a real client yet.",
         },
       ],
-      engagement: [
-        { model: "fixed-scope", fit: "Good for a one-off audit and fixes, or moving a site without losing rankings." },
-        { model: "retainer", fit: "How most SEO runs: steady fixes, content and a report every month." },
-        { model: "dedicated-team", fit: "Good for large sites, or groups of sites, that need SEO in every release." },
-      ],
-      costFactors: [
-        "Size of the site and how many pages need work",
-        "The technical state of the site today",
-        "How competitive your searches are",
-        "How many cities, branches or countries you target",
-        "Whether we write the content or your team does",
+      stack: [
+        "Google Search Console",
+        "Google Analytics 4",
+        "Google Business Profile",
+        "PageSpeed Insights",
+        "Semrush",
+        "Screaming Frog",
+        "Bing Webmaster Tools",
+        "Schema.org",
+        "Perplexity",
       ],
       faqs: [
         {
@@ -130,24 +198,55 @@ export const seoServices: Service[] = [
     name: "Local SEO",
     serviceType: "Local SEO and Google Business Profile management",
     visual: "seo",
-    related: ["/services/seo/technical-seo/", "/services/web/website-design/"],
-    tools: ["/tools/gbp-checker/", "/tools/seo-audit/"],
+    card: { art: "seo-local" },
     content: {
       outcome:
         "Show up in Google Maps and local results when people nearby search for what you offer, and turn those views into calls and visits.",
-      audience: [
-        "Clinics, restaurants, salons, showrooms and coaching centres",
-        "Service businesses covering a city or region",
-        "Businesses with several branches or franchise outlets",
-        "Businesses that moved or rebranded and have messy listings",
-      ],
-      changes: [
-        "Your Google Business Profile is complete, accurate and active",
-        "You appear in the map pack for your main services",
-        "Name, address and phone match everywhere online",
-        "Reviews arrive steadily and each one gets a reply",
-        "Each branch has its own useful page on your website",
-        "You see calls, direction requests and clicks by month",
+      segments: [
+        {
+          title: "Clinics and healthcare",
+          photo: "doctor",
+          search: "dentist near me",
+          problem: "Patients search on their phone and book whichever clinic shows first in Maps with the best reviews.",
+          outcomes: [
+            "A complete, accurate and active Google profile",
+            "A steady flow of genuine patient reviews",
+            "A page for each treatment and branch",
+          ],
+        },
+        {
+          title: "Restaurants and cafés",
+          photo: "restaurantOwner",
+          search: "south indian restaurant baner",
+          problem: "Hungry people decide in seconds from photos, hours and stars. Old photos or wrong hours send them next door.",
+          outcomes: [
+            "Fresh photos, menu and hours on Google",
+            "A reply to every review, good or bad",
+            "More calls and direction requests each month",
+          ],
+        },
+        {
+          title: "Salons and home services",
+          photo: "electrician",
+          search: "electrician near me",
+          problem: "You do great work, but competitors with more reviews take the top three spots in Maps.",
+          outcomes: [
+            "A service area set up correctly, even without a shop",
+            "Easy review requests by link or QR code",
+            "Rankings checked across every part of your area",
+          ],
+        },
+        {
+          title: "Businesses with several branches",
+          photo: "furnitureDisplay",
+          search: "furniture showroom in pune",
+          problem: "Each branch has its own listing, some duplicated or out of date, and none has its own page on your website.",
+          outcomes: [
+            "One accurate profile per branch",
+            "A useful page for every location",
+            "Calls and visits tracked branch by branch",
+          ],
+        },
       ],
       deliverables: [
         {
@@ -188,37 +287,57 @@ export const seoServices: Service[] = [
           title: "Audit",
           body: "Your profile, listings, reviews and the competitors in the map pack for your main searches.",
           duration: "Week 1",
+          photo: "analyticsLaptop",
+          art: "seo-audit",
         },
         {
           title: "Fix",
           body: "Profile details, verification problems, duplicate listings and mismatched addresses.",
           duration: "Weeks 2–3",
+          photo: "phoneLaptop",
+          art: "seo-local",
         },
         {
           title: "Build",
           body: "Location pages, structured data and links from your main pages to each branch.",
           duration: "Weeks 3–6",
+          photo: "codeScreen",
+          art: "seo-schema",
         },
         {
           title: "Grow",
           body: "Review requests, posts, photos and new listings, every month.",
           duration: "Monthly",
+          photo: "restaurantOwner",
+          art: "seo-ranks",
         },
         {
           title: "Report",
           body: "A short monthly report on calls, visits and rankings, area by area.",
           duration: "Monthly",
+          photo: "laptopDashboard",
+          art: "seo-report",
         },
       ],
-      stack: [
-        "Google Business Profile",
-        "Google Search Console",
-        "Google Analytics 4",
-        "Bing Places",
-        "Apple Business Connect",
-        "Justdial",
-        "Schema.org",
-        "Nirman CRM",
+      reports: [
+        {
+          art: "seo-local",
+          title: "Profile insights",
+          body: "What your Google profile did this month: how many people called, asked for directions or visited your website.",
+          points: ["Calls, direction requests and website clicks", "New reviews and your replies", "Photo and post views"],
+        },
+        {
+          art: "seo-ranks",
+          title: "Local rank tracking",
+          body: "Where you appear in Maps for your main searches, checked across your whole area rather than from one spot.",
+          points: ["Position for each service and area", "Changes since last month", "Competitors above and below you"],
+        },
+        {
+          art: "seo-report",
+          title: "Monthly report",
+          body: "Everything in one short report: results, what we did and what comes next month.",
+          points: ["Calls and visits by branch", "Work done this month", "Plan for next month"],
+        },
       ],
       results: [
         {
@@ -234,17 +353,15 @@ export const seoServices: Service[] = [
           context: "Sample figure for a salon in one city. Not a real client yet.",
         },
       ],
-      engagement: [
-        { model: "fixed-scope", fit: "Good for setting up or repairing your profile and listings in one go." },
-        { model: "retainer", fit: "Good for steady reviews, posts and tracking, month after month." },
-        { model: "dedicated-team", fit: "Good for chains and franchises with many locations." },
-      ],
-      costFactors: [
-        "Number of locations",
-        "The state of your listings (duplicates, wrong addresses, suspended profile)",
-        "Competition in your area and category",
-        "How many location pages you need",
-        "How many posts and review requests each month",
+      stack: [
+        "Google Business Profile",
+        "Google Search Console",
+        "Google Analytics 4",
+        "Bing Places",
+        "Apple Business Connect",
+        "Justdial",
+        "Schema.org",
+        "Nirman CRM",
       ],
       faqs: [
         {
@@ -285,24 +402,55 @@ export const seoServices: Service[] = [
     name: "E-commerce SEO",
     serviceType: "E-commerce SEO",
     visual: "seo",
-    related: ["/services/web/ecommerce-websites/", "/services/seo/technical-seo/"],
-    tools: ["/tools/seo-audit/", "/tools/schema-generator/"],
+    card: { art: "seo-product" },
     content: {
       outcome:
         "More orders from people searching for the products you sell, through category and product pages that rank and convert.",
-      audience: [
-        "Shopify and WooCommerce stores",
-        "D2C brands selling in India and abroad",
-        "Catalogues with hundreds or thousands of products",
-        "Stores moving to a new platform or theme",
-      ],
-      changes: [
-        "Category pages rank for broad product searches",
-        "Product pages show ratings and stock in Google",
-        "Filters and variants stop creating duplicate pages",
-        "Product and category pages load fast on phones",
-        "Search traffic is tracked through to orders",
-        "Best sellers get the most search attention",
+      segments: [
+        {
+          title: "Shopify and WooCommerce stores",
+          photo: "packingLabel",
+          search: "handmade ceramic mugs",
+          problem: "Your products are lovely, but in Google your store shows up below marketplaces selling something similar.",
+          outcomes: [
+            "Category pages that rank for broad product searches",
+            "Product pages with ratings and stock in Google",
+            "Best sellers getting the most attention",
+          ],
+        },
+        {
+          title: "D2C brands",
+          photo: "serum",
+          search: "vitamin c serum for oily skin",
+          problem: "Most of your orders come through marketplaces that take a cut and keep the customer relationship.",
+          outcomes: [
+            "More orders on your own store",
+            "Customers who come back to you directly",
+            "Revenue from search tracked in Analytics",
+          ],
+        },
+        {
+          title: "Large catalogues",
+          photo: "warehouse",
+          search: "nitrile safety gloves bulk",
+          problem: "Thousands of products, filters creating duplicate pages, and Google indexing the wrong ones.",
+          outcomes: [
+            "Templates that fix every product page at once",
+            "Filters and variants that stop creating duplicates",
+            "Google spending its time on pages that sell",
+          ],
+        },
+        {
+          title: "Stores changing platform",
+          photo: "shopOnline",
+          search: "buy stoneware plates online",
+          problem: "You're moving to a new platform and worried years of rankings will vanish overnight.",
+          outcomes: [
+            "A full redirect map before launch",
+            "Checks on launch day",
+            "Rankings watched closely for weeks after",
+          ],
+        },
       ],
       deliverables: [
         {
@@ -347,36 +495,57 @@ export const seoServices: Service[] = [
           title: "Audit",
           body: "A full crawl, Search Console coverage, and a review of your product and category templates.",
           duration: "Weeks 1–2",
+          photo: "analyticsLaptop",
+          art: "seo-audit",
         },
         {
           title: "Keyword map",
           body: "Searches matched to categories and products, with the best sellers first.",
           duration: "Weeks 2–3",
+          photo: "whiteboard",
+          art: "seo-plan",
         },
         {
           title: "Template fixes",
           body: "Structured data, duplicates, speed and on-page changes made once in the templates.",
           duration: "Weeks 3–6",
+          photo: "codeScreen",
+          art: "seo-product",
         },
         {
           title: "Content",
           body: "Category copy, buying guides and new collections, in order of the revenue they can bring.",
           duration: "Month 2 onwards",
+          photo: "writingNotes",
+          art: "seo-content",
         },
         {
           title: "Report",
           body: "Traffic, orders and revenue from search each month, by category.",
           duration: "Monthly",
+          photo: "laptopDashboard",
+          art: "seo-report",
         },
       ],
-      stack: [
-        "Shopify",
-        "WooCommerce",
-        "Google Search Console",
-        "Google Analytics 4",
-        "Screaming Frog",
-        "PageSpeed Insights",
-        "Schema.org",
+      reports: [
+        {
+          art: "seo-report",
+          title: "Monthly report",
+          body: "Orders and revenue from search, not only traffic, with what we did and what comes next.",
+          points: ["Orders and revenue from search", "Best and worst performing categories", "Next month's priorities"],
+        },
+        {
+          art: "seo-product",
+          title: "Search appearance",
+          body: "How your products look in Google: whether ratings and stock show, and how clicks change after each fix.",
+          points: ["Product schema status", "Review stars and stock in results", "Clicks per product page"],
+        },
+        {
+          art: "seo-plan",
+          title: "Improvement plan",
+          body: "Every template fix and content task, ranked by the revenue it can bring.",
+          points: ["Impact and effort for each task", "Month-by-month schedule", "Done, in progress and planned"],
+        },
       ],
       results: [
         {
@@ -392,17 +561,15 @@ export const seoServices: Service[] = [
           context: "Sample figure for the same store. Not a real client yet.",
         },
       ],
-      engagement: [
-        { model: "fixed-scope", fit: "Good for a technical clean-up, template fixes or a platform migration." },
-        { model: "retainer", fit: "Good for category content and reporting as the catalogue grows." },
-        { model: "dedicated-team", fit: "Good for large catalogues that need SEO in every product launch." },
-      ],
-      costFactors: [
-        "Number of products and categories",
-        "Your platform, theme and installed apps",
-        "How much product content already exists",
-        "How many countries you sell to",
-        "Whether a platform migration is involved",
+      stack: [
+        "Shopify",
+        "WooCommerce",
+        "Google Search Console",
+        "Google Analytics 4",
+        "Semrush",
+        "Screaming Frog",
+        "PageSpeed Insights",
+        "Schema.org",
       ],
       faqs: [
         {
@@ -439,23 +606,54 @@ export const seoServices: Service[] = [
     name: "Technical SEO",
     serviceType: "Technical SEO and site audit",
     visual: "seo",
-    related: ["/services/web/website-development/", "/services/seo/ai-search-optimization/"],
-    tools: ["/tools/seo-audit/", "/tools/sitemap-generator/"],
+    card: { art: "seo-audit" },
     content: {
       outcome: "A site Google can crawl, index and load quickly, with a prioritised fix list and the fixes done.",
-      audience: [
-        "Sites with important pages missing from Google",
-        "Sites that lost traffic after a redesign or migration",
-        "Large or JavaScript-heavy sites built with React or Next.js",
-        "Development teams that want clear, prioritised tickets",
-      ],
-      changes: [
-        "Every important page is indexed",
-        "Each page has one URL, without duplicates",
-        "Core Web Vitals pass on phones",
-        "Old URLs redirect cleanly, with no broken links",
-        "Structured data is valid and complete",
-        "Your developers know exactly what to fix first",
+      segments: [
+        {
+          title: "Sites missing from Google",
+          photo: "analyticsLaptop",
+          search: "interior design firm mumbai",
+          problem: "Important pages never show in Google, and Search Console is full of warnings nobody has time to read.",
+          outcomes: [
+            "Every important page indexed",
+            "Warnings explained and fixed in order of impact",
+            "One URL per page, without duplicates",
+          ],
+        },
+        {
+          title: "Sites that lost traffic after a redesign",
+          photo: "dualMonitors",
+          search: "corporate gifting company bangalore",
+          problem: "Traffic dropped after the new site went live, and nobody is sure which old URLs were lost.",
+          outcomes: [
+            "Lost URLs found and redirected",
+            "Broken links and redirect chains cleared",
+            "Recovery tracked week by week",
+          ],
+        },
+        {
+          title: "React and Next.js products",
+          photo: "devTeam",
+          search: "project management software for agencies",
+          problem: "Your product is built with JavaScript, and Google may be seeing half-empty pages.",
+          outcomes: [
+            "Content and links that Google can render",
+            "Core Web Vitals passing on phones",
+            "Structured data on every template",
+          ],
+        },
+        {
+          title: "Teams with their own developers",
+          photo: "professional",
+          search: "logistics company in chennai",
+          problem: "Your developers get vague SEO requests and can't tell which ones actually matter.",
+          outcomes: [
+            "Clear tickets, ranked by impact",
+            "Fixes checked after each release",
+            "SEO review before big changes ship",
+          ],
+        },
       ],
       deliverables: [
         {
@@ -500,38 +698,63 @@ export const seoServices: Service[] = [
           title: "Crawl",
           body: "A full crawl plus Search Console, Analytics and speed data from real users.",
           duration: "Week 1",
+          photo: "analyticsLaptop",
+          art: "seo-audit",
         },
         {
           title: "Diagnose",
           body: "Issues ranked by impact and effort, so the biggest wins come first.",
           duration: "Week 2",
+          photo: "whiteboard",
+          art: "seo-plan",
         },
         {
           title: "Fix",
           body: "Fixes made by us or by your team from our tickets, highest impact first.",
           duration: "Weeks 3–6",
+          photo: "codeScreen",
+          art: "seo-schema",
         },
         {
           title: "Verify",
           body: "A second crawl and Search Console validation to confirm each fix worked.",
           duration: "Weeks 6–8",
+          photo: "dualMonitors",
+          art: "web-launch",
         },
         {
           title: "Monitor",
           body: "Ongoing checks so new releases don't break what was fixed.",
           duration: "Monthly",
+          photo: "laptopDashboard",
+          art: "seo-report",
         },
       ],
-      stack: [
-        "Google Search Console",
-        "Screaming Frog",
-        "PageSpeed Insights",
-        "Lighthouse",
-        "Rich Results Test",
-        "Bing Webmaster Tools",
-        "Next.js",
-        "WordPress",
-        "Shopify",
+      reports: [
+        {
+          art: "seo-audit",
+          title: "Site audit",
+          body: "Every issue on your site, explained in plain words and ranked by how much traffic it costs you.",
+          points: ["Health score and issues by severity", "Why each issue matters", "How to fix it, step by step"],
+        },
+        {
+          art: "seo-plan",
+          title: "Fix plan",
+          body: "The audit turned into a schedule, with each fix sized so your team can plan around it.",
+          points: ["Impact and effort for each fix", "Who does what, and when", "Status you can check any time"],
+        },
+        {
+          art: "web-launch",
+          title: "Speed report",
+          body: "Lighthouse scores and real-user Core Web Vitals, before and after the fixes.",
+          points: ["LCP, INP and CLS on phones", "Lighthouse scores by template", "What slowed each page down"],
+        },
+        {
+          art: "seo-schema",
+          title: "Structured data check",
+          body: "The markup on your key templates, validated with Google's Rich Results Test.",
+          points: ["Valid types and any errors", "Pages with rich results", "Markup to add next"],
+        },
       ],
       results: [
         {
@@ -547,17 +770,16 @@ export const seoServices: Service[] = [
           context: "Sample figure for a WordPress site. Not a real client yet.",
         },
       ],
-      engagement: [
-        { model: "fixed-scope", fit: "Good for an audit with fixes, or a migration with a redirect plan." },
-        { model: "retainer", fit: "Good for sites that change often and need regular checks." },
-        { model: "dedicated-team", fit: "Good for product teams that want SEO review before every release." },
-      ],
-      costFactors: [
-        "Number of pages and page templates",
-        "Your platform, and whether we or your developers make the fixes",
-        "How serious the current issues are",
-        "Whether a migration is involved",
-        "How often the site changes",
+      stack: [
+        "Google Search Console",
+        "Screaming Frog",
+        "PageSpeed Insights",
+        "Lighthouse",
+        "Rich Results Test",
+        "Bing Webmaster Tools",
+        "Next.js",
+        "WordPress",
+        "Shopify",
       ],
       faqs: [
         {
@@ -598,23 +820,55 @@ export const seoServices: Service[] = [
     name: "AI search optimization",
     serviceType: "Generative engine optimization (GEO) and answer engine optimization (AEO)",
     visual: "seo",
-    related: ["/services/seo/technical-seo/", "/services/seo/local-seo/"],
-    tools: ["/tools/schema-generator/", "/tools/seo-audit/"],
+    card: { art: "seo-ai" },
     content: {
       outcome:
         "Get your business named and linked in Google AI Overviews, ChatGPT, Perplexity and Copilot answers about what you do.",
-      audience: [
-        "B2B and service businesses whose buyers research with AI assistants",
-        "Brands that rank well but see fewer clicks from Google",
-        "Experts and firms with knowledge worth quoting",
-        "Businesses that want to know what AI tools say about them",
-      ],
-      changes: [
-        "AI search crawlers can reach your site",
-        "Key pages answer real questions in quotable passages",
-        "Your business details match everywhere online",
-        "Structured data describes who you are and what you offer",
-        "You know which AI answers mention you, and which don't",
+      segments: [
+        {
+          title: "B2B and service firms",
+          photo: "consultant",
+          search: "best ERP consultant for manufacturers in India",
+          problem: "Buyers now ask AI assistants for a shortlist. If you are not in the answer, you are not on the list.",
+          outcomes: [
+            "Your firm named in answers about your field",
+            "Pages written so AI tools can quote them",
+            "Mentions on the sites AI tools trust",
+          ],
+        },
+        {
+          title: "Brands seeing fewer clicks",
+          photo: "laptopDashboard",
+          search: "how to choose a solar inverter",
+          problem: "You still rank, but Google's AI Overview answers the question and fewer people click through to you.",
+          outcomes: [
+            "Your pages cited inside the AI Overview",
+            "Content that earns the click for the next step",
+            "Visits from AI assistants measured",
+          ],
+        },
+        {
+          title: "Experts and specialist firms",
+          photo: "professional",
+          search: "is a courtyard house good for indian climate",
+          problem: "You know your field better than anyone, but AI tools quote other websites when they answer.",
+          outcomes: [
+            "Your expertise shown with authors and examples",
+            "Clear answers to the questions you get asked",
+            "Your site cited as a source",
+          ],
+        },
+        {
+          title: "Businesses checking their reputation",
+          photo: "teamCollab",
+          search: "is your company reliable",
+          problem: "You have no idea what AI assistants tell customers when they ask about you.",
+          outcomes: [
+            "A baseline of what each AI tool says today",
+            "Wrong or outdated facts corrected at the source",
+            "Monthly checks on the same questions",
+          ],
+        },
       ],
       deliverables: [
         {
@@ -651,38 +905,57 @@ export const seoServices: Service[] = [
           title: "Baseline",
           body: "Your buyers' questions tested across AI tools, and who they cite today.",
           duration: "Weeks 1–2",
+          photo: "phoneLaptop",
+          art: "seo-ai",
         },
         {
           title: "Access",
           body: "Crawler rules, llms.txt and structured data in place.",
           duration: "Week 2",
+          photo: "codeScreen",
+          art: "seo-schema",
         },
         {
           title: "Content",
           body: "Key pages rewritten into clear answers, with sources and examples.",
           duration: "Weeks 3–8",
+          photo: "writingNotes",
+          art: "seo-content",
         },
         {
           title: "Mentions",
           body: "Listings and mentions on the sites AI tools trust for your industry.",
           duration: "Ongoing",
+          photo: "contractSign",
+          art: "seo-ranks",
         },
         {
           title: "Track",
           body: "Monthly re-tests and AI referral visits in your report.",
           duration: "Monthly",
+          photo: "laptopDashboard",
+          art: "seo-report",
         },
       ],
-      stack: [
-        "ChatGPT",
-        "Perplexity",
-        "Google AI Overviews",
-        "Gemini",
-        "Microsoft Copilot",
-        "Google Search Console",
-        "Google Analytics 4",
-        "Schema.org",
-        "llms.txt",
+      reports: [
+        {
+          art: "seo-ai",
+          title: "AI visibility report",
+          body: "A fixed set of buyer questions asked in each AI tool every month, with who gets cited and whether it is you.",
+          points: ["Answers from ChatGPT, Perplexity, Gemini and Copilot", "Which sources each answer cites", "Change since last month"],
+        },
+        {
+          art: "seo-content",
+          title: "Content briefs",
+          body: "For each page we rewrite: the questions it must answer and how to structure it so AI tools can quote it.",
+          points: ["Target questions and search intent", "Outline and passage structure", "Sources and examples to include"],
+        },
+        {
+          art: "seo-report",
+          title: "Monthly report",
+          body: "Citations, AI referral visits and search results together, with next month's plan.",
+          points: ["Citations across AI tools", "Visits from AI assistants", "Work done and next steps"],
+        },
       ],
       results: [
         {
@@ -698,15 +971,16 @@ export const seoServices: Service[] = [
           context: "Sample figure for the same firm over 6 months. Not a real client yet.",
         },
       ],
-      engagement: [
-        { model: "fixed-scope", fit: "Good for a visibility check and a one-off fix of access, schema and key pages." },
-        { model: "retainer", fit: "Good for monthly content, mentions and tracking." },
-      ],
-      costFactors: [
-        "How many services or topics you want to be cited for",
-        "The state of your current content",
-        "How crowded AI answers are in your field",
-        "How many AI tools and countries we track",
+      stack: [
+        "ChatGPT",
+        "Perplexity",
+        "Google AI Overviews",
+        "Gemini",
+        "Claude",
+        "Microsoft Copilot",
+        "Google Search Console",
+        "Google Analytics 4",
+        "Schema.org",
       ],
       faqs: [
         {

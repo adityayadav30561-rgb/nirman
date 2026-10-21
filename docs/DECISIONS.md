@@ -5,6 +5,12 @@ from the client are in `docs/handoff.md` §1 and are not repeated here.
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-10-21 | Hub service tiles show a code-built mockup of each service (e.g. Google Business Profile for local SEO), never photos of people | User request |
+| 2026-10-21 | Detail service pages drop the "Part of <hub>" line above the H1; the breadcrumb already links the hub | User request |
+| 2026-10-21 | Push the repo to GitHub: `origin` = https://github.com/adityayadav30561-rgb/nirman.git (public), branch main | User request |
+| 2026-10-21 | Service pages (hubs and detail): remove "Ways to work with us" (engagement models, what affects cost) and "Related services and tools" | User request; overrides handoff §5 engagement-model block. Still no prices anywhere |
+| 2026-10-21 | Service pages redesign: richer "Who it's for" (segments with photos), child-service cards with images, "How it works" with images and scroll motion, results with report mockups, tool logos | User: sections looked weak |
+| 2026-10-21 | Download ~25–35 more Unsplash photos into public/photos for service pages | User approved |
 | 2026-10-21 | Hero on phones: the two CTAs sit side by side in one row | User request |
 | 2026-10-21 | Hero on desktop: height follows the photo (`46vw + 4rem`) instead of the full screen, to remove the empty band before Services on tall screens | User request; user approved the result |
 | 2026-10-21 | C1: Marketing card becomes **WhatsApp & email marketing via Nirman CRM** (broadcast, campaign, drip, delivery/reply stats); no ads mockups | Handoff: no PPC or social media marketing |

@@ -6,8 +6,11 @@ Keep it under ~80 lines: it is read at the start of every session.
 ## Current position
 
 - **Phase:** 4 (Service pages; really 19: 4 hubs + 15, handoff says 18), in progress.
-- **Next task:** P4.4 web pillar content (hub + 5) in
-  `src/content/services/web.ts`, same shape as `seo.ts` (written in P4.3).
+- **Next task:** P4.5 software pillar content in
+  `src/content/services/software.ts` using the new model (segments, step
+  photo + art, reports, `card.art` per child). Add software mockups to
+  `service-art.tsx` first (e.g. CRM pipeline, app screens, workflow, API/
+  integration log); P4.6 marketing needs campaign/broadcast mockups.
 - **Blockers:** none for Phase 4. Client inputs pending (list at the end of
   PLAN.md) block parts of Phases 5, 7, 9, 11.
 
@@ -50,7 +53,10 @@ Keep it under ~80 lines: it is read at the start of every session.
 - [x] P4.2 Service page template + hub variant (`components/service-page.tsx`;
   all 19 routes use it, stub until content exists)
 - [x] P4.3 SEO pillar content (hub + 4)
-- [ ] P4.4 Web pillar (hub + 5)
+- [x] P4.4 Web pillar (hub + 5)
+- [x] Service page redesign for SEO + web (user request): Who it's for tabs,
+  mockup hub tiles, scroll-driven How it works, What you get reports, tool
+  logos; engagement models, related links and "Part of" line removed
 - [ ] P4.5 Software pillar (hub + 4)
 - [ ] P4.6 Marketing pillar (hub + 2)
 - [ ] P4.7 Short quote form on each page (mailto fallback until Phase 5)
@@ -61,9 +67,15 @@ None.
 
 ## Notes for the next session
 
-- Service page copy (SEO pillar so far) is my draft; the user has not
+- Service page copy (SEO and web pillars so far) is my draft; the user has not
   reviewed it. Results are all `sample: true`. "Platforms and tools" lists
-  (e.g. Screaming Frog, Justdial) are my guesses: confirm with the client.
+  (e.g. Screaming Frog, Justdial, Shiprocket) and process timings are my
+  guesses: confirm with the client. Keep result metrics short ("1.7 s",
+  detail in the label): long ones wrap in the tile.
+- 28 new Unsplash photos in `public/photos` (catalogued in `photos.ts`);
+  `carpenter` and `modernHome` are not used yet (meant for software/CRM
+  segments such as real estate and manufacturing).
+  Tool logos load from cdn.simpleicons.org at runtime (as on the homepage).
 
 - Page descriptions in `pages.ts` are my drafts; user has not reviewed them.
 - Organization JSON-LD has no `logo` yet (needs a square PNG ≥ 112px).
@@ -79,7 +91,12 @@ None.
   clients 1–2 renamed to Mitti Ceramics / Neelgiri Retreat; old "Why us"
   section folded into Team instead of dropped.
 
-## Last session (2026-10-21)
+## Last session (2026-10-21, later)
+
+Phase 4: P4.1–P4.4 done, then the service page redesign the user asked for
+(see DECISIONS). Repo pushed to GitHub (`origin`, main).
+
+## Earlier session (2026-10-21)
 
 Phase 3 done and committed (2f1dae6): root metadata + `/og.png` share
 image, `src/lib/seo.ts` helpers + `<JsonLd>`, robots/sitemap/llms.txt,
