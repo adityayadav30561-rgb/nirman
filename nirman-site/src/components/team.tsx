@@ -1,6 +1,15 @@
-import { CircleCheck, Clock3, Compass, Handshake, LifeBuoy, MessageSquareText, Paperclip, PenTool, Ruler, Wrench } from "lucide-react";
+import { CircleCheck, Clock3, Compass, LifeBuoy, MessageSquareText, Paperclip, PenTool, Ruler, Wrench } from "lucide-react";
 import { Stage } from "./stage";
 import { Photo } from "./photo";
+import { team } from "@/content/home";
+
+const avatarTones = ["bg-cobalt text-white", "bg-coral text-white", "bg-peacock text-white", "bg-marigold text-ink"];
+
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .map((w) => w[0])
+    .join("");
 
 const reasons = [
   { icon: Compass, c: "bg-cobalt text-white", t: "Business goals first", d: "Every recommendation starts from what you need more of: enquiries, sales, time back. Technology follows." },
@@ -11,21 +20,55 @@ const reasons = [
   { icon: LifeBuoy, c: "bg-forest text-mint", t: "Here after launch", d: "Support, monitoring and monthly improvements, so the work keeps paying off after go-live." },
 ];
 
-export function WhyUs() {
+/**
+ * Team (handoff §4, decision C9): the people, then what working with them is
+ * like. Names and roles are SAMPLE placeholders until the real team is
+ * supplied; avatars stay initials until real photos exist.
+ */
+export function Team() {
   return (
-    <section id="about" aria-labelledby="about-title" className="scroll-mt-20 py-24 lg:py-32">
+    <section id="team" aria-labelledby="team-title" className="scroll-mt-20 py-24 lg:py-32">
       <div className="container-site">
         <div className="grid gap-x-12 gap-y-6 lg:grid-cols-12 lg:items-end">
-          <h2 id="about-title" className="display text-[clamp(2.6rem,6vw,5.4rem)] lg:col-span-8">
-            What working with us is like.
+          <h2 id="team-title" className="display text-[clamp(2.6rem,6vw,5.4rem)] lg:col-span-8">
+            Meet the team
           </h2>
           <p className="leading-[1.65] text-ink-2 lg:col-span-4">
-            You should always know what we&apos;re doing, why, and what it&apos;s costing. Here is an example of the weekly
-            written update we share during a project.
+            The people who will answer your call, write your code and send your reports. You talk to them directly, not
+            through a salesperson.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-x-12 gap-y-14 lg:grid-cols-12">
+        <div className="mt-12 flex flex-wrap items-center gap-3">
+          <span className="inline-flex items-center rounded-full border border-dashed border-ink/30 px-3 py-1 text-[0.8rem] font-medium text-ink-2">
+            Sample team
+          </span>
+          <span className="text-[0.85rem] text-ink-3">Placeholder names and roles. Real people and photos coming soon.</span>
+        </div>
+        <ul className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+          {team.map((p, i) => (
+            <li key={p.name} className="flex flex-col items-start gap-4 rounded-[1.75rem] bg-surface p-5 shadow-panel sm:p-6">
+              <span
+                className={`grid size-14 place-items-center rounded-full text-[1.05rem] font-semibold tracking-[0.02em] ring-4 ring-paper sm:size-16 ${avatarTones[i % avatarTones.length]}`}
+                aria-hidden
+              >
+                {initials(p.name)}
+              </span>
+              <span>
+                <span className="title block text-[1.1rem] leading-tight">{p.name}</span>
+                <span className="mt-1 block text-[0.9rem] text-ink-2">{p.role}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <h3 className="heading mt-24 text-[clamp(1.9rem,3.6vw,3.2rem)] lg:mt-32">What working with us is like.</h3>
+        <p className="mt-4 max-w-[38rem] leading-[1.65] text-ink-2">
+          You should always know what we&apos;re doing and why. Here is an example of the weekly written update we share
+          during a project.
+        </p>
+
+        <div className="mt-12 grid gap-x-12 gap-y-14 lg:grid-cols-12">
           <div className="relative lg:col-span-6">
             <div className="relative h-[22rem] overflow-hidden rounded-[2.5rem] sm:h-[30rem] lg:h-[40rem]">
               <Photo name="laptopTeam" sizes="(min-width: 1024px) 45vw, 100vw" position="50% 40%" />
@@ -44,36 +87,11 @@ export function WhyUs() {
                   <span className={`grid size-12 place-items-center rounded-2xl ${r.c}`}>
                     <r.icon className="size-5" strokeWidth={1.8} />
                   </span>
-                  <h3 className="title mt-4 text-[1.3rem]">{r.t}</h3>
+                  <h4 className="title mt-4 text-[1.3rem]">{r.t}</h4>
                   <p className="mt-2 leading-[1.6] text-ink-2">{r.d}</p>
                 </li>
               ))}
             </ul>
-
-            {/* Social proof placeholders: replace with genuine material only. */}
-            <figure className="mt-12 rounded-[2rem] border-2 border-dashed border-peacock/35 bg-peacock-soft/60 p-6 sm:p-8">
-              <p className="inline-flex items-center gap-2 text-[0.85rem] font-medium text-peacock">
-                <Handshake className="size-4" />
-                Client testimonial placeholder
-              </p>
-              <blockquote className="heading mt-4 text-[clamp(1.4rem,2.4vw,1.9rem)] text-ink/40">
-                Add a short, genuine quote from a client describing a specific result or experience.
-              </blockquote>
-              <figcaption className="mt-5 flex items-center gap-3 text-[0.95rem] text-ink-3">
-                <span className="size-10 rounded-full border-2 border-dashed border-ink/25" />
-                Name, role, company
-              </figcaption>
-            </figure>
-            <div className="mt-6">
-              <p className="text-[0.85rem] text-ink-3">Client and partner logos, once approved for use</p>
-              <ul className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-6">
-                {Array.from({ length: 6 }, (_, i) => (
-                  <li key={i} className="grid h-14 place-items-center rounded-2xl border-2 border-dashed border-ink/15 text-[0.75rem] text-ink-3">
-                    Logo
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
         </div>
       </div>

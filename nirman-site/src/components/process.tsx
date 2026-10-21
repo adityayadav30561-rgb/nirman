@@ -6,53 +6,44 @@ import { Stage } from "./stage";
 import { LineChart } from "./mockups/charts";
 import { Photo } from "./photo";
 import type { PhotoKey } from "@/content/photos";
+import { journey } from "@/content/home";
 
-const steps: { name: string; body: string; get: string[]; photo: PhotoKey; color: string }[] = [
+// Decision C6: titles and one-liners are the handoff's 5 stages
+// (content/home.ts `journey`); deliverables and visuals live here.
+const extras: { get: string[]; photo: PhotoKey; color: string; art: () => React.ReactNode }[] = [
   {
-    name: "Discover",
-    body: "We understand the business, audience, objectives, and challenges.",
     get: ["Stakeholder and customer interviews", "Competitor and search landscape review", "Audit of current site, tools and data"],
     photo: "stickyWall",
     color: "bg-cobalt text-white",
+    art: DiscoverArt,
   },
   {
-    name: "Strategize",
-    body: "We define the solution, priorities, and project roadmap.",
-    get: ["Scope with clear priorities", "Timeline and milestones", "Success measures agreed up front"],
-    photo: "tableTopDown",
-    color: "bg-marigold text-ink",
-  },
-  {
-    name: "Design",
-    body: "We develop the visual direction, user experience, and interfaces.",
-    get: ["Wireframes for key journeys", "Visual design for desktop and mobile", "Clickable prototype for review"],
+    get: ["Scope, timeline and milestones", "Wireframes and visual design for desktop and mobile", "Clickable prototype for your approval"],
     photo: "sketching",
     color: "bg-coral text-white",
+    art: DesignArt,
   },
   {
-    name: "Build",
-    body: "We develop, integrate, test, and refine the solution.",
     get: ["Weekly working builds to review", "Integrations with your tools", "Automated and manual testing"],
     photo: "coding",
     color: "bg-peacock text-white",
+    art: BuildArt,
   },
   {
-    name: "Launch",
-    body: "We deploy the project and ensure everything works as intended.",
-    get: ["Launch checklist and redirects", "Analytics and tracking verified", "Team training and handover"],
+    get: ["Speed, SEO and form checks on real phones", "Analytics and tracking verified", "Team training and handover"],
     photo: "celebrate",
     color: "bg-forest-2 text-mint",
+    art: LaunchArt,
   },
   {
-    name: "Improve",
-    body: "We measure performance, gather feedback, and make improvements.",
-    get: ["Monthly performance review", "Prioritised improvement backlog", "Ongoing support and updates"],
+    get: ["Monthly performance report", "Prioritised improvement backlog", "Fixes, updates and support"],
     photo: "womanSofa",
     color: "bg-[#d9668f] text-white",
+    art: ImproveArt,
   },
 ];
 
-const arts = [DiscoverArt, RoadmapArt, DesignArt, BuildArt, LaunchArt, ImproveArt];
+const steps = journey.map((j, i) => ({ name: j.title, body: j.body, ...extras[i] }));
 
 /**
  * Pinned horizontal journey: the section is tall, its inner frame sticks to
@@ -120,16 +111,16 @@ export function Process() {
               How a project moves from first call to steady growth.
             </h2>
             <p className="max-w-[26rem] text-[0.95rem] leading-[1.55] text-ink-2 max-sm:hidden">
-              Six stages, each ending in something you can see and approve before the next one starts.
+              Five stages, each ending in something you can see and approve before the next one starts.
             </p>
           </div>
 
-          {/* Rail */}
-          <ol className="relative mt-6 grid grid-cols-6 lg:mt-8" aria-label="Project stages">
-            <span className="absolute left-[8.33%] right-[8.33%] top-[1.125rem] h-[2px] bg-ink/12" aria-hidden />
+          {/* Rail: one column per stage; the line runs between the first and last centres */}
+          <ol className="relative mt-6 grid lg:mt-8" style={{ gridTemplateColumns: `repeat(${n}, minmax(0, 1fr))` }} aria-label="Project stages">
+            <span className="absolute top-[1.125rem] h-[2px] bg-ink/12" style={{ left: `${50 / n}%`, right: `${50 / n}%` }} aria-hidden />
             <span
-              className="absolute left-[8.33%] top-[1.125rem] h-[2px] bg-ink transition-[width] duration-300"
-              style={{ width: `${(active / (n - 1)) * 83.33}%` }}
+              className="absolute top-[1.125rem] h-[2px] bg-ink transition-[width] duration-300"
+              style={{ left: `${50 / n}%`, width: `${(active / (n - 1)) * (100 - 100 / n)}%` }}
               aria-hidden
             />
             {steps.map((s, i) => {
@@ -154,7 +145,7 @@ export function Process() {
                     >
                       {passed ? <Check className="size-3.5" strokeWidth={2.5} /> : String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className={`text-[0.85rem] transition-colors max-sm:sr-only ${isActive ? "font-medium text-ink" : "text-ink-2 group-hover:text-ink"}`}>
+                    <span className={`text-center text-[0.85rem] leading-snug transition-colors max-sm:sr-only ${isActive ? "font-medium text-ink" : "text-ink-2 group-hover:text-ink"}`}>
                       {s.name}
                     </span>
                   </button>
@@ -168,7 +159,7 @@ export function Process() {
         <div ref={viewportRef} className="container-site mt-6 min-h-0 flex-1 lg:mt-8">
           <div ref={trackRef} className="flex h-full gap-4 will-change-transform sm:gap-5">
             {steps.map((s, i) => {
-              const Art = arts[i];
+              const Art = s.art;
               return (
                 <article
                   key={s.name}
@@ -177,9 +168,9 @@ export function Process() {
                 >
                   <div className="shrink-0 px-1 lg:flex lg:w-[30%] lg:flex-col lg:justify-center lg:py-4 lg:pl-4">
                     <p className="text-[0.9rem] text-ink-3 tnum">
-                      Stage {String(i + 1).padStart(2, "0")} of 06
+                      Stage {String(i + 1).padStart(2, "0")} of {String(n).padStart(2, "0")}
                     </p>
-                    <h3 className="display mt-1 text-[clamp(2rem,4vw,3.6rem)] lg:mt-3">{s.name}</h3>
+                    <h3 className="display mt-1 text-[clamp(1.9rem,3.2vw,3rem)] lg:mt-3">{s.name}</h3>
                     <p className="mt-2 max-w-[26rem] text-[1rem] leading-[1.55] text-ink-2 lg:mt-4 lg:text-[1.05rem]">{s.body}</p>
                     <p className="mt-6 text-[0.85rem] text-ink-3 max-lg:hidden">What you receive</p>
                     <ul className="mt-3 space-y-2.5 max-lg:hidden">
@@ -257,57 +248,6 @@ function DiscoverArt() {
         ))}
       </div>
     </Board>
-  );
-}
-
-function RoadmapArt() {
-  const rows = [
-    { t: "Discovery", s: 0, e: 2, c: "bg-sage-3" },
-    { t: "UX and design", s: 1.5, e: 4.5, c: "bg-moss" },
-    { t: "Build", s: 4, e: 8.5, c: "bg-forest" },
-    { t: "Content and SEO", s: 3, e: 9, c: "bg-brass-2" },
-    { t: "Testing", s: 7.5, e: 9.5, c: "bg-signal-blue/70" },
-    { t: "Launch", s: 9.5, e: 10, c: "bg-forest-ink" },
-  ];
-  return (
-    <div className="absolute inset-0 overflow-hidden rounded-xl bg-surface p-18 shadow-panel ring-1 ring-ink/8">
-      <div className="flex items-center justify-between">
-        <p className="fs-14 font-semibold">Project roadmap</p>
-        <p className="fs-10 text-ink-3">10 weeks</p>
-      </div>
-      <div className="mt-14 grid grid-cols-[calc(var(--spacing)*110)_1fr] fs-10">
-        <span />
-        <div className="grid grid-cols-10 text-center text-ink-3 tnum">
-          {Array.from({ length: 10 }, (_, i) => (
-            <span key={i}>W{i + 1}</span>
-          ))}
-        </div>
-        {rows.map((r) => (
-          <div key={r.t} className="contents">
-            <span className="flex h-40 items-center text-ink-2">{r.t}</span>
-            <div className="relative h-40 border-t border-ink/6">
-              <div className="absolute inset-0 grid grid-cols-10">
-                {Array.from({ length: 10 }, (_, i) => (
-                  <span key={i} className="border-l border-ink/5" />
-                ))}
-              </div>
-              <span
-                className={`absolute top-10 h-20 rounded-[calc(var(--spacing)*5)] ${r.c}`}
-                style={{ left: `${r.s * 10}%`, width: `${Math.max((r.e - r.s) * 10, 3)}%` }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="mt-12 flex gap-16 fs-10 text-ink-2">
-        {["Design approved, W4", "First working build, W6", "Go-live, W10"].map((m) => (
-          <span key={m} className="flex items-center gap-6">
-            <span className="size-8 rotate-45 bg-brass" />
-            {m}
-          </span>
-        ))}
-      </div>
-    </div>
   );
 }
 

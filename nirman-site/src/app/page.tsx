@@ -3,7 +3,10 @@ import { Services } from "@/components/services/services";
 import { NirmanCrm } from "@/components/nirman-crm";
 import { Work } from "@/components/work";
 import { Process } from "@/components/process";
-import { WhyUs } from "@/components/why-us";
+import { Team } from "@/components/team";
+import { FreeTools } from "@/components/free-tools";
+import { Testimonials } from "@/components/testimonials";
+import { Faq } from "@/components/faq";
 import { FinalCta } from "@/components/final-cta";
 import { site } from "@/content/site";
 
@@ -34,7 +37,10 @@ export default function Home() {
       <NirmanCrm />
       <Work />
       <Process />
-      <WhyUs />
+      <Team />
+      <FreeTools />
+      <Testimonials />
+      <Faq />
       <FinalCta />
     </>
   );

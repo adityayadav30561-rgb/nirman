@@ -12,7 +12,7 @@ const goals = [
   "Organise sales with a CRM",
   "Replace spreadsheets with software",
   "Launch a mobile app",
-  "Run better ad campaigns",
+  "Run WhatsApp and email campaigns",
 ];
 
 export function FinalCta() {

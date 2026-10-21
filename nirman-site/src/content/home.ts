@@ -106,13 +106,16 @@ export const journey = [
   { title: "Ongoing support & growth", body: "Fixes, updates and monthly reports, so your site keeps working for you." },
 ] as const;
 
-/** SAMPLE case studies: names and numbers are invented placeholders. */
+/**
+ * SAMPLE case studies: names and numbers are invented placeholders. Names
+ * match the concept brands in the homepage visuals (mitti, Neelgiri).
+ */
 export const caseStudies = [
   {
     sample: true,
-    client: "Heritage Rugs Co.",
-    industry: "E-commerce, handmade rugs",
-    body: "A new Shopify store and product-page SEO for a family rug business selling to the US and UK.",
+    client: "Mitti Ceramics",
+    industry: "E-commerce, handmade ceramics",
+    body: "A new Shopify store and product-page SEO for a family pottery studio selling across India and abroad.",
     metrics: [
       { value: "3.2×", label: "organic traffic in 6 months" },
       { value: "41%", label: "of sales now from search" },
@@ -120,8 +123,8 @@ export const caseStudies = [
   },
   {
     sample: true,
-    client: "Heritage Fort Stays",
-    industry: "Hospitality, boutique hotel",
+    client: "Neelgiri Retreat",
+    industry: "Hospitality, hill resort",
     body: "Booking website, Google Business Profile and WhatsApp follow-ups for every enquiry.",
     metrics: [
       { value: "2.4×", label: "direct bookings" },

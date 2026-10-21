@@ -1,74 +1,63 @@
-import { ArrowUpRight, CalendarDays, ChevronDown, GraduationCap, Menu, Search, Users } from "lucide-react";
+import { ArrowRight, Building2, CalendarDays, ChevronDown, GraduationCap, Menu, Search, Users } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Stage } from "./stage";
 import { Photo } from "./photo";
+import { ButtonLink } from "./ui/button-link";
 import { Device, PhoneFrame } from "./mockups/frames";
 import { ConceptStore } from "./mockups/concept-site";
-import { LineChart } from "./mockups/charts";
+import { caseStudies } from "@/content/home";
 
 /*
- * Case study layouts. No verified projects exist yet, so every entry is a
- * clearly labelled placeholder with concept visuals. Replace copy, visuals
- * and results with real client work (and client approval) before launch.
+ * Case studies (handoff §4): 4 projects from content/home.ts. No verified
+ * projects exist yet, so every entry is a SAMPLE with concept visuals and is
+ * labelled as such. Replace copy, visuals and results with real client work
+ * (and client approval) before launch.
  */
 
-function PlaceholderTag({ dark = false }: { dark?: boolean }) {
+type Study = (typeof caseStudies)[number];
+
+const [store, resort, builders, school] = caseStudies;
+
+function SampleTag({ dark = false }: { dark?: boolean }) {
   return (
     <span
       className={`inline-flex items-center rounded-full border border-dashed px-3 py-1 text-[0.8rem] font-medium ${
         dark ? "border-white/40 text-white/85" : "border-ink/30 text-ink-2"
       }`}
     >
-      Placeholder project
+      Sample case study
     </span>
   );
 }
 
-function CaseMeta({
-  category,
-  dot,
-  title,
-  body,
-  dark = false,
-  className = "",
-}: {
-  category: string;
-  dot: string;
-  title: string;
-  body: string;
-  dark?: boolean;
-  className?: string;
-}) {
+function CaseMeta({ study, dot, dark = false, className = "" }: { study: Study; dot: string; dark?: boolean; className?: string }) {
   return (
     <div className={className}>
       <div className="flex flex-wrap items-center gap-3">
-        <PlaceholderTag dark={dark} />
+        <SampleTag dark={dark} />
         <span className={`inline-flex items-center gap-2 text-[0.9rem] ${dark ? "text-white/70" : "text-ink-3"}`}>
           <span className={`size-2 rounded-full ${dot}`} aria-hidden />
-          {category}
+          {study.industry}
         </span>
       </div>
-      <h3 className="heading mt-5 text-[clamp(1.9rem,3.4vw,2.9rem)]">{title}</h3>
-      <p className={`mt-4 max-w-[34rem] leading-[1.65] ${dark ? "text-white/70" : "text-ink-2"}`}>{body}</p>
+      <h3 className="heading mt-5 text-[clamp(1.9rem,3.4vw,2.9rem)]">{study.client}</h3>
+      <p className={`mt-4 max-w-[34rem] leading-[1.65] ${dark ? "text-white/70" : "text-ink-2"}`}>{study.body}</p>
     </div>
   );
 }
 
-function Outcomes({ dark = false }: { dark?: boolean }) {
+function Metrics({ study, dark = false }: { study: Study; dark?: boolean }) {
   return (
     <div>
-      <p className={`rounded-2xl border border-dashed p-4 text-[0.95rem] leading-relaxed ${dark ? "border-white/30 text-white/75" : "border-ink/20 text-ink-2"}`}>
-        <span className={`block text-[0.8rem] font-medium ${dark ? "text-white/60" : "text-ink-3"}`}>Outcomes</span>
-        Add verified results, such as change in enquiries, organic traffic or conversion rate, with the period measured.
-      </p>
-      <a
-        href="#contact"
-        className={`mt-5 inline-flex h-11 items-center gap-1.5 rounded-full px-5 font-medium transition-colors ${
-          dark ? "bg-white text-ink hover:bg-paper" : "bg-ink text-paper hover:bg-cobalt"
-        }`}
-      >
-        View case study
-        <ArrowUpRight className="size-4" />
-      </a>
+      <dl className="grid grid-cols-2 gap-3">
+        {study.metrics.map((m) => (
+          <div key={m.label} className={`flex flex-col-reverse rounded-2xl p-4 ${dark ? "bg-white/10" : "bg-surface/70"}`}>
+            <dt className={`mt-1 text-[0.875rem] leading-snug ${dark ? "text-white/70" : "text-ink-2"}`}>{m.label}</dt>
+            <dd className="heading whitespace-nowrap text-[clamp(1.9rem,2.6vw,2.4rem)] tnum">{m.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className={`mt-3 text-[0.8rem] ${dark ? "text-white/55" : "text-ink-3"}`}>Sample figures, not real client results.</p>
     </div>
   );
 }
@@ -82,8 +71,8 @@ export function Work() {
             Our work
           </h2>
           <p className="leading-[1.65] text-ink-2 lg:col-span-5">
-            Detailed case studies are being prepared. Each layout below is a placeholder that shows how a project will be
-            presented, with concept designs and stock photography standing in for real client work.
+            Case studies with real clients are being prepared. Until then, the four below are samples: client names, numbers
+            and visuals show how each project will be presented, not work we have delivered.
           </p>
         </div>
 
@@ -101,33 +90,22 @@ export function Work() {
             </Stage>
           </div>
           <div className="grid gap-8 bg-surface/50 px-6 py-8 sm:px-10 lg:grid-cols-12 lg:px-16 lg:py-10">
-            <CaseMeta
-              className="lg:col-span-7"
-              dot="bg-coral"
-              category="E-commerce, website design & development"
-              title="Online store for a handmade ceramics brand"
-              body="Replace with a short summary: the client's situation, what we designed and built, and the platform used."
-            />
+            <CaseMeta className="lg:col-span-7" dot="bg-coral" study={store} />
             <div className="lg:col-span-4 lg:col-start-9">
-              <Outcomes />
+              <Metrics study={store} />
             </div>
           </div>
         </article>
 
         {/* 2 + 3 side by side */}
         <div className="mt-5 grid gap-5 lg:grid-cols-12">
-          {/* Hotel, peacock */}
-          <article className="overflow-hidden rounded-[2.5rem] bg-peacock text-white lg:col-span-7">
-            <div className="px-6 pt-8 sm:px-10 sm:pt-10">
-              <CaseMeta
-                dark
-                dot="bg-mint"
-                category="Website design & development"
-                title="Direct-booking website for a hill resort"
-                body="Replace with the project summary: goals such as moving bookings away from aggregators, and how the site and booking flow were designed."
-              />
+          {/* Resort, peacock */}
+          <article className="flex flex-col overflow-hidden rounded-[2.5rem] bg-peacock text-white lg:col-span-7">
+            <div className="grid gap-6 px-6 pt-8 sm:px-10 sm:pt-10 xl:grid-cols-[1fr_17rem] xl:items-end xl:gap-8">
+              <CaseMeta dark dot="bg-mint" study={resort} />
+              <Metrics dark study={resort} />
             </div>
-            <div className="mt-8 pl-6 sm:pl-10">
+            <div className="mt-auto pl-6 pt-8 sm:pl-10">
               <Stage w={520} h={350} wLg={700} hLg={450} label="Concept resort website on a laptop and a phone">
                 <div className="absolute left-0 top-0 w-460 lg:w-600">
                   <Device device="macbook-alt">
@@ -145,81 +123,60 @@ export function Work() {
             </div>
           </article>
 
-          {/* Admissions, marigold-soft */}
+          {/* Coaching institute, marigold-soft */}
           <article className="flex flex-col overflow-hidden rounded-[2.5rem] bg-marigold-soft lg:col-span-5">
             <div className="relative h-72 sm:h-80">
               <Photo name="students" sizes="(min-width: 1024px) 40vw, 100vw" position="50% 35%" />
               <div className="absolute bottom-0 left-6 right-6 translate-y-1/2 sm:left-8 sm:right-8">
-                <Stage w={420} h={170} label="Concept admissions summary for a school group">
-                  <AdmissionsCard />
+                <Stage w={420} h={170} label="Concept admissions summary for a coaching institute">
+                  <SummaryCard
+                    icon={GraduationCap}
+                    title="Admissions 2026–27"
+                    stats={[
+                      ["Enquiries", "1,284", "bg-cobalt-soft"],
+                      ["Campus visits", "412", "bg-mint-soft"],
+                      ["Applications", "236", "bg-marigold-soft"],
+                    ]}
+                  />
                 </Stage>
               </div>
             </div>
             <div className="flex flex-1 flex-col justify-between gap-8 px-6 pb-8 pt-24 sm:px-8 sm:pt-28">
-              <CaseMeta
-                dot="bg-forest-2"
-                category="CRM & business systems"
-                title="Admissions system for a group of schools"
-                body="Replace with how enquiries, campus visits and applications were managed before, and what the new system changed."
-              />
-              <Outcomes />
+              <CaseMeta dot="bg-forest-2" study={school} />
+              <Metrics study={school} />
             </div>
           </article>
         </div>
 
-        {/* 4 + 5 compact */}
-        <div className="mt-5 grid gap-5 lg:grid-cols-2">
-          <article className="overflow-hidden rounded-[2.5rem] bg-cobalt-soft">
-            <div className="grid sm:grid-cols-2">
-              <div className="relative h-64 sm:h-auto">
-                <Photo name="doctorSmile" sizes="(min-width: 1024px) 25vw, 50vw" position="50% 20%" />
-              </div>
-              <div className="p-6 sm:p-8">
-                <div className="h-32 rounded-2xl bg-surface p-4">
-                  <p className="text-[0.8rem] text-ink-3">Organic sessions, before and after</p>
-                  <div className="relative mt-2 h-16 text-ink">
-                    <LineChart
-                      w={300}
-                      h={64}
-                      gridLines={2}
-                      series={[{ values: [20, 22, 21, 24, 23, 27, 30, 32, 35, 39, 42, 46], color: "#3346d3", dashed: true, width: 1.6 }]}
-                    />
-                    <span className="absolute inset-0 grid place-items-center">
-                      <span className="rounded-full bg-surface px-3 py-1 text-[0.75rem] text-ink-2 ring-1 ring-ink/15">Add verified data</span>
-                    </span>
-                  </div>
-                </div>
-                <CaseMeta
-                  className="mt-6"
-                  dot="bg-cobalt"
-                  category="SEO & organic growth"
-                  title="Local SEO for a multi-location clinic"
-                  body="Replace with the starting position, the work done, and verified ranking or traffic changes."
+        {/* 4. Real estate, wide and compact */}
+        <article className="mt-5 grid overflow-hidden rounded-[2.5rem] bg-cobalt-soft lg:grid-cols-12">
+          <div className="relative h-80 sm:h-96 lg:col-span-6 lg:h-auto lg:min-h-[28rem]">
+            <Photo name="terracotta" sizes="(min-width: 1024px) 50vw, 100vw" />
+            <div className="absolute inset-x-6 bottom-6 sm:inset-x-8 sm:bottom-8">
+              <Stage w={420} h={170} label="Concept site-visit summary in Nirman CRM for a residential builder">
+                <SummaryCard
+                  icon={Building2}
+                  title="Site visits, this month"
+                  stats={[
+                    ["Enquiries", "486", "bg-cobalt-soft"],
+                    ["Visits booked", "173", "bg-mint-soft"],
+                    ["Bookings", "21", "bg-marigold-soft"],
+                  ]}
                 />
-              </div>
+              </Stage>
             </div>
-          </article>
-          <article className="overflow-hidden rounded-[2.5rem] bg-[#f8dde6]">
-            <div className="grid grid-cols-3 gap-2 p-2">
-              <div className="relative col-span-2 row-span-2 aspect-square overflow-hidden rounded-[2rem]">
-                <Photo name="coldBrew2" sizes="(min-width: 1024px) 30vw, 66vw" />
-                <span className="heading absolute bottom-4 left-4 rounded-full bg-ink px-4 py-2 text-[0.95rem] text-marigold">Cold brew, delivered</span>
-              </div>
-              <div className="relative overflow-hidden rounded-[1.5rem]">
-                <Photo name="serum" sizes="20vw" />
-              </div>
-              <div className="relative overflow-hidden rounded-[1.5rem]">
-                <Photo name="amberBottle" sizes="20vw" />
-              </div>
-            </div>
-            <CaseMeta
-              className="px-6 pb-8 pt-4 sm:px-8"
-              dot="bg-[#d9668f]"
-              category="Digital marketing"
-              title="Lead generation campaigns across search and social"
-              body="Replace with campaign goals, channels and creative approach, plus verified cost-per-lead figures."
-            />
-          </article>
+          </div>
+          <div className="flex flex-col justify-center gap-8 px-6 py-8 sm:px-10 sm:py-10 lg:col-span-6 lg:px-12">
+            <CaseMeta dot="bg-cobalt" study={builders} />
+            <Metrics study={builders} />
+          </div>
+        </article>
+
+        <div className="mt-12 flex justify-center">
+          <ButtonLink href="/work/" variant="primary" size="lg">
+            See all our work
+            <ArrowRight className="size-4.5" />
+          </ButtonLink>
         </div>
       </div>
     </section>
@@ -294,15 +251,15 @@ function HotelMobile() {
   );
 }
 
-function AdmissionsCard() {
+function SummaryCard({ icon: Icon, title, stats }: { icon: LucideIcon; title: string; stats: [string, string, string][] }) {
   return (
     <div className="absolute inset-0 rounded-2xl bg-surface p-14 shadow-scene">
       <div className="flex items-center justify-between">
         <span className="flex items-center gap-8">
           <span className="grid size-24 place-items-center rounded-md bg-forest text-mint">
-            <GraduationCap className="size-13" />
+            <Icon className="size-13" />
           </span>
-          <span className="mock-display fs-14">Admissions 2026–27</span>
+          <span className="mock-display fs-14">{title}</span>
         </span>
         <span className="flex items-center gap-6 rounded-full bg-paper px-10 py-5 fs-9 text-ink-3">
           <Search className="size-10" />
@@ -310,11 +267,7 @@ function AdmissionsCard() {
         </span>
       </div>
       <div className="mt-12 grid grid-cols-3 gap-8">
-        {[
-          ["Enquiries", "1,284", "bg-cobalt-soft"],
-          ["Campus visits", "412", "bg-mint-soft"],
-          ["Applications", "236", "bg-marigold-soft"],
-        ].map(([k, v, c]) => (
+        {stats.map(([k, v, c]) => (
           <div key={k} className={`rounded-lg p-10 ${c}`}>
             <p className="fs-9 text-ink-2">{k}</p>
             <p className="mock-display mt-2 fs-20 tnum">{v}</p>
