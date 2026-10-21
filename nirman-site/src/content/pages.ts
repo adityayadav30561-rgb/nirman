@@ -274,3 +274,14 @@ export const indexedPages = pages.filter((p) => !p.noindex);
 export function pageByPath(path: string) {
   return pages.find((p) => p.path === path);
 }
+
+/** Breadcrumb trail for `path`: Home, every registered ancestor, then the page. */
+export function breadcrumbTrail(path: string): { label: string; href: string }[] {
+  const parts = path.split("/").filter(Boolean);
+  const crumbs = [{ label: "Home", href: "/" }];
+  for (let i = 1; i <= parts.length; i++) {
+    const page = pageByPath(`/${parts.slice(0, i).join("/")}/`);
+    if (page) crumbs.push({ label: page.title, href: page.path });
+  }
+  return crumbs;
+}

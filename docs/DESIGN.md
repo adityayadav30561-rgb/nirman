@@ -139,3 +139,4 @@ Marketing `#d9668f` (`pillarDots` arrays in header and footer).
 | FAQ | Sticky title left, `<details>` accordion right (plus icon rotates to a cross) |
 | Final CTA | Coral panel, goal chips that pre-fill a mailto, contact card |
 | Footer | Ink panel with six-colour stripe |
+| Service page | `components/service-page.tsx` (P4.2): hero (pillar dot + hub link, H1, outcome, Get a quote + Free SEO audit or Book a call; homepage card mockup `XVisual` in its card colour, right 7/12) → Who it's for + "What changes" pillar-soft panel → What's included (6-col grid, rows of 3 with leading pairs so no orphans) or, on hubs, child-service cards → How it works (lilac band, equal steps with duration chips) → Results (SAMPLE tags) + Platforms chips → Ways to work with us (3 engagement cards + ink "What affects cost") → FAQ → Related services and tools → coral quote band (form in P4.7) |

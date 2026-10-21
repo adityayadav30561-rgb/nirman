@@ -52,17 +52,22 @@ export function SoftwareService() {
           <ArchitectureNote />
         </div>
       }
-      visual={
-        <Stage w={520} h={357} wLg={960} hLg={627} label="A craftsman in a furniture workshop, overlaid with the production dashboard built to run it">
-          <div className="absolute left-0 top-0 h-660 w-520 overflow-hidden rounded-2xl lg:w-380">
-            <Photo name="workshop" sizes="(min-width: 1024px) 20vw, 90vw" position="40% 50%" />
-          </div>
-          <div className="absolute left-20 top-60 h-420 w-480 lg:left-170 lg:top-50 lg:h-600 lg:w-790">
-            <OpsDashboard />
-          </div>
-        </Stage>
-      }
+      visual={<SoftwareVisual />}
     />
+  );
+}
+
+/** The card's mockup, also the hero visual on software service pages (P4.2). */
+export function SoftwareVisual() {
+  return (
+    <Stage w={520} h={357} wLg={960} hLg={627} label="A craftsman in a furniture workshop, overlaid with the production dashboard built to run it">
+      <div className="absolute left-0 top-0 h-660 w-520 overflow-hidden rounded-2xl lg:w-380">
+        <Photo name="workshop" sizes="(min-width: 1024px) 20vw, 90vw" position="40% 50%" />
+      </div>
+      <div className="absolute left-20 top-60 h-420 w-480 lg:left-170 lg:top-50 lg:h-600 lg:w-790">
+        <OpsDashboard />
+      </div>
+    </Stage>
   );
 }
 

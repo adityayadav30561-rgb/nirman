@@ -5,11 +5,10 @@ Keep it under ~80 lines: it is read at the start of every session.
 
 ## Current position
 
-- **Phase:** 4 (Service pages, 18), not started.
-- **Next task:** P4.1 content model `src/content/services/*.ts` (one file per
-  pillar: hub + children). Service routes already exist as stubs; replace
-  each `page.tsx`. Use `registryMetadata()` + `serviceLd`/`faqPageLd`/
-  `Breadcrumbs` from P3.
+- **Phase:** 4 (Service pages; really 19: 4 hubs + 15, handoff says 18), in progress.
+- **Next task:** P4.3 write SEO pillar content (hub + 4): add `content`
+  to each entry in `src/content/services/seo.ts` (shape in `types.ts`).
+  Pages switch from stub to the full template as soon as `content` exists.
 - **Blockers:** none for Phase 4. Client inputs pending (list at the end of
   PLAN.md) block parts of Phases 5, 7, 9, 11.
 
@@ -47,8 +46,10 @@ Keep it under ~80 lines: it is read at the start of every session.
 
 ## Current phase tasks
 
-- [ ] P4.1 Content model `src/content/services/*.ts`
-- [ ] P4.2 Service page template + hub variant
+- [x] P4.1 Content model `src/content/services/*.ts` (types, shared engagement models,
+  4 pillar files with structure only, index with build-time link checks)
+- [x] P4.2 Service page template + hub variant (`components/service-page.tsx`;
+  all 19 routes use it, stub until content exists)
 - [ ] P4.3 SEO pillar content (hub + 4)
 - [ ] P4.4 Web pillar (hub + 5)
 - [ ] P4.5 Software pillar (hub + 4)

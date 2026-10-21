@@ -18,26 +18,31 @@ export function AppsService() {
       title="Apps people keep on their home screen."
       body="We design and build iOS and Android apps around a few tasks done really well: booking, ordering, tracking, paying. One codebase where it makes sense, native where it matters."
       points={["Product and UX design", "React Native and Flutter", "Payments, maps and notifications", "App Store and Play Store launch"]}
-      visual={
-        <Stage w={480} h={330} wLg={780} hLg={510} label="Three screens of a clinic app on phones: home, booking a doctor, and health reports">
-          <div className="absolute left-10 top-60 w-160 -rotate-[6deg] lg:left-40 lg:top-90 lg:w-236">
-            <PhoneFrame time="9:12" model="iphone-alt">
-              <HomeScreen />
-            </PhoneFrame>
-          </div>
-          <div className="absolute left-310 top-60 w-160 rotate-[6deg] lg:left-505 lg:top-90 lg:w-236">
-            <PhoneFrame time="9:15" model="iphone-alt">
-              <ReportsScreen />
-            </PhoneFrame>
-          </div>
-          <div className="absolute left-150 top-10 z-10 w-180 lg:left-262 lg:top-10 lg:w-256">
-            <PhoneFrame time="9:14">
-              <BookingScreen />
-            </PhoneFrame>
-          </div>
-        </Stage>
-      }
+      visual={<AppsVisual />}
     />
+  );
+}
+
+/** The card's mockup, also the hero visual on apps service pages (P4.2). */
+export function AppsVisual() {
+  return (
+    <Stage w={480} h={330} wLg={780} hLg={510} label="Three screens of a clinic app on phones: home, booking a doctor, and health reports">
+      <div className="absolute left-10 top-60 w-160 -rotate-[6deg] lg:left-40 lg:top-90 lg:w-236">
+        <PhoneFrame time="9:12" model="iphone-alt">
+          <HomeScreen />
+        </PhoneFrame>
+      </div>
+      <div className="absolute left-310 top-60 w-160 rotate-[6deg] lg:left-505 lg:top-90 lg:w-236">
+        <PhoneFrame time="9:15" model="iphone-alt">
+          <ReportsScreen />
+        </PhoneFrame>
+      </div>
+      <div className="absolute left-150 top-10 z-10 w-180 lg:left-262 lg:top-10 lg:w-256">
+        <PhoneFrame time="9:14">
+          <BookingScreen />
+        </PhoneFrame>
+      </div>
+    </Stage>
   );
 }
 

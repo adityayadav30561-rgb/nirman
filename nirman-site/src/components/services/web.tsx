@@ -28,25 +28,30 @@ export function WebService() {
           ))}
         </ul>
       }
-      visual={
-        <Stage w={480} h={330} wLg={720} hLg={470} label="A website design on an iMac at 1440 pixels and on a phone at 390 pixels">
-          <Dimension className="left-0 top-4 w-360 lg:top-6 lg:w-540" label="1440 px desktop" />
-          <div className="absolute left-0 top-30 w-360 lg:top-36 lg:w-540">
-            <Device device="imac">
-              <Stage w={560} h={329}>
-                <ConceptSiteDesktop compact />
-              </Stage>
-            </Device>
-          </div>
-          <Dimension className="left-335 top-60 w-135 lg:left-520 lg:top-96 lg:w-190" label="390 px" />
-          <div className="absolute left-335 top-84 w-135 lg:left-520 lg:top-120 lg:w-190">
-            <PhoneFrame>
-              <ConceptSiteMobile />
-            </PhoneFrame>
-          </div>
-        </Stage>
-      }
+      visual={<WebVisual />}
     />
+  );
+}
+
+/** The card's mockup, also the hero visual on web service pages (P4.2). */
+export function WebVisual() {
+  return (
+    <Stage w={480} h={330} wLg={720} hLg={470} label="A website design on an iMac at 1440 pixels and on a phone at 390 pixels">
+      <Dimension className="left-0 top-4 w-360 lg:top-6 lg:w-540" label="1440 px desktop" />
+      <div className="absolute left-0 top-30 w-360 lg:top-36 lg:w-540">
+        <Device device="imac">
+          <Stage w={560} h={329}>
+            <ConceptSiteDesktop compact />
+          </Stage>
+        </Device>
+      </div>
+      <Dimension className="left-335 top-60 w-135 lg:left-520 lg:top-96 lg:w-190" label="390 px" />
+      <div className="absolute left-335 top-84 w-135 lg:left-520 lg:top-120 lg:w-190">
+        <PhoneFrame>
+          <ConceptSiteMobile />
+        </PhoneFrame>
+      </div>
+    </Stage>
   );
 }
 

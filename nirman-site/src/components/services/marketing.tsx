@@ -25,16 +25,21 @@ export function MarketingService() {
       title="Messages your customers open, sent from your own CRM."
       body="We plan and run WhatsApp and email campaigns from Nirman CRM: broadcasts to opted-in customers, drip sequences after every enquiry and automatic follow-ups, with delivery, read and reply numbers for each one."
       points={["WhatsApp broadcasts to opted-in lists", "Email campaigns and newsletters", "Drip sequences and follow-ups", "Delivery, read and reply reports"]}
-      visual={
-        <Stage w={480} h={330} wLg={820} hLg={535} label="A ceramics brand's WhatsApp broadcast, follow-up sequence, audience and newsletter in Nirman CRM, with delivery, read and reply numbers by campaign">
-          <Broadcast />
-          <Sequence />
-          <Audience />
-          <EmailPreview />
-          <Performance />
-        </Stage>
-      }
+      visual={<MarketingVisual />}
     />
+  );
+}
+
+/** The card's mockup, also the hero visual on marketing service pages (P4.2). */
+export function MarketingVisual() {
+  return (
+    <Stage w={480} h={330} wLg={820} hLg={535} label="A ceramics brand's WhatsApp broadcast, follow-up sequence, audience and newsletter in Nirman CRM, with delivery, read and reply numbers by campaign">
+      <Broadcast />
+      <Sequence />
+      <Audience />
+      <EmailPreview />
+      <Performance />
+    </Stage>
   );
 }
 

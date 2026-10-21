@@ -1,0 +1,66 @@
+import type { Service } from "./types";
+
+// Web pillar: hub + 5. Content written in P4.4.
+
+export const webServices: Service[] = [
+  {
+    path: "/services/web/",
+    kind: "hub",
+    pillar: "web",
+    name: "Websites",
+    serviceType: "Website design and development",
+    visual: "web",
+    related: ["/services/seo/", "/services/software/"],
+    tools: ["/tools/seo-audit/", "/tools/sitemap-generator/"],
+  },
+  {
+    path: "/services/web/website-design/",
+    kind: "detail",
+    pillar: "web",
+    name: "Website design",
+    serviceType: "Website design",
+    visual: "web",
+    related: ["/services/web/website-development/", "/services/seo/local-seo/"],
+    tools: ["/tools/seo-audit/"],
+  },
+  {
+    path: "/services/web/website-development/",
+    kind: "detail",
+    pillar: "web",
+    name: "Website development",
+    serviceType: "Website development",
+    visual: "web",
+    related: ["/services/web/website-design/", "/services/seo/technical-seo/"],
+    tools: ["/tools/seo-audit/", "/tools/schema-generator/"],
+  },
+  {
+    path: "/services/web/ecommerce-websites/",
+    kind: "detail",
+    pillar: "web",
+    name: "E-commerce websites",
+    serviceType: "E-commerce website development (Shopify and WooCommerce)",
+    visual: "web",
+    related: ["/services/seo/ecommerce-seo/", "/services/marketing/whatsapp-marketing/"],
+    tools: ["/tools/schema-generator/", "/tools/whatsapp-link/"],
+  },
+  {
+    path: "/services/web/wordpress-development/",
+    kind: "detail",
+    pillar: "web",
+    name: "WordPress",
+    serviceType: "WordPress development",
+    visual: "web",
+    related: ["/services/web/redesign-maintenance/", "/services/seo/technical-seo/"],
+    tools: ["/tools/seo-audit/", "/tools/sitemap-generator/"],
+  },
+  {
+    path: "/services/web/redesign-maintenance/",
+    kind: "detail",
+    pillar: "web",
+    name: "Redesign and maintenance",
+    serviceType: "Website redesign and maintenance",
+    visual: "web",
+    related: ["/services/web/wordpress-development/", "/services/seo/technical-seo/"],
+    tools: ["/tools/seo-audit/"],
+  },
+];

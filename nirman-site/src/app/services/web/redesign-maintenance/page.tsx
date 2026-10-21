@@ -1,9 +1,10 @@
-import { StubPage } from "@/components/stub-page";
+import { ServicePage } from "@/components/service-page";
 import { registryMetadata } from "@/lib/seo";
 
-// Stub (P3.4). Replace with the real page.
-export const metadata = registryMetadata("/services/web/redesign-maintenance/");
+const path = "/services/web/redesign-maintenance/";
+
+export const metadata = registryMetadata(path);
 
 export default function Page() {
-  return <StubPage path="/services/web/redesign-maintenance/" />;
+  return <ServicePage path={path} />;
 }

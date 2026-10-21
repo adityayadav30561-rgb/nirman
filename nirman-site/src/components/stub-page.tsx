@@ -1,17 +1,6 @@
-import { pageByPath } from "@/content/pages";
-import { Breadcrumbs, type Crumb } from "@/components/ui/breadcrumbs";
+import { breadcrumbTrail, pageByPath } from "@/content/pages";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { ButtonLink } from "@/components/ui/button-link";
-
-/** Home plus every registered ancestor of `path`, then the page itself. */
-function trail(path: string): Crumb[] {
-  const parts = path.split("/").filter(Boolean);
-  const crumbs: Crumb[] = [{ label: "Home", href: "/" }];
-  for (let i = 1; i <= parts.length; i++) {
-    const page = pageByPath(`/${parts.slice(0, i).join("/")}/`);
-    if (page) crumbs.push({ label: page.title, href: page.path });
-  }
-  return crumbs;
-}
 
 /**
  * Placeholder for a page from content/pages.ts that is not built yet (P3.4).
@@ -32,7 +21,7 @@ export function StubPage({ path }: { path: string }) {
 
   return (
     <div className="container-site pb-20 pt-32 lg:pb-28 lg:pt-40">
-      <Breadcrumbs items={trail(path)} />
+      <Breadcrumbs items={breadcrumbTrail(path)} />
       <p className="mt-10 text-[0.95rem] text-ink-3">Coming soon</p>
       <h1 className="display mt-3 max-w-[20ch] text-[clamp(2.6rem,6vw,5.2rem)]">{page.title}</h1>
       <p className="mt-6 max-w-[38rem] text-[1.125rem] leading-[1.6] text-ink-2">{page.description}</p>

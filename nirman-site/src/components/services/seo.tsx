@@ -28,13 +28,18 @@ export function SeoService() {
       title="Be found by people already searching for you."
       body="We fix the technical foundations, build content around what your customers actually search for, and report progress in plain language: which pages rank, which bring enquiries, and what we're doing next."
       points={["Technical audits and fixes", "Keyword and content strategy", "Local SEO and Google Business Profile", "Monthly reports you can read"]}
-      visual={
-        <Stage w={460} h={330} wLg={720} hLg={470} label="Search performance dashboard with organic clicks rising over six months, top queries, and a first-place search result">
-          <SearchDashboard />
-          <SerpCard />
-        </Stage>
-      }
+      visual={<SeoVisual />}
     />
+  );
+}
+
+/** The card's mockup, also the hero visual on seo service pages (P4.2). */
+export function SeoVisual() {
+  return (
+    <Stage w={460} h={330} wLg={720} hLg={470} label="Search performance dashboard with organic clicks rising over six months, top queries, and a first-place search result">
+      <SearchDashboard />
+      <SerpCard />
+    </Stage>
   );
 }
 
