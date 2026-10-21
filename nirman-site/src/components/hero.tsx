@@ -12,9 +12,10 @@ import { hero } from "@/content/home";
 
 export function Hero() {
   return (
-    // Desktop: one screen tall, but never much taller than the photo (whose
-    // bottom sits at ~46vw), so tall screens get no empty band under the hero.
-    <section id="top" className="relative overflow-hidden lg:h-svh lg:max-h-[calc(46vw+15rem)] lg:min-h-[36rem]">
+    // Desktop: as tall as the photo (its bottom sits at ~46vw) plus a little
+    // air, not the screen height, so no screen shape leaves an empty band
+    // between the hero and the next section. Re-measure if the photo changes.
+    <section id="top" className="relative overflow-hidden lg:h-[calc(46vw+4rem)] lg:min-h-[36rem]">
       <div className="container-site relative z-10 pt-28 sm:pt-32 lg:flex lg:h-full lg:items-center lg:pb-0 lg:pt-16">
         <div className="max-w-[38rem] lg:w-[42%] lg:max-w-none">
           <h1 className="display text-[clamp(2.9rem,10.5vw,4.8rem)] text-ink lg:text-[min(5.4vw,8.5rem)]">

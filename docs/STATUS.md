@@ -73,6 +73,7 @@ None.
 ## Last session (2026-10-21)
 
 Phase 2 done (P2.1–P2.7). tsc, lint, build pass. Committed as 8c212f7 and
-6105df8. After that, hero tweaks (not committed): phone CTAs share one row;
-desktop hero capped at `46vw + 15rem` so tall screens (e.g. 1536×1286) have
-no empty band under the photo (normal 16:9/16:10 screens unchanged).
+6105df8. Then hero tweaks (1690bee): phone CTAs share one row. Follow-up
+commit: desktop hero height is now `46vw + 4rem` (the photo's
+height), not the screen height, so the gap before Services is ~280–300px on
+every desktop shape instead of up to ~400px.
