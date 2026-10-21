@@ -36,7 +36,7 @@ Goal: one codebase, one source of truth, no conflicts left open.
 Acceptance: build passes; git has an initial commit; DECISIONS.md answers
 every conflict below.
 
-### Conflicts between the current homepage and the handoff (resolve in P0.5)
+### Conflicts between the current homepage and the handoff (all resolved 2026-10-21; outcomes in DECISIONS.md, all followed the recommendation)
 
 | # | Current site | Handoff rule | Recommendation |
 |---|---|---|---|

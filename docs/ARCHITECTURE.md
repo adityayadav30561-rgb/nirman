@@ -66,3 +66,7 @@ client components as props.
    disable comment; everything else uses `next/image`.
 10. **Windows line endings** in shell pipelines break URL lists; strip `\r`.
 11. Screenshots: use `tools/shots/` (the in-app browser pane is too small).
+12. **Windows paths in Python/shell strings:** `E:\nirman` contains `\n`, which
+    Python turns into a newline. Edit docs with the Edit tool, or use `/` paths
+    (`E:/nirman`) in scripts.
+13. Git: repo at `E:\nirman2`, `.gitattributes` forces LF; `core.autocrlf=false`.
