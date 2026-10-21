@@ -89,3 +89,14 @@ client components as props.
 18. Screenshot scripts: `shotjs.mjs` loads a URL, runs a JS file (open a menu,
     set localStorage), screenshots. Don't `location.reload()` inside the JS file;
     the evaluation context dies.
+19. **Hero height is tied to the photo.** Desktop `#top` is `46vw + 4rem`
+    because the desk photo's bottom sits at ~46.1vw (Stage scales by width).
+    Replace or re-crop the photo → re-measure `img.getBoundingClientRect().bottom
+    / innerWidth` and update the class in `hero.tsx`.
+20. **`flex-1` collapses inputs in a column flex** (basis 0 beats `h-14`). Use
+    `w-full sm:flex-1` when a row stacks on phones (see `free-tools.tsx`).
+21. **`LineChart gridLines={0}`** used to emit NaN `<line>` attributes (now
+    guarded in `charts.tsx`); keep the guard if the chart is rewritten.
+22. **Preview scrolling:** right after `navigate`, a `scrollTo` in the same
+    batch is often undone by load-time scroll restoration. Scroll in a
+    separate call (or use the wheel) before screenshots.

@@ -70,10 +70,14 @@ None.
 - Lighthouse accessibility (target ≥ 95) not measured yet; Phase 11.
 - `site.bookingUrl` is still `#contact`; switch to `/book-a-call/` after P3.4.
 
+- Not yet confirmed by the user (my calls, easy to revert): sample case-study
+  clients 1–2 renamed to Mitti Ceramics / Neelgiri Retreat; old "Why us"
+  section folded into Team instead of dropped.
+
 ## Last session (2026-10-21)
 
-Phase 2 done (P2.1–P2.7). tsc, lint, build pass. Committed as 8c212f7 and
-6105df8. Then hero tweaks (1690bee): phone CTAs share one row. Follow-up
-commit: desktop hero height is now `46vw + 4rem` (the photo's
-height), not the screen height, so the gap before Services is ~280–300px on
-every desktop shape instead of up to ~400px.
+Phase 2 done: homepage now follows the handoff content and order (commits
+8c212f7, 6105df8). Removed every ads/social hint, including mockup data.
+User-requested hero fixes: phone CTAs in one row (1690bee); desktop hero
+height = photo height, not screen height (3f8f1b4). Docs: DESIGN section
+table, gotchas 19–22, two decisions. tsc, lint, build pass.

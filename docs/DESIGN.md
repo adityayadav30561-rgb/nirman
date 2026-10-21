@@ -128,11 +128,14 @@ Marketing `#d9668f` (`pillarDots` arrays in header and footer).
 
 | Section | Pattern |
 |---|---|
-| Hero | 100svh; text left (42%), photo scene right (60%): real iMac desk photo with our website on the iMac, MacBook with Nirman CRM, iPhone with shop app; fades into the page |
-| Services | 2-2-2 grid of equal `ServiceCard`s (tone colour, chip, title, body, 4 points, mockup bleeding off the bottom) |
-| Nirman CRM | Deep forest band, interactive dashboard with tabs Dashboard/Pipeline/Leads/Follow-ups/Reports |
-| Our work | Editorial case-study blocks, each a different composition, all marked "Placeholder project" |
-| Process | Pinned section; vertical scroll moves 6 stage cards horizontally; clickable stage rail |
-| Why us | Photo + weekly-update mockup, 6 reasons, placeholder testimonial + logo slots |
+| Hero | Desktop height = photo height (`46vw + 4rem`), not 100svh; text left (42%), photo scene right (60%): real iMac desk photo with our website on the iMac, MacBook with Nirman CRM, iPhone with shop app; fades into the page. Phones: both CTAs share one row |
+| Services | 2-2-2 grid of equal `ServiceCard`s (tone colour, chip, pillar tag, title, body, 4 points, "Explore <pillar>" hub link, mockup bleeding off the bottom) |
+| Nirman CRM | Deep forest band, interactive dashboard with tabs Dashboard/Pipeline/Leads/Follow-ups/Reports; 2 callout cards + 6 features below |
+| Our work | Editorial case-study blocks (wide, 7/5 pair, wide compact), each with 2 metric tiles, all tagged "Sample case study"; "See all our work" |
+| Process | Pinned section; vertical scroll moves 5 stage cards horizontally; clickable stage rail sized to the stage count |
+| Team | Sample team grid (initials avatars), then "What working with us is like": photo + weekly-update mockup, 6 reasons |
+| Free tools | Marigold-soft panel: SEO audit URL form left, list of the other 5 tools right |
+| Testimonials | 3 quote cards (peacock / surface / lilac), "Sample quotes" tag, logo placeholder slots |
+| FAQ | Sticky title left, `<details>` accordion right (plus icon rotates to a cross) |
 | Final CTA | Coral panel, goal chips that pre-fill a mailto, contact card |
 | Footer | Ink panel with six-colour stripe |

@@ -5,6 +5,8 @@ from the client are in `docs/handoff.md` §1 and are not repeated here.
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-10-21 | Hero on phones: the two CTAs sit side by side in one row | User request |
+| 2026-10-21 | Hero on desktop: height follows the photo (`46vw + 4rem`) instead of the full screen, to remove the empty band before Services on tall screens | User request; user approved the result |
 | 2026-10-21 | C1: Marketing card becomes **WhatsApp & email marketing via Nirman CRM** (broadcast, campaign, drip, delivery/reply stats); no ads mockups | Handoff: no PPC or social media marketing |
 | 2026-10-21 | C2: Remove Meta and WhatsApp logos from the tools strip and any of our art | Handoff rule |
 | 2026-10-21 | C3: Keep 6 equal service cards (2-2-2): SEO, Websites, CRM, Custom software, Mobile apps, WhatsApp & email; each tagged with its pillar and linking to the pillar hub | User choice |
