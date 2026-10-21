@@ -6,11 +6,10 @@ Keep it under ~80 lines: it is read at the start of every session.
 ## Current position
 
 - **Phase:** 4 (Service pages; really 19: 4 hubs + 15, handoff says 18), in progress.
-- **Next task:** P4.5 software pillar content in
-  `src/content/services/software.ts` using the new model (segments, step
-  photo + art, reports, `card.art` per child). Add software mockups to
-  `service-art.tsx` first (e.g. CRM pipeline, app screens, workflow, API/
-  integration log); P4.6 marketing needs campaign/broadcast mockups.
+- **Next task:** P4.6 marketing pillar (hub + WhatsApp + email) in
+  `src/content/services/marketing.ts`, new model. Add marketing mockups to
+  `service-art.tsx` first (broadcast, drip sequence, email preview, campaign
+  report, audience segments); no Meta/WhatsApp logos, generic chat icon only.
 - **Blockers:** none for Phase 4. Client inputs pending (list at the end of
   PLAN.md) block parts of Phases 5, 7, 9, 11.
 
@@ -57,7 +56,8 @@ Keep it under ~80 lines: it is read at the start of every session.
 - [x] Service page redesign for SEO + web (user request): Who it's for tabs,
   mockup hub tiles, scroll-driven How it works, What you get reports, tool
   logos; engagement models, related links and "Part of" line removed
-- [ ] P4.5 Software pillar (hub + 4)
+- [x] P4.5 Software pillar (hub + 4) with 10 software mockups (`sw-*` in
+  `service-art.tsx`); CRM page points to Nirman CRM ("Book a demo") in its FAQ
 - [ ] P4.6 Marketing pillar (hub + 2)
 - [ ] P4.7 Short quote form on each page (mailto fallback until Phase 5)
 
@@ -67,14 +67,13 @@ None.
 
 ## Notes for the next session
 
-- Service page copy (SEO and web pillars so far) is my draft; the user has not
+- Service page copy (SEO, web and software pillars so far) is my draft; the user has not
   reviewed it. Results are all `sample: true`. "Platforms and tools" lists
   (e.g. Screaming Frog, Justdial, Shiprocket) and process timings are my
   guesses: confirm with the client. Keep result metrics short ("1.7 s",
   detail in the label): long ones wrap in the tile.
 - 28 new Unsplash photos in `public/photos` (catalogued in `photos.ts`);
-  `carpenter` and `modernHome` are not used yet (meant for software/CRM
-  segments such as real estate and manufacturing).
+  all are now in use.
   Tool logos load from cdn.simpleicons.org at runtime (as on the homepage).
 
 - Page descriptions in `pages.ts` are my drafts; user has not reviewed them.

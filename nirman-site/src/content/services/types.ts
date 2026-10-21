@@ -26,7 +26,17 @@ export type ArtefactId =
   | "web-code"
   | "web-launch"
   | "web-maintain"
-  | "web-store";
+  | "web-store"
+  | "sw-scope"
+  | "sw-flow"
+  | "sw-sprint"
+  | "sw-pipeline"
+  | "sw-dashboard"
+  | "sw-app"
+  | "sw-workflow"
+  | "sw-integrations"
+  | "sw-qa"
+  | "sw-support";
 
 export type ServiceContent = {
   /** One line under the H1: what the client gets, not what we do. */

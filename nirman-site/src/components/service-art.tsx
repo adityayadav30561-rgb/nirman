@@ -1,7 +1,19 @@
 import type { ReactNode } from "react";
 import {
   ArrowDown,
+  ArrowRight,
   ArrowUp,
+  Bike,
+  CreditCard,
+  FileSpreadsheet,
+  LayoutDashboard,
+  Package,
+  Receipt,
+  Settings,
+  Smartphone,
+  Truck,
+  Users,
+  Zap,
   CalendarCheck,
   Check,
   CircleAlert,
@@ -25,6 +37,7 @@ import {
 import type { ArtefactId } from "@/content/services";
 import { Stage } from "./stage";
 import { Donut, LineChart } from "./mockups/charts";
+import { PhoneFrame } from "./mockups/frames";
 
 // UI mockups of what clients receive at each step of a service (P4 redesign).
 // Every one is a 640 × 420 design-px composition inside a Stage, so the same
@@ -48,6 +61,16 @@ export const artefacts: Record<ArtefactId, { label: string; render: () => ReactN
   "web-launch": { label: "Launch report with Lighthouse scores and Core Web Vitals", render: WebLaunch },
   "web-maintain": { label: "Monthly maintenance report with uptime, backups and updates", render: WebMaintain },
   "web-store": { label: "Online store product page with an order notification", render: WebStore },
+  "sw-scope": { label: "Scope document listing features by priority, estimate and phase", render: SwScope },
+  "sw-flow": { label: "User flow linking the screens of an ordering app", render: SwFlow },
+  "sw-sprint": { label: "Sprint board with tasks in to do, in progress, review and done", render: SwSprint },
+  "sw-pipeline": { label: "CRM sales pipeline with leads moving from enquiry to booking", render: SwPipeline },
+  "sw-dashboard": { label: "Operations dashboard of a custom web app with deliveries and a shipments table", render: SwDashboard },
+  "sw-app": { label: "Two phone screens of an ordering app beside its app store release status", render: SwApp },
+  "sw-workflow": { label: "Automation that turns a payment into an invoice, a sheet row and a receipt message", render: SwWorkflow },
+  "sw-integrations": { label: "Connected business tools with a live sync log", render: SwIntegrations },
+  "sw-qa": { label: "Test report with passing tests, coverage and devices tested", render: SwQa },
+  "sw-support": { label: "Monthly support report with uptime, tickets and release notes", render: SwSupport },
 };
 
 /** One artefact, scaled to its container's width. */
@@ -915,5 +938,521 @@ function WebStore() {
         <p className="mt-4 fs-11 leading-snug">Reminder sent after 1 hour. 18% of carts recovered this month.</p>
       </div>
     </div>
+  );
+}
+
+/* ------------------------------ Software ------------------------------ */
+
+function SwScope() {
+  const rows: [string, "Must" | "Should" | "Could", string, string][] = [
+    ["Leads from website and IndiaMART in one list", "Must", "5 days", "Phase 1"],
+    ["Site visit booking with reminders", "Must", "4 days", "Phase 1"],
+    ["Quotation PDF from a template", "Must", "3 days", "Phase 1"],
+    ["WhatsApp follow-ups from the lead page", "Should", "3 days", "Phase 1"],
+    ["Commission report for each agent", "Should", "2 days", "Phase 2"],
+    ["Customer portal for documents", "Could", "8 days", "Phase 2"],
+  ];
+  const tone = { Must: "red", Should: "amber", Could: "grey" } as const;
+  return (
+    <Window title="Scope · Sales CRM for Skyline Realty" meta="v3 · approved">
+      <div className="grid grid-cols-[6fr_1.2fr_1.1fr_1.1fr] gap-x-10 border-b border-ink/8 pb-8 fs-9 uppercase tracking-wide text-ink-3">
+        <span>Feature</span>
+        <span>Priority</span>
+        <span>Estimate</span>
+        <span>Phase</span>
+      </div>
+      <ul className="divide-y divide-ink/8">
+        {rows.map(([f, p, e, ph]) => (
+          <li key={f} className="grid grid-cols-[6fr_1.2fr_1.1fr_1.1fr] items-center gap-x-10 py-10 fs-11">
+            <span>{f}</span>
+            <span>
+              <Pill tone={tone[p]}>{p}</Pill>
+            </span>
+            <span className="text-ink-2">{e}</span>
+            <span className="text-ink-2">{ph}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="absolute bottom-16 left-18 right-18 flex items-center gap-10 rounded-md bg-peacock-soft px-14 py-10 fs-11 text-peacock">
+        <FileText className="size-14" />
+        Phase 1: 15 features, 6 weeks, signed off by your sales head
+      </div>
+    </Window>
+  );
+}
+
+function SwFlow() {
+  const screens: [string, number][] = [
+    ["Sign in with OTP", 2],
+    ["Home", 4],
+    ["Product", 3],
+    ["Cart", 3],
+    ["Pay with UPI", 2],
+    ["Track order", 4],
+  ];
+  return (
+    <Window title="User flow · Ordering app" meta="FigJam">
+      <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-y-26">
+        {screens.map(([t, n], i) => (
+          <FlowStep key={t} title={t} lines={n} last={i % 3 === 2} active={i === 4} />
+        ))}
+      </div>
+      <div className="absolute bottom-14 right-18 flex items-center gap-6 rounded-full bg-ink px-12 py-6 fs-10 text-paper">
+        <Users className="size-11" />
+        Tested with 5 customers before the build
+      </div>
+    </Window>
+  );
+}
+
+function FlowStep({ title, lines, last, active }: { title: string; lines: number; last: boolean; active: boolean }) {
+  return (
+    <>
+      <div className={`rounded-md bg-surface p-10 shadow-panel ring-1 ${active ? "ring-peacock" : "ring-ink/10"}`}>
+        <p className={`fs-10 font-semibold ${active ? "text-peacock" : ""}`}>{title}</p>
+        <div className="mt-8 h-30 rounded-sm bg-paper-2" />
+        <div className="mt-6 space-y-4">
+          {Array.from({ length: lines }, (_, i) => (
+            <span key={i} className="block h-5 rounded-full bg-ink/10" style={{ width: `${90 - i * 15}%` }} />
+          ))}
+        </div>
+      </div>
+      {!last && <ArrowRight className="mx-8 size-16 text-ink-3" aria-hidden />}
+    </>
+  );
+}
+
+function SwSprint() {
+  const cols: [string, [string, string, string][]][] = [
+    ["To do", [["NC-41", "Export leads to Excel", "PK"], ["NC-44", "Agent targets screen", "AM"]]],
+    ["In progress", [["NC-38", "Site visit reminders", "RG"], ["NC-40", "Quotation template", "PK"]]],
+    ["Review", [["NC-35", "IndiaMART lead import", "AM"]]],
+    ["Done", [["NC-31", "Lead list and filters", "RG"], ["NC-33", "Sign in with OTP", "PK"], ["NC-34", "Roles and permissions", "AM"]]],
+  ];
+  return (
+    <Window title="Sprint 4 · Weeks 7–8" meta="Demo on Friday">
+      <div className="grid grid-cols-4 gap-10">
+        {cols.map(([name, cards]) => (
+          <div key={name} className="rounded-md bg-paper/80 p-8">
+            <p className="flex items-center justify-between px-2 fs-10 font-semibold">
+              {name}
+              <span className="text-ink-3 tnum">{cards.length}</span>
+            </p>
+            <div className="mt-8 space-y-6">
+              {cards.map(([id, t, who]) => (
+                <div key={id} className="rounded-sm bg-surface p-8 shadow-panel ring-1 ring-ink/6">
+                  <p className="fs-8 text-ink-3">{id}</p>
+                  <p className="mt-2 fs-10 leading-snug">{t}</p>
+                  <p className="mt-6 flex justify-end">
+                    <span className="grid size-16 place-items-center rounded-full bg-peacock fs-7 font-semibold text-white">{who}</span>
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="absolute bottom-16 left-18 right-18">
+        <div className="flex justify-between fs-10">
+          <span className="text-ink-2">23 of 31 points done</span>
+          <span className="text-peacock">On track</span>
+        </div>
+        <span className="mt-6 block h-8 rounded-full bg-paper-2">
+          <span className="block h-full w-[74%] rounded-full bg-peacock" />
+        </span>
+      </div>
+    </Window>
+  );
+}
+
+function SwPipeline() {
+  const cols: [string, string, [string, string, string][]][] = [
+    ["New enquiry", "#3346d3", [["Rohit Sharma", "3BHK · Baner", "Website"], ["Ananya Iyer", "2BHK · Wakad", "IndiaMART"]]],
+    ["Site visit", "#f4b23e", [["Kabir Mehta", "Villa · Lavasa", "Sat, 11 am"], ["Sneha Kulkarni", "3BHK · Baner", "Sun, 4 pm"]]],
+    ["Negotiation", "#ec6a4c", [["Farhan Ali", "Office · Hinjewadi", "Quote sent"]]],
+    ["Booked", "#4f9a74", [["Priya Desai", "2BHK · Wakad", "Agreement"], ["Arjun Rao", "3BHK · Baner", "Token paid"]]],
+  ];
+  return (
+    <Window title="Pipeline · Skyline Realty" meta="This month">
+      <div className="grid grid-cols-4 gap-10">
+        {cols.map(([name, color, cards]) => (
+          <div key={name}>
+            <p className="flex items-center gap-6 fs-10 font-semibold">
+              <span className="size-8 rounded-full" style={{ background: color }} />
+              {name}
+            </p>
+            <span className="mt-6 block h-3 rounded-full" style={{ background: color, opacity: 0.35 }} />
+            <div className="mt-8 space-y-8">
+              {cards.map(([n, need, tag]) => (
+                <div key={n} className="rounded-md bg-surface p-10 shadow-panel ring-1 ring-ink/6">
+                  <p className="fs-11 font-semibold">{n}</p>
+                  <p className="mt-2 fs-10 text-ink-2">{need}</p>
+                  <p className="mt-6 w-fit rounded-full bg-paper px-8 py-2 fs-9 text-ink-2">{tag}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="absolute bottom-16 left-18 right-18 flex items-center gap-10 rounded-md bg-mint-soft px-14 py-10 fs-11 text-forest">
+        <MessageCircle className="size-14" />
+        Every new enquiry gets a WhatsApp reply within 2 minutes
+      </div>
+    </Window>
+  );
+}
+
+function SwDashboard() {
+  const rows: [string, string, string, "green" | "amber" | "blue"][] = [
+    ["SH-2041", "Pune → Mumbai", "Delivered", "green"],
+    ["SH-2042", "Pune → Nashik", "In transit", "blue"],
+    ["SH-2043", "Pune → Goa", "Delayed 2 h", "amber"],
+    ["SH-2044", "Pune → Surat", "In transit", "blue"],
+  ];
+  const nav: [typeof Truck, string][] = [
+    [LayoutDashboard, "Overview"],
+    [Package, "Shipments"],
+    [Truck, "Vehicles"],
+    [Users, "Drivers"],
+    [Settings, "Settings"],
+  ];
+  return (
+    <div className="absolute inset-0 flex overflow-hidden rounded-xl bg-surface text-ink shadow-scene ring-1 ring-ink/8">
+      <div className="w-130 shrink-0 bg-peacock-2 p-14 text-white">
+        <p className="flex items-center gap-6 fs-13 font-semibold">
+          <Truck className="size-14" />
+          FleetDesk
+        </p>
+        <ul className="mt-18 space-y-6 fs-10">
+          {nav.map(([Icon, l], i) => (
+            <li key={l} className={`flex items-center gap-6 rounded-sm px-8 py-6 ${i === 0 ? "bg-white/15" : "text-white/70"}`}>
+              <Icon className="size-11" />
+              {l}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="min-w-0 flex-1 p-16">
+        <div className="grid grid-cols-3 gap-8">
+          {[
+            ["Shipments today", "142"],
+            ["On time", "96%"],
+            ["Open issues", "3"],
+          ].map(([k, v]) => (
+            <div key={k} className="rounded-md bg-paper/80 p-10">
+              <p className="fs-9 text-ink-3">{k}</p>
+              <p className="mt-2 fs-20 font-semibold tnum">{v}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-10 h-90 text-ink">
+          <LineChart w={460} h={90} gridLines={3} series={[{ values: [96, 110, 104, 121, 118, 130, 128, 142], color: "#1f6f78", fill: true }]} />
+        </div>
+        <ul className="mt-10 divide-y divide-ink/8 rounded-md bg-paper/60 px-10">
+          {rows.map(([id, r, st, t]) => (
+            <li key={id} className="grid grid-cols-[1fr_2fr_1.4fr] items-center gap-8 py-7 fs-10">
+              <span className="font-medium tnum">{id}</span>
+              <span className="text-ink-2">{r}</span>
+              <span className="justify-self-end">
+                <Pill tone={t}>{st}</Pill>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function SwApp() {
+  return (
+    <div className="absolute inset-0">
+      <div className="absolute left-10 top-0 w-170 -rotate-[4deg]">
+        <PhoneFrame time="6:02" model="iphone-alt">
+          <OrderHomeScreen />
+        </PhoneFrame>
+      </div>
+      <div className="absolute left-200 top-24 z-10 w-170 rotate-[3deg]">
+        <PhoneFrame time="6:15">
+          <OrderTrackScreen />
+        </PhoneFrame>
+      </div>
+      <div className="absolute right-0 top-40 w-220 rounded-xl bg-surface p-16 shadow-scene ring-1 ring-ink/8">
+        <p className="flex items-center gap-6 fs-12 font-semibold">
+          <Smartphone className="size-14 text-peacock" />
+          Release 2.4.0
+        </p>
+        <ul className="mt-12 space-y-8 fs-11">
+          {["App Store: live", "Google Play: live", "Push notifications: on"].map((t) => (
+            <li key={t} className="flex items-center gap-8">
+              <Tick />
+              {t}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-14 grid grid-cols-2 gap-8">
+          <div className="rounded-md bg-paper/80 p-8">
+            <p className="fs-9 text-ink-3">Crash-free</p>
+            <p className="fs-16 font-semibold tnum">99.8%</p>
+          </div>
+          <div className="rounded-md bg-paper/80 p-8">
+            <p className="fs-9 text-ink-3">Rating</p>
+            <p className="flex items-center gap-4 fs-16 font-semibold tnum">
+              4.7 <Star className="size-12 fill-marigold text-marigold" />
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function OrderHomeScreen() {
+  return (
+    <div className="px-12 pt-4">
+      <p className="fs-9 text-ink-3">Good evening, Meera</p>
+      <p className="mock-display fs-16 leading-tight">What do you need?</p>
+      <p className="mt-8 flex items-center gap-6 rounded-full bg-paper px-10 py-6 fs-9 text-ink-3">
+        <Search className="size-10" />
+        Search 4,000 items
+      </p>
+      <div className="mt-10 grid grid-cols-2 gap-6">
+        {["Groceries", "Pharmacy", "Bakery", "Pet care"].map((c, i) => (
+          <span key={c} className={`rounded-md px-8 py-12 fs-9 font-medium ${["bg-mint-soft", "bg-cobalt-soft", "bg-marigold-soft", "bg-coral-soft"][i]}`}>
+            {c}
+          </span>
+        ))}
+      </div>
+      <div className="mt-10 rounded-md bg-peacock p-10 text-white">
+        <p className="fs-9 text-white/70">Delivered in</p>
+        <p className="fs-16 font-semibold">20 minutes</p>
+      </div>
+    </div>
+  );
+}
+
+function OrderTrackScreen() {
+  const steps: [string, string, "done" | "now" | "next"][] = [
+    ["Order placed", "6:02", "done"],
+    ["Packed", "6:09", "done"],
+    ["On the way", "6:15", "now"],
+    ["Delivered", "", "next"],
+  ];
+  return (
+    <div className="px-12 pt-4">
+      <p className="fs-9 text-ink-3">Order #2041</p>
+      <p className="mock-display fs-16 leading-tight">Arriving in 6 min</p>
+      <ul className="mt-10 space-y-8">
+        {steps.map(([t, time, st]) => (
+          <li key={t} className="flex items-center gap-8 fs-10">
+            <span
+              className={`grid size-14 place-items-center rounded-full ${
+                st === "done" ? "bg-forest text-paper" : st === "now" ? "bg-peacock text-white ring-4 ring-peacock-soft" : "bg-paper-2"
+              }`}
+            >
+              {st === "done" && <Check className="size-8" strokeWidth={3} />}
+            </span>
+            <span className={`flex-1 ${st === "next" ? "text-ink-3" : ""}`}>{t}</span>
+            <span className="fs-9 text-ink-3 tnum">{time}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-12 flex items-center gap-8 rounded-md bg-paper p-8">
+        <span className="grid size-24 place-items-center rounded-full bg-marigold-soft text-[#9a6510]">
+          <Bike className="size-12" />
+        </span>
+        <span className="min-w-0 flex-1 fs-9 leading-tight">
+          <span className="block font-semibold">Ravi</span>
+          <span className="text-ink-3">On a bike, 1.2 km away</span>
+        </span>
+      </div>
+      <p className="mt-8 rounded-full bg-ink py-7 text-center fs-10 font-medium text-paper">Call rider</p>
+    </div>
+  );
+}
+
+function SwWorkflow() {
+  const nodes: [typeof Zap, string, string, string][] = [
+    [CreditCard, "Trigger", "Razorpay: payment received", "bg-cobalt-soft text-cobalt"],
+    [Receipt, "Action", "Zoho Books: create invoice", "bg-marigold-soft text-[#9a6510]"],
+    [FileSpreadsheet, "Action", "Google Sheets: add a row", "bg-mint-soft text-forest"],
+    [MessageCircle, "Action", "WhatsApp: send receipt", "bg-peacock-soft text-peacock"],
+  ];
+  const runs: [string, string, string][] = [
+    ["10:42", "Meera Joshi", "3.1 s"],
+    ["10:17", "Harsh Vora", "2.8 s"],
+    ["09:58", "Lakshmi N.", "3.4 s"],
+  ];
+  return (
+    <Window title="Automation · Payment received" meta="Runs on every payment">
+      <div className="flex items-stretch">
+        {nodes.map(([Icon, kind, t, c], i) => (
+          <div key={t} className="flex flex-1 items-center">
+            <div className="h-full flex-1 rounded-md bg-surface p-10 shadow-panel ring-1 ring-ink/8">
+              <span className={`grid size-24 place-items-center rounded-sm ${c}`}>
+                <Icon className="size-13" />
+              </span>
+              <p className="mt-6 fs-8 uppercase tracking-wide text-ink-3">{kind}</p>
+              <p className="mt-2 fs-10 font-medium leading-snug">{t}</p>
+            </div>
+            {i < nodes.length - 1 && <ArrowRight className="mx-4 size-13 shrink-0 text-ink-3" aria-hidden />}
+          </div>
+        ))}
+      </div>
+      <p className="mt-16 fs-10 font-semibold">Latest runs</p>
+      <ul className="mt-6 divide-y divide-ink/8 rounded-md bg-paper/70 px-12">
+        {runs.map(([t, who, d]) => (
+          <li key={t} className="flex items-center gap-10 py-8 fs-10">
+            <span className="w-40 text-ink-3 tnum">{t}</span>
+            <span className="flex-1">{who}</span>
+            <Pill tone="green">Success · {d}</Pill>
+          </li>
+        ))}
+      </ul>
+      <div className="absolute bottom-16 right-18 flex items-center gap-8 rounded-full bg-peacock px-14 py-8 fs-10 text-white">
+        <Zap className="size-11" />
+        412 runs, about 14 hours of typing saved this month
+      </div>
+    </Window>
+  );
+}
+
+function SwIntegrations() {
+  const apps: [string, "Connected" | "Syncing"][] = [
+    ["Website forms", "Connected"],
+    ["IndiaMART", "Connected"],
+    ["Razorpay", "Connected"],
+    ["Tally", "Syncing"],
+    ["Google Sheets", "Connected"],
+    ["Gmail", "Connected"],
+  ];
+  const log = [
+    ["10:42:07", "POST /webhooks/indiamart", "200", "lead created"],
+    ["10:42:09", "POST /crm/leads/8812/assign", "200", "assigned to Priya"],
+    ["10:44:31", "GET /tally/stock?sku=HX-220", "200", "142 in stock"],
+    ["10:45:02", "POST /webhooks/razorpay", "200", "invoice queued"],
+  ];
+  return (
+    <Window title="Integrations" meta="6 connected">
+      <div className="grid grid-cols-3 gap-8">
+        {apps.map(([n, st]) => (
+          <div key={n} className="flex items-center justify-between rounded-md bg-paper/80 px-10 py-8">
+            <span className="fs-10 font-medium">{n}</span>
+            <Pill tone={st === "Connected" ? "green" : "blue"}>{st}</Pill>
+          </div>
+        ))}
+      </div>
+      <div className="mt-14 rounded-md bg-ink p-12 font-mono text-paper">
+        <p className="fs-9 text-paper/50">Sync log</p>
+        <ul className="mt-6 space-y-5 fs-9">
+          {log.map(([t, req, code, note]) => (
+            <li key={t} className="flex gap-10 whitespace-nowrap">
+              <span className="text-paper/40">{t}</span>
+              <span className="min-w-0 flex-1 truncate">{req}</span>
+              <span className="text-[#9fdcb8]">{code}</span>
+              <span className="w-110 truncate text-paper/60">{note}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="absolute bottom-16 left-18 flex items-center gap-6 fs-10 text-ink-2">
+        <ShieldCheck className="size-12 text-forest" />
+        Failed calls are retried, and you get an alert if a sync stops
+      </div>
+    </Window>
+  );
+}
+
+function SwQa() {
+  return (
+    <Window title="Test report · Release 2.4" meta="Ready for release">
+      <div className="grid grid-cols-[1fr_1.4fr] gap-16">
+        <div className="flex items-center gap-14">
+          <div className="relative w-110 shrink-0">
+            <Donut parts={[{ value: 412, color: "#4f9a74" }]} size={110} thickness={12} />
+            <span className="absolute inset-0 grid place-items-center text-center">
+              <span>
+                <span className="block fs-20 font-semibold leading-none tnum">412</span>
+                <span className="fs-9 text-ink-3">tests passed</span>
+              </span>
+            </span>
+          </div>
+          <div className="space-y-8 fs-10">
+            <p>
+              <span className="text-ink-3">Coverage</span>
+              <span className="block fs-16 font-semibold tnum">86%</span>
+            </p>
+            <p>
+              <span className="text-ink-3">App start</span>
+              <span className="block fs-16 font-semibold tnum">1.1 s</span>
+            </p>
+          </div>
+        </div>
+        <div>
+          <p className="fs-10 font-semibold">Devices tested</p>
+          <ul className="mt-6 grid grid-cols-2 gap-6 fs-10">
+            {["iPhone 15", "iPhone SE", "Pixel 8", "Redmi Note 12", "Galaxy A14", "iPad 10th gen"].map((d) => (
+              <li key={d} className="flex items-center gap-6 rounded-sm bg-paper/80 px-8 py-6">
+                <Tick />
+                {d}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <ul className="mt-14 divide-y divide-ink/8 rounded-md bg-paper/70 px-12">
+        {[
+          ["Checkout with UPI, card and cash on delivery", "Passed"],
+          ["Order tracking on a slow 3G network", "Passed"],
+          ["Screen reader labels on every button", "Passed"],
+        ].map(([t, r]) => (
+          <li key={t} className="flex items-center gap-10 py-8 fs-10">
+            <span className="flex-1">{t}</span>
+            <Pill tone="green">{r}</Pill>
+          </li>
+        ))}
+      </ul>
+    </Window>
+  );
+}
+
+function SwSupport() {
+  return (
+    <Window title="Support report · October" meta="FleetDesk">
+      <div className="grid grid-cols-3 gap-10">
+        {[
+          ["Uptime", "99.97%"],
+          ["Tickets resolved", "18 of 18"],
+          ["First reply", "42 min"],
+        ].map(([k, v]) => (
+          <div key={k} className="rounded-md bg-paper/80 p-12">
+            <p className="fs-9 text-ink-3">{k}</p>
+            <p className="mt-4 fs-20 font-semibold tnum">{v}</p>
+          </div>
+        ))}
+      </div>
+      <div className="mt-14 grid grid-cols-2 gap-10">
+        <div className="rounded-md bg-peacock-soft/70 p-12">
+          <p className="fs-10 font-semibold text-peacock">Released: v2.4.1</p>
+          <ul className="mt-6 space-y-5 fs-10">
+            <li>Bulk upload of delivery addresses</li>
+            <li>Faster shipment search</li>
+            <li>Fix: driver app sync on weak signal</li>
+          </ul>
+        </div>
+        <div className="rounded-md bg-paper/80 p-12">
+          <p className="fs-10 font-semibold">Planned for November</p>
+          <ul className="mt-6 space-y-5 fs-10 text-ink-2">
+            <li>Customer delivery tracking link</li>
+            <li>Fuel cost report by vehicle</li>
+            <li>Server upgrade with no downtime</li>
+          </ul>
+        </div>
+      </div>
+      <div className="absolute bottom-16 left-18 right-18 flex items-center gap-10 rounded-md bg-ink px-14 py-10 fs-10 text-paper">
+        <ShieldCheck className="size-13 text-mint" />
+        Daily backups, security patches and error alerts watched around the clock
+      </div>
+    </Window>
   );
 }
