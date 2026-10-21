@@ -17,29 +17,18 @@ Keep it under ~80 lines: it is read at the start of every session.
 
 - Homepage design complete and approved (see `docs/DESIGN.md`).
 - Phase 0: git, handoff data ported, trailing slashes, decisions C1–C9.
-- Phase 1: UI primitives, multi-page header with Services mega menu + Tools
-  dropdown + mobile accordion menu, 4-column footer, WhatsApp button, phone
-  sticky bar, consult pop-up, cookie banner, 404 page. All mounted in
-  `layout.tsx` for every page. Checked at 390 / 1024 / 1440.
-- Phase 2: homepage follows the handoff (C1–C6, C9). All copy/data from
-  `content/home.ts`; samples labelled on page. 4 SAMPLE case studies,
-  5-stage process, Team (with old Why us), Free tools, Testimonials, FAQ.
-- Phase 3: SEO foundation.
-  - Page registry `src/content/pages.ts`: all 39 handoff §2 pages with path,
-    title (= H1), description, section, noindex. Single source for metadata,
-    sitemap, llms.txt and stubs. Add new pages here first.
-  - `src/lib/seo.ts`: `pageMetadata()`, `registryMetadata(path)`, JSON-LD
-    builders (Organization, ProfessionalService, WebSite, Service,
-    SoftwareApplication, WebApplication, FAQPage, BreadcrumbList, Article);
-    `<JsonLd>` in `components/json-ld.tsx`. Placeholder contact values are
-    left out of JSON-LD automatically.
-  - Share image `/og.png` (route handler, gotcha 23). `robots.txt` (AI
-    crawlers named and allowed), `sitemap.xml` (38 URLs), `llms.txt`.
-  - 38 stub routes via `components/stub-page.tsx` (breadcrumbs, H1,
-    "Coming soon", Get a quote / Book a demo for CRM).
-  - Acceptance script passed: 39 pages 200, unique titles + descriptions,
-    one H1 each, canonical with trailing slash, thank-you noindex; all 40
-    homepage internal links resolve (closes the deferred Phase 2 item).
+- Phase 1: UI primitives, header (mega menu, Tools dropdown, mobile menu),
+  footer, WhatsApp button, sticky bar, pop-up, cookie banner, 404; all in
+  `layout.tsx`. Checked at 390 / 1024 / 1440.
+- Phase 2: homepage follows the handoff (C1–C6, C9); copy in
+  `content/home.ts`; samples labelled on page.
+- Phase 3: page registry `src/content/pages.ts` (39 pages: path, title = H1,
+  description, noindex; add new pages here first, gotcha 24).
+  `src/lib/seo.ts`: `pageMetadata()`, `registryMetadata(path)`, 9 JSON-LD
+  builders; `<JsonLd>` in `components/json-ld.tsx`. `/og.png` (gotcha 23),
+  robots (AI crawlers allowed), sitemap (38 URLs), llms.txt. 38 stubs via
+  `components/stub-page.tsx`. Acceptance script passed (unique titles and
+  descriptions, one H1, trailing-slash canonicals, homepage links resolve).
 
 ## Phase checklist
 
@@ -88,7 +77,9 @@ None.
 
 ## Last session (2026-10-21)
 
-Phase 3 done (P3.1–P3.4, uncommitted at time of writing): metadata, OG image,
-seo helpers, robots/sitemap/llms.txt, page registry, 38 stubs;
-`site.bookingUrl` now `/book-a-call/`. tsc, lint, build pass (44 static
-routes).
+Phase 3 done and committed (2f1dae6): root metadata + `/og.png` share
+image, `src/lib/seo.ts` helpers + `<JsonLd>`, robots/sitemap/llms.txt,
+page registry `pages.ts`, 38 stub routes; `site.bookingUrl` now
+`/book-a-call/`. Why a registry: one list keeps metadata, sitemap, llms.txt
+and stubs in sync. No user decisions this session. tsc, lint, build pass
+(44 static routes).
