@@ -4,7 +4,11 @@ import {
   ArrowRight,
   ArrowUp,
   Bike,
+  CheckCheck,
   CreditCard,
+  GitBranch,
+  Inbox,
+  Mail,
   FileSpreadsheet,
   LayoutDashboard,
   Package,
@@ -71,6 +75,14 @@ export const artefacts: Record<ArtefactId, { label: string; render: () => ReactN
   "sw-integrations": { label: "Connected business tools with a live sync log", render: SwIntegrations },
   "sw-qa": { label: "Test report with passing tests, coverage and devices tested", render: SwQa },
   "sw-support": { label: "Monthly support report with uptime, tickets and release notes", render: SwSupport },
+  "mk-broadcast": { label: "A WhatsApp offer on a phone beside its delivery, read and reply numbers", render: MkBroadcast },
+  "mk-email": { label: "An email newsletter open in an inbox, with open and click rates", render: MkEmail },
+  "mk-journey": { label: "Automated follow-up journey mixing WhatsApp and email steps", render: MkJourney },
+  "mk-segments": { label: "Audience segments built from CRM data with their sizes", render: MkSegments },
+  "mk-report": { label: "Campaign report comparing WhatsApp and email campaigns", render: MkReport },
+  "mk-templates": { label: "WhatsApp message templates and their approval status", render: MkTemplates },
+  "mk-deliverability": { label: "Email domain set-up checks and inbox placement", render: MkDeliverability },
+  "mk-calendar": { label: "Monthly campaign calendar across WhatsApp and email", render: MkCalendar },
 };
 
 /** One artefact, scaled to its container's width. */
@@ -1452,6 +1464,397 @@ function SwSupport() {
       <div className="absolute bottom-16 left-18 right-18 flex items-center gap-10 rounded-md bg-ink px-14 py-10 fs-10 text-paper">
         <ShieldCheck className="size-13 text-mint" />
         Daily backups, security patches and error alerts watched around the clock
+      </div>
+    </Window>
+  );
+}
+
+/* ------------------------------ Marketing ----------------------------- */
+// Rose accent (#d9668f / #b23f69) for the marketing pillar. Chats use a
+// plain chat look and a generic icon: no WhatsApp logo (decision C2).
+
+function MkBroadcast() {
+  const stats: [string, string, number][] = [
+    ["Sent", "2,140", 100],
+    ["Delivered", "98%", 98],
+    ["Read", "81%", 81],
+    ["Replied", "312", 15],
+  ];
+  return (
+    <div className="absolute inset-0">
+      <div className="absolute left-30 top-0 w-190">
+        <PhoneFrame time="7:30">
+          <div className="flex h-full flex-col bg-[#efeae0]">
+            <div className="flex items-center gap-6 bg-forest px-10 py-7 text-white">
+              <span className="grid size-20 place-items-center rounded-full bg-mint fs-8 font-semibold text-forest">S</span>
+              <span className="fs-9 font-semibold leading-tight">
+                Spice Route Kitchen
+                <span className="block fs-7 font-normal text-white/70">Business account</span>
+              </span>
+            </div>
+            <div className="p-8">
+              <div className="overflow-hidden rounded-md bg-surface">
+                <div className="h-70 bg-[linear-gradient(135deg,#f4b23e,#ec6a4c)] p-8">
+                  <p className="mock-display fs-14 leading-tight text-white">Weekend thali festival</p>
+                </div>
+                <p className="px-8 pt-6 fs-9 leading-snug">Hi Rahul, 14 regional thalis this weekend only. Book a table or order home delivery.</p>
+                <p className="flex items-center justify-end gap-3 px-8 pb-4 pt-2 fs-7 text-ink-3">
+                  7:30
+                  <CheckCheck className="size-9 text-peacock" />
+                </p>
+                {["Book a table", "Order now"].map((b) => (
+                  <span key={b} className="block border-t border-ink/8 py-5 text-center fs-9 font-medium text-peacock">
+                    {b}
+                  </span>
+                ))}
+              </div>
+              <div className="ml-auto mt-6 w-fit max-w-[85%] rounded-md bg-mint-soft px-8 py-5 fs-9 leading-snug">
+                Table for 4 on Saturday, 8 pm?
+              </div>
+            </div>
+          </div>
+        </PhoneFrame>
+      </div>
+      <div className="absolute right-0 top-40 w-300 rounded-xl bg-surface p-16 shadow-scene ring-1 ring-ink/8">
+        <p className="flex items-center gap-6 fs-12 font-semibold">
+          <MessageCircle className="size-14 text-[#b23f69]" />
+          Broadcast · Thali festival
+        </p>
+        <p className="mt-2 fs-9 text-ink-3">To customers who ordered in the last 90 days</p>
+        <div className="mt-12 space-y-10">
+          {stats.map(([k, v, w]) => (
+            <div key={k}>
+              <div className="flex justify-between fs-10">
+                <span className="text-ink-2">{k}</span>
+                <span className="font-semibold tnum">{v}</span>
+              </div>
+              <span className="mt-4 block h-7 rounded-full bg-paper-2">
+                <span className="block h-full rounded-full bg-[#d9668f]" style={{ width: `${w}%` }} />
+              </span>
+            </div>
+          ))}
+        </div>
+        <p className="mt-14 rounded-md bg-[#f8dde6] px-10 py-8 fs-10 text-[#b23f69]">96 table bookings and orders traced to this message</p>
+      </div>
+    </div>
+  );
+}
+
+function MkEmail() {
+  const inbox: [string, string, boolean][] = [
+    ["Mitti Ceramics", "The monsoon edit is here", true],
+    ["Bank alerts", "Your statement is ready", false],
+    ["Kavya", "Re: weekend plans", false],
+  ];
+  return (
+    <div className="absolute inset-0 flex overflow-hidden rounded-xl bg-surface text-ink shadow-scene ring-1 ring-ink/8">
+      <div className="w-180 shrink-0 border-r border-ink/8 bg-paper/60 p-12">
+        <p className="flex items-center gap-6 fs-11 font-semibold">
+          <Inbox className="size-12" />
+          Inbox
+        </p>
+        <ul className="mt-10 space-y-4">
+          {inbox.map(([from, sub, on]) => (
+            <li key={sub} className={`rounded-sm px-8 py-7 ${on ? "bg-surface shadow-panel ring-1 ring-[#d9668f]/40" : ""}`}>
+              <p className={`fs-10 ${on ? "font-semibold" : "text-ink-2"}`}>{from}</p>
+              <p className="truncate fs-9 text-ink-3">{sub}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="min-w-0 flex-1 p-16">
+        <p className="fs-13 font-semibold">The monsoon edit is here</p>
+        <p className="mt-2 fs-9 text-ink-3">Mitti Ceramics &lt;hello@mitticeramics.com&gt;</p>
+        <div className="mt-10 overflow-hidden rounded-md ring-1 ring-ink/8">
+          <div className="flex h-110 items-end bg-[linear-gradient(140deg,#efe6dc,#d9c4ae)] p-12">
+            <p className="mock-display fs-20 leading-none text-[#5b3a24]">12 new glazes</p>
+          </div>
+          <div className="p-12">
+            <p className="fs-10 leading-snug text-ink-2">Hand-thrown in Khurja, glazed in shades of rain and moss. Free delivery across India this week.</p>
+            <span className="mt-10 inline-block rounded-full bg-[#5b3a24] px-14 py-6 fs-10 font-medium text-white">Shop the collection</span>
+          </div>
+        </div>
+        <div className="mt-12 grid grid-cols-3 gap-8">
+          {[
+            ["Opened", "46%"],
+            ["Clicked", "9.2%"],
+            ["Orders", "58"],
+          ].map(([k, v]) => (
+            <div key={k} className="rounded-md bg-[#f8dde6]/60 px-10 py-6">
+              <p className="fs-9 text-ink-3">{k}</p>
+              <p className="fs-14 font-semibold text-[#b23f69] tnum">{v}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MkJourney() {
+  const steps: [typeof Mail, string, string, string][] = [
+    [Zap, "Trigger", "New enquiry from the website", "bg-cobalt-soft text-cobalt"],
+    [MessageCircle, "Right away", "WhatsApp: thanks, with the brochure", "bg-[#f8dde6] text-[#b23f69]"],
+    [Mail, "Day 2", "Email: a project like yours", "bg-marigold-soft text-[#9a6510]"],
+  ];
+  return (
+    <Window title="Journey · New enquiry follow-up" meta="Active">
+      <div className="grid grid-cols-[1.5fr_1fr] gap-16">
+        <div>
+          <ol className="space-y-8">
+            {steps.map(([Icon, when, t, c]) => (
+              <li key={t} className="flex items-center gap-10 rounded-md bg-surface p-8 shadow-panel ring-1 ring-ink/8">
+                <span className={`grid size-24 shrink-0 place-items-center rounded-sm ${c}`}>
+                  <Icon className="size-12" />
+                </span>
+                <span className="leading-tight">
+                  <span className="block fs-8 text-ink-3">{when}</span>
+                  <span className="block fs-10 font-medium">{t}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
+          <p className="my-8 flex items-center gap-6 fs-9 text-ink-3">
+            <GitBranch className="size-11" />
+            Day 4: did they reply?
+          </p>
+          <div className="grid grid-cols-2 gap-8">
+            <div className="rounded-md bg-mint-soft p-8">
+              <p className="fs-8 text-forest">Yes</p>
+              <p className="fs-10 font-medium">Assign to sales, call within 1 hour</p>
+            </div>
+            <div className="rounded-md bg-paper p-8">
+              <p className="fs-8 text-ink-3">No</p>
+              <p className="fs-10 font-medium">WhatsApp: book a free visit?</p>
+            </div>
+          </div>
+        </div>
+        <div className="space-y-10">
+          {[
+            ["In this journey", "214"],
+            ["Replied", "41%"],
+            ["Visits booked", "38"],
+          ].map(([k, v]) => (
+            <div key={k} className="rounded-md bg-paper/80 p-12">
+              <p className="fs-9 text-ink-3">{k}</p>
+              <p className="mt-2 fs-20 font-semibold tnum">{v}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Window>
+  );
+}
+
+function MkSegments() {
+  const segs: [string, string, number][] = [
+    ["Bought in the last 90 days", "Orders · last 90 days", 2140],
+    ["Abandoned cart", "Cart · no order in 24 h", 386],
+    ["Enquired, not booked", "Stage = enquiry · 14+ days", 512],
+    ["VIP customers", "3+ orders · spend top 10%", 174],
+    ["Pune, no order in 6 months", "City = Pune · inactive", 903],
+  ];
+  return (
+    <Window title="Audiences" meta="From Nirman CRM">
+      <ul className="divide-y divide-ink/8">
+        {segs.map(([n, rule, c]) => (
+          <li key={n} className="grid grid-cols-[2.2fr_1.6fr_1fr] items-center gap-10 py-10">
+            <span className="flex items-center gap-8 fs-11 font-medium">
+              <Users className="size-12 text-[#b23f69]" />
+              {n}
+            </span>
+            <span className="truncate fs-9 text-ink-3">{rule}</span>
+            <span className="flex items-center gap-6">
+              <span className="h-6 flex-1 rounded-full bg-paper-2">
+                <span className="block h-full rounded-full bg-[#d9668f]" style={{ width: `${(c / 2140) * 100}%` }} />
+              </span>
+              <span className="w-36 text-right fs-10 font-semibold tnum">{c.toLocaleString("en-IN")}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+      <div className="absolute bottom-16 left-18 right-18 flex items-center gap-10 rounded-md bg-mint-soft px-14 py-10 fs-10 text-forest">
+        <ShieldCheck className="size-13" />
+        Only contacts who opted in are messaged. Opt-outs are honoured automatically.
+      </div>
+    </Window>
+  );
+}
+
+function MkReport() {
+  const rows: [string, "WhatsApp" | "Email", string, string, string][] = [
+    ["Thali festival", "WhatsApp", "2,140", "81%", "96"],
+    ["October newsletter", "Email", "6,420", "44%", "58"],
+    ["Abandoned cart", "WhatsApp", "386", "77%", "69"],
+    ["Win-back offer", "Email", "903", "38%", "21"],
+  ];
+  return (
+    <Window title="Campaign report · October" meta="All channels">
+      <div className="grid grid-cols-[2.2fr_1.2fr_1fr_1fr_1fr] gap-x-10 border-b border-ink/8 pb-8 fs-9 uppercase tracking-wide text-ink-3">
+        <span>Campaign</span>
+        <span>Channel</span>
+        <span className="text-right">Sent</span>
+        <span className="text-right">Read/open</span>
+        <span className="text-right">Orders</span>
+      </div>
+      <ul className="divide-y divide-ink/8">
+        {rows.map(([n, ch, s, r, o]) => (
+          <li key={n} className="grid grid-cols-[2.2fr_1.2fr_1fr_1fr_1fr] items-center gap-x-10 py-10 fs-11">
+            <span>{n}</span>
+            <span>
+              <Pill tone={ch === "WhatsApp" ? "green" : "blue"}>{ch}</Pill>
+            </span>
+            <span className="text-right text-ink-2 tnum">{s}</span>
+            <span className="text-right tnum">{r}</span>
+            <span className="text-right font-semibold tnum">{o}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="absolute bottom-16 left-18 right-18 grid grid-cols-3 gap-10">
+        {[
+          ["Orders from campaigns", "244"],
+          ["Replies handled", "512"],
+          ["Unsubscribes", "0.3%"],
+        ].map(([k, v]) => (
+          <div key={k} className="rounded-md bg-[#f8dde6]/60 px-12 py-8">
+            <p className="fs-9 text-ink-3">{k}</p>
+            <p className="fs-16 font-semibold text-[#b23f69] tnum">{v}</p>
+          </div>
+        ))}
+      </div>
+    </Window>
+  );
+}
+
+function MkTemplates() {
+  const rows: [string, string, "Approved" | "In review"][] = [
+    ["order_confirmation", "Utility", "Approved"],
+    ["shipping_update", "Utility", "Approved"],
+    ["weekend_offer", "Marketing", "Approved"],
+    ["visit_reminder", "Utility", "Approved"],
+    ["diwali_collection", "Marketing", "In review"],
+  ];
+  return (
+    <Window title="WhatsApp templates" meta="Business API">
+      <div className="grid grid-cols-[1.4fr_1fr] gap-16">
+        <ul className="divide-y divide-ink/8">
+          {rows.map(([n, cat, st], i) => (
+            <li key={n} className={`flex items-center gap-8 px-6 py-9 fs-10 ${i === 2 ? "rounded-sm bg-[#f8dde6]/50" : ""}`}>
+              <span className="min-w-0 flex-1 truncate font-mono">{n}</span>
+              <span className="text-ink-3">{cat}</span>
+              <Pill tone={st === "Approved" ? "green" : "amber"}>{st}</Pill>
+            </li>
+          ))}
+        </ul>
+        <div className="rounded-md bg-[#efeae0] p-10">
+          <p className="fs-9 text-ink-3">Preview · weekend_offer</p>
+          <div className="mt-6 rounded-md bg-surface p-8 fs-10 leading-snug">
+            Hi {"{{1}}"}, this weekend only: {"{{2}}"}. Reply to book, or tap below.
+            <span className="mt-6 block border-t border-ink/8 pt-6 text-center font-medium text-peacock">See the offer</span>
+            <span className="block border-t border-ink/8 pt-6 text-center font-medium text-peacock">Stop updates</span>
+          </div>
+          <p className="mt-8 fs-9 text-ink-2">Every marketing template includes an opt-out button.</p>
+        </div>
+      </div>
+    </Window>
+  );
+}
+
+function MkDeliverability() {
+  return (
+    <Window title="Email set-up · mitticeramics.com" meta="All checks passing">
+      <div className="grid grid-cols-[1.3fr_1fr] gap-16">
+        <ul className="space-y-8">
+          {[
+            ["SPF", "Sending servers authorised"],
+            ["DKIM", "Emails signed with your domain"],
+            ["DMARC", "Policy set, reports monitored"],
+            ["Custom link domain", "links.mitticeramics.com"],
+            ["One-click unsubscribe", "In every marketing email"],
+          ].map(([k, v]) => (
+            <li key={k} className="flex items-center gap-10 rounded-md bg-paper/80 px-10 py-8">
+              <Tick />
+              <span className="leading-tight">
+                <span className="block fs-11 font-semibold">{k}</span>
+                <span className="block fs-9 text-ink-3">{v}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+        <div>
+          <div className="relative mx-auto w-130">
+            <Donut parts={[{ value: 96, color: "#d9668f" }, { value: 4, color: "#f8dde6" }]} size={130} thickness={14} />
+            <span className="absolute inset-0 grid place-items-center text-center">
+              <span>
+                <span className="block fs-24 font-semibold leading-none tnum">96%</span>
+                <span className="fs-9 text-ink-3">reach the inbox</span>
+              </span>
+            </span>
+          </div>
+          <ul className="mt-14 space-y-6 fs-10">
+            {[
+              ["Bounces", "0.4%"],
+              ["Spam complaints", "0.01%"],
+              ["Unsubscribes", "0.2%"],
+            ].map(([k, v]) => (
+              <li key={k} className="flex justify-between rounded-sm bg-paper/80 px-10 py-5">
+                <span className="text-ink-2">{k}</span>
+                <span className="font-semibold tnum">{v}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </Window>
+  );
+}
+
+function MkCalendar() {
+  // November 2026: the 1st is a Sunday, Diwali is on the 8th.
+  const events: Record<number, [string, "wa" | "em"]> = {
+    2: ["Diwali preview", "em"],
+    5: ["Diwali sale", "wa"],
+    12: ["Newsletter", "em"],
+    14: ["Weekend offer", "wa"],
+    19: ["Restock alert", "wa"],
+    24: ["Care guide", "em"],
+    28: ["Win-back", "em"],
+  };
+  return (
+    <Window title="Campaign calendar · November" meta="7 campaigns planned">
+      <div className="grid grid-cols-7 gap-4 fs-8 uppercase tracking-wide text-ink-3">
+        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
+          <span key={d} className="px-4">
+            {d}
+          </span>
+        ))}
+      </div>
+      <div className="mt-6 grid grid-cols-7 gap-4">
+        {Array.from({ length: 42 }, (_, i) => {
+          const day = i - 5;
+          const e = events[day];
+          return (
+            <div key={i} className={`h-44 rounded-sm p-4 ${day < 1 || day > 30 ? "bg-transparent" : "bg-paper/80"}`}>
+              {day >= 1 && day <= 30 && <span className="fs-8 text-ink-3 tnum">{day}</span>}
+              {e && (
+                <span className={`mt-2 block truncate rounded-xs px-4 py-2 fs-8 font-medium ${e[1] === "wa" ? "bg-mint-soft text-forest" : "bg-[#f8dde6] text-[#b23f69]"}`}>
+                  {e[0]}
+                </span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <div className="mt-8 flex gap-14 fs-9 text-ink-2">
+        <span className="flex items-center gap-4">
+          <span className="size-8 rounded-full bg-forest" />
+          WhatsApp
+        </span>
+        <span className="flex items-center gap-4">
+          <span className="size-8 rounded-full bg-[#d9668f]" />
+          Email
+        </span>
+        <span className="ml-auto">Abandoned cart and order updates run all month</span>
       </div>
     </Window>
   );

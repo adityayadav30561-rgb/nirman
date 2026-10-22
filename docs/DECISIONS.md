@@ -5,6 +5,7 @@ from the client are in `docs/handoff.md` §1 and are not repeated here.
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-10-22 | Hub service pages also drop the coloured-dot label above the H1; no service page has a label there now | User request: the H1 already names the page |
 | 2026-10-21 | Hub service tiles show a code-built mockup of each service (e.g. Google Business Profile for local SEO), never photos of people | User request |
 | 2026-10-21 | Detail service pages drop the "Part of <hub>" line above the H1; the breadcrumb already links the hub | User request |
 | 2026-10-21 | Push the repo to GitHub: `origin` = https://github.com/adityayadav30561-rgb/nirman.git (public), branch main | User request |

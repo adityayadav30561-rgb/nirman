@@ -36,7 +36,15 @@ export type ArtefactId =
   | "sw-workflow"
   | "sw-integrations"
   | "sw-qa"
-  | "sw-support";
+  | "sw-support"
+  | "mk-broadcast"
+  | "mk-email"
+  | "mk-journey"
+  | "mk-segments"
+  | "mk-report"
+  | "mk-templates"
+  | "mk-deliverability"
+  | "mk-calendar";
 
 export type ServiceContent = {
   /** One line under the H1: what the client gets, not what we do. */

@@ -5,7 +5,7 @@ import type { PillarId } from "@/content/home";
 import { breadcrumbTrail, pageByPath } from "@/content/pages";
 import { site } from "@/content/site";
 import { toolLogos } from "@/content/tool-logos";
-import { pillarChildren, pillarHub, serviceByPath, type Service, type ServiceContent, type ServiceVisual } from "@/content/services";
+import { pillarChildren, serviceByPath, type Service, type ServiceContent, type ServiceVisual } from "@/content/services";
 import { serviceLd } from "@/lib/seo";
 import { JsonLd } from "./json-ld";
 import { Faq } from "./faq";
@@ -90,8 +90,6 @@ export function ServicePage({ path }: { path: string }) {
 }
 
 function Hero({ service, title, content }: { service: Service; title: string; content: ServiceContent }) {
-  const hub = pillarHub(service.pillar)!;
-  const a = accents[service.pillar];
   const v = visuals[service.visual];
   const Visual = v.render;
   // Handoff §5: Get a quote / Free audit. The audit only fits SEO and web work.
@@ -106,13 +104,7 @@ function Hero({ service, title, content }: { service: Service; title: string; co
         <Breadcrumbs items={breadcrumbTrail(service.path)} />
         <div className="mt-8 grid gap-x-12 gap-y-10 lg:mt-10 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-5">
-            {/* Detail pages skip this label: the breadcrumb already links the hub. */}
-            {service.kind === "hub" && (
-              <p className="mb-5 inline-flex items-center gap-2 text-[0.95rem] font-medium text-ink-2">
-                <span className={`size-2.5 rounded-full ${a.dot}`} aria-hidden />
-                {hub.name} services
-              </p>
-            )}
+            {/* No label above the H1: the breadcrumb and the title already name the page. */}
             <h1 id="service-title" className="display text-[clamp(2.6rem,7vw,4.4rem)] lg:text-[min(4.4vw,6.5rem)]">
               {title}
             </h1>

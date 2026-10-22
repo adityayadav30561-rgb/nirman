@@ -73,5 +73,9 @@ export const toolLogos: Record<string, string | null> = {
   Tally: null,
   IndiaMART: null,
   "Nirman CRM": null,
+  // C2: no WhatsApp logo anywhere, so the API always shows a lettered tile.
+  "WhatsApp Business API": null,
+  "Google Postmaster Tools": "google",
+  Outlook: null,
   "WCAG 2.2": null,
 };

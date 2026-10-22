@@ -6,10 +6,9 @@ Keep it under ~80 lines: it is read at the start of every session.
 ## Current position
 
 - **Phase:** 4 (Service pages; really 19: 4 hubs + 15, handoff says 18), in progress.
-- **Next task:** P4.6 marketing pillar (hub + WhatsApp + email) in
-  `src/content/services/marketing.ts`, new model. Add marketing mockups to
-  `service-art.tsx` first (broadcast, drip sequence, email preview, campaign
-  report, audience segments); no Meta/WhatsApp logos, generic chat icon only.
+- **Next task:** P4.7 short quote form at the bottom of every service page
+  (replace `QuoteBand` in `components/service-page.tsx`; disabled submit with
+  a mailto fallback until the Phase 5 API exists). Then Phase 4 is done.
 - **Blockers:** none for Phase 4. Client inputs pending (list at the end of
   PLAN.md) block parts of Phases 5, 7, 9, 11.
 
@@ -58,7 +57,8 @@ Keep it under ~80 lines: it is read at the start of every session.
   logos; engagement models, related links and "Part of" line removed
 - [x] P4.5 Software pillar (hub + 4) with 10 software mockups (`sw-*` in
   `service-art.tsx`); CRM page points to Nirman CRM ("Book a demo") in its FAQ
-- [ ] P4.6 Marketing pillar (hub + 2)
+- [x] P4.6 Marketing pillar (hub + 2) with 8 marketing mockups (`mk-*`);
+  WhatsApp stays a lettered tile in tool logos (C2)
 - [ ] P4.7 Short quote form on each page (mailto fallback until Phase 5)
 
 ## Half-finished work
@@ -67,7 +67,12 @@ None.
 
 ## Notes for the next session
 
-- Service page copy (SEO, web and software pillars so far) is my draft; the user has not
+- Phase 4 acceptance check passed for all 19 service pages (Service +
+  BreadcrumbList + FAQPage JSON-LD, one H1, no stub). The only rupee figure
+  is the sample "Consultation fee" inside the homepage clinic-app mockup
+  (a client's app screen, not our price).
+
+- Service page copy (all 19 pages) is my draft; the user has not
   reviewed it. Results are all `sample: true`. "Platforms and tools" lists
   (e.g. Screaming Frog, Justdial, Shiprocket) and process timings are my
   guesses: confirm with the client. Keep result metrics short ("1.7 s",
