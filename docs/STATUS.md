@@ -5,11 +5,13 @@ Keep it under ~80 lines: it is read at the start of every session.
 
 ## Current position
 
-- **Phase:** 4 (Service pages; really 19: 4 hubs + 15, handoff says 18), in progress.
-- **Next task:** P4.7 short quote form at the bottom of every service page
-  (replace `QuoteBand` in `components/service-page.tsx`; disabled submit with
-  a mailto fallback until the Phase 5 API exists). Then Phase 4 is done.
-- **Blockers:** none for Phase 4. Client inputs pending (list at the end of
+- **Phase:** 5 (Lead capture), not started. Phase 4 done (19 service pages).
+- **Next task:** P5.1 `app/api/lead/route.ts` (zod, rate limit, Turnstile,
+  CRM endpoint with log + email fallback). Then swap the body of
+  `sendLead()` in `src/lib/lead.ts` to POST there: the service page form
+  (`components/quote-form.tsx`) already sends a `Lead` through it.
+- **Blockers:** Phase 5 needs the CRM endpoint, booking tool and Turnstile
+  keys from the client (build with stubs/env flags until then). Client inputs pending (list at the end of
   PLAN.md) block parts of Phases 5, 7, 9, 11.
 
 ## Done so far
@@ -35,7 +37,7 @@ Keep it under ~80 lines: it is read at the start of every session.
 - [x] Phase 1: Design system and layout shell
 - [x] Phase 2: Homepage aligned to handoff
 - [x] Phase 3: SEO foundation
-- [ ] Phase 4: Service pages (18)
+- [x] Phase 4: Service pages (19)
 - [ ] Phase 5: Lead capture
 - [ ] Phase 6: Nirman CRM page
 - [ ] Phase 7: Free SEO audit
@@ -59,7 +61,8 @@ Keep it under ~80 lines: it is read at the start of every session.
   `service-art.tsx`); CRM page points to Nirman CRM ("Book a demo") in its FAQ
 - [x] P4.6 Marketing pillar (hub + 2) with 8 marketing mockups (`mk-*`);
   WhatsApp stays a lettered tile in tool logos (C2)
-- [ ] P4.7 Short quote form on each page (mailto fallback until Phase 5)
+- [x] P4.7 Short quote form on every service page (`quote-form.tsx`):
+  validates, then `sendLead()` opens the email app pre-filled until Phase 5
 
 ## Half-finished work
 
