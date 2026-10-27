@@ -120,3 +120,15 @@ client components as props.
 26. **Service page mockups** (`components/service-art.tsx`) are all 640 × 420
     design px so one mockup works in the process panel and the reports viewer.
     Server-render them and pass them to the client sections as `visual` props.
+27. **Bounded scale.** `html` font-size is clamped per device class (desktop max
+    17px) and `container-site` is capped at 96rem. Never size anything with a
+    bare `vw` (it grows forever on 4K); use rem, `clamp()` with a rem ceiling,
+    or `cqw` inside a capped `@container` wrapper (see `hero.tsx`).
+28. **Downloads in this environment:** the context-mode hook blocks `curl` and
+    `wget` in Bash. Use PowerShell `Invoke-WebRequest -UseBasicParsing` (without
+    that switch Windows PowerShell 5.1 stops at an interactive prompt). Pexels'
+    `/download/video/<id>/` redirect returns the *largest* file, so send a `HEAD`
+    first and check `Content-Length`; there is no ffmpeg here to shrink files.
+29. **Ambient video** (`home1/ambient-video.tsx`): poster always renders; the
+    file loads only at 768px and up, without reduced motion or Save-Data, once
+    visible. Keep clips under 6 MB.

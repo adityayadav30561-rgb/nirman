@@ -5,16 +5,25 @@ Keep it under ~80 lines: it is read at the start of every session.
 
 ## Current position
 
-- **Phase:** 5 (Lead capture), not started. Phase 4 done (19 service pages).
-- **Next task:** P5.1 `app/api/lead/route.ts` (zod, rate limit, Turnstile,
-  CRM endpoint with log + email fallback). Then swap the body of
-  `sendLead()` in `src/lib/lead.ts` to POST there: the service page form
-  (`components/quote-form.tsx`) already sends a `Lead` through it.
-- **Blockers:** Phase 5 needs the CRM endpoint, booking tool and Turnstile
-  keys from the client (build with stubs/env flags until then). Client inputs pending (list at the end of
-  PLAN.md) block parts of Phases 5, 7, 9, 11.
+- **Phase:** Redesign v3, step R0 (plan + first design) done and awaiting
+  the user's review. Phase 5 (lead API) is paused; the R-phases in
+  `docs/REDESIGN.md` §10 replace Phases 5 to 11.
+- **Next task:** wait for feedback on (1) the sitemap and menu plan
+  (REDESIGN §4, §5, decisions §13) and (2) `/homepage1/` (linked in the header
+  as "homepage1"). Then R1 foundations: fixed-16px fluid scale, UI kit with the
+  five button variants, new header/footer with mega menus, registry `status`.
+- **Blockers:** the sitemap needs the user's yes/no on §13. Client inputs are
+  listed in REDESIGN §11.
 
 ## Done so far
+
+- Redesign v3 R0 (2026-10-27): `docs/REDESIGN.md` + `docs/sitemap-v3.json`
+  (95 static pages: 39 L1, 41 L2, 15 L3); bounded scale applied (root max 17px,
+  container 96rem, hero boxed with `cqw`); `/homepage1/` built (hero with video
+  and animated HTML cards, promise strip, 4 pillar cards, video band, Nirman
+  CRM screens, scroll process, industries, sample work, tools, AEO answers,
+  quote form); new button variants (`tonal`, `quiet`, `tonalOn`, `mint`);
+  shared `QuoteSection`; two Pexels clips in `public/videos`.
 
 - Homepage design complete and approved (see `docs/DESIGN.md`).
 - Phase 0: git, handoff data ported, trailing slashes, decisions C1–C9.
@@ -32,6 +41,12 @@ Keep it under ~80 lines: it is read at the start of every session.
   descriptions, one H1, trailing-slash canonicals, homepage links resolve).
 
 ## Phase checklist
+
+- [x] R0 Plan and homepage1 (awaiting review)
+- [ ] R1 Foundations · [ ] R2 Homepage · [ ] R3 Templates · [ ] R4 Content
+- [ ] R5 Systems (leads, CMS, tools) · [ ] R6 SEO infrastructure · [ ] R7 Launch
+
+Old phases (kept for history; superseded from Phase 5 on):
 
 - [x] Phase 0: Alignment and setup
 - [x] Phase 1: Design system and layout shell

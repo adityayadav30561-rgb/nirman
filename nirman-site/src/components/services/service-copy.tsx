@@ -83,7 +83,7 @@ export function ServiceCard({
       </div>
       {/* The mockup is positioned absolutely, so this area grows to fill the
           card (rows share one height) and simply reveals more of it. */}
-      <div className="relative mt-8 min-h-[62vw] flex-1 sm:min-h-[44vw] lg:min-h-[25vw]">
+      <div className="relative mt-8 min-h-[62vw] flex-1 sm:min-h-[44vw] lg:min-h-[min(25vw,24rem)]">
         <div
           className={`absolute inset-x-6 sm:inset-x-10 2xl:inset-x-12 ${
             visualAlign === "center" ? "top-1/2 -translate-y-1/2" : "top-0"

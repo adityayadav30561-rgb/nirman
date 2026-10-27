@@ -24,6 +24,13 @@ export const pages: PageEntry[] = [
     section: "core",
   },
   {
+    path: "/homepage1/",
+    title: "Nirman homepage design 1 (review)",
+    description: "A first design of the v3 homepage, for review. Not indexed.",
+    section: "core",
+    noindex: true,
+  },
+  {
     path: "/about/",
     title: "About Nirman",
     description: "Who we are, how we work and the team behind Nirman's websites, SEO, custom software and Nirman CRM.",

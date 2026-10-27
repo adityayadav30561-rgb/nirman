@@ -11,6 +11,11 @@ Read only the phase you are working on.
 
 Task IDs (`P2.3`) are referenced from STATUS.md and commit messages.
 
+> **2026-10-27: the website is being redesigned (v3).** Phases 0 to 4 are done
+> and reused. Phases 5 to 11 below are superseded by the R-phases in
+> `docs/REDESIGN.md` §10 (R1 to R7), which absorb them; keep this file for the
+> detail of each old task. Do not start Phase 5 on its own.
+
 ---
 
 ## Phase 0: Alignment and project setup (1 session)

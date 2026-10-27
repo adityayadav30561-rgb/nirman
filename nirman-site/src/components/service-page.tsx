@@ -15,7 +15,7 @@ import { Artefact } from "./service-art";
 import { ServiceAudience } from "./service-audience";
 import { ServiceProcess } from "./service-process";
 import { ServiceReports } from "./service-reports";
-import { QuoteForm } from "./quote-form";
+import { QuoteSection } from "./quote-section";
 import { Breadcrumbs } from "./ui/breadcrumbs";
 import { ButtonLink } from "./ui/button-link";
 import { SeoVisual } from "./services/seo";
@@ -121,7 +121,7 @@ function Hero({ service, title, content }: { service: Service; title: string; co
           </div>
           {/* The mockup sits at the top and may bleed off the panel's bottom edge, as on the homepage cards. */}
           <div
-            className={`relative min-h-[72vw] overflow-hidden rounded-[2rem] sm:min-h-[52vw] lg:col-span-7 lg:min-h-[34vw] lg:rounded-[2.5rem] ${v.panel}`}
+            className={`relative min-h-[72vw] overflow-hidden rounded-[2rem] sm:min-h-[52vw] lg:col-span-7 lg:min-h-[min(34vw,33rem)] lg:rounded-[2.5rem] ${v.panel}`}
           >
             {v.dots && <div className="dot-grid-light absolute inset-0" aria-hidden />}
             <div className="absolute inset-x-6 top-8 sm:inset-x-10 sm:top-10 lg:inset-x-12 lg:top-12">
@@ -267,57 +267,5 @@ function ToolLogo({ name }: { name: string }) {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={`https://cdn.simpleicons.org/${slug}`} alt="" width={24} height={24} loading="lazy" className="size-6" />
     </span>
-  );
-}
-
-// Handoff §5 "what happens next" (get-a-quote side panel).
-const nextSteps = [
-  ["We reply within 2 working hours", "A real person reads your enquiry, during Indian working hours."],
-  ["A short discovery call", "A free 15-minute call to understand your goals, at a time that suits you."],
-  ["A written proposal in 48 hours", "Scope, timeline and how we would work together. No obligation."],
-];
-
-/** Closing section: what happens next, and the short quote form (P4.7). */
-function QuoteSection({ service, path }: { service: string; path: string }) {
-  return (
-    <section id="quote" aria-labelledby="quote-title" className="scroll-mt-24 pb-24 lg:pb-32">
-      <div className="container-site">
-        <div className="grid gap-x-12 gap-y-10 rounded-[2rem] bg-coral p-6 text-ink sm:p-10 lg:grid-cols-12 lg:rounded-[2.5rem] lg:p-14">
-          <div className="lg:col-span-5 lg:py-4">
-            <h2 id="quote-title" className="display text-[clamp(2.4rem,5vw,4.4rem)]">
-              Tell us what you need
-            </h2>
-            <p className="mt-4 max-w-[30rem] text-[1.1rem] leading-[1.6] text-ink/80">
-              Share a few details and we&rsquo;ll come back with questions, ideas and a written quote.
-            </p>
-            <ol className="mt-8 space-y-5">
-              {nextSteps.map(([t, b], i) => (
-                <li key={t} className="flex gap-4">
-                  <span className="grid size-9 shrink-0 place-items-center rounded-full bg-ink title text-[0.95rem] text-paper tnum">{i + 1}</span>
-                  <span>
-                    <span className="block font-medium">{t}</span>
-                    <span className="mt-0.5 block text-[0.95rem] leading-[1.55] text-ink/75">{b}</span>
-                  </span>
-                </li>
-              ))}
-            </ol>
-            <p className="mt-8 text-[0.95rem] text-ink/80">
-              Prefer to talk first?{" "}
-              <Link href={site.bookingUrl} className="font-medium text-ink underline underline-offset-4">
-                Book a call
-              </Link>{" "}
-              or email{" "}
-              <a href={`mailto:${site.email}`} className="font-medium text-ink underline underline-offset-4">
-                {site.email}
-              </a>
-              .
-            </p>
-          </div>
-          <div className="lg:col-span-7">
-            <QuoteForm service={service} source={path} />
-          </div>
-        </div>
-      </div>
-    </section>
   );
 }

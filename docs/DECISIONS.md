@@ -5,6 +5,12 @@ from the client are in `docs/handoff.md` §1 and are not repeated here.
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-10-27 | Redesign the whole website (v3): ~95 intent-specific pages instead of 39, new navigation, new homepage, SEO/AEO/GEO built in from the start. Plan in `docs/REDESIGN.md`; page list in `docs/sitemap-v3.json` | User request; sitemap and tiers await the user's review |
+| 2026-10-27 | Design principle: links are buttons. Navigation outside prose is a pill button (5 variants); text links only inside running paragraphs and always underlined | User request (REDESIGN §3.1) |
+| 2026-10-27 | Responsive scale is bounded, not identical everywhere: 1rem stops at 17px, content container capped at 96rem (~1630px), no raw `vw` sizes. Looks good on every screen, not the same. Interim patch applied now; target is fixed 16px root + fluid tokens (R1) | User: boxes were too big on a 27-inch monitor |
+| 2026-10-27 | `homepage1` is the first v3 homepage, a review route (`/homepage1/`, noindex) linked in the header until approved | User request |
+| 2026-10-27 | Two ambient stock videos (Pexels licence, hands only, 1.8 MB and 4.8 MB) allowed on the homepage; rules in REDESIGN §3.5 | User asked for videos on the homepage |
+| 2026-10-27 | Phase 5 (lead API) is paused; the R-phases replace Phases 5 to 11 | User wants the redesign first |
 | 2026-10-22 | Hub service pages also drop the coloured-dot label above the H1; no service page has a label there now | User request: the H1 already names the page |
 | 2026-10-21 | Hub service tiles show a code-built mockup of each service (e.g. Google Business Profile for local SEO), never photos of people | User request |
 | 2026-10-21 | Detail service pages drop the "Part of <hub>" line above the H1; the breadcrumb already links the hub | User request |

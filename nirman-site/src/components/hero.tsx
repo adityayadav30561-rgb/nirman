@@ -12,24 +12,27 @@ import { hero } from "@/content/home";
 
 export function Hero() {
   return (
-    // Desktop: as tall as the photo (its bottom sits at ~46vw) plus a little
+    // Desktop: as tall as the photo (its bottom sits at ~46cqw) plus a little
     // air, not the screen height, so no screen shape leaves an empty band
     // between the hero and the next section. Re-measure if the photo changes.
-    <section id="top" className="relative overflow-hidden lg:h-[calc(46vw+4rem)] lg:min-h-[36rem]">
+    // The wrapper is a size container (cqw units) capped in width, so on a 27-inch
+    // or 4K screen the hero stays at its largest designed size, centred.
+    <div className="@container mx-auto max-w-[107rem]">
+    <section id="top" className="relative overflow-hidden lg:h-[calc(46cqw+4rem)] lg:min-h-[36rem] min-[107rem]:rounded-b-[2.5rem]">
       <div className="container-site relative z-10 pt-28 sm:pt-32 lg:flex lg:h-full lg:items-center lg:pb-0 lg:pt-16">
         <div className="max-w-[38rem] lg:w-[42%] lg:max-w-none">
-          <h1 className="display text-[clamp(2.9rem,10.5vw,4.8rem)] text-ink lg:text-[min(5.4vw,8.5rem)]">
+          <h1 className="display text-[clamp(2.9rem,10.5cqw,4.8rem)] text-ink lg:text-[min(5.4cqw,5.6rem)]">
             {hero.headline.map((line) => (
               <span key={line} className="block lg:whitespace-nowrap">
                 {line}
               </span>
             ))}
           </h1>
-          <p className="mt-7 max-w-[31rem] text-[1.2rem] leading-[1.55] text-ink-2 lg:mt-[1.6vw] lg:max-w-[34vw] lg:text-[clamp(1.2rem,1.25vw,1.75rem)]">
+          <p className="mt-7 max-w-[31rem] text-[1.2rem] leading-[1.55] text-ink-2 lg:mt-[1.6cqw] lg:max-w-[34cqw] lg:text-[clamp(1.2rem,1.25cqw,1.75rem)]">
             {hero.intro}
           </p>
           {/* Phones: both buttons share one row (smaller type, no arrows). */}
-          <div className="mt-10 flex gap-2 sm:flex-wrap sm:gap-3 lg:mt-[2.4vw] max-sm:[&>a]:h-12 max-sm:[&>a]:min-w-0 max-sm:[&>a]:flex-1 max-sm:[&>a]:px-3 max-sm:[&>a]:text-[0.9rem] 2xl:[&>a]:h-16 2xl:[&>a]:px-8 2xl:[&>a]:text-[1.15rem]">
+          <div className="mt-10 flex gap-2 sm:flex-wrap sm:gap-3 lg:mt-[2.4cqw] max-sm:[&>a]:h-12 max-sm:[&>a]:min-w-0 max-sm:[&>a]:flex-1 max-sm:[&>a]:px-3 max-sm:[&>a]:text-[0.9rem] 2xl:[&>a]:h-16 2xl:[&>a]:px-8 2xl:[&>a]:text-[1.15rem]">
             <ButtonLink href={hero.primary.href} variant="primary" size="lg">
               {hero.primary.label}
               <ArrowRight className="size-4.5 max-sm:hidden" />
@@ -39,12 +42,13 @@ export function Hero() {
               <ArrowRight className="size-4.5 max-sm:hidden" />
             </ButtonLink>
           </div>
-          <p className="mt-4 text-[0.95rem] text-ink-3 lg:mt-[1vw] lg:text-[clamp(0.95rem,0.9vw,1.25rem)]">{hero.note}</p>
+          <p className="mt-4 text-[0.95rem] text-ink-3 lg:mt-[1cqw] lg:text-[clamp(0.95rem,0.9cqw,1.25rem)]">{hero.note}</p>
         </div>
       </div>
 
       <Workspace />
     </section>
+    </div>
   );
 }
 

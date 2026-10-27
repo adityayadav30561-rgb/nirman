@@ -67,23 +67,24 @@
 
 @layer base {
   /*
-   * Fluid scale: 1rem tracks the viewport width within each device class,
-   * so a layout looks the same on every phone, every tablet and every
-   * desktop, just larger or smaller. Reference widths: 390px phone,
-   * 768px tablet, 1440px desktop (1rem = 16px at each). Breakpoints in rem
-   * still use the browser default, so they are unaffected.
+   * Bounded fluid scale. 1rem follows the viewport inside each device class
+   * so phones, tablets and laptops look alike, but every class has a floor
+   * and a ceiling: on a 27-inch or 4K screen the type, boxes and spacing stop
+   * growing (1rem tops out at 17px) and the page simply gets more margin.
+   * Reference widths: 390px phone, 768px tablet, 1440px desktop (16px each).
+   * Breakpoints in rem still use the browser default, so they are unaffected.
    */
   html {
     font-size: clamp(14px, calc(100vw / 24.375), 18px);
   }
   @media (width >= 40rem) {
     html {
-      font-size: calc(100vw / 48);
+      font-size: clamp(13px, calc(100vw / 48), 18px);
     }
   }
   @media (width >= 64rem) {
     html {
-      font-size: max(13px, calc(100vw / 90));
+      font-size: clamp(13px, calc(100vw / 90), 17px);
     }
   }
 
@@ -147,7 +148,8 @@
 
 @utility container-site {
   width: 100%;
-  max-width: 124rem;
+  /* Upper limit: about 1630px of content at the largest root size. */
+  max-width: 96rem;
   margin-inline: auto;
   padding-inline: 1rem;
   @media (width >= 40rem) {
@@ -276,6 +278,14 @@
   from { transform: scaleY(0); }
   to { transform: scaleY(1); }
 }
+@keyframes card-in {
+  from { opacity: 0; transform: translate3d(0, calc(var(--spacing, 1px) * 18), 0) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes float-y {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, calc(var(--spacing, 1px) * -5), 0); }
+}
 @keyframes ken-burns {
   from { transform: scale(1.08); }
   to { transform: scale(1); }
@@ -296,6 +306,9 @@
   animation: grow-bar 0.9s var(--ease-settle) both;
 }
 .anim-ken { animation: ken-burns 2.4s var(--ease-settle) both; }
+/* HTML-generated cards over video: enter once (use animation-delay to stagger), then drift. */
+.anim-card { animation: card-in 0.9s var(--ease-settle) both; }
+.anim-float { animation: float-y 7s ease-in-out infinite; }
 
 .rail-line {
   transform-origin: left;
@@ -314,7 +327,9 @@
   .anim-pop,
   .anim-draw,
   .anim-bar,
-  .anim-ken {
+  .anim-ken,
+  .anim-card,
+  .anim-float {
     animation: none !important;
   }
   .anim-draw { stroke-dasharray: none; }

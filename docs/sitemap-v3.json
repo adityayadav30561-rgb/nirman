@@ -1,0 +1,910 @@
+{
+  "version": 3,
+  "date": "2026-10-27",
+  "tiers": {
+    "L1": "launch core",
+    "L2": "write before or at launch",
+    "L3": "after launch"
+  },
+  "counts": {
+    "total": 95,
+    "L1": 39,
+    "L2": 41,
+    "L3": 15
+  },
+  "pages": [
+    {
+      "section": "home",
+      "path": "/",
+      "name": "Home",
+      "tier": "L1",
+      "template": "home",
+      "topic": "Nirman: SEO, websites, software and CRM",
+      "note": "Entity definition above the fold; links every pillar."
+    },
+    {
+      "section": "services",
+      "path": "/services/",
+      "name": "All services",
+      "tier": "L2",
+      "template": "hub",
+      "topic": "digital services overview",
+      "note": "Index of the four pillars; helps brand + category queries."
+    },
+    {
+      "section": "services",
+      "path": "/services/seo/",
+      "name": "SEO services",
+      "tier": "L1",
+      "template": "hub",
+      "topic": "SEO services",
+      "note": "Pillar hub."
+    },
+    {
+      "section": "services",
+      "path": "/services/seo/local-seo/",
+      "name": "Local SEO",
+      "tier": "L1",
+      "template": "service",
+      "topic": "local SEO services",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/seo/google-business-profile/",
+      "name": "Google Business Profile management",
+      "tier": "L2",
+      "template": "service",
+      "topic": "Google Business Profile optimization",
+      "note": "Split from local SEO to own the GBP queries."
+    },
+    {
+      "section": "services",
+      "path": "/services/seo/ecommerce-seo/",
+      "name": "E-commerce SEO",
+      "tier": "L1",
+      "template": "service",
+      "topic": "e-commerce SEO",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/seo/technical-seo/",
+      "name": "Technical SEO and site audit",
+      "tier": "L1",
+      "template": "service",
+      "topic": "technical SEO audit",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/seo/content-seo/",
+      "name": "SEO content writing",
+      "tier": "L2",
+      "template": "service",
+      "topic": "SEO content writing",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/seo/international-seo/",
+      "name": "International SEO",
+      "tier": "L2",
+      "template": "service",
+      "topic": "international SEO",
+      "note": "Serves the India + overseas audience; no per-country doorway pages."
+    },
+    {
+      "section": "services",
+      "path": "/services/seo/ai-search-optimization/",
+      "name": "AI search optimization (GEO and AEO)",
+      "tier": "L1",
+      "template": "service",
+      "topic": "generative engine optimization",
+      "note": "Flagship differentiator."
+    },
+    {
+      "section": "services",
+      "path": "/services/web/",
+      "name": "Website design and development",
+      "tier": "L1",
+      "template": "hub",
+      "topic": "website design and development",
+      "note": "Pillar hub."
+    },
+    {
+      "section": "services",
+      "path": "/services/web/website-design/",
+      "name": "Website design",
+      "tier": "L1",
+      "template": "service",
+      "topic": "website design services",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/web/website-development/",
+      "name": "Website development",
+      "tier": "L1",
+      "template": "service",
+      "topic": "website development company",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/web/nextjs-development/",
+      "name": "Next.js development",
+      "tier": "L2",
+      "template": "service",
+      "topic": "Next.js development",
+      "note": "Developer-intent page."
+    },
+    {
+      "section": "services",
+      "path": "/services/web/ecommerce-websites/",
+      "name": "E-commerce websites",
+      "tier": "L1",
+      "template": "service",
+      "topic": "e-commerce website development",
+      "note": "Overview; platform pages below."
+    },
+    {
+      "section": "services",
+      "path": "/services/web/shopify-development/",
+      "name": "Shopify development",
+      "tier": "L2",
+      "template": "service",
+      "topic": "Shopify development services",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/web/woocommerce-development/",
+      "name": "WooCommerce development",
+      "tier": "L2",
+      "template": "service",
+      "topic": "WooCommerce development",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/web/wordpress-development/",
+      "name": "WordPress development",
+      "tier": "L1",
+      "template": "service",
+      "topic": "WordPress development services",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/web/landing-pages/",
+      "name": "Landing page design",
+      "tier": "L2",
+      "template": "service",
+      "topic": "landing page design",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/web/redesign-maintenance/",
+      "name": "Website redesign and maintenance",
+      "tier": "L1",
+      "template": "service",
+      "topic": "website redesign and maintenance",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/software/",
+      "name": "Custom software development",
+      "tier": "L1",
+      "template": "hub",
+      "topic": "custom software development",
+      "note": "Pillar hub."
+    },
+    {
+      "section": "services",
+      "path": "/services/software/crm-development/",
+      "name": "CRM development",
+      "tier": "L1",
+      "template": "service",
+      "topic": "custom CRM development",
+      "note": "Points to Nirman CRM; CTA wording per CRM rule."
+    },
+    {
+      "section": "services",
+      "path": "/services/software/web-apps/",
+      "name": "Web apps and SaaS development",
+      "tier": "L1",
+      "template": "service",
+      "topic": "web app and SaaS development",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/software/mobile-apps/",
+      "name": "Mobile app development",
+      "tier": "L1",
+      "template": "service",
+      "topic": "mobile app development",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/software/automation-integrations/",
+      "name": "Automation and integrations",
+      "tier": "L1",
+      "template": "service",
+      "topic": "business process automation",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/software/internal-tools/",
+      "name": "Internal tools and dashboards",
+      "tier": "L2",
+      "template": "service",
+      "topic": "internal tools development",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/software/customer-portals/",
+      "name": "Customer portals",
+      "tier": "L2",
+      "template": "service",
+      "topic": "customer portal development",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/marketing/",
+      "name": "Marketing automation via CRM",
+      "tier": "L1",
+      "template": "hub",
+      "topic": "marketing automation",
+      "note": "Pillar hub. No PPC or social media marketing, ever."
+    },
+    {
+      "section": "services",
+      "path": "/services/marketing/whatsapp-marketing/",
+      "name": "WhatsApp marketing",
+      "tier": "L1",
+      "template": "service",
+      "topic": "WhatsApp marketing",
+      "note": "No WhatsApp logos in our artwork."
+    },
+    {
+      "section": "services",
+      "path": "/services/marketing/whatsapp-business-api/",
+      "name": "WhatsApp Business API",
+      "tier": "L2",
+      "template": "service",
+      "topic": "WhatsApp Business API setup",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/marketing/email-marketing/",
+      "name": "Email marketing",
+      "tier": "L1",
+      "template": "service",
+      "topic": "email marketing services",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/marketing/email-automation/",
+      "name": "Email automation",
+      "tier": "L2",
+      "template": "service",
+      "topic": "email marketing automation",
+      "note": ""
+    },
+    {
+      "section": "services",
+      "path": "/services/marketing/lead-nurturing/",
+      "name": "Lead nurturing",
+      "tier": "L2",
+      "template": "service",
+      "topic": "lead nurturing automation",
+      "note": ""
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/",
+      "name": "Nirman CRM",
+      "tier": "L1",
+      "template": "product",
+      "topic": "CRM software with WhatsApp and email",
+      "note": "Product page. Current route is /crm/; rename and 301."
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/features/",
+      "name": "Nirman CRM features",
+      "tier": "L2",
+      "template": "hub",
+      "topic": "CRM features",
+      "note": ""
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/features/lead-management/",
+      "name": "Lead management",
+      "tier": "L2",
+      "template": "feature",
+      "topic": "CRM lead management",
+      "note": ""
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/features/sales-pipeline/",
+      "name": "Sales pipeline",
+      "tier": "L2",
+      "template": "feature",
+      "topic": "sales pipeline CRM",
+      "note": ""
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/features/whatsapp-integration/",
+      "name": "WhatsApp in your CRM",
+      "tier": "L2",
+      "template": "feature",
+      "topic": "WhatsApp CRM integration",
+      "note": ""
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/features/email-integration/",
+      "name": "Email in your CRM",
+      "tier": "L2",
+      "template": "feature",
+      "topic": "CRM with email integration",
+      "note": ""
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/features/follow-up-automation/",
+      "name": "Follow-up automation",
+      "tier": "L2",
+      "template": "feature",
+      "topic": "CRM follow-up automation",
+      "note": ""
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/features/reports-and-analytics/",
+      "name": "Reports and analytics",
+      "tier": "L2",
+      "template": "feature",
+      "topic": "CRM reports and analytics",
+      "note": ""
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/features/team-and-permissions/",
+      "name": "Team and permissions",
+      "tier": "L2",
+      "template": "feature",
+      "topic": "CRM user roles and permissions",
+      "note": ""
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/for/",
+      "name": "Nirman CRM by industry",
+      "tier": "L2",
+      "template": "hub",
+      "topic": "CRM for small business by industry",
+      "note": ""
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/for/real-estate/",
+      "name": "Nirman CRM for real estate",
+      "tier": "L2",
+      "template": "usecase",
+      "topic": "CRM for real estate",
+      "note": "Industry pipeline stages and screens; distinct from /industries/."
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/for/healthcare/",
+      "name": "Nirman CRM for clinics and healthcare",
+      "tier": "L2",
+      "template": "usecase",
+      "topic": "CRM for clinics",
+      "note": "Industry pipeline stages and screens; distinct from /industries/."
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/for/education/",
+      "name": "Nirman CRM for education",
+      "tier": "L2",
+      "template": "usecase",
+      "topic": "CRM for coaching and education",
+      "note": "Industry pipeline stages and screens; distinct from /industries/."
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/for/manufacturing/",
+      "name": "Nirman CRM for manufacturers and B2B",
+      "tier": "L2",
+      "template": "usecase",
+      "topic": "CRM for manufacturers",
+      "note": "Industry pipeline stages and screens; distinct from /industries/."
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/for/hospitality-travel/",
+      "name": "Nirman CRM for hospitality and travel",
+      "tier": "L3",
+      "template": "usecase",
+      "topic": "CRM for hotels and travel agencies",
+      "note": "Industry pipeline stages and screens; distinct from /industries/."
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/for/finance-insurance/",
+      "name": "Nirman CRM for finance and insurance",
+      "tier": "L3",
+      "template": "usecase",
+      "topic": "CRM for insurance agents",
+      "note": "Industry pipeline stages and screens; distinct from /industries/."
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/for/ecommerce/",
+      "name": "Nirman CRM for e-commerce",
+      "tier": "L3",
+      "template": "usecase",
+      "topic": "CRM for online stores",
+      "note": "Industry pipeline stages and screens; distinct from /industries/."
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/for/local-services/",
+      "name": "Nirman CRM for local services",
+      "tier": "L3",
+      "template": "usecase",
+      "topic": "CRM for service businesses",
+      "note": "Industry pipeline stages and screens; distinct from /industries/."
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/integrations/",
+      "name": "Nirman CRM integrations",
+      "tier": "L2",
+      "template": "listing",
+      "topic": "CRM integrations",
+      "note": "Website forms, Meta lead ads, payment gateways, IndiaMART/JustDial if relevant."
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/security/",
+      "name": "Security and data ownership",
+      "tier": "L2",
+      "template": "trust",
+      "topic": "CRM data security",
+      "note": "Trust page for buyers."
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/book-a-demo/",
+      "name": "Book a Nirman CRM demo",
+      "tier": "L1",
+      "template": "form",
+      "topic": "book a CRM demo",
+      "note": "Replaces /book-a-call/?type=crm-demo. Demo only: no signup, no trial."
+    },
+    {
+      "section": "crm",
+      "path": "/nirman-crm/vs-spreadsheets/",
+      "name": "Nirman CRM vs spreadsheets",
+      "tier": "L3",
+      "template": "comparison",
+      "topic": "CRM vs Excel",
+      "note": "Competitor-name comparisons need legal review before any are written."
+    },
+    {
+      "section": "industries",
+      "path": "/industries/",
+      "name": "Industries we serve",
+      "tier": "L1",
+      "template": "hub",
+      "topic": "digital services by industry",
+      "note": "Eight cards, each a button to its page."
+    },
+    {
+      "section": "industries",
+      "path": "/industries/real-estate/",
+      "name": "Digital services for real estate",
+      "tier": "L2",
+      "template": "industry",
+      "topic": "digital marketing and software for real estate",
+      "note": "Full-service view: problems, recommended services, CRM fit, sample case study."
+    },
+    {
+      "section": "industries",
+      "path": "/industries/healthcare-clinics/",
+      "name": "Digital services for healthcare and clinics",
+      "tier": "L2",
+      "template": "industry",
+      "topic": "digital marketing and software for healthcare and clinics",
+      "note": "Full-service view: problems, recommended services, CRM fit, sample case study."
+    },
+    {
+      "section": "industries",
+      "path": "/industries/education/",
+      "name": "Digital services for education and coaching",
+      "tier": "L2",
+      "template": "industry",
+      "topic": "digital marketing and software for education and coaching",
+      "note": "Full-service view: problems, recommended services, CRM fit, sample case study."
+    },
+    {
+      "section": "industries",
+      "path": "/industries/ecommerce-retail/",
+      "name": "Digital services for e-commerce and retail",
+      "tier": "L2",
+      "template": "industry",
+      "topic": "digital marketing and software for e-commerce and retail",
+      "note": "Full-service view: problems, recommended services, CRM fit, sample case study."
+    },
+    {
+      "section": "industries",
+      "path": "/industries/manufacturing-b2b/",
+      "name": "Digital services for manufacturing and b2b",
+      "tier": "L3",
+      "template": "industry",
+      "topic": "digital marketing and software for manufacturing and b2b",
+      "note": "Full-service view: problems, recommended services, CRM fit, sample case study."
+    },
+    {
+      "section": "industries",
+      "path": "/industries/hospitality-travel/",
+      "name": "Digital services for hospitality and travel",
+      "tier": "L3",
+      "template": "industry",
+      "topic": "digital marketing and software for hospitality and travel",
+      "note": "Full-service view: problems, recommended services, CRM fit, sample case study."
+    },
+    {
+      "section": "industries",
+      "path": "/industries/finance-insurance/",
+      "name": "Digital services for finance and insurance",
+      "tier": "L3",
+      "template": "industry",
+      "topic": "digital marketing and software for finance and insurance",
+      "note": "Full-service view: problems, recommended services, CRM fit, sample case study."
+    },
+    {
+      "section": "industries",
+      "path": "/industries/local-services/",
+      "name": "Digital services for local services",
+      "tier": "L3",
+      "template": "industry",
+      "topic": "digital marketing and software for local services",
+      "note": "Full-service view: problems, recommended services, CRM fit, sample case study."
+    },
+    {
+      "section": "work",
+      "path": "/work/",
+      "name": "Our work",
+      "tier": "L1",
+      "template": "listing",
+      "topic": "case studies",
+      "note": "Filter chips by service and industry (filters are not indexed)."
+    },
+    {
+      "section": "resources",
+      "path": "/resources/",
+      "name": "Resources",
+      "tier": "L2",
+      "template": "hub",
+      "topic": "digital growth resources",
+      "note": "Landing page for blog, guides, glossary, FAQ and tools."
+    },
+    {
+      "section": "resources",
+      "path": "/blog/",
+      "name": "Blog",
+      "tier": "L1",
+      "template": "listing",
+      "topic": "digital marketing and software blog",
+      "note": "Posts and category pages come from the CMS."
+    },
+    {
+      "section": "resources",
+      "path": "/guides/",
+      "name": "Guides",
+      "tier": "L2",
+      "template": "listing",
+      "topic": "in-depth guides",
+      "note": "Long-form pillar guides from the CMS."
+    },
+    {
+      "section": "resources",
+      "path": "/glossary/",
+      "name": "Glossary",
+      "tier": "L2",
+      "template": "listing",
+      "topic": "digital marketing glossary",
+      "note": "Definition pages from the CMS; strong for AEO."
+    },
+    {
+      "section": "resources",
+      "path": "/faq/",
+      "name": "Frequently asked questions",
+      "tier": "L2",
+      "template": "faq",
+      "topic": "questions about Nirman's services",
+      "note": "Grouped by topic; every answer also lives on its service page."
+    },
+    {
+      "section": "resources",
+      "path": "/tools/",
+      "name": "Free tools",
+      "tier": "L1",
+      "template": "hub",
+      "topic": "free SEO and marketing tools",
+      "note": "No signup, free forever."
+    },
+    {
+      "section": "resources",
+      "path": "/tools/seo-audit/",
+      "name": "Free SEO audit",
+      "tier": "L1",
+      "template": "tool",
+      "topic": "free SEO audit tool",
+      "note": "Flagship; score shows without email."
+    },
+    {
+      "section": "resources",
+      "path": "/tools/serp-preview/",
+      "name": "Meta tag and SERP preview",
+      "tier": "L1",
+      "template": "tool",
+      "topic": "SERP preview tool",
+      "note": ""
+    },
+    {
+      "section": "resources",
+      "path": "/tools/schema-generator/",
+      "name": "Schema markup generator",
+      "tier": "L1",
+      "template": "tool",
+      "topic": "schema markup generator",
+      "note": ""
+    },
+    {
+      "section": "resources",
+      "path": "/tools/sitemap-generator/",
+      "name": "Sitemap and robots.txt generator",
+      "tier": "L1",
+      "template": "tool",
+      "topic": "sitemap generator",
+      "note": ""
+    },
+    {
+      "section": "resources",
+      "path": "/tools/gbp-checker/",
+      "name": "Google Business Profile checker",
+      "tier": "L1",
+      "template": "tool",
+      "topic": "Google Business Profile checker",
+      "note": ""
+    },
+    {
+      "section": "resources",
+      "path": "/tools/whatsapp-link/",
+      "name": "WhatsApp link and QR code generator",
+      "tier": "L1",
+      "template": "tool",
+      "topic": "WhatsApp link generator",
+      "note": ""
+    },
+    {
+      "section": "resources",
+      "path": "/tools/email-subject-tester/",
+      "name": "Email subject line tester",
+      "tier": "L3",
+      "template": "tool",
+      "topic": "email subject line tester",
+      "note": "Phase 2 tool."
+    },
+    {
+      "section": "resources",
+      "path": "/tools/utm-builder/",
+      "name": "UTM link builder",
+      "tier": "L3",
+      "template": "tool",
+      "topic": "UTM builder",
+      "note": "Phase 2 tool."
+    },
+    {
+      "section": "resources",
+      "path": "/tools/keyword-ideas/",
+      "name": "Keyword idea generator",
+      "tier": "L3",
+      "template": "tool",
+      "topic": "keyword idea generator",
+      "note": "Phase 2 tool."
+    },
+    {
+      "section": "resources",
+      "path": "/tools/page-speed-checker/",
+      "name": "Page speed checker",
+      "tier": "L3",
+      "template": "tool",
+      "topic": "page speed checker",
+      "note": "PageSpeed Insights wrapper."
+    },
+    {
+      "section": "resources",
+      "path": "/tools/lost-leads-calculator/",
+      "name": "Lost leads calculator",
+      "tier": "L3",
+      "template": "tool",
+      "topic": "lead loss calculator",
+      "note": "No prices of ours shown."
+    },
+    {
+      "section": "company",
+      "path": "/about/",
+      "name": "About Nirman",
+      "tier": "L1",
+      "template": "about",
+      "topic": "about Nirman",
+      "note": "Story, values, countries served; stats from one source of truth."
+    },
+    {
+      "section": "company",
+      "path": "/about/how-we-work/",
+      "name": "How we work",
+      "tier": "L2",
+      "template": "about",
+      "topic": "our process",
+      "note": "Five stages, what you receive at each, timelines."
+    },
+    {
+      "section": "company",
+      "path": "/about/team/",
+      "name": "Our team",
+      "tier": "L2",
+      "template": "about",
+      "topic": "Nirman team",
+      "note": "Names, roles, photos: needs client input (E-E-A-T)."
+    },
+    {
+      "section": "company",
+      "path": "/contact/",
+      "name": "Contact",
+      "tier": "L1",
+      "template": "form",
+      "topic": "contact Nirman",
+      "note": "Short form, phone, WhatsApp, address, map, booking."
+    },
+    {
+      "section": "company",
+      "path": "/get-a-quote/",
+      "name": "Get a quote",
+      "tier": "L1",
+      "template": "form",
+      "topic": "get a quote",
+      "note": "Multi-step form; no prices."
+    },
+    {
+      "section": "company",
+      "path": "/book-a-call/",
+      "name": "Book a call",
+      "tier": "L1",
+      "template": "form",
+      "topic": "book a discovery call",
+      "note": "Calendar embed."
+    },
+    {
+      "section": "company",
+      "path": "/thank-you/",
+      "name": "Thank you",
+      "tier": "L1",
+      "template": "utility",
+      "topic": "",
+      "note": "noindex."
+    },
+    {
+      "section": "company",
+      "path": "/careers/",
+      "name": "Careers",
+      "tier": "L3",
+      "template": "about",
+      "topic": "Nirman careers",
+      "note": "Only if the client hires; otherwise drop."
+    },
+    {
+      "section": "legal",
+      "path": "/privacy-policy/",
+      "name": "Privacy policy",
+      "tier": "L1",
+      "template": "legal",
+      "topic": "",
+      "note": ""
+    },
+    {
+      "section": "legal",
+      "path": "/terms/",
+      "name": "Terms of service",
+      "tier": "L1",
+      "template": "legal",
+      "topic": "",
+      "note": ""
+    },
+    {
+      "section": "legal",
+      "path": "/cookie-policy/",
+      "name": "Cookie policy",
+      "tier": "L2",
+      "template": "legal",
+      "topic": "",
+      "note": "Linked from the consent banner."
+    },
+    {
+      "section": "legal",
+      "path": "/accessibility/",
+      "name": "Accessibility statement",
+      "tier": "L2",
+      "template": "legal",
+      "topic": "",
+      "note": "WCAG 2.2 AA commitment and contact."
+    },
+    {
+      "section": "legal",
+      "path": "/sitemap/",
+      "name": "Sitemap",
+      "tier": "L2",
+      "template": "utility",
+      "topic": "",
+      "note": "HTML sitemap for people and crawlers."
+    }
+  ],
+  "dynamic": [
+    {
+      "pattern": "/work/[slug]/",
+      "what": "Case study",
+      "source": "Sanity",
+      "note": "Client, challenge, solution, results with numbers, services used, quote."
+    },
+    {
+      "pattern": "/blog/[slug]/",
+      "what": "Blog post",
+      "source": "Sanity",
+      "note": "Article schema, author, reviewed date."
+    },
+    {
+      "pattern": "/blog/category/[slug]/",
+      "what": "Blog category",
+      "source": "Sanity",
+      "note": "Indexed; unique intro text."
+    },
+    {
+      "pattern": "/guides/[slug]/",
+      "what": "Guide",
+      "source": "Sanity",
+      "note": "Pillar content with table of contents."
+    },
+    {
+      "pattern": "/glossary/[term]/",
+      "what": "Glossary term",
+      "source": "Sanity",
+      "note": "Definition first, DefinedTerm schema."
+    },
+    {
+      "pattern": "/authors/[slug]/",
+      "what": "Author profile",
+      "source": "Sanity",
+      "note": "Person schema, credentials, articles."
+    }
+  ]
+}

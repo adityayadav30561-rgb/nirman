@@ -50,8 +50,9 @@ const tabs: { id: Tab; label: string; icon: typeof KanbanSquare }[] = [
   { id: "reports", label: "Reports", icon: ChartColumn },
 ];
 
-export function NirmanCrm() {
-  const [tab, setTab] = useState<Tab>("dashboard");
+/** `initialTab` lets the design export (scripts/export-crm-screens.tsx) render each view. */
+export function NirmanCrm({ initialTab = "dashboard" }: { initialTab?: Tab }) {
+  const [tab, setTab] = useState<Tab>(initialTab);
   const baseId = useId();
 
   const onKeyDown = (e: React.KeyboardEvent) => {

@@ -95,6 +95,8 @@ export const mainNav: NavLink[] = [
   { label: "Our work", href: "/work/" },
   { label: "About", href: "/about/" },
   { label: "Blog", href: "/blog/" },
+  // Review link for the v3 homepage design. Remove when the new homepage is approved.
+  { label: "homepage1", href: "/homepage1/" },
 ];
 
 /** Footer "Company" column (handoff §3). */
