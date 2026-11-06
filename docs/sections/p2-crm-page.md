@@ -24,7 +24,7 @@ right). Scores on the 70-point rubric (DESIGN-PROTOCOL 3).
 
 | # | Section | Variants (idea) | Scores | Chosen |
 |---|---|---|---|---|
-| 1 | Hero | A centred + window that flattens on scroll; B split + floating event cards; C ink launch, window rises from the bottom edge; D text + phone in front of a window | A 58, B 54, **C 60**, D 51 | **C** |
+| 1 | Hero | A centred + window that flattens on scroll; B split + floating event cards; C ink launch, window rises from the bottom edge; D text + phone in front of a window | **A 58**, B 54, C 60, D 51 | **A** (user override 2026-11-06; C scored highest) |
 | 2 | Problems | A before/after rows; B four cards; C numbered list | **A 56**, B 52, C 51 | **A** |
 | 3 | Feature tour (7 features) | A tabs over one window; B sticky story, window switches as each step passes; C alternating rows | A 56, **B 63**, C 50 | **B** |
 | 4 | WhatsApp and email | A two cards + campaigns window; B ink band, phone + email card; C window + two lists | A 53, **B 60**, C 49 | **B** |
@@ -34,13 +34,14 @@ right). Scores on the 70-point rubric (DESIGN-PROTOCOL 3).
 | 8 | Questions | Homepage Questions pattern reused (consistency), no email field; Book a demo button | n/a | reuse |
 | 9 | Book a demo | A steps + form card; B ink band form; C centred form | **A 60**, B 59, C 55 | **A** (B would sit dark against the dark footer) |
 
-Rhythm: ink hero, pale problems and tour, ink WhatsApp/email, pale
+Rhythm (after the user chose hero A): pale hero, problems and tour, ink WhatsApp/email, pale
 integrations and audiences, ink customisation, pale questions and demo, ink
 footer.
 
 ## Motion
-- Hero: calm load fade-up (`gs-hide` start states, no flash); window rise
-  and scale scrubbed to scroll.
+- Hero (A): calm load fade-up (`gs-hide` start states, no flash); the
+  dashboard window starts tilted back (rotateX 14deg) and flattens as you
+  scroll; the phone rises at its corner (both scrubbed).
 - Tour: ScrollTrigger toggles per step (60% line), Framer cross-fade of the
   screen, position dots.
 - Integrations: lines draw from the hub, nodes pop in (GSAP, once).
