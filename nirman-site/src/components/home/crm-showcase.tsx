@@ -19,7 +19,7 @@ import { crmViews, type CrmViewKey } from "@/content/crm";
 const screens = { inbox: InboxScreen, pipeline: PipelineScreen, followups: FollowupsScreen, reports: DashboardScreen };
 const icons = { inbox: Inbox, pipeline: Columns3, followups: CalendarClock, reports: LayoutDashboard };
 
-export function CrmShowcase({ note }: { note: string }) {
+export function CrmShowcase() {
   const [i, setI] = useState(0);
   const reduce = useReducedMotion();
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -70,7 +70,7 @@ export function CrmShowcase({ note }: { note: string }) {
 
       <div id="crm-panel" role="tabpanel" aria-labelledby={`crm-tab-${key}`} className="relative mt-5">
         <p className="sr-only">
-          Nirman CRM {v.label} screen with sample data: {v.point}
+          Nirman CRM {v.label} screen: {v.point}
         </p>
         {/* tablet and up: the whole window */}
         <div className="c-window hidden md:block">
@@ -95,7 +95,6 @@ export function CrmShowcase({ note }: { note: string }) {
           </div>
         </div>
         <PhoneInbox className="c-phone absolute -right-3 -bottom-20 z-10 hidden w-[10rem] md:block lg:-right-6 lg:-bottom-28 lg:w-[11rem] xl:-right-10 xl:w-[12rem]" />
-        <p className="mt-5 text-[0.72rem] tracking-wide text-white/85 uppercase">{note}</p>
       </div>
     </div>
   );

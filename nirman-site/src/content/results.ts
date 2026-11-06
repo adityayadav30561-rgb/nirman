@@ -1,17 +1,17 @@
-// Sample testimonials for the homepage Results section
-// (docs/sections/06-results.md). ALL SAMPLE: shown with a "SAMPLE" chip until
-// the client supplies real quotes. No personal names, no star ratings, no
-// numbers (they would read as real results). Replace, never extend, with
-// invented content.
+// Homepage Results testimonials (docs/sections/06-results.md).
+// PLACEHOLDER QUOTES, not real clients. User decision 2026-11-06: no SAMPLE
+// labels while the site is being built; the user supplies real reviews when
+// the site is complete. LAUNCH BLOCKER (BUILD-PLAN S4): replace every quote
+// before the site goes public. No star ratings and no numbers.
 
-export type SampleQuote = { quote: string; who: string; place: string; tags: string[]; initials: string; tone: string };
+export type Quote = { quote: string; who: string; place: string; tags: string[]; initials: string; tone: string };
 
 export const resultsIntro = {
   title: "Results our customers can see.",
-  line: "Sample reviews for now: real client quotes will replace them.",
+  line: "What business owners say after working with Nirman.",
 };
 
-export const sampleQuotes: SampleQuote[] = [
+export const quotes: Quote[] = [
   {
     quote: "They rebuilt our clinic website and set up enquiry follow-ups. Patients book from their phones now, and no message waits until the next day.",
     who: "Clinic owner",

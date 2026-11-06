@@ -1,6 +1,7 @@
 // Nirman CRM section on the homepage (docs/sections/05-crm.md, redo
-// 2026-11-06: screen-led, the product named in the heading). Screens show
-// sample data from content/crm-screens.ts, labelled on the page. Every CRM
+// 2026-11-06: screen-led, the product named in the heading). The screens are
+// the real Nirman CRM design (user: the CRM will be updated to match), with
+// demo data from content/crm-screens.ts and no labels. Every CRM
 // call to action: "Book a demo".
 
 export const crmIntro = {
@@ -8,7 +9,6 @@ export const crmIntro = {
   title: "Nirman CRM: every lead in one place, answered in minutes.",
   line: "Our own CRM. Website forms, WhatsApp, email and calls land in one inbox, every lead gets an instant reply, and your team is reminded to follow up.",
   cta: { label: "Book a demo", href: "/nirman-crm/#book-a-demo" },
-  note: "Product screens · sample data",
 };
 
 /** One per screen tab; the same lines are the section's check points. */

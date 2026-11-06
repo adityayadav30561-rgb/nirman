@@ -6,8 +6,8 @@ import { LogoMark } from "@/components/logo";
  * Nirman CRM desktop app window, built in HTML (docs/sections/05-crm.md).
  * Everything inside is sized in em and the base size follows the frame's
  * width (container query units), so the whole window scales like a
- * screenshot but stays sharp and selectable. Illustrative product UI: the
- * caller shows a "Sample data" label.
+ * screenshot but stays sharp and selectable. This is the real Nirman CRM
+ * design (user, 2026-11-06: the CRM will be updated to match it).
  */
 
 export type CrmView = "inbox" | "leads" | "pipeline" | "followups" | "reports";

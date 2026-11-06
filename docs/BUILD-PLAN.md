@@ -50,4 +50,7 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 - [ ] S2 SEO infrastructure: page registry, metadata, OG image, robots,
       sitemap, llms.txt, JSON-LD (see `docs/REDESIGN.md` sections 8 and 12)
 - [ ] S3 Accessibility and performance pass (Lighthouse at least 95)
-- [ ] S4 Launch checklist (domain, analytics, real contact details)
+- [ ] S4 Launch checklist (domain, analytics, real contact details).
+      **Blocker:** replace the placeholder testimonials in
+      `nirman-site/src/content/results.ts` with the user's real reviews
+      (they are unlabelled since 2026-11-06); never launch with them

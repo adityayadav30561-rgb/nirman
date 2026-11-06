@@ -1,11 +1,12 @@
 import { ResultsSpotlight } from "@/components/home/results-spotlight";
 import { ResultsMotion } from "@/components/motion/results-motion";
-import { resultsIntro, sampleQuotes } from "@/content/results";
+import { resultsIntro, quotes } from "@/content/results";
 
 /*
  * Results (docs/sections/06-results.md, variant B chosen per the design
- * protocol): sample testimonials as a spotlight with business-type tabs.
- * Every card carries a SAMPLE chip until real quotes exist (client rule).
+ * protocol): testimonials as a spotlight with business-type tabs.
+ * PLACEHOLDER QUOTES (user, 2026-11-06: no labels while building). They must
+ * be replaced with real client quotes before launch: BUILD-PLAN S4 blocker.
  * Motion: GSAP entrance in components/motion/results-motion.tsx; quote
  * switching is Framer Motion inside ResultsSpotlight.
  */
@@ -27,7 +28,7 @@ export function Results() {
           <p className="r-sub mt-3 text-[0.9rem] text-muted">{resultsIntro.line}</p>
         </div>
         <div className="mt-10">
-          <ResultsSpotlight quotes={sampleQuotes} />
+          <ResultsSpotlight quotes={quotes} />
         </div>
       </div>
     </ResultsMotion>

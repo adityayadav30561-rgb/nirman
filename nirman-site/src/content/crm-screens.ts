@@ -1,7 +1,7 @@
-// Sample data for the Nirman CRM product screens built in code
-// (src/components/crm/). ILLUSTRATIVE PRODUCT UI ONLY: every screen that uses
-// it shows a "Sample data" label. People and businesses are made up; these
-// are not clients and the figures are not results.
+// Demo data for the Nirman CRM screens (src/components/crm/). The screens are
+// the real Nirman CRM design (user, 2026-11-06); no "sample" labels. People
+// and businesses here are invented demo records, not clients, and the
+// figures are not results.
 
 export type Channel = "whatsapp" | "email" | "form" | "call";
 

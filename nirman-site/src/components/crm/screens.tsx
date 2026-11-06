@@ -2,7 +2,7 @@ import { Check, CircleCheck, Clock, Globe, Mail, MessageCircle, Paperclip, Phone
 import { channelLabel, dashboard, followups, inbox, pipeline, thread, type Channel } from "@/content/crm-screens";
 
 /*
- * Nirman CRM screens for AppFrame (all sizes in em; sample data from
+ * Nirman CRM screens for AppFrame (all sizes in em; demo data from
  * content/crm-screens.ts). Generic channel icons only: no WhatsApp,
  * Instagram or Facebook logos (client rule).
  */

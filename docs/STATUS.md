@@ -43,6 +43,10 @@ the end of every session. Keep it under about 60 lines. Older history:
   tokens). Section records written before this still mention blue; the
   code is the truth.
 
+- **No "SAMPLE" labels (user, 2026-11-06).** CRM screens = the real CRM
+  design. Testimonials are unlabelled placeholders: replace before launch
+  (S4 blocker).
+
 ## Next task
 
 **Homepage is complete** (H9 review done: `docs/sections/00-page-review.md`).

@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { QuoteCard } from "@/components/home/quote-card";
-import type { SampleQuote } from "@/content/results";
+import type { Quote } from "@/content/results";
 
 /*
  * Results spotlight (docs/sections/06-results.md, variant B): the business
- * types are tabs; the chosen sample quote shows large. WAI-ARIA tabs:
+ * types are tabs; the chosen quote shows large. WAI-ARIA tabs:
  * ArrowLeft/Right, Home, End move and select. Auto-rotates every 6 s with a
  * thin progress line under the active tab; pauses on hover, on focus and
  * while the section is off screen; off under reduced motion.
@@ -15,7 +15,7 @@ import type { SampleQuote } from "@/content/results";
  */
 const ROTATE_S = 6;
 
-export function ResultsSpotlight({ quotes }: { quotes: SampleQuote[] }) {
+export function ResultsSpotlight({ quotes }: { quotes: Quote[] }) {
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
   const [inView, setInView] = useState(false);
@@ -72,7 +72,7 @@ export function ResultsSpotlight({ quotes }: { quotes: SampleQuote[] }) {
       <div
         ref={list}
         role="tablist"
-        aria-label="Sample reviews by type of business"
+        aria-label="Reviews by type of business"
         className="-mx-6 flex gap-1 overflow-x-auto px-6 pb-2 [mask-image:linear-gradient(to_right,#000_85%,transparent)] [scrollbar-width:none] md:-mx-10 md:px-10 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 lg:[mask-image:none]"
       >
         {quotes.map((q, k) => {

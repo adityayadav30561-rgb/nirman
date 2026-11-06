@@ -10,7 +10,7 @@ import { crmIntro, crmViews } from "@/content/crm";
  * protocol): a blue product band. Left, the product badge, a heading that
  * names Nirman CRM, a sentence, four check points and the only action, Book
  * a demo. Right, the real product screens built in code (desktop window with
- * tabs + phone), sample data. Motion: GSAP in components/motion/crm-motion.tsx
+ * tabs + phone): the real Nirman CRM design, demo data. Motion: GSAP in components/motion/crm-motion.tsx
  * (text entrance, window and phone parallax); screen switching is Framer
  * Motion inside CrmShowcase.
  */
@@ -45,7 +45,7 @@ export function Crm() {
             {crmIntro.cta.label}
           </Link>
         </div>
-        <CrmShowcase note={crmIntro.note} />
+        <CrmShowcase />
       </div>
     </CrmMotion>
   );

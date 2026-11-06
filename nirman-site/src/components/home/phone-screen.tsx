@@ -3,7 +3,7 @@ import { Cloud } from "@/components/home/cloud";
 
 /**
  * Nirman CRM mobile screen, built in HTML for the hero phone.
- * Illustrative product UI with sample data (labelled), not client results.
+ * The real Nirman CRM design (user, 2026-11-06), with demo data.
  */
 
 const followUps = [
@@ -100,7 +100,6 @@ export function PhoneScreen() {
         ))}
       </ul>
 
-      <p className="mt-2 px-4 text-[0.42rem] tracking-wide text-muted uppercase">Sample data</p>
 
       {/* tab bar */}
       <div className="mt-auto flex items-center justify-around border-t border-line/70 bg-white px-3 pt-2 pb-4 text-muted" aria-hidden>
