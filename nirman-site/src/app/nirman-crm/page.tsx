@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { CrmHero } from "@/components/crm-page/hero";
 import { CrmTour } from "@/components/crm-page/tour";
-import { CrmAudiences, CrmChannels, CrmCustomisation, CrmDemo, CrmIntegrations, CrmProblems, CrmQuestions } from "@/components/crm-page/sections";
+import { CrmChanges } from "@/components/crm-page/changes";
+import { CrmAudiences, CrmChannels, CrmCustomisation, CrmDemo, CrmIntegrations, CrmQuestions } from "@/components/crm-page/sections";
 import { crmFaqs, crmHero, features } from "@/content/crm-page";
 import { site } from "@/content/site";
 
@@ -50,7 +51,7 @@ export default function NirmanCrmPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <CrmHero />
-      <CrmProblems />
+      <CrmChanges />
       <CrmTour />
       <CrmChannels />
       <CrmIntegrations />

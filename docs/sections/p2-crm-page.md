@@ -25,7 +25,7 @@ right). Scores on the 70-point rubric (DESIGN-PROTOCOL 3).
 | # | Section | Variants (idea) | Scores | Chosen |
 |---|---|---|---|---|
 | 1 | Hero | A centred + window that flattens on scroll; B split + floating event cards; C ink launch, window rises from the bottom edge; D text + phone in front of a window | **A 58**, B 54, C 60, D 51 | **A** on the ink band (user override 2026-11-06; C scored highest) |
-| 2 | Problems | A before/after rows; B four cards; C numbered list | **A 56**, B 52, C 51 | **A** |
+| 2 | What changes (redo) | User: the text-only rows were "just plain text". Redo with pictures (`crm-page/change-visuals.tsx`): A bento cards with a CRM piece on top; B switch "Without a CRM / With Nirman CRM" flipping four picture cards; C before-to-after rows scrubbed by scroll; D stacked sticky cards. Sheets `shots/p2-crm-changes-{1440,375}.jpg` | A 57, **B 60**, C 49, D 52 (first round: rows A 56) | **B** (`crm-page/changes.tsx`) |
 | 3 | Feature tour (7 features) | A tabs over one window; B sticky story, window switches as each step passes; C alternating rows | A 56, **B 63**, C 50 | **B** |
 | 4 | WhatsApp and email | A two cards + campaigns window; B ink band, phone + email card; C window + two lists | A 53, **B 60**, C 49 | **B** |
 | 5 | Integrations | A tiles; B hub with lines drawn in; C two-column list | **A 57, B 57**, C 50 | **B** (tie: closer to the reference's hub plate) |

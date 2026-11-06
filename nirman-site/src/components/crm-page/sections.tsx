@@ -1,15 +1,15 @@
 import Link from "next/link";
-import { ArrowRight, Check, Mail, MessageCircle, X } from "lucide-react";
+import { ArrowRight, Check, Mail, MessageCircle } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { PhoneInbox } from "@/components/crm/screens";
 import { DemoForm } from "@/components/crm-page/demo-form";
 import { IntegrationsHub } from "@/components/crm-page/integrations-hub";
 import { QuestionList } from "@/components/home/question-list";
-import { audiences, channels, crmFaqs, customisation, demo, demoHref, integrations, problems } from "@/content/crm-page";
+import { audiences, channels, crmFaqs, customisation, demo, demoHref, integrations } from "@/content/crm-page";
 
 /*
  * /nirman-crm/ sections after the hero and tour (docs/sections/p2-crm-page.md):
- * problems (A), WhatsApp and email (B), integrations (B), who it is for (A),
+ * ("What changes" lives in changes.tsx), WhatsApp and email (B), integrations (B), who it is for (A),
  * customisation (A), questions (homepage Questions pattern), book a demo (A).
  * Entrances: GSAP via <Reveal> (.rv children fade up in order).
  */
@@ -27,36 +27,6 @@ function Checks({ items, dark = false }: { items: readonly string[]; dark?: bool
         </li>
       ))}
     </ul>
-  );
-}
-
-export function CrmProblems() {
-  return (
-    <Reveal aria-labelledby="crm-problems-title" className="py-20 lg:py-28">
-      <div className="container-page">
-        <h2 id="crm-problems-title" className={`${h2} max-w-[36rem]`}>{problems.title}</h2>
-        <div className="mt-10 border-t border-line">
-          <div className="hidden grid-cols-2 gap-10 py-3 text-[0.8rem] font-semibold text-muted md:grid" aria-hidden>
-            <span>Without a CRM</span>
-            <span>With Nirman CRM</span>
-          </div>
-          <ul>
-            {problems.items.map((p) => (
-              <li key={p.after} className="rv grid grid-cols-1 gap-2 border-b border-line py-5 md:grid-cols-2 md:gap-10">
-                <p className="flex gap-2.5 text-[0.95rem] text-muted">
-                  <X className="mt-0.5 size-4.5 shrink-0" aria-hidden />
-                  <span><span className="sr-only">Without a CRM: </span>{p.before}</span>
-                </p>
-                <p className="flex gap-2.5 text-[1.05rem] font-medium text-ink">
-                  <Check className="mt-0.5 size-4.5 shrink-0 text-brand" strokeWidth={2.6} aria-hidden />
-                  <span><span className="sr-only">With Nirman CRM: </span>{p.after}</span>
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </Reveal>
   );
 }
 
