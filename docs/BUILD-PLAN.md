@@ -22,6 +22,8 @@ best). Tick a task only when it is built, verified, recorded and pushed.
       (`04-map.md`, variant A, GSAP map reveal)
 - [x] H5 Nirman CRM: chat bubbles and CRM cards, Book a demo (`05-crm.md`,
       variant B, scroll-played conversation)
+- [x] H5b Nirman CRM redo (user: "no screens"): blue product band with real
+      product screens in code, tabs + phone (`05-crm.md` round 2, variant C)
 - [x] H6 Results: SAMPLE testimonials (`06-results.md`, variant B,
       spotlight with business-type tabs)
 - [x] H7 Questions: email + Submit, FAQ rows with FAQ markup

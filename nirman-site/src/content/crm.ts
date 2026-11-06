@@ -1,28 +1,22 @@
-// Nirman CRM section on the homepage (docs/sections/05-crm.md). Copy is a
-// draft. Events are illustrative product UI, labelled "Sample data" on the
-// page; they are not client results. Every CRM call to action: "Book a demo".
+// Nirman CRM section on the homepage (docs/sections/05-crm.md, redo
+// 2026-11-06: screen-led, the product named in the heading). Screens show
+// sample data from content/crm-screens.ts, labelled on the page. Every CRM
+// call to action: "Book a demo".
 
 export const crmIntro = {
-  title: "Every lead, answered and followed up.",
-  line: "Nirman CRM brings your website forms, WhatsApp and email into one inbox, replies in minutes and reminds your team to follow up, so no enquiry goes cold.",
+  badge: "Nirman CRM · our own product",
+  title: "Nirman CRM: every lead in one place, answered in minutes.",
+  line: "Our own CRM. Website forms, WhatsApp, email and calls land in one inbox, every lead gets an instant reply, and your team is reminded to follow up.",
   cta: { label: "Book a demo", href: "/nirman-crm/#book-a-demo" },
+  note: "Product screens · sample data",
 };
 
-export const crmPoints = [
-  { key: "inbox", title: "One inbox", line: "Website forms, WhatsApp and email in one place." },
-  { key: "reply", title: "Instant reply", line: "An automatic first reply the moment a lead arrives." },
-  { key: "assign", title: "Right person", line: "Each lead assigned to the right team member." },
-  { key: "follow", title: "Follow-ups", line: "Reminders, so no enquiry goes cold." },
+/** One per screen tab; the same lines are the section's check points. */
+export const crmViews = [
+  { key: "inbox", label: "Inbox", point: "WhatsApp, email, website forms and calls in one inbox." },
+  { key: "pipeline", label: "Pipeline", point: "Every enquiry on a board, from new to won." },
+  { key: "followups", label: "Follow-ups", point: "Reminders and suggested messages, so no lead goes cold." },
+  { key: "reports", label: "Dashboard", point: "Leads, reply times and sources at a glance." },
 ] as const;
 
-export type Lead = { initials: string; name: string; channel: "form" | "chat" | "mail" | "call"; tone: string };
-
-export const sampleLeads: Lead[] = [
-  { initials: "RS", name: "Riya S.", channel: "form", tone: "bg-[#dbe9fd] text-brand" },
-  { initials: "AK", name: "Arjun K.", channel: "chat", tone: "bg-[#fde6d9] text-accent" },
-  { initials: "MP", name: "Meera P.", channel: "mail", tone: "bg-[#ddf3e6] text-[#1f8a55]" },
-  { initials: "JD", name: "James D.", channel: "call", tone: "bg-[#ece6fc] text-[#6b4fd8]" },
-  { initials: "SN", name: "Sara N.", channel: "chat", tone: "bg-[#fdf3d4] text-[#a06a00]" },
-];
-
-export const sampleEvents = ["New lead: website form", "Auto-reply sent", "Assigned to Priya", "Replied in 2 min", "Follow-up at 4 pm"];
+export type CrmViewKey = (typeof crmViews)[number]["key"];

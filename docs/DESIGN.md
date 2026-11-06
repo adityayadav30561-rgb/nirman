@@ -76,8 +76,15 @@ thirds of the H1.
   blue arrow that turns down (Framer Motion height; closed answers stay in the
   HTML, `inert`); `EmailAsk` is the email pill joined to a dark Submit, which
   opens a mailto until the lead API exists.
-- `home/crm.tsx` (Nirman CRM): text + four check points + Book a demo;
-  pale-blue plate with channel icons, a sample chat card and a lead card.
+- `home/crm.tsx` + `home/crm-showcase.tsx` (Nirman CRM): blue gradient band,
+  product badge (logo mark + "our own product"), heading naming the product,
+  four check points, white Book a demo; screen tabs over a desktop window +
+  phone. Phones: window shown as a crop without the sidebar.
+- `crm/app-frame.tsx` (`AppFrame`) + `crm/screens.tsx`: the Nirman CRM app
+  built in HTML, sized in em from the container width (`text-[1.18cqw]`), so
+  it scales like a screenshot; screens Inbox, Pipeline, Follow-ups,
+  Dashboard, `PhoneInbox`; sample data in `content/crm-screens.ts`. Reuse
+  for `/nirman-crm/`.
 - `ui/select.tsx` (`Select`): the site's dropdown, used instead of native
   `<select>` everywhere (user found the browser's list ugly). White
   rounded-2xl list with a soft shadow, rows highlight in `wash`, the chosen
@@ -100,7 +107,7 @@ client wrapper that renders its `<section>` and runs `useGSAP`:
 | `hero-motion.tsx` | calm load: headline from a 40% ghost, phone swings in once (from 120% right, 20deg, to 8deg, no overshoot), subtitle and button fade, sparks, loop and underline draw, clouds fade in; then float and cloud drift. Scroll (scrubbed): text and phone rise, phone straightens, front clouds faster than back |
 | `facts-motion.tsx` | once at 92%: band wipes open from the left, heading fades up, figures rise out of a mask 0.08 s apart, labels fade |
 | `map-motion.tsx` | once at 75%: map revealed by a circle growing from India, India pin drops, arcs draw to each market and its pin pops, heading lines rise, bar rises; India pin pulses |
-| `crm-motion.tsx` | text once at 75%; the sample conversation scrubbed to scroll (plate, icons, chat card, messages with typing dots, lead card) |
+| `crm-motion.tsx` | text once at 75% (SplitText heading, badge, sentence, points, button, showcase fade up); window and phone parallax scrubbed while the band is on screen (screen tabs are Framer Motion) |
 | `results-motion.tsx` | once at 75%: spark, heading lines, sub-line, tabs stagger, quote panel rises (quote switching is Framer Motion) |
 | `questions-motion.tsx` | once at 75%: orange spark draws, heading lines, sentence and email field fade up, question rows stagger in (opening a row is Framer Motion) |
 | `footer-motion.tsx` | once at 90%: blue panel rises 60px, logo, blurb, icons, columns and bottom bar fade up in sequence (`ft-*` targets) |

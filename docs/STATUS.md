@@ -18,9 +18,11 @@ the end of every session. Keep it under about 60 lines. Older history:
   do done (`docs/sections/03-services.md`): 4 variants, D (editorial list)
   chosen 52/60; 3D-style icons in SVG. Where we work done
   (`docs/sections/04-map.md`): 4 variants incl. a Three.js globe, A (flat
-  dotted map, GSAP reveal from India) chosen 54/70. Nirman CRM done
-  (`docs/sections/05-crm.md`): B (sample conversation played by scroll)
-  chosen 58/70. Results done (`docs/sections/06-results.md`): B (spotlight
+  dotted map, GSAP reveal from India) chosen 54/70. Nirman CRM **redone** after user
+  feedback ("no screens"; `docs/sections/05-crm.md` round 2): C, a blue
+  product band naming Nirman CRM, real screens built in code
+  (`src/components/crm/`: Inbox, Pipeline, Follow-ups, Dashboard, phone)
+  with tabs, chosen 59/70. Results done (`docs/sections/06-results.md`): B (spotlight
   with tabs, all SAMPLE) chosen 55/70. Questions done
   (`docs/sections/07-questions.md`): A (reference layout, accordion, FAQPage
   JSON-LD; email opens a mailto until S1) chosen 60/70. Footer done (`docs/sections/08-footer.md`): A

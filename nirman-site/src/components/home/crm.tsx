@@ -1,121 +1,51 @@
-import { Check, FileText, Mail, MessageCircle, Send } from "lucide-react";
-import { ButtonLink } from "@/components/ui/button";
+import Link from "next/link";
+import { Check } from "lucide-react";
+import { LogoMark } from "@/components/logo";
+import { CrmShowcase } from "@/components/home/crm-showcase";
 import { CrmMotion } from "@/components/motion/crm-motion";
-import { crmIntro, crmPoints } from "@/content/crm";
+import { crmIntro, crmViews } from "@/content/crm";
 
 /*
- * Nirman CRM (docs/sections/05-crm.md, variant B chosen per the design
- * protocol, with variant A's pale-blue plate and channel icons): text and
- * "Book a demo" on the left; on the right a sample conversation (lead asks,
- * auto-reply, a person replies in 2 minutes) and the CRM lead card.
- * Motion: GSAP in components/motion/crm-motion.tsx (the conversation plays
- * as you scroll); c-* classes are its targets. Sample data, labelled.
+ * Nirman CRM (docs/sections/05-crm.md, redo variant C chosen per the design
+ * protocol): a blue product band. Left, the product badge, a heading that
+ * names Nirman CRM, a sentence, four check points and the only action, Book
+ * a demo. Right, the real product screens built in code (desktop window with
+ * tabs + phone), sample data. Motion: GSAP in components/motion/crm-motion.tsx
+ * (text entrance, window and phone parallax); screen switching is Framer
+ * Motion inside CrmShowcase.
  */
-
-const card = "rounded-[1.25rem] bg-white shadow-[0_18px_40px_-24px_rgb(5_7_12/0.35),0_1px_2px_rgb(5_7_12/0.05)]";
-
-function Typing({ className = "" }: { className?: string }) {
-  // shown only while the motion plays (display toggled by GSAP)
-  return (
-    <li aria-hidden className={`c-typing ml-auto hidden w-fit items-center gap-1 rounded-2xl rounded-tr-md bg-brand/10 px-3.5 py-3 ${className}`}>
-      <span className="size-1.5 rounded-full bg-brand/60" />
-      <span className="size-1.5 rounded-full bg-brand/45" />
-      <span className="size-1.5 rounded-full bg-brand/30" />
-    </li>
-  );
-}
-
 export function Crm() {
   return (
-    <CrmMotion aria-labelledby="crm-title" className="overflow-x-clip py-20 lg:py-28">
-      <div className="container-page grid items-center gap-14 lg:grid-cols-2">
-        <div className="max-w-[31rem]">
-          <h2
-            id="crm-title"
-            className="c-title text-[clamp(1.7rem,2.8vw,2.5rem)] leading-[1.25] font-semibold tracking-[-0.02em] text-ink"
-          >
+    <CrmMotion
+      aria-labelledby="crm-title"
+      className="overflow-hidden bg-[linear-gradient(160deg,#0a63e6_0%,#025dde_50%,#034fbf_100%)] pt-20 pb-28 text-white lg:pt-28 lg:pb-40"
+    >
+      <div className="container-page grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
+        <div>
+          <p className="c-in inline-flex items-center gap-2 rounded-full bg-white/15 py-1 pr-3.5 pl-1 text-[0.8rem] font-medium">
+            <LogoMark className="size-6" tone="light" />
+            {crmIntro.badge}
+          </p>
+          <h2 id="crm-title" className="c-title mt-5 text-[clamp(1.7rem,3vw,2.75rem)] leading-[1.15] font-semibold tracking-[-0.025em]">
             {crmIntro.title}
           </h2>
-          <p className="c-sub mt-4 text-[0.95rem] leading-[1.7] text-muted">{crmIntro.line}</p>
-          <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-2.5">
-            {crmPoints.map((p) => (
-              <li key={p.key} className="c-point flex items-center gap-2 text-[0.85rem] font-medium text-ink">
-                <span className="grid size-5 place-items-center rounded-full bg-brand/10 text-brand">
-                  <Check className="size-3" aria-hidden />
-                </span>
-                {p.title}
+          <p className="c-in mt-4 max-w-[34rem] text-[1rem] text-white/90">{crmIntro.line}</p>
+          <ul className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+            {crmViews.map((v) => (
+              <li key={v.key} className="c-in flex gap-2.5 text-[0.9rem] text-white/90">
+                <Check className="mt-0.5 size-4.5 shrink-0" strokeWidth={2.6} aria-hidden />
+                {v.point}
               </li>
             ))}
           </ul>
-          <ButtonLink href={crmIntro.cta.href} className="c-btn mt-8">
+          <Link
+            href={crmIntro.cta.href}
+            className="c-in mt-8 inline-flex h-12 items-center rounded-full bg-white px-7 text-[0.9rem] font-medium text-ink transition-colors hover:bg-wash focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
             {crmIntro.cta.label}
-          </ButtonLink>
+          </Link>
         </div>
-
-        <div className="c-stage relative mx-auto w-full max-w-[34rem] px-3 pt-6 pb-36 sm:px-6">
-          {/* pale-blue plate (reference) and floating channel icons */}
-          <div aria-hidden className="c-plate absolute inset-x-0 top-0 bottom-10 rounded-[2.5rem] bg-[linear-gradient(160deg,#e9f2fd,#dfeafb)]" />
-          {[
-            { I: FileText, pos: "-left-3 top-16" },
-            { I: MessageCircle, pos: "-right-3 top-40" },
-            { I: Mail, pos: "right-10 -bottom-1" },
-          ].map(({ I, pos }, i) => (
-            <span
-              key={i}
-              aria-hidden
-              className={`c-icon absolute z-10 grid size-10 place-items-center rounded-full bg-white text-brand shadow-[0_10px_22px_-12px_rgb(5_7_12/0.4)] ${pos}`}
-            >
-              <I className="size-4" />
-            </span>
-          ))}
-
-          <div className={`c-chat relative ${card} p-5`}>
-            <div className="flex items-center gap-3 border-b border-line pb-4">
-              <span className="grid size-10 place-items-center rounded-full bg-[#dbe9fd] text-[0.8rem] font-semibold text-brand ring-4 ring-white">
-                RS
-              </span>
-              <div className="flex-1">
-                <p className="text-[0.85rem] font-semibold text-ink">Riya S.</p>
-                <p className="text-[0.7rem] text-muted">Website form · Clinic website</p>
-              </div>
-              <span className="text-[0.62rem] tracking-wide text-muted uppercase">Sample data</span>
-            </div>
-            <ul className="mt-4 space-y-3 text-[0.82rem]">
-              <li className="c-msg max-w-[82%] rounded-2xl rounded-tl-md bg-wash px-3.5 py-2.5 text-ink">
-                Hi, I need a new website for my clinic. Can you share a quote?
-                <span className="mt-1 block text-[0.65rem] text-muted">10:02</span>
-              </li>
-              <Typing />
-              <li className="c-msg ml-auto max-w-[82%] rounded-2xl rounded-tr-md bg-brand/10 px-3.5 py-2.5 text-ink">
-                Thanks Riya, we have your message. Priya will reply in a few minutes.
-                <span className="mt-1 flex items-center gap-1 text-[0.65rem] text-brand">
-                  <Send className="size-3" aria-hidden />
-                  Auto-reply · 10:02
-                </span>
-              </li>
-              <Typing />
-              <li className="c-msg ml-auto max-w-[82%] rounded-2xl rounded-tr-md bg-brand px-3.5 py-2.5 text-white">
-                Hi Riya, this is Priya from Nirman. Can we call you at 4 pm today?
-                <span className="mt-1 block text-[0.65rem] text-white/80">10:04 · Replied in 2 min</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className={`c-lead absolute bottom-0 left-0 z-10 w-[16rem] ${card} p-4 sm:-left-6`}>
-            <p className="text-[0.65rem] tracking-wide text-muted uppercase">Lead</p>
-            <p className="mt-1 text-[0.9rem] font-semibold text-ink">Riya S. · Clinic website</p>
-            <dl className="mt-3 grid grid-cols-2 gap-2 text-[0.72rem]">
-              <dt className="text-muted">Stage</dt>
-              <dd>
-                <span className="rounded-full bg-[#ddf3e6] px-2 py-0.5 text-[#1f8a55]">Contacted</span>
-              </dd>
-              <dt className="text-muted">Owner</dt>
-              <dd className="text-ink">Priya</dd>
-              <dt className="text-muted">Follow-up</dt>
-              <dd className="text-ink">Today, 4:00 pm</dd>
-            </dl>
-          </div>
-        </div>
+        <CrmShowcase note={crmIntro.note} />
       </div>
     </CrmMotion>
   );
