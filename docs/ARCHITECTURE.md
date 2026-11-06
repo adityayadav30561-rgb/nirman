@@ -20,13 +20,14 @@ E:\nirman2\
     src\app\                layout.tsx (Poppins, metadata, header), page.tsx (homepage),
                             globals.css (tokens, container, motion system), favicon.ico
     src\components\         site-header.tsx (client, GSAP entrance), logo.tsx
-    src\components\motion\  gsap.ts (plugins), hero-, facts-, services-, map-, crm-motion (client)
+    src\components\motion\  gsap.ts (plugins), hero-, facts-, services-, map-, crm-, results-motion (client)
     src\components\home\    hero.tsx, phone-screen.tsx, cloud.tsx, facts.tsx, services.tsx,
-                            service-icons.tsx, map.tsx, world-map.tsx, quote-bar.tsx, crm.tsx
+                            service-icons.tsx, map.tsx, world-map.tsx, quote-bar.tsx, crm.tsx,
+                            results.tsx, results-spotlight.tsx (client), quote-card.tsx
     src\components\ui\      button.tsx (ButtonLink), select.tsx (Select, client, Framer Motion)
     src\components\lab\     section variants while choosing (protocol); dev-only
     src\content\            site.ts (brand, placeholders), nav.ts, image-credits.ts, facts.ts,
-                            services.ts, map.ts, world-dots.json (generated), crm.ts
+                            services.ts, map.ts, world-dots.json (generated), crm.ts, results.ts
     scripts\cut-hand.py     builds the hero hand layers from the Unsplash photo
     scripts\make-world-dots.mjs  builds content/world-dots.json (Natural Earth land, hex grid in
                             the Natural Earth projection; d3-geo also used server-side by world-map)
@@ -45,7 +46,8 @@ often: pin a release at least two weeks old. Images via
 
 ## Client vs server components
 
-Client (`"use client"`): site-header, ui/select and `components/motion/*`. Everything else is a server component.
+Client (`"use client"`): site-header, ui/select, home/results-spotlight and
+`components/motion/*`. Everything else is a server component.
 
 ## Gotchas (add new ones here)
 

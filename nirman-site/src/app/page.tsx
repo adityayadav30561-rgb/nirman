@@ -3,10 +3,11 @@ import { Facts } from "@/components/home/facts";
 import { Services } from "@/components/home/services";
 import { WhereWeWork } from "@/components/home/map";
 import { Crm } from "@/components/home/crm";
+import { Results } from "@/components/home/results";
 
 // Homepage, built section by section from docs/PAGE-PLAN.md section 2 and
 // docs/REFERENCE-VIDEO.md, each section chosen per docs/DESIGN-PROTOCOL.md.
-// Done so far: header (in layout), hero, facts band, what we do, where we work, Nirman CRM.
+// Done so far: header (in layout), hero, facts band, what we do, where we work, Nirman CRM, results.
 export default function Home() {
   return (
     <>
@@ -15,6 +16,7 @@ export default function Home() {
       <Services />
       <WhereWeWork />
       <Crm />
+      <Results />
     </>
   );
 }
