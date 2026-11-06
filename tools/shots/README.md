@@ -21,8 +21,9 @@ node tools/shots/shotsec.mjs 1440 C:/tmp/shots top:0:900 services:0:900
 node tools/shots/shotsec.mjs 390  C:/tmp/shots top:0:844
 ```
 
-Files are written as `<id>-<offset>-<width>.png`. Write them to the
-session scratchpad, never into the repo.
+Files are written as `<id>-<offset>-<width>.png`. Working shots go to the
+session scratchpad. The only screenshots that belong in the repo are the
+downscaled design-protocol records in `docs/sections/shots/` (section 5).
 
 ## 3. Evaluate JS in the page at a given width
 
@@ -37,6 +38,23 @@ node tools/shots/eval.mjs q.js 1440
 - Combine several shots into one image with PIL before reading it.
 - Photos load lazily: if a screen looks grey, capture again; the second pass is cached.
 - The dev overlay ("N Issues" badge) often shows stale errors from old hot reloads; trust `npx tsc --noEmit` and `npm run build`.
+
+## 5. Variant screenshots for the design protocol (what worked, 2026-11-06)
+
+Headless Edge stalled on 2026-11-06: its profile opened
+`edge://sync-confirmation-dialog` and CDP calls hung. `shotel.mjs` (whole
+elements by id on any path) skips `edge://` pages, but if Edge still hangs,
+use the in-app browser instead:
+
+1. `resize_window` to 1440 x 480 (then 375 x 520).
+2. In the lab page, run JS that hides the header and every variant except
+   one, and scrolls to the top (see `__only(id)` in the 02-facts session:
+   hide `header`, show only the `main > div > div` that contains `#id`).
+3. `computer screenshot` at scale 1; the tool result names the saved JPEG in
+   `~/.claude/projects/.../tool-results/`. Copy it to
+   `docs/sections/shots/NN-name-<variant>-<width>.jpg`.
+   Desktop shots come out 800px wide (the pane scales 1440 down), which is
+   fine for the record.
 
 ## 4. Stop Edge when done
 

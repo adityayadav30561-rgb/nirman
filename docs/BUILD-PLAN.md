@@ -10,8 +10,8 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 - [x] H0 Foundations: minimal app, Poppins, v4 tokens, bounded scale
 - [x] H1 Header and hero (`docs/sections/01-hero.md`), with the hand, clouds
       and measured entrance
-- [ ] H2 Facts band (blue): 2 h reply, 48 h proposal, 3 to 6 wk website,
-      100% your code and data (`02-facts.md`)
+- [x] H2 Facts band (blue): 2 h reply, 48 h proposal, 3 to 6 wk website,
+      100% your code and data (`02-facts.md`, variant B)
 - [ ] H3 What we do: four services with icons and buttons (`03-services.md`)
 - [ ] H4 Where we work: dotted world map in code, India office plus markets
       we serve (US, UAE, UK), Service / Timeline / Get a quote bar
@@ -24,7 +24,7 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 - [ ] H9 Whole-page review at 375 / 768 / 1440 / 1920
       (`00-page-review.md`); homepage metadata and JSON-LD
 - [ ] H10 Shared reveal-on-scroll component (REFERENCE-VIDEO 4.3), built
-      with H2 and reused
+      with H3 (the facts band has no motion of its own) and reused
 
 ## P: Other pages (option B, 18 pages; order can change with the user)
 

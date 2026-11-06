@@ -46,6 +46,10 @@ thirds of the H1.
   and `outline`; sizes `sm` (header) and `md`.
 - `site-header.tsx`: logo, nav with active underline, Services dropdown,
   header buttons, mobile menu.
+- `home/facts.tsx`: full-bleed `brand` band; `h2` lead-in plus four light
+  figures (value with a half-size unit) over 0.8rem labels at white/85; thin
+  white/25 dividers; 2 x 2 on phones, one row from 768px, heading beside the
+  row from 1024px. Data in `content/facts.ts`.
 - `home/cloud.tsx`: flat-bottomed cartoon cloud (white, blue-grey underside).
 - `home/phone-screen.tsx`: Nirman CRM mobile UI in HTML (sample data).
 - `logo.tsx`: plan-view mark (ink, orange threshold) + wordmark.
