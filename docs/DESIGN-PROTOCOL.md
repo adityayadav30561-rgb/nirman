@@ -160,6 +160,27 @@ section needs:
    `requested`. Meanwhile build the section with a clearly marked
    placeholder of the exact size, so layout and motion can be finished.
 
+**The user can only generate still images, with ChatGPT or Gemini** (user,
+2026-11-06). So:
+- Requests are **still images only**. Video, animation and 3D are built in
+  code (GSAP, Framer Motion, Three.js) or left out.
+- Neither tool takes an exact pixel size. Ask for an **aspect ratio** they
+  support (ChatGPT: square 1:1, portrait 2:3, landscape 3:2; Gemini: most
+  common ratios, e.g. 1:1, 3:4, 4:3, 9:16, 16:9) at the highest quality,
+  and state the size Claude will crop and display it at. Plan for files of
+  roughly 1000 to 1500px on the long side: use them at that size or smaller
+  (no upscaling), or as a soft background.
+- **Transparent background:** ChatGPT can deliver a transparent PNG (ask
+  for it explicitly). With Gemini, ask for a plain, evenly lit pure white
+  (#FFFFFF) background with a soft contact shadow only, and Claude cuts it
+  out (as with `nirman-site/scripts/cut-hand.py`).
+- Write the prompt as plain natural language that pastes straight into
+  either chat. Put the negatives as clear "Do not include ..." sentences
+  (both tools ignore separate negative-prompt fields).
+- For a set that must match (e.g. four icons), ask for all items in one
+  image on a grid with even spacing, so the style stays consistent; Claude
+  splits the sheet.
+
 Write the prompt during the section's brief (step 1 of section 2), as soon as
 it is clear the asset is needed, not at the end. One prompt per asset; when
 a set must match (for example four icons), say so and give the shared style
@@ -170,14 +191,19 @@ in each prompt.
 ```md
 ### <ID, e.g. A04-1> <short name>
 - Section and use: <section, where on the page, what it must communicate>
-- Tool hint: <image model suited, e.g. Midjourney / DALL-E / Firefly / Ideogram; video: Runway / Sora; 3D: any GLB export>
-- Size: <exact pixels, e.g. 2400 x 1600 px>, aspect <3:2>; minimum <1600 px wide>
-- Type and format: <photo / 3D render / illustration / video / 3D model>;
-  deliver <PNG with transparent background / JPG / WebP / MP4 H.264 10 s loop
-  under 6 MB / GLB under 2 MB>
-- Prompt: <one paragraph: subject, action, setting, composition and
-  framing, camera angle and lens, lighting, mood, materials, level of
-  detail, style references in words>
+- Tool: <ChatGPT or Gemini, and why (ChatGPT for transparent PNGs and
+  precise layouts; Gemini for photo-real scenes); both work unless noted>
+- Aspect and size: <aspect the tool supports, e.g. 3:2 landscape>, highest
+  quality; Claude will crop to <e.g. 1440 x 960 px> and show it at <e.g.
+  up to 720px wide>
+- Type and format: <photo / 3D-style render / illustration / icon sheet>;
+  download as <PNG (transparent, ChatGPT) / PNG on pure white #FFFFFF
+  (Gemini, Claude cuts it out) / JPG for full-bleed photos>
+- Prompt (paste into ChatGPT or Gemini as is): <one paragraph of plain
+  sentences: subject, action, setting, composition and framing, camera
+  angle and lens, lighting, mood, materials, level of detail, style in
+  words, aspect ratio, background; then "Do not include ..." sentences
+  for the negatives>
 - Colours: <from DESIGN.md tokens, e.g. brand blue #025dde, page #f5f7f9,
   accent orange #f26b2b; neutral greys>
 - Background: <transparent / plain #f5f7f9 / soft studio / blurred office>

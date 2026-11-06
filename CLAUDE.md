@@ -86,8 +86,8 @@ DESIGN-PROTOCOL section 5; code in `nirman-site/src/components/motion/`.
 - URLs: lowercase, hyphens, trailing slash.
 - Assets: build in code first; ask before downloading images and credit
   them in `nirman-site/src/content/image-credits.ts`; anything you cannot
-  make or download, write a detailed generation prompt for the user (size,
-  type, format, negatives) and log it in `docs/ASSET-REQUESTS.md`
+  make or download, write a detailed generation prompt for the user to run
+  in ChatGPT or Gemini (still images only; aspect, type, format, negatives) and log it in `docs/ASSET-REQUESTS.md`
   (DESIGN-PROTOCOL section 6).
 
 ## Commands (run in `nirman-site/`)

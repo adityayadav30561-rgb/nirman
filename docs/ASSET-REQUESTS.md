@@ -1,9 +1,9 @@
 # Asset requests (images and media the user generates)
 
-User rule (2026-11-06): whenever a section needs an image, video, texture,
-3D model or anything else Claude cannot make itself, Claude writes a
-**detailed generation prompt** (with size, type and negatives) for the user
-to generate and send back. Rules: `docs/DESIGN-PROTOCOL.md` section 6. This
+User rule (2026-11-06): whenever a section needs an image Claude cannot
+build in code or download, Claude writes a **detailed generation prompt**
+(with aspect and size, type, format and negatives) for the user to generate
+**with ChatGPT or Gemini** (still images only) and send back. Rules: `docs/DESIGN-PROTOCOL.md` section 6. This
 file is the log: every request is added here, so any session knows what is
 pending, received or in use.
 
