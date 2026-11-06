@@ -63,6 +63,11 @@ thirds of the H1.
   India-to-market arcs, reveal mask) and `home/quote-bar.tsx` (`QuoteBar`:
   pill GET form with Service and Timeline selects and a dark Get a quote
   button; reusable on other pages).
+- `ui/select.tsx` (`Select`): the site's dropdown, used instead of native
+  `<select>` everywhere (user found the browser's list ugly). White
+  rounded-2xl list with a soft shadow, rows highlight in `wash`, the chosen
+  row in brand blue with a check; full keyboard support; Framer Motion
+  open/close; hidden input carries the value for forms.
 - `home/cloud.tsx`: flat-bottomed cartoon cloud (white, blue-grey underside).
 - `home/phone-screen.tsx`: Nirman CRM mobile UI in HTML (sample data).
 - `logo.tsx`: plan-view mark (ink, orange threshold) + wordmark.

@@ -23,7 +23,7 @@ E:\nirman2\
     src\components\motion\  gsap.ts (plugins), hero-, facts-, services-, map-motion (client)
     src\components\home\    hero.tsx, phone-screen.tsx, cloud.tsx, facts.tsx, services.tsx,
                             service-icons.tsx, map.tsx, world-map.tsx, quote-bar.tsx
-    src\components\ui\      button.tsx (ButtonLink)
+    src\components\ui\      button.tsx (ButtonLink), select.tsx (Select, client, Framer Motion)
     src\components\lab\     section variants while choosing (protocol); dev-only
     src\content\            site.ts (brand, placeholders), nav.ts, image-credits.ts, facts.ts,
                             services.ts, map.ts, world-dots.json (generated)
@@ -37,13 +37,14 @@ E:\nirman2\
 Next.js 16.4.2 (App Router, Turbopack, `cacheComponents: true`,
 `partialPrefetching: true`), React 19.3, Tailwind 4 (`@theme` in CSS),
 TypeScript, ESLint 9 flat config, lucide-react icons, GSAP 3.15.0 (pinned) +
-@gsap/react. Images via
+@gsap/react, Framer Motion (`motion` 13.5.1, pinned). Packages that publish
+often: pin a release at least two weeks old. Images via
 `next/image` (`images.qualities: [70, 80]`; pass `quality={80}`; use
 `preload`, not the deprecated `priority`).
 
 ## Client vs server components
 
-Client (`"use client"`): site-header and `components/motion/*`. Everything else is a server component.
+Client (`"use client"`): site-header, ui/select and `components/motion/*`. Everything else is a server component.
 
 ## Gotchas (add new ones here)
 

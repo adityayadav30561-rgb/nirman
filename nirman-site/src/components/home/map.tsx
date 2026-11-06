@@ -14,8 +14,8 @@ import { mapIntro, places } from "@/content/map";
  */
 export function WhereWeWork() {
   return (
-    <MapMotion aria-labelledby="map-title" className="overflow-hidden py-20 lg:py-28">
-      <div className="container-page grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
+    <MapMotion aria-labelledby="map-title" className="py-20 lg:py-28">
+      <div className="container-page grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
         <div className="order-2 lg:order-1">
           <WorldMap className="-mx-2 lg:-ml-10" maskId="home-map-reveal" />
           <ul className="mt-6 grid gap-2 sm:hidden">

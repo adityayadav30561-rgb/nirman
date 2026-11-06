@@ -34,7 +34,7 @@ arrives, the bar last.
 ## Assets
 - Dotted map: **built in code** from Natural Earth 110m land (public domain)
   via `world-atlas` by `scripts/make-world-dots.mjs` ->
-  `src/content/world-dots.json` (1,947 dots, hex grid, 2.8 degrees).
+  `src/content/world-dots.json` (1,990 dots, hex grid, 2.8 degrees, 84N to 56S).
 - Pins and their mini screens: **built in code** (no photos needed).
 - Globe (variant B): **built in code** with Three.js.
 - Nothing to request from the user for this section.
@@ -102,6 +102,16 @@ sits under the map. Runner-up B (globe); the user may override.
   in as its arc lands, heading lines rise (SplitText), sentence fades up, bar
   rises at 1.2 s, phone place list staggers in; then India's pin pulses
   gently.
+- Fixes after user review (2026-11-06): (1) the map was cut at the top: the
+  dot grid started at 78N and lost Greenland and the Canadian Arctic; now
+  84N to 56S (1,990 dots, viewBox 360 x 140, aspect follows the data);
+  (2) the native browser dropdowns looked out of place: replaced by the
+  site's own `components/ui/select.tsx` (custom listbox, keyboard support,
+  Framer Motion open/close; values in hidden inputs, so the GET form is
+  unchanged). Columns now 1:1 from 1024px so every option fits (170px for
+  "Marketing automation" at 1440); on phones the Get a quote button sits
+  full width under the two fields. The section no longer clips overflow,
+  so the open list is never cut off.
 - Verified: 1440 (sequence reaches its end state; no horizontal scroll),
   768 (labels clear of each other), 375 (place list, 855px tall). Lab code
   deleted; shots kept.

@@ -5,7 +5,8 @@ import { places, type Place } from "@/content/map";
 /*
  * Flat dotted world map (hex grid of land dots from Natural Earth, see
  * scripts/make-world-dots.mjs), equirectangular, cropped to latitudes
- * 78N..56S. SVG units are degrees: x = lon + 180, y = 78 - lat.
+ * world.latTop (84N) to world.latBottom (56S). SVG units are degrees:
+ * x = lon + 180, y = latTop - lat.
  * Pins are HTML laid over it at percent positions, so they stay crisp and
  * readable at any size. Targets for GSAP (components/motion/map-motion.tsx):
  * .m-reveal (mask circle centred on India), .m-arc (pathLength 1), .m-pin.
@@ -13,7 +14,7 @@ import { places, type Place } from "@/content/map";
  */
 
 const W = 360;
-const H = world.latTop - world.latBottom; // 134
+const H = world.latTop - world.latBottom; // 140
 
 export const toX = (lon: number) => lon + 180;
 export const toY = (lat: number) => world.latTop - lat;
@@ -75,7 +76,7 @@ export function WorldMap({
 }) {
   const office = places[0];
   return (
-    <div className={`relative aspect-[360/134] ${className}`}>
+    <div className={`relative ${className}`} style={{ aspectRatio: `${W} / ${H}` }}>
       <svg viewBox={`0 0 ${W} ${H}`} className="absolute inset-0 size-full" aria-hidden>
         <defs>
           <mask id={maskId}>

@@ -12,7 +12,7 @@ const topo = JSON.parse(readFileSync(require.resolve("world-atlas/land-110m.json
 const land = feature(topo, topo.objects.land);
 
 const STEP = 2.8; // degrees between dots
-const LAT_TOP = 78;
+const LAT_TOP = 84; // covers Greenland and the Canadian Arctic (land reaches about 83.6N)
 const LAT_BOTTOM = -56; // leave out Antarctica
 const dots = [];
 let row = 0;
