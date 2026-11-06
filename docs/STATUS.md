@@ -45,22 +45,15 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
-**H9 Whole-page review** (`docs/BUILD-PLAN.md`; DESIGN-PROTOCOL 2.9):
-1. Full-page screenshots at 375, 768, 1440, 1920 (cloud sessions:
-   Playwright, `tools/shots/README.md` section 6); scroll through so every
-   GSAP entrance has run.
-2. Check rhythm (pale page vs the two blue bands: facts and footer),
-   repeated layouts back to back, spacing scale, how often calls to action
-   appear, transitions between sections. Record in
-   `docs/sections/00-page-review.md` and fix what it finds.
-3. Homepage metadata (title, description, Open Graph) and JSON-LD
-   (Organization / WebSite; FAQPage is already in Questions). Read the
-   Next 16 metadata guide in `node_modules/next/dist/docs/` first.
+**Homepage is complete** (H9 review done: `docs/sections/00-page-review.md`).
+Next: **P2 `/nirman-crm/`** (recommended first: the CRM screens already
+exist in `src/components/crm/`, and every "Book a demo" button points
+there). Then P1 services, P3 get-a-quote. Each page follows the protocol
+(variants per section on `/lab/`). Read PAGE-PLAN section 3 for the page's
+sections first. The user may choose a different order.
 
 ## Open questions for the user
 
-- `muted` grey text is about 2.9:1 contrast (fails AA 4.5:1). Darken to
-  about `#6b7079`, or keep the reference grey for short lines only?
 - Real contact details, domain, and which social profiles exist (all
   placeholders: `src/content/site.ts`; footer icons are generic with `#`
   links in `src/content/footer.ts`).

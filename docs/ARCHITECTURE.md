@@ -190,3 +190,8 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
 40. **`layout.tsx` edits may not reach the dev server.** Adding the footer to
     the root layout kept serving the old HTML until the dev server was
     restarted with a clean `.next` (same fix as gotcha 32).
+41. **`next/og` dropped parts of the logo.** `ImageResponse` rendered
+    the white tile and orange threshold but not the dark "n" (SVG strokes,
+    SVG rects, borders and positioned divs all vanished). The share image is
+    a static `src/app/opengraph-image.png` made with headless Chromium:
+    `NODE_PATH=$(npm root -g) node nirman-site/scripts/make-og.mjs`.

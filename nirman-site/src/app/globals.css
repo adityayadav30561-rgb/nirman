@@ -11,7 +11,7 @@
   --color-surface: #ffffff;
   --color-ink: #05070c;
   --color-ink-2: #1b1f27; /* dark pill, est. */
-  --color-muted: #90949b;
+  --color-muted: #6b7079; /* 4.6:1 on page (was #90949b, 2.9:1; H9 review) */
   --color-line: #e3e7ed; /* est. */
 
   /* No blue anywhere (user, 2026-11-06): ink bands, burnt-orange accent. */

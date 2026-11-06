@@ -29,7 +29,7 @@ export function CrmMotion(props: ComponentPropsWithoutRef<"section">) {
         });
         const scrub = { trigger: ref.current, start: "top bottom", end: "bottom top", scrub: true };
         gsap.fromTo(q(".c-window"), { y: 40 }, { y: -30, ease: "none", scrollTrigger: scrub });
-        gsap.fromTo(q(".c-phone"), { y: 110 }, { y: -60, ease: "none", scrollTrigger: scrub });
+        gsap.fromTo(q(".c-phone"), { y: 60 }, { y: -60, ease: "none", scrollTrigger: scrub });
         return () => split.revert();
       });
     },

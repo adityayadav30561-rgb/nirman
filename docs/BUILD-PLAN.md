@@ -29,7 +29,7 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 - [x] H7 Questions: email + Submit, FAQ rows with FAQ markup
       (`07-questions.md`)
 - [x] H8 Footer (blue) (`08-footer.md`)
-- [ ] H9 Whole-page review at 375 / 768 / 1440 / 1920
+- [x] H9 Whole-page review at 375 / 768 / 1440 / 1920
       (`00-page-review.md`); homepage metadata and JSON-LD
 - [x] H10 Shared motion setup: `components/motion/gsap.ts` + one client
       wrapper per section (replaced the first CSS `Reveal`, 2026-11-06)

@@ -15,7 +15,7 @@ line here.
 | `surface` | `#ffffff` | cards, menus |
 | `ink` | `#05070c` | headings, main text |
 | `ink-2` | `#1b1f27` | dark pill buttons |
-| `muted` | `#90949b` | supporting grey text (see contrast note) |
+| `muted` | `#6b7079` | supporting grey text, 4.6:1 on page (was `#90949b`, darkened in H9) |
 | `line` | `#e3e7ed` | dividers |
 | `brand` | `#c2410c` | burnt orange: links, tabs, active states, product UI accent (5.2:1 on white) |
 | `brand-deep` | `#9a3412` | darker burnt orange |
@@ -33,9 +33,7 @@ rose `#fde2e7`/`#b4234a`, green, purple, amber. Do not reintroduce blue
 hues; the comparison of the four options is
 `docs/sections/shots/colour-options.jpg`.
 
-**Contrast note (open):** `muted` on `page` is about 2.9:1, below the 4.5:1
-the protocol asks for body text. It matches the reference. Decide with the
-user: darken to about `#6b7079` (about 4.6:1) or keep for short lines only.
+**Contrast:** `muted` was darkened to `#6b7079` in the H9 review (4.6:1).
 
 ## Type
 
