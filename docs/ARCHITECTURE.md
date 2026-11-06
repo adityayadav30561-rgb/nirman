@@ -28,7 +28,8 @@ E:\nirman2\
     src\content\            site.ts (brand, placeholders), nav.ts, image-credits.ts, facts.ts,
                             services.ts, map.ts, world-dots.json (generated)
     scripts\cut-hand.py     builds the hero hand layers from the Unsplash photo
-    scripts\make-world-dots.mjs  builds content/world-dots.json (Natural Earth land, hex grid)
+    scripts\make-world-dots.mjs  builds content/world-dots.json (Natural Earth land, hex grid in
+                            the Natural Earth projection; d3-geo also used server-side by world-map)
     public\images\hero\     hand-back.webp, hand-front.webp
 ```
 
@@ -49,7 +50,7 @@ Client (`"use client"`): site-header, ui/select and `components/motion/*`. Every
 ## Gotchas (add new ones here)
 
 Gotchas 3-29 come from the old v2 site; some mention code that is now in
-`old-site/`. The general lessons still apply. Newest: 30-38.
+`old-site/`. The general lessons still apply. Newest: 30-39.
 
 1. **Next 16 is different.** Read `nirman-site/node_modules/next/dist/docs/`
    before Next-specific code. `next lint` is gone; `middleware` is `proxy`;
@@ -178,4 +179,9 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
 38. **Tailwind 4 `rotate-*` uses the CSS `rotate` property**, which stacks
     with GSAP's transform rotation. On GSAP targets use
     `[transform:rotate(8deg)]` instead.
+39. **World maps: never a plain lat/lon grid.** Equirectangular stretches the
+    Arctic so the northern coasts form a straight, "cropped" top edge. Lay
+    dots out in a real projection (Natural Earth, `scripts/make-world-dots.mjs`)
+    and place pins with the same projection (scale and translate are saved
+    in the JSON).
 

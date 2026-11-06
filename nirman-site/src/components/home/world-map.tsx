@@ -1,28 +1,36 @@
 import { Building2, Globe2 } from "lucide-react";
+import { geoNaturalEarth1 } from "d3-geo";
 import world from "@/content/world-dots.json";
 import { places, type Place } from "@/content/map";
 
 /*
- * Flat dotted world map (hex grid of land dots from Natural Earth, see
- * scripts/make-world-dots.mjs), equirectangular, cropped to latitudes
- * world.latTop (84N) to world.latBottom (56S). SVG units are degrees:
- * x = lon + 180, y = latTop - lat.
+ * Flat dotted world map: land dots from Natural Earth on an even hex grid in
+ * the Natural Earth projection (scripts/make-world-dots.mjs), north pole down
+ * to 56S. Pins and arcs use the same projection (rebuilt here from the
+ * scale and translate saved in the JSON). Server component: d3-geo never
+ * reaches the browser.
  * Pins are HTML laid over it at percent positions, so they stay crisp and
  * readable at any size. Targets for GSAP (components/motion/map-motion.tsx):
  * .m-reveal (mask circle centred on India), .m-arc (pathLength 1), .m-pin.
  * On phones the name chips hide; the section shows a place list instead.
  */
 
-const W = 360;
-const H = world.latTop - world.latBottom; // 140
-
-export const toX = (lon: number) => lon + 180;
-export const toY = (lat: number) => world.latTop - lat;
-const pct = (p: Place) => ({ left: `${(toX(p.lon) / W) * 100}%`, top: `${(toY(p.lat) / H) * 100}%` });
+const W = world.width;
+const H = world.height;
+const projection = geoNaturalEarth1()
+  .scale(world.scale)
+  .translate(world.translate as [number, number]);
+const xy = (p: Place) => projection([p.lon, p.lat]) ?? [0, 0];
+const pct = (p: Place) => {
+  const [x, y] = xy(p);
+  return { left: `${(x / W) * 100}%`, top: `${(y / H) * 100}%` };
+};
+const DOT_R = world.step * 0.32;
 
 /** Arc from India to a market, bowed upwards. */
 function arcPath(a: Place, b: Place) {
-  const x1 = toX(a.lon), y1 = toY(a.lat), x2 = toX(b.lon), y2 = toY(b.lat);
+  const [x1, y1] = xy(a);
+  const [x2, y2] = xy(b);
   const mx = (x1 + x2) / 2, my = (y1 + y2) / 2 - Math.abs(x2 - x1) * 0.28;
   return `M${x1} ${y1} Q${mx} ${my} ${x2} ${y2}`;
 }
@@ -80,12 +88,12 @@ export function WorldMap({
       <svg viewBox={`0 0 ${W} ${H}`} className="absolute inset-0 size-full" aria-hidden>
         <defs>
           <mask id={maskId}>
-            <circle className="m-reveal" cx={toX(office.lon)} cy={toY(office.lat)} r={400} fill="white" />
+            <circle className="m-reveal" cx={xy(office)[0]} cy={xy(office)[1]} r={400} fill="white" />
           </mask>
         </defs>
         <g className={`m-dots ${dotClass}`} mask={`url(#${maskId})`}>
-          {world.dots.map(([lon, lat], i) => (
-            <circle key={i} cx={toX(lon)} cy={toY(lat)} r={0.95} />
+          {world.dots.map(([x, y], i) => (
+            <circle key={i} cx={x} cy={y} r={DOT_R} />
           ))}
         </g>
         {arcs &&

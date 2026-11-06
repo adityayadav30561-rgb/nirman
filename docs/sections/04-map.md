@@ -112,6 +112,16 @@ sits under the map. Runner-up B (globe); the user may override.
   "Marketing automation" at 1440); on phones the Get a quote button sits
   full width under the two fields. The section no longer clips overflow,
   so the open list is never cut off.
+- Second fix (user: "still cropped"): the data was complete; the flat top
+  came from the equirectangular grid, which stretches the Arctic so the
+  northern coasts line up into a straight edge. The dots are now laid out
+  on an even hex grid in the **Natural Earth projection** (rounded outline,
+  compact poles, Greenland its own shape): `scripts/make-world-dots.mjs`
+  saves the projected x, y plus the projection's scale and translate
+  (1,742 dots, viewBox 360 x 158.1); `world-map.tsx` rebuilds the same
+  projection with `d3-geo` (now a runtime dependency, used only in this
+  server component, so nothing extra reaches the browser) to place pins,
+  arcs and the reveal mask.
 - Verified: 1440 (sequence reaches its end state; no horizontal scroll),
   768 (labels clear of each other), 375 (place list, 855px tall). Lab code
   deleted; shots kept.

@@ -59,7 +59,8 @@ thirds of the H1.
   when the element is about 80% down the screen; children animate with
   `rv-icon` / `rv-text` (set `--i` item index, `--j` 0 title / 1 line).
 - `home/map.tsx` ("Where we work"), `home/world-map.tsx` (`WorldMap`,
-  `MapPin`: hex-dot land map from Natural Earth, pins with side labels,
+  `MapPin`: hex-dot land map from Natural Earth in the Natural Earth
+  projection (rounded outline), pins with side labels,
   India-to-market arcs, reveal mask) and `home/quote-bar.tsx` (`QuoteBar`:
   pill GET form with Service and Timeline selects and a dark Get a quote
   button; reusable on other pages).
