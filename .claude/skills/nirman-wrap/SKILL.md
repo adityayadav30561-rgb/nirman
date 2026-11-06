@@ -17,7 +17,9 @@ this one. Everything it needs must be in the docs and on GitHub.
 3. Tick finished tasks in `docs/BUILD-PLAN.md`. Make sure each section worked
    on has an up-to-date record in `docs/sections/` (variants, scores, choice,
    screenshots in `docs/sections/shots/`).
-4. Add user decisions to `docs/DECISIONS.md`, measured motion to
+4. Make sure every asset prompt given to the user this session is logged in
+   `docs/ASSET-REQUESTS.md` with its status. Add user decisions to
+   `docs/DECISIONS.md`, measured motion to
    `docs/REFERENCE-VIDEO.md`, design-system changes to `docs/DESIGN.md`, new
    gotchas to `docs/ARCHITECTURE.md`.
 5. Move any script or note that matters out of the scratchpad into the repo

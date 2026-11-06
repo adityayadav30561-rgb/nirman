@@ -60,8 +60,9 @@ All motion is GSAP, Framer Motion or Three.js (section 5).**
 
 1. **Brief.** Create `docs/sections/NN-name.md` from the template in
    section 4: the section's job, its content (from `docs/PAGE-PLAN.md`), what
-   the reference does (layout and motion from `docs/REFERENCE-VIDEO.md`), and
-   constraints.
+   the reference does (layout and motion from `docs/REFERENCE-VIDEO.md`),
+   constraints, and the assets it needs. For any asset that cannot be built
+   in code or downloaded, write the generation prompt now (section 6).
 2. **Measure the reference** for that section if it moves (see
    `tools/video/README.md`); add the measured table to REFERENCE-VIDEO
    section 4.
@@ -145,6 +146,63 @@ failsafes in `globals.css`.
 - Verify by seeking timelines (ARCHITECTURE gotcha 36), at 375, 768, 1440
   and 1920, and with reduced motion.
 
+## 6. Assets Claude cannot make (user rule, 2026-11-06)
+
+**Order of preference** for any image, video, texture or 3D model a
+section needs:
+1. **Build it in code** (SVG, HTML/CSS, canvas, Three.js): icons, UI
+   screens, charts, maps, patterns, simple 3D.
+2. **Download a free-licence asset**, only after asking the user (name the
+   source, licence and size), and credit it in
+   `src/content/image-credits.ts`.
+3. **Ask the user to generate it:** write a detailed prompt (template below),
+   show it in chat, and log it in `docs/ASSET-REQUESTS.md` with status
+   `requested`. Meanwhile build the section with a clearly marked
+   placeholder of the exact size, so layout and motion can be finished.
+
+Write the prompt during the section's brief (step 1 of section 2), as soon as
+it is clear the asset is needed, not at the end. One prompt per asset; when
+a set must match (for example four icons), say so and give the shared style
+in each prompt.
+
+**Prompt template** (fill every line; keep it in the log exactly as given):
+
+```md
+### <ID, e.g. A04-1> <short name>
+- Section and use: <section, where on the page, what it must communicate>
+- Tool hint: <image model suited, e.g. Midjourney / DALL-E / Firefly / Ideogram; video: Runway / Sora; 3D: any GLB export>
+- Size: <exact pixels, e.g. 2400 x 1600 px>, aspect <3:2>; minimum <1600 px wide>
+- Type and format: <photo / 3D render / illustration / video / 3D model>;
+  deliver <PNG with transparent background / JPG / WebP / MP4 H.264 10 s loop
+  under 6 MB / GLB under 2 MB>
+- Prompt: <one paragraph: subject, action, setting, composition and
+  framing, camera angle and lens, lighting, mood, materials, level of
+  detail, style references in words>
+- Colours: <from DESIGN.md tokens, e.g. brand blue #025dde, page #f5f7f9,
+  accent orange #f26b2b; neutral greys>
+- Background: <transparent / plain #f5f7f9 / soft studio / blurred office>
+- Negatives (must NOT appear): <the standard list below + anything specific>
+- Variations: <how many, e.g. 3 options; or "one per item, same style">
+- Acceptance check: <what Claude will check, e.g. "hand fully inside frame,
+  edges clean for cut-out, no text">
+- File name and place: <e.g. map-office-india.png; Claude saves it to
+  public/images/map/>
+```
+
+**Standard negatives** (include in every prompt, then add specific ones):
+no text, letters, numbers or captions; no logos or brand marks (especially
+no WhatsApp, Instagram or Facebook logos); no watermarks or signatures; no
+prices or currency symbols; no ads or PPC or social-media imagery; no real
+people's recognisable faces unless asked; no distorted hands or extra
+fingers; no blur, noise, artefacts or low resolution; no busy backgrounds;
+no cropped edges on the main subject; no dark or moody palette (the site is
+light and airy); no stock-photo clichés (handshakes, pointing at screens).
+
+**On receiving the file:** check it against the acceptance line; if it
+fails, say what is wrong and give a corrected prompt (keep the same ID with
+a suffix, e.g. A04-1b). If it passes, process and use it, update the log
+(`used`, file path) and the section record.
+
 ## 4. Section file template (`docs/sections/NN-name.md`)
 
 ```md
@@ -161,6 +219,10 @@ From PAGE-PLAN.md (headings, copy, data, artwork).
 
 ## Reference
 Layout and motion from REFERENCE-VIDEO.md (section and table numbers).
+
+## Assets
+Each asset: built in code / downloaded (source, licence) / requested from
+the user (ID in ASSET-REQUESTS.md, status).
 
 ## Variants
 | Variant | Idea | Shots |

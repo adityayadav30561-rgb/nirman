@@ -84,8 +84,11 @@ DESIGN-PROTOCOL section 5; code in `nirman-site/src/components/motion/`.
 - Do not invent clients, results, testimonials or stats. Use clearly marked
   placeholders (`SAMPLE` / "Placeholder") until real ones are supplied.
 - URLs: lowercase, hyphens, trailing slash.
-- Ask before downloading images; credit them in
-  `nirman-site/src/content/image-credits.ts`.
+- Assets: build in code first; ask before downloading images and credit
+  them in `nirman-site/src/content/image-credits.ts`; anything you cannot
+  make or download, write a detailed generation prompt for the user (size,
+  type, format, negatives) and log it in `docs/ASSET-REQUESTS.md`
+  (DESIGN-PROTOCOL section 6).
 
 ## Commands (run in `nirman-site/`)
 

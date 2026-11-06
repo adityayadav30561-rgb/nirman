@@ -17,7 +17,9 @@ The docs and GitHub are the only memory. Load the minimum, then continue.
 5. Read other docs (`ARCHITECTURE.md`, `REFERENCE-VIDEO.md`, `PAGE-PLAN.md`,
    `handoff.md`) only for the part the task needs: grep the heading, then
    read that line range.
-6. If STATUS lists half-finished work, resume that first.
+6. If STATUS lists half-finished work, resume that first. Check
+   `docs/ASSET-REQUESTS.md` for files the user may have sent back
+   (`requested` rows) and ask about them if the next task needs them.
 7. Reply to the user in at most four short lines: where things stand, what
    was done last, the next task, and any question that blocks it. Then start
    the next task unless it needs the user's decision.

@@ -68,6 +68,7 @@ None.
 | `docs/DESIGN-PROTOCOL.md` | design principles and the 3-4 variant process |
 | `docs/sections/` | one record per section: brief, variants, scores, choice |
 | `docs/DESIGN.md` | current tokens, type, components, motion classes |
+| `docs/ASSET-REQUESTS.md` | images/media the user generates from Claude's prompts (pending, received, used) |
 | `docs/PAGE-PLAN.md` | pages and what goes on each |
 | `docs/REFERENCE-VIDEO.md` | the reference's layout and measured motion |
 | `docs/ARCHITECTURE.md` | file map and gotchas (read gotchas 30-38) |
