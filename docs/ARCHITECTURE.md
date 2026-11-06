@@ -187,3 +187,6 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
     and place pins with the same projection (scale and translate are saved
     in the JSON).
 
+40. **`layout.tsx` edits may not reach the dev server.** Adding the footer to
+    the root layout kept serving the old HTML until the dev server was
+    restarted with a clean `.next` (same fix as gotcha 32).

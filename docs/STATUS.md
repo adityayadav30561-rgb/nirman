@@ -23,7 +23,9 @@ the end of every session. Keep it under about 60 lines. Older history:
   chosen 58/70. Results done (`docs/sections/06-results.md`): B (spotlight
   with tabs, all SAMPLE) chosen 55/70. Questions done
   (`docs/sections/07-questions.md`): A (reference layout, accordion, FAQPage
-  JSON-LD; email opens a mailto until S1) chosen 60/70.
+  JSON-LD; email opens a mailto until S1) chosen 60/70. Footer done (`docs/sections/08-footer.md`): A
+  (reference blue panel, generic social icons as placeholders) chosen 59/70.
+  **The homepage now has every section.**
 - **Motion rule (user, 2026-11-06):** only GSAP, Framer Motion or Three.js
   (DESIGN-PROTOCOL section 5). CSS keyframe motion removed; hero back to the
   calm first entrance plus scroll parallax; facts and services use GSAP
@@ -36,23 +38,25 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
-**H8 Footer (blue)** (`docs/BUILD-PLAN.md`), following the protocol:
-1. Brief `docs/sections/08-footer.md` from PAGE-PLAN section 2 (footer row)
-   and REFERENCE-VIDEO (footer: logo, blurb, columns and social icons fade
-   in one after another as the blue panel rises). Links from
-   `src/content/nav.ts`; contact details are placeholders (`site.ts`); no
-   WhatsApp / Instagram / Facebook logos in our artwork (ask which social
-   profiles exist; generic icons only until then).
-2. Lab `src/app/lab/footer/` with 3 to 4 variants; shots with
-   `tools/shots/shotpw.cjs` (README section 6) in cloud sessions.
-3. Score, choose, record, build; then H9 whole-page review.
+**H9 Whole-page review** (`docs/BUILD-PLAN.md`; DESIGN-PROTOCOL 2.9):
+1. Full-page screenshots at 375, 768, 1440, 1920 (cloud sessions:
+   Playwright, `tools/shots/README.md` section 6); scroll through so every
+   GSAP entrance has run.
+2. Check rhythm (pale page vs the two blue bands: facts and footer),
+   repeated layouts back to back, spacing scale, how often calls to action
+   appear, transitions between sections. Record in
+   `docs/sections/00-page-review.md` and fix what it finds.
+3. Homepage metadata (title, description, Open Graph) and JSON-LD
+   (Organization / WebSite; FAQPage is already in Questions). Read the
+   Next 16 metadata guide in `node_modules/next/dist/docs/` first.
 
 ## Open questions for the user
 
 - `muted` grey text is about 2.9:1 contrast (fails AA 4.5:1). Darken to
   about `#6b7079`, or keep the reference grey for short lines only?
 - Real contact details, domain, and which social profiles exist (all
-  placeholders in `src/content/site.ts`).
+  placeholders: `src/content/site.ts`; footer icons are generic with `#`
+  links in `src/content/footer.ts`).
 
 ## Half-finished work
 
@@ -83,5 +87,5 @@ the design protocol, build plan and current design docs; built the facts
 band (B) and What we do (D) through the protocol; at the user's request
 calmed the hero and moved all motion to GSAP; added the asset-prompt rule
 (ChatGPT/Gemini); built Where we work (A, dotted map), Nirman CRM (B), Results (B) and
-Questions (A, in a cloud session with Playwright shots);
+Questions (A) and the Footer (A), in a cloud session with Playwright shots;
 pushed to GitHub.

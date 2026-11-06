@@ -67,6 +67,10 @@ thirds of the H1.
 - `home/results.tsx` + `home/results-spotlight.tsx` + `home/quote-card.tsx`:
   sample testimonials; tabs of business types switch one large quote (Framer
   Motion), every card with an orange SAMPLE chip.
+- `site-footer.tsx` + `footer-parts.tsx` (in `layout.tsx`): rounded blue
+  gradient panel, logo + blurb + generic round social icons (placeholders,
+  `content/footer.ts`), Company / Services / Resources / Contact info as
+  quiet pill links (44px), rule, copyright + legal links; text 85% white.
 - `home/questions.tsx` + `home/question-list.tsx` + `home/email-ask.tsx`:
   FAQ with FAQPage JSON-LD (content `content/faq.ts`); accordion rows with a
   blue arrow that turns down (Framer Motion height; closed answers stay in the
@@ -99,6 +103,7 @@ client wrapper that renders its `<section>` and runs `useGSAP`:
 | `crm-motion.tsx` | text once at 75%; the sample conversation scrubbed to scroll (plate, icons, chat card, messages with typing dots, lead card) |
 | `results-motion.tsx` | once at 75%: spark, heading lines, sub-line, tabs stagger, quote panel rises (quote switching is Framer Motion) |
 | `questions-motion.tsx` | once at 75%: orange spark draws, heading lines, sentence and email field fade up, question rows stagger in (opening a row is Framer Motion) |
+| `footer-motion.tsx` | once at 90%: blue panel rises 60px, logo, blurb, icons, columns and bottom bar fade up in sequence (`ft-*` targets) |
 | `services-motion.tsx` | heading lines rise out of a mask (SplitText), spark draws; each row once at 85%: divider draws left to right, icon flips in (3D), title, line, then button |
 
 Static start states in `globals.css` (only under `html.js` and
