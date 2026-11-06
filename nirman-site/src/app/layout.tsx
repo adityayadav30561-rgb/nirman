@@ -26,7 +26,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${poppins.variable} antialiased`}>
+    // suppressHydrationWarning: the inline script adds the "js" class before React hydrates.
+    <html lang="en" className={`${poppins.variable} antialiased`} suppressHydrationWarning>
+      <head>
+        {/* Marks JS as available before first paint; reveal-on-scroll start states apply only under html.js. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body>
         <a
           href="#main"

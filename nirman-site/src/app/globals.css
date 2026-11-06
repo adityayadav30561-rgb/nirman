@@ -258,7 +258,39 @@ body {
   }
 }
 
+/*
+ * Reveal on scroll (components/reveal.tsx, REFERENCE-VIDEO 4.3 "Features",
+ * measured). Children wait, paused in their start state, until the section
+ * gets data-in (top about 80% down the screen). Only under html.js, so
+ * without JS everything simply shows.
+ * rv-icon: starts 2x large, below-right, shrinks into place (0.9 s,
+ *   ease-in-out), --i = item index (0.1 s apart).
+ * rv-text: fades in as its icon lands; --j = 0 title, 1 description.
+ */
+html.js [data-reveal] .rv-icon {
+  animation: rv-icon 0.9s cubic-bezier(0.45, 0, 0.25, 1) calc(var(--i, 0) * 0.1s) both;
+  animation-play-state: paused;
+}
+html.js [data-reveal] .rv-text {
+  animation: fade-in 0.5s ease-out calc(var(--i, 0) * 0.1s + 0.55s + var(--j, 0) * 0.1s) both;
+  animation-play-state: paused;
+}
+html.js [data-reveal] .draw path {
+  animation-play-state: paused;
+}
+html.js [data-reveal][data-in] :is(.rv-icon, .rv-text, .draw path) {
+  animation-play-state: running;
+}
+@keyframes rv-icon {
+  from {
+    scale: 2;
+    translate: 70% 80%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .rv-icon,
+  .rv-text,
   .intro,
   .logo-in,
   .nav-in,

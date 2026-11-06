@@ -14,8 +14,10 @@ the end of every session. Keep it under about 60 lines. Older history:
 - **Homepage:** header and hero done and verified (`docs/sections/01-hero.md`):
   hand holding a code-built Nirman CRM phone, clouds, and an entrance
   animation measured frame by frame from the reference video. Facts band
-  done (`docs/sections/02-facts.md`): first section through the protocol,
-  4 variants, B chosen 49/60.
+  done (`docs/sections/02-facts.md`): 4 variants, B chosen 49/60. What we
+  do done (`docs/sections/03-services.md`): 4 variants, D (editorial list)
+  chosen 52/60; 3D-style icons in SVG; shared reveal-on-scroll component
+  `components/reveal.tsx` with the measured icon motion.
 - **Design protocol in force** (`docs/DESIGN-PROTOCOL.md`): for every new
   section build 3 to 4 variants on `/lab/<section>/`, screenshot, score,
   choose the best, record it in `docs/sections/`, then build it.
@@ -24,17 +26,19 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
-**H3 What we do** (`docs/BUILD-PLAN.md`), following the protocol:
-1. Brief `docs/sections/03-services.md`; measure the section's motion in the
-   video (Features, about clip 5.2 to 7.0 s: icons rise left to right, then
-   text) with `tools/video/` (ask the user for the video if it is not at the
-   path in `tools/video/README.md`).
-2. Recreate `/lab/services/` (pattern: `src/app/lab/<section>/page.tsx`,
-   `notFound()` in production, `robots` noindex; variants in
-   `src/components/lab/<section>/`; each variant wrapped in `id="var-x"`).
-   Build 3 to 4 variants; shots per `tools/shots/README.md` section 5.
-3. Score, choose, record; build the winner with the shared reveal-on-scroll
-   component (H10).
+**H4 Where we work** (`docs/BUILD-PLAN.md`), following the protocol:
+1. Brief `docs/sections/04-map.md` (PAGE-PLAN section 2 row 5: dotted world
+   map in code, India office plus markets we serve US, UAE, UK; pins say
+   "markets we serve"; Service / Timeline / Get a quote bar). Measure the
+   map section in the video (about clip 6.0 to 9.4 s: pins pop in, big one
+   first, search bar last) with `tools/video/` (adapt
+   `track_features.py`; ask the user for the video if it is missing).
+2. Lab pattern: `src/app/lab/<section>/page.tsx` (`notFound()` in
+   production, noindex), variants in `src/components/lab/<section>/`, each
+   wrapped in `id="var-x"`; give every SVG with gradients a unique id
+   (gotcha 35). Shots per `tools/shots/README.md` section 5; wait about 2 s
+   after showing a variant so its reveal finishes.
+3. Score, choose, record; build the winner inside `<Reveal>`.
 
 ## Open questions for the user
 
@@ -68,4 +72,5 @@ None.
 Planned the rebuild (PAGE-PLAN, REFERENCE-VIDEO), removed the old site,
 built header and hero with the hand, clouds and a measured entrance; wrote
 the design protocol, build plan and current design docs; built the facts
-band through the protocol (variants A-D, B chosen); pushed all to GitHub.
+band (B) and What we do (D) through the protocol, plus the shared reveal
+component; pushed all to GitHub.

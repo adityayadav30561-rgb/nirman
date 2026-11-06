@@ -173,8 +173,15 @@ When a section enters the lower part of the card (about 60 percent down):
 - Hand-drawn accents draw in after their heading has appeared.
 
 All timings and distances in this section are **estimates**. Specific cases:
-- **Features:** the three icons appear left to right with a small rise, then
-  their titles and text.
+- **Features (MEASURED 2026-11-06, `tools/video/track_features.py`, clip
+  5.0 to 6.4 s, 1440px units relative to the section heading):** the
+  heading is static. The three icons first sit about **2x their final size**,
+  60 to 80px right of and 45 to 80px below their final spot, in a wide row
+  beside the heading. When the section top is about 80% down the screen they
+  **shrink and glide into place over about 0.9 s, ease-in-out** (slow start,
+  fastest in the middle), left to right about 0.1 s apart (icon 1 about
+  5.2 to 5.9 s, icon 2 to 6.15 s, icon 3 to 6.3 s). Each title fades in as its
+  icon lands, its description about 0.1 s later; no visible rise.
 - **Map:** pins pop in with a small scale; the big centre pin is the largest
   and arrives first. The search bar fades in last.
 - **Community:** the avatars rise from the bottom of the section into place

@@ -50,6 +50,14 @@ thirds of the H1.
   figures (value with a half-size unit) over 0.8rem labels at white/85; thin
   white/25 dividers; 2 x 2 on phones, one row from 768px, heading beside the
   row from 1024px. Data in `content/facts.ts`.
+- `home/services.tsx`: "What we do": heading left (spark, `h2`, grey line),
+  editorial list right: one row per service with `ServiceIcon`, title,
+  line, right-aligned dark button with arrow. Data `content/services.ts`.
+- `home/service-icons.tsx`: four 3D-style SVG icons (websites, seo,
+  software, marketing); pass a page-unique `uid`.
+- `reveal.tsx`: client wrapper (`as`, default `section`) that adds `data-in`
+  when the element is about 80% down the screen; children animate with
+  `rv-icon` / `rv-text` (set `--i` item index, `--j` 0 title / 1 line).
 - `home/cloud.tsx`: flat-bottomed cartoon cloud (white, blue-grey underside).
 - `home/phone-screen.tsx`: Nirman CRM mobile UI in HTML (sample data).
 - `logo.tsx`: plan-view mark (ink, orange threshold) + wordmark.
@@ -62,7 +70,10 @@ All entrance timing starts from `--t0` (0.1 s after load). Curves:
 `draw` (SVG paths with `pathLength=1`, `--d` and `--dur`), `phone-enter`
 (`phone-move` + `phone-tilt`), `phone-float`, `clouds-follow`, `cloud`,
 `cloud-far`. Every class is switched off under `prefers-reduced-motion`.
-Section reveals on scroll (REFERENCE-VIDEO 4.3) are still to build (H10).
+Section reveals on scroll: `Reveal` + `rv-icon` / `rv-text` (paused start
+state under `html.js`, running once `data-in`); `.draw` paths inside a
+`Reveal` also wait for it. An inline script in `layout.tsx` adds `js` to
+`<html>` before paint, so without JS content just shows.
 
 ## Artwork
 

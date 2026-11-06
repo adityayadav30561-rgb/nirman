@@ -19,11 +19,13 @@ E:\nirman2\
   nirman-site\              the Next.js app
     src\app\                layout.tsx (Poppins, metadata, header), page.tsx (homepage),
                             globals.css (tokens, container, motion system), favicon.ico
-    src\components\         site-header.tsx (client), logo.tsx
-    src\components\home\    hero.tsx, phone-screen.tsx, cloud.tsx
+    src\components\         site-header.tsx (client), reveal.tsx (client), logo.tsx
+    src\components\home\    hero.tsx, phone-screen.tsx, cloud.tsx, facts.tsx, services.tsx,
+                            service-icons.tsx
     src\components\ui\      button.tsx (ButtonLink)
     src\components\lab\     section variants while choosing (protocol); dev-only
-    src\content\            site.ts (brand, placeholders), nav.ts, image-credits.ts
+    src\content\            site.ts (brand, placeholders), nav.ts, image-credits.ts, facts.ts,
+                            services.ts
     scripts\cut-hand.py     builds the hero hand layers from the Unsplash photo
     public\images\hero\     hand-back.webp, hand-front.webp
 ```
@@ -38,12 +40,12 @@ TypeScript, ESLint 9 flat config, lucide-react icons. Images via
 
 ## Client vs server components
 
-Client (`"use client"`): site-header. Everything else is a server component.
+Client (`"use client"`): site-header, reveal. Everything else is a server component.
 
 ## Gotchas (add new ones here)
 
 Gotchas 3-29 come from the old v2 site; some mention code that is now in
-`old-site/`. The general lessons still apply. Newest: 30-34.
+`old-site/`. The general lessons still apply. Newest: 30-35.
 
 1. **Next 16 is different.** Read `nirman-site/node_modules/next/dist/docs/`
    before Next-specific code. `next lint` is gone; `middleware` is `proxy`;
@@ -151,3 +153,7 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
 31. **Bulk deletes are blocked** by the built-in safety check (`rm -rf` on
     several folders). Do not work around it: ask the user, or move folders to
     a gitignored archive with their approval (2026-11-06: `old-site/`).
+35. **SVG gradient ids are global.** Two inline SVGs with the same
+    `<linearGradient id>` share one definition; if the first copy sits in a
+    hidden element (display: none), every other copy loses its fill. Give
+    each icon instance a unique id prefix (`ServiceIcon uid`).

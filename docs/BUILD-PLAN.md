@@ -12,7 +12,8 @@ best). Tick a task only when it is built, verified, recorded and pushed.
       and measured entrance
 - [x] H2 Facts band (blue): 2 h reply, 48 h proposal, 3 to 6 wk website,
       100% your code and data (`02-facts.md`, variant B)
-- [ ] H3 What we do: four services with icons and buttons (`03-services.md`)
+- [x] H3 What we do: four services with icons and buttons (`03-services.md`,
+      variant D, editorial list)
 - [ ] H4 Where we work: dotted world map in code, India office plus markets
       we serve (US, UAE, UK), Service / Timeline / Get a quote bar
       (`04-map.md`)
@@ -23,8 +24,9 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 - [ ] H8 Footer (blue) (`08-footer.md`)
 - [ ] H9 Whole-page review at 375 / 768 / 1440 / 1920
       (`00-page-review.md`); homepage metadata and JSON-LD
-- [ ] H10 Shared reveal-on-scroll component (REFERENCE-VIDEO 4.3), built
-      with H3 (the facts band has no motion of its own) and reused
+- [x] H10 Shared reveal-on-scroll component (REFERENCE-VIDEO 4.3):
+      `components/reveal.tsx` + `rv-icon` / `rv-text` in globals.css, built
+      with H3; reuse for every later section
 
 ## P: Other pages (option B, 18 pages; order can change with the user)
 
