@@ -62,18 +62,26 @@ thirds of the H1.
 - `home/phone-screen.tsx`: Nirman CRM mobile UI in HTML (sample data).
 - `logo.tsx`: plan-view mark (ink, orange threshold) + wordmark.
 
-## Motion system (`globals.css`)
+## Motion system (GSAP; rules in DESIGN-PROTOCOL section 5)
 
-All entrance timing starts from `--t0` (0.1 s after load). Curves:
-`--ease-cubic` (measured ease-out cubic) and `--ease-out`. Classes: `intro`
-(fade), `logo-in`, `nav-in`, `cta-in`, `cta-dark-in`, `hero-h1`, `hero-btn`,
-`draw` (SVG paths with `pathLength=1`, `--d` and `--dur`), `phone-enter`
-(`phone-move` + `phone-tilt`), `phone-float`, `clouds-follow`, `cloud`,
-`cloud-far`. Every class is switched off under `prefers-reduced-motion`.
-Section reveals on scroll: `Reveal` + `rv-icon` / `rv-text` (paused start
-state under `html.js`, running once `data-in`); `.draw` paths inside a
-`Reveal` also wait for it. An inline script in `layout.tsx` adds `js` to
-`<html>` before paint, so without JS content just shows.
+All motion lives in `src/components/motion/` (GSAP 3.15.0 pinned, with
+ScrollTrigger and SplitText; Framer Motion and Three.js allowed when they
+fit). `gsap.ts` registers plugins and exports `MOTION_OK`; each section has a
+client wrapper that renders its `<section>` and runs `useGSAP`:
+
+| Wrapper | What it does |
+|---|---|
+| `site-header.tsx` (inline) | logo fades, nav items 0.1 s apart, dark button grey to dark, outline button |
+| `hero-motion.tsx` | calm load: headline from a 40% ghost, phone swings in once (from 120% right, 20deg, to 8deg, no overshoot), subtitle and button fade, sparks, loop and underline draw, clouds fade in; then float and cloud drift. Scroll (scrubbed): text and phone rise, phone straightens, front clouds faster than back |
+| `facts-motion.tsx` | once at 92%: band wipes open from the left, heading fades up, figures rise out of a mask 0.08 s apart, labels fade |
+| `services-motion.tsx` | heading lines rise out of a mask (SplitText), spark draws; each row once at 85%: divider draws left to right, icon flips in (3D), title, line, then button |
+
+Static start states in `globals.css` (only under `html.js` and
+`prefers-reduced-motion: no-preference`): `gs-hide` (hidden), `gs-ghost`
+(40% opacity), `gs-draw` (strokes hidden), `gs-clip-x` (clipped from the
+right). The first three have a 2.5 s failsafe that shows them if GSAP never
+runs. `.draw path` uses `stroke-dasharray: 1 2` with `pathLength=1`. A
+`beforeInteractive` script in `layout.tsx` adds `js` to `<html>`.
 
 ## Artwork
 

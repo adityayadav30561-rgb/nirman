@@ -7,15 +7,13 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { ButtonLink } from "@/components/ui/button";
 import { headerCtas, mainNav, serviceLinks } from "@/content/nav";
-
-/** Delay (s) for the load entrance; see docs/REFERENCE-VIDEO.md 4.2. */
-const d = (s: number) => ({ "--d": `${s}s` }) as React.CSSProperties;
+import { gsap, MOTION_OK, useGSAP } from "@/components/motion/gsap";
 
 function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname.startsWith(href);
 }
 
-function ServicesMenu({ active, delay }: { active: boolean; delay: number }) {
+function ServicesMenu({ active }: { active: boolean }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -34,7 +32,7 @@ function ServicesMenu({ active, delay }: { active: boolean; delay: number }) {
   }, [open]);
 
   return (
-    <div ref={ref} className="intro relative" style={d(delay)} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+    <div ref={ref} className="hd-item gs-hide relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <button
         type="button"
         aria-expanded={open}
@@ -83,25 +81,44 @@ function ServicesMenu({ active, delay }: { active: boolean; delay: number }) {
 export function SiteHeader() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Load entrance (GSAP, the calm first version): logo, nav items 0.1 s apart,
+  // then the dark button (grey to dark) and the outline button. Start states
+  // (gs-hide) are in globals.css. Runs once per page load (the header persists).
+  useGSAP(
+    () => {
+      gsap.matchMedia().add(MOTION_OK, () => {
+        const q = gsap.utils.selector(headerRef);
+        const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+        tl.fromTo(q(".hd-logo"), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, 0);
+        tl.fromTo(q(".hd-item"), { autoAlpha: 0, y: 6 }, { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.1 }, 0.2);
+        tl.fromTo(q(".hd-menu"), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, 0.3);
+        tl.fromTo(q(".hd-cta-dark"), { autoAlpha: 0, y: 6, backgroundColor: "#c9ced6" }, { autoAlpha: 1, y: 0, duration: 0.4 }, 0.4);
+        tl.to(q(".hd-cta-dark"), { backgroundColor: "#1b1f27", duration: 0.4, clearProps: "backgroundColor" }, 0.5);
+        tl.fromTo(q(".hd-cta"), { autoAlpha: 0, y: 6 }, { autoAlpha: 1, y: 0, duration: 0.4 }, 0.7);
+      });
+    },
+    { scope: headerRef },
+  );
 
   return (
-    <header className="relative z-30">
+    <header ref={headerRef} className="relative z-30">
       <div className="container-page flex h-[5.5rem] items-center justify-between gap-6">
-        <Link href="/" aria-label="Nirman home" className="logo-in shrink-0">
+        <Link href="/" aria-label="Nirman home" className="hd-logo gs-hide shrink-0">
           <Logo />
         </Link>
 
         <nav aria-label="Main" className="hidden lg:block">
-          <ul className="nav-in flex items-center gap-9 text-[0.82rem] text-ink-2">
-            {mainNav.map((item, i) => (
+          <ul className="flex items-center gap-9 text-[0.82rem] text-ink-2">
+            {mainNav.map((item) => (
               <li key={item.href}>
                 {item.children ? (
-                  <ServicesMenu active={isActive(pathname, item.href)} delay={0.05 + i * 0.1} />
+                  <ServicesMenu active={isActive(pathname, item.href)} />
                 ) : (
                   <Link
                     href={item.href}
-                    className="intro nav-item"
-                    style={d(0.05 + i * 0.1)}
+                    className="hd-item gs-hide nav-item"
                     aria-current={isActive(pathname, item.href) ? "page" : undefined}
                     data-active={isActive(pathname, item.href) || undefined}
                   >
@@ -114,18 +131,17 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <ButtonLink href={headerCtas.primary.href} size="sm" className="cta-dark-in" style={d(0.15)}>
+          <ButtonLink href={headerCtas.primary.href} size="sm" className="hd-cta-dark gs-hide">
             {headerCtas.primary.label}
           </ButtonLink>
-          <ButtonLink href={headerCtas.secondary.href} size="sm" variant="outline" className="cta-in" style={d(0.45)}>
+          <ButtonLink href={headerCtas.secondary.href} size="sm" variant="outline" className="hd-cta gs-hide">
             {headerCtas.secondary.label}
           </ButtonLink>
         </div>
 
         <button
           type="button"
-          className="cta-in grid size-11 place-items-center rounded-full bg-white text-ink shadow-[0_2px_8px_rgb(5_7_12/0.08)] lg:hidden"
-          style={d(0.15)}
+          className="hd-menu gs-hide grid size-11 place-items-center rounded-full bg-white text-ink shadow-[0_2px_8px_rgb(5_7_12/0.08)] lg:hidden"
           aria-expanded={mobileOpen}
           aria-controls="mobile-menu"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}

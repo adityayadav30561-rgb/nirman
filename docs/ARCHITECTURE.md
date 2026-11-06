@@ -19,7 +19,8 @@ E:\nirman2\
   nirman-site\              the Next.js app
     src\app\                layout.tsx (Poppins, metadata, header), page.tsx (homepage),
                             globals.css (tokens, container, motion system), favicon.ico
-    src\components\         site-header.tsx (client), reveal.tsx (client), logo.tsx
+    src\components\         site-header.tsx (client, GSAP entrance), logo.tsx
+    src\components\motion\  gsap.ts (plugins), hero-motion, facts-motion, services-motion (client)
     src\components\home\    hero.tsx, phone-screen.tsx, cloud.tsx, facts.tsx, services.tsx,
                             service-icons.tsx
     src\components\ui\      button.tsx (ButtonLink)
@@ -34,18 +35,19 @@ E:\nirman2\
 
 Next.js 16.4.2 (App Router, Turbopack, `cacheComponents: true`,
 `partialPrefetching: true`), React 19.3, Tailwind 4 (`@theme` in CSS),
-TypeScript, ESLint 9 flat config, lucide-react icons. Images via
+TypeScript, ESLint 9 flat config, lucide-react icons, GSAP 3.15.0 (pinned) +
+@gsap/react. Images via
 `next/image` (`images.qualities: [70, 80]`; pass `quality={80}`; use
 `preload`, not the deprecated `priority`).
 
 ## Client vs server components
 
-Client (`"use client"`): site-header, reveal. Everything else is a server component.
+Client (`"use client"`): site-header and `components/motion/*`. Everything else is a server component.
 
 ## Gotchas (add new ones here)
 
 Gotchas 3-29 come from the old v2 site; some mention code that is now in
-`old-site/`. The general lessons still apply. Newest: 30-35.
+`old-site/`. The general lessons still apply. Newest: 30-38.
 
 1. **Next 16 is different.** Read `nirman-site/node_modules/next/dist/docs/`
    before Next-specific code. `next lint` is gone; `middleware` is `proxy`;
@@ -157,3 +159,21 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
     `<linearGradient id>` share one definition; if the first copy sits in a
     hidden element (display: none), every other copy loses its fill. Give
     each icon instance a unique id prefix (`ServiceIcon uid`).
+36. **The in-app browser pane can run the page as hidden**
+    (`document.visibilityState` "hidden", about 3 frames a second), and
+    GSAP's lag smoothing then makes animations crawl about 10x slower, so
+    screenshots look frozen. To check motion: in dev, `window.__gsap` and
+    `window.__ST` exist (`components/motion/gsap.ts`). Run
+    `__gsap.ticker.lagSmoothing(0)`, or seek: `const r = __gsap.exportRoot();
+    r.pause(); r.seek(t)` (load timelines only; it breaks scroll triggers, so
+    reload afterwards). Read computed styles rather than trusting
+    screenshots. Reloading restores the scroll position: set
+    `history.scrollRestoration = 'manual'` and `scrollTo(0, 0)` first.
+37. **CSS failsafe animations beat inline styles.** The `gs-*` failsafes
+    (2.5 s) override GSAP's inline values once they fire, so only use them
+    for properties GSAP has finished with by then (visibility, the hero's
+    opacity and strokes). Never on anything scroll-triggered.
+38. **Tailwind 4 `rotate-*` uses the CSS `rotate` property**, which stacks
+    with GSAP's transform rotation. On GSAP targets use
+    `[transform:rotate(8deg)]` instead.
+

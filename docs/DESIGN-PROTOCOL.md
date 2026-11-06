@@ -6,7 +6,8 @@ account: follow it without being asked.
 
 Short version: **for each section, Claude builds 3 to 4 genuinely different
 designs, screenshots them, scores them against the principles below, picks
-the best, records why, and only then builds the winner into the page.**
+the best, records why, and only then builds the winner into the page.
+All motion is GSAP, Framer Motion or Three.js (section 5).**
 
 ## 1. Principles (the bar every design must clear)
 
@@ -27,9 +28,10 @@ the best, records why, and only then builds the winner into the page.**
    forever. Never size with bare `vw`.
 6. **Mobile is designed, not squeezed.** Check 375, 768, 1024, 1440 and
    1920. No horizontal scroll. Tap targets at least 44px.
-7. **Motion follows the reference video** (`docs/REFERENCE-VIDEO.md`):
-   measured, purposeful, ease-out, no layout shift, and fully disabled under
-   `prefers-reduced-motion`.
+7. **Motion: GSAP, Framer Motion or Three.js only** (user rule,
+   2026-11-06). See section 5. Calm on load, richer on scroll; purposeful,
+   no layout shift, and fully off under `prefers-reduced-motion`. The
+   reference video inspires the feel; it is not copied frame for frame.
 
 ### Every section
 8. **Concrete, not generic.** Each section shows something real: product UI
@@ -64,8 +66,9 @@ the best, records why, and only then builds the winner into the page.**
    `tools/video/README.md`); add the measured table to REFERENCE-VIDEO
    section 4.
 3. **Build 3 to 4 variants.** They must differ in layout or idea, not just
-   colour. Variant A stays closest to the reference; B to D explore
-   alternatives (for example a different content arrangement, a stronger
+   colour, and each comes with a motion concept built with the allowed
+   libraries (section 5). Variant A stays closest to the reference; B to D
+   explore alternatives (for example a different content arrangement, a stronger
    product visual, a more editorial layout). Build them as real components in
    `nirman-site/src/components/lab/<section>/` and show them on the dev-only
    route `/lab/<section>/` (it must return 404 in production and be
@@ -98,14 +101,49 @@ the best, records why, and only then builds the winner into the page.**
 |---|---|---|
 | Clarity and hierarchy | 3 | The point of the section is clear in 3 seconds |
 | Fit with the reference look and motion | 2 | Feels like the same site as the reference video |
+| Motion fit | 2 | Scroll motion (GSAP / Framer / Three) that explains or delights, never in the way |
 | Conversion | 2 | The main action is obvious and well placed |
 | Mobile quality | 2 | Designed for 375px, not just stacked |
 | Distinctiveness | 1 | Specific to Nirman, not a generic template |
 | Accessibility | 1 | Contrast, order, focus and tap sizes are right |
 | Performance cost | 1 | Little JS, light images, no layout shift |
 
-Total = sum of score x weight (max 60). A variant that breaks a client rule
-(principle 15) is out, whatever its score.
+Total = sum of score x weight (max 70 since the motion row was added on
+2026-11-06; earlier records are out of 60). A variant that breaks a client
+rule (principle 15) is out, whatever its score.
+
+## 5. Motion (user rule, 2026-11-06)
+
+**Allowed:** only these three, each for what it does best.
+- **GSAP** (`gsap` 3.15.0 pinned, with ScrollTrigger and SplitText):
+  load timelines, scroll-triggered reveals, scrubbed parallax, pinning,
+  text line or word reveals, SVG line drawing. The default choice.
+- **Framer Motion** (`motion` package, `motion/react`): component state
+  motion, such as hover and tap, layout changes, tabs, accordions,
+  enter and exit of menus and modals.
+- **Three.js** (with `@react-three/fiber`): real 3D scenes, such as a globe,
+  product objects or particles. Only where 3D adds meaning; lazy-load it,
+  render on demand, and keep a static fallback image.
+
+**Not allowed:** hand-written CSS `@keyframes` animations for sections, or
+other animation libraries. CSS transitions are fine for simple hover or
+focus colour changes. The only CSS keyframes left are the start-state
+failsafes in `globals.css`.
+
+**How to build it** (see `src/components/motion/`):
+- Import from `components/motion/gsap.ts` (registers plugins once).
+- One small client wrapper per section (`<XMotion>`) that renders the
+  section element and runs `useGSAP` scoped to it; the section's markup
+  stays a server component and marks targets with short class names.
+- Wrap everything in `gsap.matchMedia().add(MOTION_OK, ...)`, so reduced
+  motion gets the final state.
+- Above the fold: set start states in CSS (`gs-hide`, `gs-ghost`,
+  `gs-draw`, `gs-clip-x`, only under `html.js`) so nothing flashes before
+  hydration; below the fold: `gsap.set` in the wrapper.
+- Load motion stays calm (the user found the measured hero entrance too
+  much); scroll motion carries the richness.
+- Verify by seeking timelines (ARCHITECTURE gotcha 36), at 375, 768, 1440
+  and 1920, and with reduced motion.
 
 ## 4. Section file template (`docs/sections/NN-name.md`)
 
@@ -135,7 +173,8 @@ Layout and motion from REFERENCE-VIDEO.md (section and table numbers).
 |---|---|---|---|---|
 | Clarity (3) | | | | |
 | ... | | | | |
-| Total /60 | | | | |
+| Motion fit (2) | | | | |
+| Total /70 | | | | |
 
 ## Choice
 Winner and why (2-3 sentences). User override, if any.

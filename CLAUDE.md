@@ -37,6 +37,11 @@ recorded in `docs/sections/NN-name.md` (with screenshots in
 `docs/sections/shots/`), then built. Show the user the choice; they may
 override.
 
+**Motion rule (user, 2026-11-06):** animation only with GSAP
+(ScrollTrigger, SplitText), Framer Motion or Three.js; no CSS keyframe
+animations for sections. Calm on load, richer on scroll. Details:
+DESIGN-PROTOCOL section 5; code in `nirman-site/src/components/motion/`.
+
 ## Record everything (multi-session memory)
 
 - After each finished, verified task: tick it in `docs/BUILD-PLAN.md`,
@@ -58,7 +63,8 @@ override.
   searches to the `cavecrew-investigator` subagent; prefer `ctx_*` tools for
   long output; downscale screenshots (`tools/shots/README.md`).
 - After editing `globals.css`, restart the dev server with a clean `.next`
-  (ARCHITECTURE gotcha 32).
+  (ARCHITECTURE gotcha 32). To check motion in the browser pane, see
+  gotcha 36 (the pane can throttle animation).
 
 ## End of every session ("wrap up", or before the user clears)
 

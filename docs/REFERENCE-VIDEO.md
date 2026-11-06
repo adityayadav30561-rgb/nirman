@@ -129,6 +129,12 @@ reading a section, and one full stop to let the carousel play.
 
 ### 4.2 Hero entrance (MEASURED 2026-11-06, per-frame tracking)
 
+> **Not used on the site (user, 2026-11-06):** built exactly, it felt like
+> too much. The hero uses the calmer first version, in GSAP
+> (`docs/sections/01-hero.md` "Motion rework"). All site motion is GSAP,
+> Framer Motion or Three.js (DESIGN-PROTOCOL section 5); the measurements
+> here and in 4.3 are inspiration for timing and feel, not a script.
+
 Measured with `track_hero.py` (OpenCV, every 0.05 s, 60 fps source): card
 edges, phone bezel (centre and angle via min-area rectangle), headline left
 edge and darkness, first nav item, Login pill, button darkness. Positions are

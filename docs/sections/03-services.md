@@ -81,3 +81,14 @@ user may override (A is the most literal match to the video).
 - Section heights: 1038px at 375, 757px at 768, 731px at 1440. Heading's left
   edge = hero H1's left edge (1920 check). No horizontal scroll.
 - Status: built and verified 2026-11-06. Lab code deleted; shots kept.
+
+## Motion rework (2026-11-06, user rule: GSAP / Framer / Three only)
+The CSS "icons shrink from 2x" reveal and `components/reveal.tsx` were
+removed. Concepts weighed: (1) heading lines rise out of a mask + per-row
+divider draw + 3D icon flip, (2) pinned list that highlights rows while
+scrolling, (3) scrubbed icon parallax. Chose (1): editorial and quick; (2)
+makes people scroll a long way for four rows, (3) adds little. Built in
+`components/motion/services-motion.tsx`: SplitText lines (mask, re-split on
+resize) at 80%; each row once at 85% (ScrollTrigger.batch): divider draws
+left to right (0.9 s), icon flips in (rotationY -75 to 0, back ease), title
+and line fade up, then the button.

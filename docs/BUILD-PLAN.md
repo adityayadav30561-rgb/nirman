@@ -14,6 +14,9 @@ best). Tick a task only when it is built, verified, recorded and pushed.
       100% your code and data (`02-facts.md`, variant B)
 - [x] H3 What we do: four services with icons and buttons (`03-services.md`,
       variant D, editorial list)
+- [x] H3b Motion rework (user rule): CSS keyframes removed; GSAP for header,
+      hero (calm load + scroll parallax), facts and services; protocol
+      section 5 (GSAP / Framer Motion / Three.js only)
 - [ ] H4 Where we work: dotted world map in code, India office plus markets
       we serve (US, UAE, UK), Service / Timeline / Get a quote bar
       (`04-map.md`)
@@ -24,9 +27,8 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 - [ ] H8 Footer (blue) (`08-footer.md`)
 - [ ] H9 Whole-page review at 375 / 768 / 1440 / 1920
       (`00-page-review.md`); homepage metadata and JSON-LD
-- [x] H10 Shared reveal-on-scroll component (REFERENCE-VIDEO 4.3):
-      `components/reveal.tsx` + `rv-icon` / `rv-text` in globals.css, built
-      with H3; reuse for every later section
+- [x] H10 Shared motion setup: `components/motion/gsap.ts` + one client
+      wrapper per section (replaced the first CSS `Reveal`, 2026-11-06)
 
 ## P: Other pages (option B, 18 pages; order can change with the user)
 

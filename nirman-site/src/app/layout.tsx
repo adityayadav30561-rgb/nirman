@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
+import Script from "next/script";
 import { site } from "@/content/site";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
@@ -28,11 +29,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     // suppressHydrationWarning: the inline script adds the "js" class before React hydrates.
     <html lang="en" className={`${poppins.variable} antialiased`} suppressHydrationWarning>
-      <head>
-        {/* Marks JS as available before first paint; reveal-on-scroll start states apply only under html.js. */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
-      </head>
       <body>
+        {/* Marks JS as available before hydration; GSAP start states (gs-*) apply only under html.js. */}
+        <Script id="js-flag" strategy="beforeInteractive">
+          {"document.documentElement.classList.add('js')"}
+        </Script>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-white"

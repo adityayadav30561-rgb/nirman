@@ -82,3 +82,12 @@ override.
 - Verified at 375, 768, 1440, 1920: no horizontal scroll, figures' left edge
   lines up with the hero headline, width capped at 84rem.
 - Lab code deleted after the choice; screenshots stay in `shots/`.
+
+## Motion rework (2026-11-06, user rule: GSAP / Framer / Three only)
+Concepts weighed: (1) band wipes open + figures rise out of a mask, (2) band
+width scrubbed with scroll, (3) count-up numbers. Chose (1): confident, light,
+works when the band is already on screen at load; (2) fights the full-bleed
+look, (3) means nothing for "2 h" or "3 to 6 wk". Built in
+`components/motion/facts-motion.tsx`: once at 92% of the screen, band
+`clip-path` wipes from the left (0.9 s), heading fades up, figures rise out
+of a mask 0.08 s apart, labels fade. Start clip is CSS (`gs-clip-x`).

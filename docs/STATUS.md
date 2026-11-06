@@ -12,12 +12,15 @@ the end of every session. Keep it under about 60 lines. Older history:
   18 pages, full-width page, keyword headline, Poppins, four true facts,
   SAMPLE results, artwork built in code or downloaded with permission.
 - **Homepage:** header and hero done and verified (`docs/sections/01-hero.md`):
-  hand holding a code-built Nirman CRM phone, clouds, and an entrance
-  animation measured frame by frame from the reference video. Facts band
+  hand holding a code-built Nirman CRM phone, clouds, a calm GSAP load
+  entrance and scroll parallax. Facts band
   done (`docs/sections/02-facts.md`): 4 variants, B chosen 49/60. What we
   do done (`docs/sections/03-services.md`): 4 variants, D (editorial list)
-  chosen 52/60; 3D-style icons in SVG; shared reveal-on-scroll component
-  `components/reveal.tsx` with the measured icon motion.
+  chosen 52/60; 3D-style icons in SVG.
+- **Motion rule (user, 2026-11-06):** only GSAP, Framer Motion or Three.js
+  (DESIGN-PROTOCOL section 5). CSS keyframe motion removed; hero back to the
+  calm first entrance plus scroll parallax; facts and services use GSAP
+  scroll reveals (`src/components/motion/`).
 - **Design protocol in force** (`docs/DESIGN-PROTOCOL.md`): for every new
   section build 3 to 4 variants on `/lab/<section>/`, screenshot, score,
   choose the best, record it in `docs/sections/`, then build it.
@@ -38,7 +41,10 @@ the end of every session. Keep it under about 60 lines. Older history:
    wrapped in `id="var-x"`; give every SVG with gradients a unique id
    (gotcha 35). Shots per `tools/shots/README.md` section 5; wait about 2 s
    after showing a variant so its reveal finishes.
-3. Score, choose, record; build the winner inside `<Reveal>`.
+3. Each variant carries a motion concept (GSAP / Framer / Three; a globe
+   in Three.js is a natural candidate here). Score on the 70-point rubric
+   (motion row added), choose, record; build the winner with a
+   `components/motion/map-motion.tsx` wrapper.
 
 ## Open questions for the user
 
@@ -64,7 +70,7 @@ None.
 | `docs/DESIGN.md` | current tokens, type, components, motion classes |
 | `docs/PAGE-PLAN.md` | pages and what goes on each |
 | `docs/REFERENCE-VIDEO.md` | the reference's layout and measured motion |
-| `docs/ARCHITECTURE.md` | file map and gotchas (read gotchas 30-34) |
+| `docs/ARCHITECTURE.md` | file map and gotchas (read gotchas 30-38) |
 | `tools/video/README.md` | how to measure the reference video |
 
 ## Last session (2026-11-06)
@@ -72,5 +78,5 @@ None.
 Planned the rebuild (PAGE-PLAN, REFERENCE-VIDEO), removed the old site,
 built header and hero with the hand, clouds and a measured entrance; wrote
 the design protocol, build plan and current design docs; built the facts
-band (B) and What we do (D) through the protocol, plus the shared reveal
-component; pushed all to GitHub.
+band (B) and What we do (D) through the protocol; then, at the user's
+request, calmed the hero and moved all motion to GSAP; pushed to GitHub.

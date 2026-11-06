@@ -1,12 +1,14 @@
-import type { CSSProperties } from "react";
+import type { SVGProps } from "react";
 
 /**
  * Small flat-bottomed cartoon cloud, as in the reference hero: white with a
  * faint blue-grey underside. Sized by width; height follows the viewBox.
+ * Drift (GSAP, components/motion/hero-motion.tsx) reads data-dx (px) and
+ * data-t (seconds) when the cloud has the class `h-drift`.
  */
-export function Cloud({ className = "", style }: { className?: string; style?: CSSProperties }) {
+export function Cloud({ className = "", ...rest }: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 120 46" aria-hidden className={`pointer-events-none drop-shadow-[0_3px_4px_rgb(40_70_120/0.10)] ${className}`} style={style}>
+    <svg viewBox="0 0 120 46" aria-hidden className={`pointer-events-none drop-shadow-[0_3px_4px_rgb(40_70_120/0.10)] ${className}`} {...rest}>
       <defs>
         <linearGradient id="cloud-fill" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0.45" stopColor="#ffffff" />

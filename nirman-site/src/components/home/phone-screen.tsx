@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import { Bell, CalendarClock, ChartNoAxesColumn, House, MessageCircle, Plus, Users } from "lucide-react";
 import { Cloud } from "@/components/home/cloud";
 
@@ -19,8 +18,8 @@ export function PhoneScreen() {
   return (
     <div className="relative isolate flex h-full flex-col bg-[linear-gradient(180deg,#dcebfb_0%,#eef5fd_22%,#ffffff_42%)] text-ink">
       {/* the app's sky: two small clouds behind the heading */}
-      <Cloud className="cloud absolute -z-10 top-[3.4rem] right-[0.6rem] w-[3.4rem] opacity-90" style={{ "--d": "0.9s", "--dx": "-6px", "--t": "9s" } as CSSProperties} />
-      <Cloud className="cloud absolute -z-10 top-[6.6rem] right-[3.6rem] w-[2.4rem] opacity-80" style={{ "--d": "1s", "--dx": "5px", "--t": "11s" } as CSSProperties} />
+      <Cloud className="h-drift absolute -z-10 top-[3.4rem] right-[0.6rem] w-[3.4rem] opacity-90" data-dx={-6} data-t={9} />
+      <Cloud className="h-drift absolute -z-10 top-[6.6rem] right-[3.6rem] w-[2.4rem] opacity-80" data-dx={5} data-t={11} />
 
       {/* status bar */}
       <div className="flex items-center justify-between px-5 pt-3 text-[0.55rem] font-semibold">
