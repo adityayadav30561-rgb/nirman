@@ -64,6 +64,8 @@ thirds of the H1.
   India-to-market arcs, reveal mask) and `home/quote-bar.tsx` (`QuoteBar`:
   pill GET form with Service and Timeline selects and a dark Get a quote
   button; reusable on other pages).
+- `home/crm.tsx` (Nirman CRM): text + four check points + Book a demo;
+  pale-blue plate with channel icons, a sample chat card and a lead card.
 - `ui/select.tsx` (`Select`): the site's dropdown, used instead of native
   `<select>` everywhere (user found the browser's list ugly). White
   rounded-2xl list with a soft shadow, rows highlight in `wash`, the chosen
@@ -86,6 +88,7 @@ client wrapper that renders its `<section>` and runs `useGSAP`:
 | `hero-motion.tsx` | calm load: headline from a 40% ghost, phone swings in once (from 120% right, 20deg, to 8deg, no overshoot), subtitle and button fade, sparks, loop and underline draw, clouds fade in; then float and cloud drift. Scroll (scrubbed): text and phone rise, phone straightens, front clouds faster than back |
 | `facts-motion.tsx` | once at 92%: band wipes open from the left, heading fades up, figures rise out of a mask 0.08 s apart, labels fade |
 | `map-motion.tsx` | once at 75%: map revealed by a circle growing from India, India pin drops, arcs draw to each market and its pin pops, heading lines rise, bar rises; India pin pulses |
+| `crm-motion.tsx` | text once at 75%; the sample conversation scrubbed to scroll (plate, icons, chat card, messages with typing dots, lead card) |
 | `services-motion.tsx` | heading lines rise out of a mask (SplitText), spark draws; each row once at 85%: divider draws left to right, icon flips in (3D), title, line, then button |
 
 Static start states in `globals.css` (only under `html.js` and

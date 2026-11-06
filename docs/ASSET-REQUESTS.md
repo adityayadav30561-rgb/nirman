@@ -19,7 +19,7 @@ and updates the row below.
 
 | ID | Section | What | Status | File in the repo |
 |---|---|---|---|---|
-| (none yet) | | | | |
+| A05-1 | 05 Nirman CRM | Sheet of 6 3D-style cartoon avatars (optional upgrade) | requested | |
 
 Status values: `requested` (prompt written, waiting for the user),
 `received` (file sent, not yet processed), `used` (in the site),
@@ -30,3 +30,41 @@ Status values: `requested` (prompt written, waiting for the user),
 <!-- Add each request below, newest last, using the template in
 DESIGN-PROTOCOL section 6. Keep the prompt text exactly as given to the
 user, so a later session can ask for the same asset again. -->
+
+### A05-1 Avatar sheet for the Nirman CRM section (optional)
+- Section and use: 05 Nirman CRM, the round avatars around the CRM hub
+  (replace the initials circles). Friendly, varied business people, as
+  leads arriving from different channels.
+- Tool: ChatGPT (transparent PNG). Gemini also works (pure white background).
+- Aspect and size: 3:2 landscape, highest quality. Claude crops each avatar
+  to a 256 x 256 px circle and shows it at 40 to 72px.
+- Type and format: 3D-style render, icon sheet; PNG with a transparent
+  background (ChatGPT) or on pure white #FFFFFF (Gemini).
+- Prompt (paste as is): "Create one image containing six separate 3D
+  cartoon avatar heads and shoulders, arranged in a neat grid of 3 columns
+  and 2 rows with even spacing and nothing touching. Style: soft, glossy,
+  friendly 3D render like modern app illustrations, smooth clay-like
+  surfaces, gentle studio lighting from the top left, soft shading, no
+  outlines. People: a young Indian woman with a ponytail, a middle-aged
+  Indian man with glasses and a short beard, a young man with curly hair, a
+  woman in a hijab, an older man with grey hair, a young woman with short
+  hair. Each smiles naturally and faces the viewer, cropped at the
+  shoulders, wearing plain casual business clothes in soft blue (#025dde
+  tints), white or light grey, with small touches of orange (#f26b2b). Each
+  head sits inside its own plain circle of a different soft pastel colour
+  (light blue, peach, mint, lilac, sand, pale yellow). Transparent
+  background, landscape 3:2. Do not include any text, letters, numbers or
+  captions. Do not include any logos, brand marks or app icons (especially
+  no WhatsApp, Instagram or Facebook). Do not include watermarks or
+  signatures. Do not make them look like real or famous people. Do not
+  distort faces or hands, and do not add extra fingers. Do not use dark,
+  moody or busy backgrounds."
+- Colours: brand blue #025dde tints, accent orange #f26b2b touches, soft pastels.
+- Background: transparent (ChatGPT) or pure white #FFFFFF (Gemini).
+- Negatives: as in the prompt (standard list).
+- Variations: one sheet; if a face looks off, regenerate that sheet.
+- Acceptance check: six separate avatars, evenly spaced, none cropped, clean
+  edges, no text or logos, consistent style.
+- File name and place: crm-avatars-sheet.png; Claude splits it into
+  public/images/crm/avatar-1.webp to avatar-6.webp.
+

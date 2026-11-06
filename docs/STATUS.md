@@ -18,7 +18,9 @@ the end of every session. Keep it under about 60 lines. Older history:
   do done (`docs/sections/03-services.md`): 4 variants, D (editorial list)
   chosen 52/60; 3D-style icons in SVG. Where we work done
   (`docs/sections/04-map.md`): 4 variants incl. a Three.js globe, A (flat
-  dotted map, GSAP reveal from India) chosen 54/70.
+  dotted map, GSAP reveal from India) chosen 54/70. Nirman CRM done
+  (`docs/sections/05-crm.md`): B (sample conversation played by scroll)
+  chosen 58/70.
 - **Motion rule (user, 2026-11-06):** only GSAP, Framer Motion or Three.js
   (DESIGN-PROTOCOL section 5). CSS keyframe motion removed; hero back to the
   calm first entrance plus scroll parallax; facts and services use GSAP
@@ -31,23 +33,21 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
-**H5 Nirman CRM** (`docs/BUILD-PLAN.md`), following the protocol:
-1. Brief `docs/sections/05-crm.md` (PAGE-PLAN section 2 row 6: heading
-   "Every lead, answered and followed up.", WhatsApp and email built in, a
-   cluster of chat bubbles and CRM cards (a lead arrives, is assigned,
-   replied in 2 minutes), dark "Book a demo"; no WhatsApp/Instagram/Facebook
-   logos, a generic chat icon only). Reference: the Community section (about
-   clip 9.2 to 11.2 s: avatars rise, speech bubbles pop). Look at it with
-   `tools/video/sheet.py`. The CRM screens in `design-handoff/crm-screens.html`
-   are the visual source for the cards. If 3D-style people avatars are
-   wanted, write a ChatGPT/Gemini prompt (DESIGN-PROTOCOL section 6) and
-   log it in `docs/ASSET-REQUESTS.md`.
-2. Lab: `src/app/lab/crm/page.tsx` (`notFound()` in production, noindex),
-   variants in `src/components/lab/crm/`, each in `id="var-x"`; unique SVG
-   ids (gotcha 35); shots per `tools/shots/README.md` section 5.
-3. Every variant has a motion concept (GSAP / Framer Motion / Three.js);
-   score on the 70-point rubric, choose, record; build the winner with
-   `components/motion/crm-motion.tsx`.
+**H6 Results** (`docs/BUILD-PLAN.md`), following the protocol:
+1. Brief `docs/sections/06-results.md` (PAGE-PLAN section 2 row 7: heading
+   "Results our customers can see.", three cards in a row (quote mark,
+   3 lines, initials avatar, name, role, rating), arrows slide the row;
+   **every card clearly marked SAMPLE** until real quotes exist; never
+   invent clients). Reference: Testimonials (clip 11.0 to 14.4 s: row slides
+   left by one card over about 1.2 s; arrows are the controls); look with
+   `tools/video/sheet.py`.
+2. Lab `src/app/lab/results/` (`notFound()` in production, noindex), 3 to 4
+   variants, each with a motion concept (GSAP / Framer Motion / Three.js;
+   a Framer Motion carousel is a natural fit); shots per
+   `tools/shots/README.md` section 5.
+3. Score on the 70-point rubric, choose, record, build with
+   `components/motion/results-motion.tsx` (or Framer Motion in the
+   component).
 
 ## Open questions for the user
 
@@ -84,4 +84,5 @@ built header and hero with the hand, clouds and a measured entrance; wrote
 the design protocol, build plan and current design docs; built the facts
 band (B) and What we do (D) through the protocol; at the user's request
 calmed the hero and moved all motion to GSAP; added the asset-prompt rule
-(ChatGPT/Gemini); built Where we work (A, dotted map); pushed to GitHub.
+(ChatGPT/Gemini); built Where we work (A, dotted map) and Nirman CRM (B);
+pushed to GitHub.

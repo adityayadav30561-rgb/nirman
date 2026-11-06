@@ -20,7 +20,8 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 - [x] H4 Where we work: dotted world map in code, India office plus markets
       we serve (US, UAE, UK), Service / Timeline / Get a quote bar
       (`04-map.md`, variant A, GSAP map reveal)
-- [ ] H5 Nirman CRM: chat bubbles and CRM cards, Book a demo (`05-crm.md`)
+- [x] H5 Nirman CRM: chat bubbles and CRM cards, Book a demo (`05-crm.md`,
+      variant B, scroll-played conversation)
 - [ ] H6 Results: SAMPLE cards in a sliding row (`06-results.md`)
 - [ ] H7 Questions: email + Submit, FAQ rows with FAQ markup
       (`07-questions.md`)
