@@ -31,3 +31,248 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
 }
+
+@layer components {
+  /* Page width: capped so 27-inch screens do not stretch the layout. */
+  .container-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 84rem;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 48rem) {
+    .container-page {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  .nav-item {
+    position: relative;
+    display: inline-flex;
+    padding-block: 0.5rem;
+    transition: color 0.2s;
+  }
+  .nav-item:hover,
+  .nav-item[data-active] {
+    color: var(--color-ink);
+  }
+  .nav-item[data-active]::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0.9rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-ink);
+    translate: -50% 0;
+  }
+}
+
+/*
+ * Hero load entrance, measured from the reference video (docs/REFERENCE-VIDEO.md
+ * 4.2): per-frame tracking of the phone bezel, headline, nav and buttons,
+ * relative to the card, converted to a 1440px page. T0 (--t0) is the moment
+ * the phone first appears; everything else is timed from it.
+ * "backwards" fill: the start state holds during the delay, then the element
+ * falls back to its normal styles (so hover colours keep working).
+ */
+:root {
+  --t0: 0.1s;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  /* measured: headline, nav and header buttons all follow ease-out cubic */
+  --ease-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* Plain fade (nav items, subtitle). --d is added to T0. */
+.intro {
+  animation: fade-in 0.3s ease-out calc(var(--t0) + var(--d, 0s)) backwards;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Logo drifts in from the left with the headline. */
+.logo-in {
+  animation:
+    slide-x 1.15s var(--ease-cubic) var(--t0) backwards,
+    fade-in 0.4s ease-out var(--t0) backwards;
+  --from-x: -1.8rem;
+}
+@keyframes slide-x {
+  from {
+    translate: var(--from-x) 0;
+  }
+}
+
+/* Nav row slides in from ~112px right while its items fade in 0.1 s apart. */
+.nav-in {
+  animation: slide-x 1.15s var(--ease-cubic) var(--t0) backwards;
+  --from-x: 7rem;
+}
+
+/* Header buttons slide in from off the right edge, one after the other. */
+.cta-in {
+  animation:
+    slide-x 1.15s var(--ease-cubic) calc(var(--t0) + var(--d, 0s)) backwards,
+    fade-in 0.25s ease-out calc(var(--t0) + var(--d, 0s)) backwards;
+  --from-x: 24rem;
+}
+/* The dark one arrives grey and darkens. */
+.cta-dark-in {
+  animation:
+    slide-x 1.15s var(--ease-cubic) calc(var(--t0) + var(--d, 0s)) backwards,
+    fade-in 0.25s ease-out calc(var(--t0) + var(--d, 0s)) backwards,
+    bg-grey 0.6s ease-out calc(var(--t0) + var(--d, 0s) + 0.15s) backwards;
+  --from-x: 24rem;
+}
+@keyframes bg-grey {
+  from {
+    background-color: #b4b9c2;
+  }
+}
+
+/* Headline: slides in from 1.75em left (1.15 s) and darkens from 55% (0.85 s). */
+.hero-h1 {
+  animation:
+    h1-slide 1.15s var(--ease-cubic) var(--t0) backwards,
+    h1-fade 0.85s cubic-bezier(0.3, 0.6, 0.5, 1) var(--t0) backwards;
+}
+@keyframes h1-slide {
+  from {
+    translate: -1.75em 0;
+  }
+}
+@keyframes h1-fade {
+  from {
+    opacity: 0.55;
+  }
+}
+
+/* Button: appears grey at T0+0.2 s, darkens over 0.9 s. */
+.hero-btn {
+  animation:
+    fade-in 0.12s linear calc(var(--t0) + 0.2s) backwards,
+    bg-grey 0.9s var(--ease-cubic) calc(var(--t0) + 0.25s) backwards;
+}
+
+/* Hand-drawn strokes draw in (paths use pathLength="1"); --d added to T0. */
+.draw path {
+  /* dash = whole path, gap longer than it, so offset 1 hides it fully */
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 0;
+  animation: draw var(--dur, 0.4s) ease-out calc(var(--t0) + var(--d, 0s)) backwards;
+}
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+/*
+ * Phone + hand. Measured path (offsets from rest; x as % of the hand box
+ * width, y as % of its height; 1.6 s, sampled every 0.05 to 0.1 s): enters
+ * from off the right tilted ~28deg, passes its spot at 0.2 s, overshoots
+ * ~125px left and ~70px down tilted -8deg at 0.65 s, then glides back and
+ * straightens to +4deg by 1.6 s. Linear between dense samples.
+ */
+.phone-enter {
+  rotate: 4deg;
+  transform-origin: 50% 85%;
+  animation:
+    phone-move 1.6s linear var(--t0) backwards,
+    phone-tilt 1.6s linear var(--t0) backwards;
+}
+@keyframes phone-move {
+  0% { translate: 92% 9%; }
+  6.25% { translate: 42% 6%; }
+  9.4% { translate: 20% 3%; }
+  12.5% { translate: 1.8% 4%; }
+  15.6% { translate: -7.4% 5%; }
+  21.9% { translate: -20.9% 7%; }
+  31% { translate: -23.5% 8.5%; }
+  40.6% { translate: -25.6% 10%; }
+  46.9% { translate: -21.5% 8.5%; }
+  53% { translate: -16.8% 6%; }
+  59% { translate: -10.2% 4%; }
+  65.6% { translate: -7% 3%; }
+  72% { translate: -5.7% 2%; }
+  78% { translate: -2.5% 1%; }
+  90.6% { translate: 0 0.3%; }
+  100% { translate: 0 0; }
+}
+@keyframes phone-tilt {
+  0% { rotate: 28deg; }
+  6.25% { rotate: 14deg; }
+  9.4% { rotate: 8deg; }
+  12.5% { rotate: 4deg; }
+  15.6% { rotate: -1.5deg; }
+  21.9% { rotate: -6deg; }
+  31% { rotate: -6deg; }
+  40.6% { rotate: -8deg; }
+  46.9% { rotate: -6.5deg; }
+  53% { rotate: -2.7deg; }
+  59% { rotate: -0.6deg; }
+  65.6% { rotate: 0.6deg; }
+  72% { rotate: 2.8deg; }
+  78% { rotate: 3.8deg; }
+  100% { rotate: 4deg; }
+}
+/* Screen UI fades in over the blank pale-blue screen as the phone swings in. */
+.screen-in {
+  animation: fade-in 0.35s ease-out calc(var(--t0) + 0.1s) backwards;
+}
+/* After landing: measured slow drift (~25px left, tilt eases ~2deg), then back. */
+.phone-float {
+  animation: phone-float 2.6s ease-in-out calc(var(--t0) + 1.6s) infinite alternate;
+}
+@keyframes phone-float {
+  to {
+    translate: -5% 1%;
+    rotate: -2deg;
+  }
+}
+
+/*
+ * Clouds near the phone ride along with it (same path, no tilt, so they stay
+ * level); far clouds just fade in. Each cloud then drifts slowly sideways.
+ */
+.clouds-follow {
+  animation:
+    phone-move 1.6s linear var(--t0) backwards,
+    fade-in 0.3s ease-out var(--t0) backwards;
+}
+.cloud {
+  animation: cloud-drift var(--t, 9s) ease-in-out calc(var(--t0) + 1.6s) infinite alternate;
+}
+.cloud-far {
+  animation:
+    fade-in 0.8s ease-out calc(var(--t0) + var(--d, 0.3s)) backwards,
+    cloud-drift var(--t, 9s) ease-in-out calc(var(--t0) + 1.6s) infinite alternate;
+}
+@keyframes cloud-drift {
+  to {
+    translate: var(--dx, 12px) 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro,
+  .logo-in,
+  .nav-in,
+  .cta-in,
+  .cta-dark-in,
+  .hero-h1,
+  .hero-btn,
+  .draw path,
+  .phone-enter,
+  .screen-in,
+  .phone-float,
+  .clouds-follow,
+  .cloud,
+  .cloud-far {
+    animation: none !important;
+  }
+}

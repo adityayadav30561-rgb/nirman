@@ -1,51 +1,49 @@
 # Architecture, file map and gotchas
 
-## Folders
+## Folders (rebuild, 2026-11-06)
 
 ```
 E:\nirman2\
   CLAUDE.md                 session instructions (auto-loaded)
-  docs\                     plan, status, decisions, design, this file, handoff copy
-  tools\shots\              headless-Edge screenshot scripts: shotsec, shotjs, eval, evalasync (see README)
+  docs\                     STATUS, BUILD-PLAN, DECISIONS, DESIGN, DESIGN-PROTOCOL,
+                            PAGE-PLAN, REFERENCE-VIDEO, REDESIGN (SEO/QA standards),
+                            handoff (business rules), this file
+  docs\sections\            one design record per section (+ shots\ screenshots)
+  docs\archive\             old v2 plan, design and status (history only)
+  tools\shots\              headless-Edge screenshot scripts (see README)
+  tools\video\              reference-video analysis scripts (see README)
+  design-handoff\           CRM screens HTML + design tokens the user liked (v2 look)
   .claude\launch.json       dev server config for the app preview
+  .claude\skills\           nirman-start, nirman-wrap (session start / end)
+  old-site\                 old v2 app, gitignored, local only
   nirman-site\              the Next.js app
-    src\app\                layout.tsx (fonts, metadata, header/footer/widgets for every page),
-                            page.tsx (homepage sections + JSON-LD), not-found.tsx (404), globals.css
-    src\components\         hero, nirman-crm, work, process, why-us, final-cta, logo, photo, stage,
-                            site-header (dropdowns + mobile menu), site-footer, site-widgets
-                            (cookie banner, consult pop-up, WhatsApp button, phone sticky bar)
-    src\components\services services grid: services.tsx (grid + intro), service-copy.tsx
-                            (ServiceCard + tones), seo/web/automation/software/apps/marketing.tsx
-    src\components\mockups\ frames.tsx (Device, PhoneFrame), concept-site.tsx, charts.tsx, art.tsx
-    src\components\ui\      button.ts (helper), button-link, container, section, heading, card, chip,
-                            breadcrumbs
-    src\content\            site.ts (brand, contact placeholders, all nav data), home.ts (homepage
-                            copy, SAMPLE data), photos.ts, devices.ts
-    src\lib\stored.ts       localStorage hook (consent, dismissed pop-ups)
-    scripts\                make-device-cutouts.py
-    design-assets\raw\      original device photos (not served)
-    public\photos\          self-hosted Unsplash photos
-    public\assets\          device cutouts + glass masks, hero photo
+    src\app\                layout.tsx (Poppins, metadata, header), page.tsx (homepage),
+                            globals.css (tokens, container, motion system), favicon.ico
+    src\components\         site-header.tsx (client), logo.tsx
+    src\components\home\    hero.tsx, phone-screen.tsx, cloud.tsx
+    src\components\ui\      button.tsx (ButtonLink)
+    src\components\lab\     section variants while choosing (protocol); dev-only
+    src\content\            site.ts (brand, placeholders), nav.ts, image-credits.ts
+    scripts\cut-hand.py     builds the hero hand layers from the Unsplash photo
+    public\images\hero\     hand-back.webp, hand-front.webp
 ```
-
-Old project (reference only, do not edit): `E:\nirman\website\` has the
-handoff's `site.ts` nav data, `content/home.ts` copy, and asset scripts
-(`scripts/cutout.py`, `split-sheet.py`, `process-assets.mjs`).
 
 ## Stack
 
 Next.js 16.4.2 (App Router, Turbopack, `cacheComponents: true`,
 `partialPrefetching: true`), React 19.3, Tailwind 4 (`@theme` in CSS),
-TypeScript, ESLint 9 flat config, lucide-react icons. Node 24. Images via
-`next/image` built-in optimiser (`images.qualities: [70, 80]`).
+TypeScript, ESLint 9 flat config, lucide-react icons. Images via
+`next/image` (`images.qualities: [70, 80]`; pass `quality={80}`; use
+`preload`, not the deprecated `priority`).
 
 ## Client vs server components
 
-Client (`"use client"`): site-header, site-widgets, nirman-crm, process, final-cta, lib/stored.
-Everything else is a server component. Server components can pass JSX to
-client components as props.
+Client (`"use client"`): site-header. Everything else is a server component.
 
 ## Gotchas (add new ones here)
+
+Gotchas 3-29 come from the old v2 site; some mention code that is now in
+`old-site/`. The general lessons still apply. Newest: 30-34.
 
 1. **Next 16 is different.** Read `nirman-site/node_modules/next/dist/docs/`
    before Next-specific code. `next lint` is gone; `middleware` is `proxy`;
@@ -136,6 +134,20 @@ client components as props.
     `.next`, `npx tsc --noEmit` fails with "Cannot find name 'LayoutProps'"
     until `npm run build` or `npm run dev` regenerates `.next/types`. Run the
     build first, then tsc.
+32. **Stale dev CSS.** The dev server does NOT pick up `globals.css` edits
+    (no recompile; likely the custom `turbopack.rules` CSS loader in
+    `next.config.ts`), and keeps serving old CSS even after a plain restart
+    (persistent cache). After every CSS edit: stop the server, delete
+    `nirman-site/.next`, start again. Running `npm run build` while the dev
+    server runs can also leave it stale. TSX edits hot-reload fine.
+33. **Checking animations frame by frame:** restart all CSS animations, pause
+    them, then seek: set `style.animation='none'` on every element, force a
+    reflow, clear it, then `document.getAnimations().forEach(a => { a.pause();
+    a.currentTime = t * 1000 })`. Finished animations drop out of
+    `getAnimations()`, so do this before they end.
+34. **SVG draw-in:** `vectorEffect="non-scaling-stroke"` breaks
+    `pathLength`-based dashes; and use `stroke-dasharray: 1 2` (gap longer
+    than the path) so offset 1 hides the stroke completely.
 31. **Bulk deletes are blocked** by the built-in safety check (`rm -rf` on
     several folders). Do not work around it: ask the user, or move folders to
     a gitignored archive with their approval (2026-11-06: `old-site/`).

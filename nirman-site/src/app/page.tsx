@@ -1,12 +1,7 @@
-import { Logo } from "@/components/logo";
+import { Hero } from "@/components/home/hero";
 
-// Blank start for the 2026-11-06 rebuild. The homepage is built section by
-// section from docs/PAGE-PLAN.md and docs/REFERENCE-VIDEO.md.
+// Homepage, built section by section from docs/PAGE-PLAN.md section 2 and
+// docs/REFERENCE-VIDEO.md. Done so far: header (in layout) and hero.
 export default function Home() {
-  return (
-    <div className="grid min-h-svh place-items-center">
-      <h1 className="sr-only">Nirman</h1>
-      <Logo />
-    </div>
-  );
+  return <Hero />;
 }

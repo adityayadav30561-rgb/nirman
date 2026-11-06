@@ -1,51 +1,72 @@
 # Nirman website: session instructions
 
 This file is loaded into every session automatically. Keep it short. Detail
-lives in `docs/`; read only the part you need.
+lives in `docs/`; read only the part you need. The user works from several
+Claude sessions and accounts: **the docs and GitHub are the only memory**.
 
 ## What this is
 
 Marketing website for **Nirman**, a digital agency (SEO, websites, custom
 software incl. mobile apps, WhatsApp/email marketing) and its own product
 **Nirman CRM**. Next.js 16 + Tailwind 4 + TypeScript, in `nirman-site/`.
-The design was built in an earlier session; business rules come from
-`docs/handoff.md`. India + international audience, English only.
+Business rules: `docs/handoff.md`. India + international audience, English.
 
-**2026-11-06: the site is being rebuilt from scratch.** The old site is
-tagged `archive/v2`. Read `docs/PAGE-PLAN.md` (pages and content, awaiting the
-user's decisions) and `docs/REFERENCE-VIDEO.md` (design and motion spec from
-the user's reference video) before building. `docs/REDESIGN.md` keeps the SEO
-and QA standards; its 95-page sitemap is superseded.
+**Rebuild from scratch since 2026-11-06** (old site: commit `2eba621`, tag
+`archive/v2`). Pages and content: `docs/PAGE-PLAN.md` (18 pages, decided).
+Look and motion: the user's reference video, `docs/REFERENCE-VIDEO.md`.
+Tasks: `docs/BUILD-PLAN.md`. SEO/QA standards: `docs/REDESIGN.md` sections 2,
+3, 8, 12 (its sitemap is superseded).
 
-## Start of every session (do this first, nothing else)
+## Start of every session (do this first)
 
-1. Read `docs/STATUS.md` (current phase, next task, blockers). It is short.
-2. Open **only** the current phase section of `docs/PLAN.md` (grep for the
-   phase heading; do not read the whole file).
-3. Read `docs/ARCHITECTURE.md` / `docs/DESIGN.md` / `docs/handoff.md` only
-   for the section the task needs (grep the heading, then read that range).
-4. Tell the user in one or two lines where things stand and what you will do.
+1. `git pull` in `E:\nirman2` (another session may have pushed).
+2. Read `docs/STATUS.md` (short): position, next task, open questions.
+3. Read the next task in `docs/BUILD-PLAN.md`, and its section record in
+   `docs/sections/` if one exists.
+4. Before designing anything, read `docs/DESIGN-PROTOCOL.md`; for tokens and
+   components, `docs/DESIGN.md`. Read other docs only for the part the task
+   needs (grep the heading, then read that range).
+5. Tell the user in one or two lines where things stand and what you will do.
+
+## Design protocol (user rule, 2026-11-06)
+
+Every section and page follows `docs/DESIGN-PROTOCOL.md`: best design
+principles, and for each section **3 to 4 variants** built on the dev-only
+`/lab/` route, screenshotted at 1440 and 375, scored, the best chosen and
+recorded in `docs/sections/NN-name.md` (with screenshots in
+`docs/sections/shots/`), then built. Show the user the choice; they may
+override.
+
+## Record everything (multi-session memory)
+
+- After each finished, verified task: tick it in `docs/BUILD-PLAN.md`,
+  update `docs/STATUS.md` (position, next task), then **commit and push**.
+- User decisions go into `docs/DECISIONS.md` (date, decision, why) the moment
+  they are made. Section design choices go into `docs/sections/`.
+- Measured motion goes into `docs/REFERENCE-VIDEO.md` section 4; new design
+  tokens or components into `docs/DESIGN.md`; gotchas into
+  `docs/ARCHITECTURE.md`.
+- Never leave important state only in chat, the scratchpad or a local file
+  outside the repo. Scripts that matter go in `tools/` or
+  `nirman-site/scripts/`.
+- Never commit the reference video, its frames, or `old-site/`.
 
 ## While working
 
-- One task at a time from the plan. Tick it in `docs/STATUS.md` as soon as it
-  is done and verified, so a cleared session never redoes work.
-- Record any decision the user makes in `docs/DECISIONS.md` (date, decision,
-  why) the moment it is made.
-- New gotcha discovered? Add it to `docs/ARCHITECTURE.md` "Gotchas".
-- Keep context small: `grep`/`head` instead of reading whole files; read
-  files by line range; send broad code searches to the `cavecrew-investigator`
-  subagent; prefer `ctx_*` tools (context-mode plugin) for long command
-  output; downscale screenshots (see `tools/shots/README.md`).
-- Do not paste large files or logs into replies.
+- One task at a time from `docs/BUILD-PLAN.md`.
+- Keep context small: `grep`/`head` instead of whole files; send broad code
+  searches to the `cavecrew-investigator` subagent; prefer `ctx_*` tools for
+  long output; downscale screenshots (`tools/shots/README.md`).
+- After editing `globals.css`, restart the dev server with a clean `.next`
+  (ARCHITECTURE gotcha 32).
 
 ## End of every session ("wrap up", or before the user clears)
 
-1. Update `docs/STATUS.md`: done this session, exact next step, open
+1. `npx tsc --noEmit`, `npm run lint`, `npm run build` pass (stop the dev
+   server first), or note in STATUS why not.
+2. Update `docs/STATUS.md`: done this session, exact next step, open
    questions, anything half-finished (file + what is left).
-2. Make sure `npx tsc --noEmit`, `npm run lint` and `npm run build` pass, or
-   note in STATUS why not.
-3. Commit if the user approves (git repo at `E:\nirman2`).
+3. Commit and push to `origin` main (git repo at `E:\nirman2`).
 
 ## Hard rules (from the client; never break)
 
@@ -57,12 +78,16 @@ and QA standards; its 95-page sitemap is superseded.
 - Do not invent clients, results, testimonials or stats. Use clearly marked
   placeholders (`SAMPLE` / "Placeholder") until real ones are supplied.
 - URLs: lowercase, hyphens, trailing slash.
+- Ask before downloading images; credit them in
+  `nirman-site/src/content/image-credits.ts`.
 
 ## Commands (run in `nirman-site/`)
 
 `npm run dev` (port 3000; the app preview uses `E:\nirman2\.claude\launch.json`)
-· `npx tsc --noEmit` · `npm run lint` · `npm run build`
-· `python scripts/make-device-cutouts.py` (rebuild device mockup images)
+· `npx tsc --noEmit` (run `npm run build` first after deleting `.next`)
+· `npm run lint` · `npm run build`
+· `python scripts/cut-hand.py <photo.png> public/images/hero` (hero hand layers)
+· reference video analysis: `tools/video/README.md`
 
 ## Next.js 16 warning
 

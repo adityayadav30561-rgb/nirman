@@ -11,7 +11,7 @@ page. Status: **plan for review**, written 2026-10-27. `homepage1` (route
 `/homepage1/`, linked in the header) is the first design built from it.
 
 Related docs: `docs/handoff.md` (business rules, still binding),
-`docs/DESIGN.md` (how v2 is built today), `docs/DECISIONS.md` (what the user
+`docs/archive/DESIGN-v2.md` (how v2 was built), `docs/DECISIONS.md` (what the user
 decided), `docs/sitemap-v3.json` (the page list below, machine readable).
 
 ## Contents

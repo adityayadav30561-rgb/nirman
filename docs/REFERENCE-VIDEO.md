@@ -127,30 +127,40 @@ Reading: it behaves like a smooth-scroll site where the visitor scrolls with
 momentum: short eased bursts at section changes, a slow constant drift while
 reading a section, and one full stop to let the carousel play.
 
-### 4.2 Hero entrance (estimates from 0.1 s frame sheets)
+### 4.2 Hero entrance (MEASURED 2026-11-06, per-frame tracking)
 
-Times are **relative to the moment the hero starts appearing** (clip time
-0.8 s is t = 0). The first 0.8 s of the clip is the loop seam, and the card
-scale-in and left shift seen around clip time 0.8 to 1.2 s look like the
-presentation camera, so they are **not** part of the site: on a real page the
-entrance starts immediately on load.
+Measured with `track_hero.py` (OpenCV, every 0.05 s, 60 fps source): card
+edges, phone bezel (centre and angle via min-area rectangle), headline left
+edge and darkness, first nav item, Login pill, button darkness. Positions are
+relative to the card and converted to a 1440px page. The card itself moves
+(presentation camera) until clip 1.0 s, so values before that are rough.
 
-| t (s) | Event |
+T0 = clip 0.85 s, the moment the phone first appears. Built in `globals.css`
+with `--t0: 0.1s` after load.
+
+| T0 + (s) | Event (measured) |
 |---|---|
-| 0.0 | H1 is a ghost at about 40 percent opacity (estimate) |
-| 0.0 to 0.4 | H1 fades to full opacity |
-| 0.2 | Phone enters from the right edge, tilted about 20 degrees (estimate) with a blank pale-blue screen; header "Home", "About" fade in |
-| 0.2 to 0.6 | Phone slides left and up while the tilt eases from about 20 to 8 degrees; the screen UI fades in |
-| 0.2 to 0.9 | Nav items appear one by one, about 0.1 s apart (Home, About, Pricing, Contact, Blog) |
-| 0.4 and 0.7 | Login pill, then Register pill, fade in at the right of the header |
-| 0.2 to 0.7 | "Get Started" button fades from grey to near black |
-| 0.4 to 1.1 | Blue spark strokes beside the H1 draw in |
-| 1.1 to 1.3 | Orange underline under "Good Way!" draws in |
-| 1.4 to 2.3 | Hold; the phone drifts a few pixels and eases to a smaller tilt (slow float) |
+| 0 | Phone + hand at the right edge, tilted ~28deg; H1 at ~55% opacity and ~1.75em left of its place; nav row ~112px right of its place |
+| 0 to 0.85 | H1 darkens to 100% |
+| 0 to 1.15 | H1 slides right into place, ease-out cubic (offsets at +0.15/0.25/0.35/0.45/0.55 s: 82/56/37/23/14 px); nav row slides left on the same curve; logo drifts in from the left |
+| 0 to 0.3 | Subtitle fades in (no movement) |
+| 0.05 to 0.55 | Nav items fade in 0.1 s apart |
+| 0.1 | Phone passes 205px right of rest, tilt 14deg; screen UI fades in |
+| 0.15 / 0.45 | Login, then Register, slide in from off the right (~380px), ease-out cubic, 1.15 s; Login arrives grey and darkens |
+| 0.2 | Phone crosses its rest position, tilt 4deg |
+| 0.2 to 1.1 | "Get Started" appears grey, then darkens (lum 136 to 28) |
+| 0.25 / 0.35 / 0.45 / 0.55 | Blue spark strokes 1, 2, 3, then the curl |
+| 0.45 to 0.65 | Orange underline draws |
+| 0.65 | Phone overshoot: 125px left, 70px down, tilt -8deg (top leans left) |
+| 0.65 to 1.6 | Phone glides back right and up, tilt -8 to +4deg (0 at +1.0 s) |
+| 1.6 on | Rest tilt +4deg; slow float (~25px left over ~0.5 s, tilt eases ~2deg, then back) |
 
-Total entrance: about 1.3 s, then the hold. The scroll in 4.1 begins about
-2.4 s after the hero starts (clip 3.2 s); on a real page the visitor scrolls,
-so this is only the pause before auto-motion would start.
+Clouds near the phone ride in with it (same path, no tilt: they stay level).
+Exact keyframes: `phone-move` / `phone-tilt` in `globals.css`.
+
+The scroll in 4.1 begins about 2.4 s after the hero starts (clip 3.2 s); on
+a real page the visitor scrolls, so this is only the pause before auto-motion
+would start.
 
 ### 4.3 Section reveals (rule observed in every section)
 
@@ -193,7 +203,7 @@ All timings and distances in this section are **estimates**. Specific cases:
 ## 5. How this maps to a real website
 
 The video presents a page inside a frame; a real visitor controls the scroll.
-The build can be done two ways (**decision needed**, see PAGE-PLAN.md):
+The build can be done two ways (**decided 2026-11-06: option 1, real page**):
 
 1. **Real page, same feel (recommended).** Normal full-width page. Smooth
    scrolling with momentum, the same hero entrance on load, the same reveal
