@@ -24,7 +24,7 @@ best). Tick a task only when it is built, verified, recorded and pushed.
       variant B, scroll-played conversation)
 - [x] H6 Results: SAMPLE testimonials (`06-results.md`, variant B,
       spotlight with business-type tabs)
-- [ ] H7 Questions: email + Submit, FAQ rows with FAQ markup
+- [x] H7 Questions: email + Submit, FAQ rows with FAQ markup
       (`07-questions.md`)
 - [ ] H8 Footer (blue) (`08-footer.md`)
 - [ ] H9 Whole-page review at 375 / 768 / 1440 / 1920

@@ -67,6 +67,11 @@ thirds of the H1.
 - `home/results.tsx` + `home/results-spotlight.tsx` + `home/quote-card.tsx`:
   sample testimonials; tabs of business types switch one large quote (Framer
   Motion), every card with an orange SAMPLE chip.
+- `home/questions.tsx` + `home/question-list.tsx` + `home/email-ask.tsx`:
+  FAQ with FAQPage JSON-LD (content `content/faq.ts`); accordion rows with a
+  blue arrow that turns down (Framer Motion height; closed answers stay in the
+  HTML, `inert`); `EmailAsk` is the email pill joined to a dark Submit, which
+  opens a mailto until the lead API exists.
 - `home/crm.tsx` (Nirman CRM): text + four check points + Book a demo;
   pale-blue plate with channel icons, a sample chat card and a lead card.
 - `ui/select.tsx` (`Select`): the site's dropdown, used instead of native
@@ -93,6 +98,7 @@ client wrapper that renders its `<section>` and runs `useGSAP`:
 | `map-motion.tsx` | once at 75%: map revealed by a circle growing from India, India pin drops, arcs draw to each market and its pin pops, heading lines rise, bar rises; India pin pulses |
 | `crm-motion.tsx` | text once at 75%; the sample conversation scrubbed to scroll (plate, icons, chat card, messages with typing dots, lead card) |
 | `results-motion.tsx` | once at 75%: spark, heading lines, sub-line, tabs stagger, quote panel rises (quote switching is Framer Motion) |
+| `questions-motion.tsx` | once at 75%: orange spark draws, heading lines, sentence and email field fade up, question rows stagger in (opening a row is Framer Motion) |
 | `services-motion.tsx` | heading lines rise out of a mask (SplitText), spark draws; each row once at 85%: divider draws left to right, icon flips in (3D), title, line, then button |
 
 Static start states in `globals.css` (only under `html.js` and

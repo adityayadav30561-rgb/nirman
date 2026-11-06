@@ -21,7 +21,9 @@ the end of every session. Keep it under about 60 lines. Older history:
   dotted map, GSAP reveal from India) chosen 54/70. Nirman CRM done
   (`docs/sections/05-crm.md`): B (sample conversation played by scroll)
   chosen 58/70. Results done (`docs/sections/06-results.md`): B (spotlight
-  with tabs, all SAMPLE) chosen 55/70.
+  with tabs, all SAMPLE) chosen 55/70. Questions done
+  (`docs/sections/07-questions.md`): A (reference layout, accordion, FAQPage
+  JSON-LD; email opens a mailto until S1) chosen 60/70.
 - **Motion rule (user, 2026-11-06):** only GSAP, Framer Motion or Three.js
   (DESIGN-PROTOCOL section 5). CSS keyframe motion removed; hero back to the
   calm first entrance plus scroll parallax; facts and services use GSAP
@@ -34,20 +36,16 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
-**H7 Questions** (`docs/BUILD-PLAN.md`), following the protocol:
-1. Brief `docs/sections/07-questions.md` (PAGE-PLAN section 2 row 8:
-   heading "Got a question for Nirman?", an email field joined to a
-   "Submit" button, and three to six questions with blue arrows that open
-   short answers; FAQPage JSON-LD for search). Reference: FAQ (clip 14.0
-   to 16.6 s: heading with an orange spark, pill email field + dark Submit;
-   right, a sentence and question rows with thin dividers and blue arrows);
-   look with `tools/video/sheet.py`. Answers must follow the client rules
-   (no prices; no PPC or social media marketing; CRM = Book a demo).
-2. Lab `src/app/lab/questions/`, 3 to 4 variants with motion concepts
-   (Framer Motion suits the accordion); shots per tools/shots README 5.
-3. Score on the 70-point rubric, choose, record, build. The email form has
-   no backend yet (lead API is task S1): post to a mailto or a placeholder
-   handler and say so on screen; do not fake a success state.
+**H8 Footer (blue)** (`docs/BUILD-PLAN.md`), following the protocol:
+1. Brief `docs/sections/08-footer.md` from PAGE-PLAN section 2 (footer row)
+   and REFERENCE-VIDEO (footer: logo, blurb, columns and social icons fade
+   in one after another as the blue panel rises). Links from
+   `src/content/nav.ts`; contact details are placeholders (`site.ts`); no
+   WhatsApp / Instagram / Facebook logos in our artwork (ask which social
+   profiles exist; generic icons only until then).
+2. Lab `src/app/lab/footer/` with 3 to 4 variants; shots with
+   `tools/shots/shotpw.cjs` (README section 6) in cloud sessions.
+3. Score, choose, record, build; then H9 whole-page review.
 
 ## Open questions for the user
 
@@ -84,5 +82,6 @@ built header and hero with the hand, clouds and a measured entrance; wrote
 the design protocol, build plan and current design docs; built the facts
 band (B) and What we do (D) through the protocol; at the user's request
 calmed the hero and moved all motion to GSAP; added the asset-prompt rule
-(ChatGPT/Gemini); built Where we work (A, dotted map), Nirman CRM (B) and Results (B);
+(ChatGPT/Gemini); built Where we work (A, dotted map), Nirman CRM (B), Results (B) and
+Questions (A, in a cloud session with Playwright shots);
 pushed to GitHub.

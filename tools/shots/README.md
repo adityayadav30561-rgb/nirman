@@ -61,3 +61,15 @@ use the in-app browser instead:
 ```powershell
 Get-CimInstance Win32_Process -Filter "Name='msedge.exe'" | Where-Object { $_.CommandLine -match 'nirman-edge' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }
 ```
+
+## 6. Linux cloud sessions (Playwright, 2026-11-06)
+
+Cloud sessions have no Edge but ship Chromium + Playwright (global).
+`tools/shots/shotpw.cjs` screenshots elements by id at 1440 and 375, header
+hidden, after scrolling each into view so GSAP entrances finish:
+
+```bash
+NODE_PATH=$(npm root -g) node tools/shots/shotpw.cjs http://localhost:3000/lab/<section>/ <outDir> qa qb qc qd
+```
+
+Then downscale to 1200px JPEG with PIL for `docs/sections/shots/`.
