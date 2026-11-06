@@ -16,7 +16,7 @@ export const crmViews = [
   { key: "inbox", label: "Inbox", point: "WhatsApp, email, website forms and calls in one inbox." },
   { key: "pipeline", label: "Pipeline", point: "Every enquiry on a board, from new to won." },
   { key: "followups", label: "Follow-ups", point: "Reminders and suggested messages, so no lead goes cold." },
-  { key: "reports", label: "Dashboard", point: "Leads, reply times and sources at a glance." },
+  { key: "dashboard", label: "Dashboard", point: "Leads, reply times and sources at a glance." },
 ] as const;
 
 export type CrmViewKey = (typeof crmViews)[number]["key"];

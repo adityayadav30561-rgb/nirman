@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Bell, CalendarClock, ChartNoAxesColumn, Columns3, Inbox, Plus, Search, Settings, Users } from "lucide-react";
+import { Bell, CalendarClock, ChartNoAxesColumn, Columns3, Inbox, LayoutDashboard, Megaphone, Plus, Search, Settings, Users, Workflow } from "lucide-react";
 import { LogoMark } from "@/components/logo";
 
 /*
@@ -10,13 +10,16 @@ import { LogoMark } from "@/components/logo";
  * design (user, 2026-11-06: the CRM will be updated to match it).
  */
 
-export type CrmView = "inbox" | "leads" | "pipeline" | "followups" | "reports";
+export type CrmView = "dashboard" | "inbox" | "leads" | "pipeline" | "followups" | "campaigns" | "automations" | "reports";
 
 export const crmNav: { key: CrmView; label: string; Icon: typeof Inbox; badge?: string }[] = [
+  { key: "dashboard", label: "Dashboard", Icon: LayoutDashboard },
   { key: "inbox", label: "Inbox", Icon: Inbox, badge: "2" },
   { key: "leads", label: "Leads", Icon: Users },
   { key: "pipeline", label: "Pipeline", Icon: Columns3 },
   { key: "followups", label: "Follow-ups", Icon: CalendarClock, badge: "6" },
+  { key: "campaigns", label: "Campaigns", Icon: Megaphone },
+  { key: "automations", label: "Automations", Icon: Workflow },
   { key: "reports", label: "Reports", Icon: ChartNoAxesColumn },
 ];
 
@@ -25,7 +28,7 @@ export function AppFrame({ active, children, className = "" }: { active: CrmView
     <div className={`@container ${className}`}>
       <div
         aria-hidden
-        className="flex aspect-[16/10] w-full flex-col overflow-hidden rounded-[1.1em] bg-surface text-[1.18cqw] text-ink shadow-[0_2.5em_5em_-1.5em_rgba(18,20,24,0.28),0_0_0_1px_rgba(5,7,12,0.06)]"
+        className="flex aspect-[16/9.4] w-full flex-col overflow-hidden rounded-[1.1em] bg-surface text-[1.18cqw] text-ink shadow-[0_2.5em_5em_-1.5em_rgba(18,20,24,0.28),0_0_0_1px_rgba(5,7,12,0.06)]"
       >
         {/* window bar */}
         <div className="flex h-[2.4em] shrink-0 items-center gap-[0.45em] border-b border-line bg-[#f7f9fb] px-[1em]">

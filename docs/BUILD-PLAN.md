@@ -37,7 +37,7 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 ## P: Other pages (option B, 18 pages; order can change with the user)
 
 - [ ] P1 `/services/` and the four service pages (one template)
-- [ ] P2 `/nirman-crm/` (screens from `design-handoff/crm-screens.html`)
+- [x] P2 `/nirman-crm/` (`docs/sections/p2-crm-page.md`; real CRM design, 8 screens)
 - [ ] P3 `/get-a-quote/` multi-step form and `/thank-you/`
 - [ ] P4 `/contact/`, `/about/`
 - [ ] P5 `/work/` (SAMPLE), `/industries/`

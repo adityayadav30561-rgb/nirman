@@ -172,6 +172,22 @@ export function FollowupsScreen() {
             </li>
           ))}
         </ul>
+        <p className="mt-[1em] mb-[0.5em] text-[0.7em] font-semibold text-[#6b7079] uppercase">Tomorrow</p>
+        <ul className="flex flex-col gap-[0.5em]">
+          {[
+            { text: "Site visit with Vikram", meta: "Call · 10:00", channel: "call" as const },
+            { text: "Send welcome email to Kabir", meta: "Email · 12:00", channel: "email" as const },
+          ].map((f) => (
+            <li key={f.text} className="crm-row flex items-center gap-[0.8em] rounded-[0.8em] bg-white p-[0.8em] ring-1 ring-line">
+              <span className="size-[1.4em] rounded-[0.4em] ring-1 ring-ink/25" />
+              <span className="min-w-0 flex-1">
+                <span className="block text-[0.82em] font-medium">{f.text}</span>
+                <span className="block text-[0.68em] text-[#6b7079]">{f.meta}</span>
+              </span>
+              <ChannelChip channel={f.channel} />
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="w-[15em] shrink-0 rounded-[0.9em] bg-[#fff6ec] p-[1em]">
         <p className="flex items-center gap-[0.4em] text-[0.78em] font-semibold text-accent">
@@ -224,6 +240,36 @@ export function DashboardScreen() {
                 <span className="mt-[0.25em] block h-[0.45em] rounded-full bg-[#f2f5f8]">
                   <span className={`crm-fill block h-full origin-left rounded-full ${s.tone}`} style={{ width: `${s.pct}%` }} />
                 </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className="mt-[0.8em] grid grid-cols-2 gap-[0.8em]">
+        <div className="crm-card rounded-[0.9em] p-[0.9em] ring-1 ring-line">
+          <p className="text-[0.78em] font-semibold">Due today</p>
+          <ul className="mt-[0.5em] flex flex-col gap-[0.45em]">
+            {followups.slice(1, 4).map((f) => (
+              <li key={f.text} className="flex items-center gap-[0.5em] text-[0.7em]">
+                <ChannelChip channel={f.channel} label={false} />
+                <span className="flex-1 truncate">{f.text}</span>
+                <span className="text-[#6b7079]">{f.meta.split(" · ")[1]}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="crm-card rounded-[0.9em] p-[0.9em] ring-1 ring-line">
+          <p className="text-[0.78em] font-semibold">Recent activity</p>
+          <ul className="mt-[0.5em] flex flex-col gap-[0.45em] text-[0.7em]">
+            {[
+              ["Sara viewed the proposal", "5 min"],
+              ["Auto-reply sent to Riya", "12 min"],
+              ["Kabir moved to Won", "1 h"],
+            ].map(([t, m]) => (
+              <li key={t} className="flex items-center gap-[0.5em]">
+                <span className="size-[0.5em] rounded-full bg-brand" />
+                <span className="flex-1 truncate">{t}</span>
+                <span className="text-[#6b7079]">{m}</span>
               </li>
             ))}
           </ul>

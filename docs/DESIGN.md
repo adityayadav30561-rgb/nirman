@@ -89,6 +89,12 @@ thirds of the H1.
   product badge (logo mark + "our own product"), heading naming the product,
   four check points, white Book a demo; screen tabs over a desktop window +
   phone. Phones: window shown as a crop without the sidebar.
+- **Nirman CRM screens are the real CRM design** (user, 2026-11-06). Views:
+  Dashboard, Inbox, Leads, Pipeline, Follow-ups, Campaigns, Automations,
+  Reports (`crm/screen-map.tsx`; extra screens in `crm/screens-more.tsx`);
+  window 16:9.4. Inner pages: `crm-page/*`, `motion/reveal.tsx` (generic
+  `.rv` fade-up), `crm-page/window-crop.tsx` (phone crops),
+  `crm-page/demo-form.tsx`.
 - `crm/app-frame.tsx` (`AppFrame`) + `crm/screens.tsx`: the Nirman CRM app
   built in HTML, sized in em from the container width (`text-[1.18cqw]`), so
   it scales like a screenshot; screens Inbox, Pipeline, Follow-ups,

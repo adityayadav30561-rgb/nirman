@@ -58,6 +58,10 @@ sections first. The user may choose a different order.
 
 ## Open questions for the user
 
+- Confirm the Nirman CRM claims taken from the handoff: Meta lead ads,
+  IndiaMART / JustDial, payment links, API and webhooks, data import and
+  export, official WhatsApp Business Platform (`src/content/crm-page.ts`).
+
 - Real contact details, domain, and which social profiles exist (all
   placeholders: `src/content/site.ts`; footer icons are generic with `#`
   links in `src/content/footer.ts`).

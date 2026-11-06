@@ -97,3 +97,58 @@ export const dashboard = {
     { label: "Calls", pct: 9, tone: "bg-[#1f8a55]" },
   ],
 };
+
+/* Leads list: one row per lead, with the selected lead's history. */
+export const leads = [
+  { initials: "RS", name: "Riya Sharma", business: "Clinic, Pune", source: "whatsapp" as Channel, stage: "New enquiry", score: 82, last: "Asked for a quote · 2 min", owner: "PN", tone: "bg-[#fbe9df] text-brand" },
+  { initials: "JD", name: "James Dunn", business: "Retail, London", source: "email" as Channel, stage: "Contacted", score: 64, last: "Opened proposal · 1 h", owner: "AK", tone: "bg-[#ece6fc] text-[#6b4fd8]" },
+  { initials: "AK", name: "Arjun Kapoor", business: "Café, Delhi", source: "form" as Channel, stage: "New enquiry", score: 71, last: "Form submitted · 3 h", owner: "PN", tone: "bg-[#fde2e7] text-[#b4234a]" },
+  { initials: "SN", name: "Sara Nasser", business: "Real estate, Dubai", source: "whatsapp" as Channel, stage: "Proposal sent", score: 88, last: "Viewed quote twice · 5 h", owner: "RV", tone: "bg-[#fdf3d4] text-[#a06a00]" },
+  { initials: "MP", name: "Meera Pillai", business: "School, Kochi", source: "call" as Channel, stage: "Contacted", score: 45, last: "Missed call · yesterday", owner: "AK", tone: "bg-[#ddf3e6] text-[#1f8a55]" },
+  { initials: "VS", name: "Vikram Singh", business: "Gym, Jaipur", source: "whatsapp" as Channel, stage: "Contacted", score: 38, last: "No reply · 3 days", owner: "RV", tone: "bg-[#e6f0ee] text-[#2f6f63]" },
+];
+
+export const leadTimeline = [
+  { text: "Viewed the quote twice", meta: "Today, 11:40" },
+  { text: "Proposal sent by Rohan", meta: "Mon, 16:05" },
+  { text: "Discovery call, 24 min", meta: "Fri, 12:30" },
+  { text: "Enquiry on WhatsApp", meta: "Thu, 09:12" },
+];
+
+/* Reports */
+export const reports = {
+  kpis: [
+    { label: "Leads this month", value: "148", delta: "+18%" },
+    { label: "Deals won", value: "27", delta: "+6" },
+    { label: "Win rate", value: "32%", delta: "+4 pts" },
+    { label: "First reply", value: "2 min", delta: "−9 min" },
+  ],
+  months: [
+    { m: "May", v: 52 }, { m: "Jun", v: 61 }, { m: "Jul", v: 58 }, { m: "Aug", v: 74 }, { m: "Sep", v: 69 }, { m: "Oct", v: 92 },
+  ],
+  funnel: [
+    { label: "Enquiries", v: 148 }, { label: "Contacted", v: 96 }, { label: "Proposal", v: 41 }, { label: "Won", v: 27 },
+  ],
+  team: [
+    { initials: "PN", name: "Priya N.", won: 11, pct: 82 },
+    { initials: "RV", name: "Rohan V.", won: 9, pct: 66 },
+    { initials: "AK", name: "Aisha K.", won: 7, pct: 52 },
+  ],
+};
+
+/* Campaigns: WhatsApp and email broadcasts and drips */
+export const campaigns = [
+  { name: "Diwali offer for past enquiries", channel: "whatsapp" as Channel, status: "Sent", audience: "412 contacts", stats: [["Delivered", "98%"], ["Read", "81%"], ["Replied", "64"]] },
+  { name: "Welcome series, 3 emails", channel: "email" as Channel, status: "Running", audience: "New leads", stats: [["Opened", "58%"], ["Clicked", "17%"], ["Booked", "12"]] },
+  { name: "Proposal reminder after 2 days", channel: "whatsapp" as Channel, status: "Running", audience: "Proposal sent", stats: [["Sent", "86"], ["Read", "77%"], ["Replied", "31"]] },
+  { name: "Monthly newsletter", channel: "email" as Channel, status: "Draft", audience: "All customers", stats: [["Scheduled", "1 Dec"], ["", ""], ["", ""]] },
+];
+
+/* Automations: a no-code workflow */
+export const workflow = [
+  { kind: "trigger", title: "New lead arrives", meta: "Website form, WhatsApp, email or ad" },
+  { kind: "action", title: "Send instant reply", meta: "WhatsApp template · within seconds" },
+  { kind: "action", title: "Assign to the right person", meta: "By service and city, round robin" },
+  { kind: "wait", title: "Wait 2 hours", meta: "Stop if the lead replies" },
+  { kind: "branch", title: "No reply yet?", meta: "Remind the owner and send a follow-up" },
+] as const;

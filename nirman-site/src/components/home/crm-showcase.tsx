@@ -16,8 +16,8 @@ import { crmViews, type CrmViewKey } from "@/content/crm";
  * description. On phones the window is shown as a crop at a readable size,
  * without its sidebar, and the phone is left out (it would cover the crop). Parallax targets: .c-window, .c-phone (crm-motion).
  */
-const screens = { inbox: InboxScreen, pipeline: PipelineScreen, followups: FollowupsScreen, reports: DashboardScreen };
-const icons = { inbox: Inbox, pipeline: Columns3, followups: CalendarClock, reports: LayoutDashboard };
+const screens = { inbox: InboxScreen, pipeline: PipelineScreen, followups: FollowupsScreen, dashboard: DashboardScreen };
+const icons = { inbox: Inbox, pipeline: Columns3, followups: CalendarClock, dashboard: LayoutDashboard };
 
 export function CrmShowcase() {
   const [i, setI] = useState(0);
