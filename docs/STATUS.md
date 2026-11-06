@@ -16,7 +16,9 @@ the end of every session. Keep it under about 60 lines. Older history:
   entrance and scroll parallax. Facts band
   done (`docs/sections/02-facts.md`): 4 variants, B chosen 49/60. What we
   do done (`docs/sections/03-services.md`): 4 variants, D (editorial list)
-  chosen 52/60; 3D-style icons in SVG.
+  chosen 52/60; 3D-style icons in SVG. Where we work done
+  (`docs/sections/04-map.md`): 4 variants incl. a Three.js globe, A (flat
+  dotted map, GSAP reveal from India) chosen 54/70.
 - **Motion rule (user, 2026-11-06):** only GSAP, Framer Motion or Three.js
   (DESIGN-PROTOCOL section 5). CSS keyframe motion removed; hero back to the
   calm first entrance plus scroll parallax; facts and services use GSAP
@@ -29,22 +31,23 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
-**H4 Where we work** (`docs/BUILD-PLAN.md`), following the protocol:
-1. Brief `docs/sections/04-map.md` (PAGE-PLAN section 2 row 5: dotted world
-   map in code, India office plus markets we serve US, UAE, UK; pins say
-   "markets we serve"; Service / Timeline / Get a quote bar). Measure the
-   map section in the video (about clip 6.0 to 9.4 s: pins pop in, big one
-   first, search bar last) with `tools/video/` (adapt
-   `track_features.py`; ask the user for the video if it is missing).
-2. Lab pattern: `src/app/lab/<section>/page.tsx` (`notFound()` in
-   production, noindex), variants in `src/components/lab/<section>/`, each
-   wrapped in `id="var-x"`; give every SVG with gradients a unique id
-   (gotcha 35). Shots per `tools/shots/README.md` section 5; wait about 2 s
-   after showing a variant so its reveal finishes.
-3. Each variant carries a motion concept (GSAP / Framer / Three; a globe
-   in Three.js is a natural candidate here). Score on the 70-point rubric
-   (motion row added), choose, record; build the winner with a
-   `components/motion/map-motion.tsx` wrapper.
+**H5 Nirman CRM** (`docs/BUILD-PLAN.md`), following the protocol:
+1. Brief `docs/sections/05-crm.md` (PAGE-PLAN section 2 row 6: heading
+   "Every lead, answered and followed up.", WhatsApp and email built in, a
+   cluster of chat bubbles and CRM cards (a lead arrives, is assigned,
+   replied in 2 minutes), dark "Book a demo"; no WhatsApp/Instagram/Facebook
+   logos, a generic chat icon only). Reference: the Community section (about
+   clip 9.2 to 11.2 s: avatars rise, speech bubbles pop). Look at it with
+   `tools/video/sheet.py`. The CRM screens in `design-handoff/crm-screens.html`
+   are the visual source for the cards. If 3D-style people avatars are
+   wanted, write a ChatGPT/Gemini prompt (DESIGN-PROTOCOL section 6) and
+   log it in `docs/ASSET-REQUESTS.md`.
+2. Lab: `src/app/lab/crm/page.tsx` (`notFound()` in production, noindex),
+   variants in `src/components/lab/crm/`, each in `id="var-x"`; unique SVG
+   ids (gotcha 35); shots per `tools/shots/README.md` section 5.
+3. Every variant has a motion concept (GSAP / Framer Motion / Three.js);
+   score on the 70-point rubric, choose, record; build the winner with
+   `components/motion/crm-motion.tsx`.
 
 ## Open questions for the user
 
@@ -79,5 +82,6 @@ None.
 Planned the rebuild (PAGE-PLAN, REFERENCE-VIDEO), removed the old site,
 built header and hero with the hand, clouds and a measured entrance; wrote
 the design protocol, build plan and current design docs; built the facts
-band (B) and What we do (D) through the protocol; then, at the user's
-request, calmed the hero and moved all motion to GSAP; pushed to GitHub.
+band (B) and What we do (D) through the protocol; at the user's request
+calmed the hero and moved all motion to GSAP; added the asset-prompt rule
+(ChatGPT/Gemini); built Where we work (A, dotted map); pushed to GitHub.

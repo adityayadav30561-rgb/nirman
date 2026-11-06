@@ -58,6 +58,11 @@ thirds of the H1.
 - `reveal.tsx`: client wrapper (`as`, default `section`) that adds `data-in`
   when the element is about 80% down the screen; children animate with
   `rv-icon` / `rv-text` (set `--i` item index, `--j` 0 title / 1 line).
+- `home/map.tsx` ("Where we work"), `home/world-map.tsx` (`WorldMap`,
+  `MapPin`: hex-dot land map from Natural Earth, pins with side labels,
+  India-to-market arcs, reveal mask) and `home/quote-bar.tsx` (`QuoteBar`:
+  pill GET form with Service and Timeline selects and a dark Get a quote
+  button; reusable on other pages).
 - `home/cloud.tsx`: flat-bottomed cartoon cloud (white, blue-grey underside).
 - `home/phone-screen.tsx`: Nirman CRM mobile UI in HTML (sample data).
 - `logo.tsx`: plan-view mark (ink, orange threshold) + wordmark.
@@ -74,6 +79,7 @@ client wrapper that renders its `<section>` and runs `useGSAP`:
 | `site-header.tsx` (inline) | logo fades, nav items 0.1 s apart, dark button grey to dark, outline button |
 | `hero-motion.tsx` | calm load: headline from a 40% ghost, phone swings in once (from 120% right, 20deg, to 8deg, no overshoot), subtitle and button fade, sparks, loop and underline draw, clouds fade in; then float and cloud drift. Scroll (scrubbed): text and phone rise, phone straightens, front clouds faster than back |
 | `facts-motion.tsx` | once at 92%: band wipes open from the left, heading fades up, figures rise out of a mask 0.08 s apart, labels fade |
+| `map-motion.tsx` | once at 75%: map revealed by a circle growing from India, India pin drops, arcs draw to each market and its pin pops, heading lines rise, bar rises; India pin pulses |
 | `services-motion.tsx` | heading lines rise out of a mask (SplitText), spark draws; each row once at 85%: divider draws left to right, icon flips in (3D), title, line, then button |
 
 Static start states in `globals.css` (only under `html.js` and

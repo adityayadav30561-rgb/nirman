@@ -17,9 +17,9 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 - [x] H3b Motion rework (user rule): CSS keyframes removed; GSAP for header,
       hero (calm load + scroll parallax), facts and services; protocol
       section 5 (GSAP / Framer Motion / Three.js only)
-- [ ] H4 Where we work: dotted world map in code, India office plus markets
+- [x] H4 Where we work: dotted world map in code, India office plus markets
       we serve (US, UAE, UK), Service / Timeline / Get a quote bar
-      (`04-map.md`)
+      (`04-map.md`, variant A, GSAP map reveal)
 - [ ] H5 Nirman CRM: chat bubbles and CRM cards, Book a demo (`05-crm.md`)
 - [ ] H6 Results: SAMPLE cards in a sliding row (`06-results.md`)
 - [ ] H7 Questions: email + Submit, FAQ rows with FAQ markup

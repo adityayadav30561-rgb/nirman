@@ -20,14 +20,15 @@ E:\nirman2\
     src\app\                layout.tsx (Poppins, metadata, header), page.tsx (homepage),
                             globals.css (tokens, container, motion system), favicon.ico
     src\components\         site-header.tsx (client, GSAP entrance), logo.tsx
-    src\components\motion\  gsap.ts (plugins), hero-motion, facts-motion, services-motion (client)
+    src\components\motion\  gsap.ts (plugins), hero-, facts-, services-, map-motion (client)
     src\components\home\    hero.tsx, phone-screen.tsx, cloud.tsx, facts.tsx, services.tsx,
-                            service-icons.tsx
+                            service-icons.tsx, map.tsx, world-map.tsx, quote-bar.tsx
     src\components\ui\      button.tsx (ButtonLink)
     src\components\lab\     section variants while choosing (protocol); dev-only
     src\content\            site.ts (brand, placeholders), nav.ts, image-credits.ts, facts.ts,
-                            services.ts
+                            services.ts, map.ts, world-dots.json (generated)
     scripts\cut-hand.py     builds the hero hand layers from the Unsplash photo
+    scripts\make-world-dots.mjs  builds content/world-dots.json (Natural Earth land, hex grid)
     public\images\hero\     hand-back.webp, hand-front.webp
 ```
 
