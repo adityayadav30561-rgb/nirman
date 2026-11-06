@@ -45,7 +45,9 @@ DESIGN-PROTOCOL section 5; code in `nirman-site/src/components/motion/`.
 ## Record everything (multi-session memory)
 
 - After each finished, verified task: tick it in `docs/BUILD-PLAN.md`,
-  update `docs/STATUS.md` (position, next task), then **commit and push**.
+  update `docs/STATUS.md` (position, next task), then **commit and push to
+  `origin` main** (user rule: every build goes to main). Cloud sessions on a
+  `claude/...` branch also run `git push origin HEAD:main`.
 - User decisions go into `docs/DECISIONS.md` (date, decision, why) the moment
   they are made. Section design choices go into `docs/sections/`.
 - Measured motion goes into `docs/REFERENCE-VIDEO.md` section 4; new design
