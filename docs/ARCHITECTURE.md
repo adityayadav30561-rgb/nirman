@@ -132,3 +132,10 @@ client components as props.
 29. **Ambient video** (`home1/ambient-video.tsx`): poster always renders; the
     file loads only at 768px and up, without reduced motion or Save-Data, once
     visible. Keep clips under 6 MB.
+30. **`LayoutProps` / `PageProps` are generated types.** After deleting
+    `.next`, `npx tsc --noEmit` fails with "Cannot find name 'LayoutProps'"
+    until `npm run build` or `npm run dev` regenerates `.next/types`. Run the
+    build first, then tsc.
+31. **Bulk deletes are blocked** by the built-in safety check (`rm -rf` on
+    several folders). Do not work around it: ask the user, or move folders to
+    a gitignored archive with their approval (2026-11-06: `old-site/`).

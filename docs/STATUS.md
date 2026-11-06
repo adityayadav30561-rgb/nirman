@@ -5,15 +5,27 @@ Keep it under ~80 lines: it is read at the start of every session.
 
 ## Current position
 
-- **Phase:** Redesign v3, step R0 (plan + first design) done and awaiting
-  the user's review. Phase 5 (lead API) is paused; the R-phases in
-  `docs/REDESIGN.md` §10 replace Phases 5 to 11.
-- **Next task:** wait for feedback on (1) the sitemap and menu plan
-  (REDESIGN §4, §5, decisions §13) and (2) `/homepage1/` (linked in the header
-  as "homepage1"). Then R1 foundations: fixed-16px fluid scale, UI kit with the
-  five button variants, new header/footer with mega menus, registry `status`.
-- **Blockers:** the sitemap needs the user's yes/no on §13. Client inputs are
-  listed in REDESIGN §11.
+- **Phase:** rebuild from scratch (2026-11-06). Step 1 done: all PAGE-PLAN
+  decisions made (see DECISIONS.md): 18 pages, full-width page, keyword
+  headline, Poppins, four true facts, SAMPLE results, Claude builds/downloads
+  artwork. Step 2: build the homepage from `docs/REFERENCE-VIDEO.md`.
+- **Old site removed from the app:** moved (not deleted) to
+  `E:\nirman2\old-site\` (gitignored; user approved the move; the user may
+  delete it any time). Also in GitHub commit `2eba621` / local tag
+  `archive/v2`.
+- **New minimal app (done, verified):** `src/app/layout.tsx` (Poppins via
+  next/font, metadata), `globals.css` (v4 tokens from the video, bounded
+  scale clamp 15 to 17px), blank `page.tsx` (logo only), `src/content/site.ts`
+  (brand + placeholders), `src/components/logo.tsx` (mark recoloured: ink +
+  orange), favicon restored. tsc, lint, build pass; preview shows Poppins,
+  page bg #f5f7f9, no console errors. OG image route and robots/sitemap not
+  recreated yet (do with the SEO pass).
+- **Next task:** build the header and hero with the entrance timing from
+  REFERENCE-VIDEO 4.2 (headline "Websites, SEO and software that grow your
+  business."). Ask before downloading the hand-with-phone photo; the phone
+  screen is built in code.
+- **Not committed:** docs + new minimal app + `.gitignore` (`old-site/`).
+  Never commit the reference video or its frames.
 
 ## Done so far
 

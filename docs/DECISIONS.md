@@ -5,6 +5,16 @@ from the client are in `docs/handoff.md` §1 and are not repeated here.
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-11-06 | User dislikes the whole site and asked to remove everything. Old site and homepage1 are tagged `archive/v2` (commit 2eba621). Deleting the files is waiting for the user's approval (a safety check blocked the bulk delete) | User request |
+| 2026-11-06 | New order of work: (1) decide pages and content (`docs/PAGE-PLAN.md`), (2) build the homepage from the reference video (`docs/REFERENCE-VIDEO.md`). `docs/REDESIGN.md` section 4 (95-page sitemap) is superseded; its principles and SEO/AEO/GEO standards stay as guidance | User request |
+| 2026-11-06 | Reference video analysed: 60 fps, 1037 frames, page scrolls inside a floating card with staggered reveals; measured timings recorded. Third-party video and frames are not committed | User supplied the video |
+| 2026-11-06 | Site size: option B, 18 pages (list in `docs/PAGE-PLAN.md` section 1) | User chose "b" |
+| 2026-11-06 | Rendering: normal full-width page with the video's motion (not the floating card) | User choice |
+| 2026-11-06 | Hero headline: "Websites, SEO and software that grow your business." (replaces "Build better. Grow smarter.") | User choice |
+| 2026-11-06 | Typeface: Poppins (replaces Mona Sans + Funnel Sans) | User choice; matches reference |
+| 2026-11-06 | Artwork: Claude builds icons, map and screens in code, downloads a free-licence hand-with-phone photo (asks before downloading), uses the current logo | User choice |
+| 2026-11-06 | Facts band: the four true facts (2 h reply, 48 h proposal, 3 to 6 wk website, 100% your code and data) | User choice; no invented stats |
+| 2026-11-06 | Results section: shown now with cards clearly labelled SAMPLE, replaced when real quotes arrive | User choice |
 | 2026-10-27 | Redesign the whole website (v3): ~95 intent-specific pages instead of 39, new navigation, new homepage, SEO/AEO/GEO built in from the start. Plan in `docs/REDESIGN.md`; page list in `docs/sitemap-v3.json` | User request; sitemap and tiers await the user's review |
 | 2026-10-27 | Design principle: links are buttons. Navigation outside prose is a pill button (5 variants); text links only inside running paragraphs and always underlined | User request (REDESIGN §3.1) |
 | 2026-10-27 | Responsive scale is bounded, not identical everywhere: 1rem stops at 17px, content container capped at 96rem (~1630px), no raw `vw` sizes. Looks good on every screen, not the same. Interim patch applied now; target is fixed 16px root + fluid tokens (R1) | User: boxes were too big on a 27-inch monitor |

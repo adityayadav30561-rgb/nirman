@@ -11,9 +11,11 @@ software incl. mobile apps, WhatsApp/email marketing) and its own product
 The design was built in an earlier session; business rules come from
 `docs/handoff.md`. India + international audience, English only.
 
-**Redesign v3 is in progress** (2026-10-27): read `docs/REDESIGN.md` (sitemap,
-navigation, design principles, SEO/AEO/GEO) before building or editing pages.
-Its principles override older habits (links are buttons; bounded scale).
+**2026-11-06: the site is being rebuilt from scratch.** The old site is
+tagged `archive/v2`. Read `docs/PAGE-PLAN.md` (pages and content, awaiting the
+user's decisions) and `docs/REFERENCE-VIDEO.md` (design and motion spec from
+the user's reference video) before building. `docs/REDESIGN.md` keeps the SEO
+and QA standards; its 95-page sitemap is superseded.
 
 ## Start of every session (do this first, nothing else)
 

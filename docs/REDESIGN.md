@@ -1,5 +1,11 @@
 # Nirman website v3: redesign plan
 
+> **2026-11-06: partly superseded.** The user rejected the current site and
+> the sitemap in section 4 (95 pages). Pages and content are now decided in
+> `docs/PAGE-PLAN.md`; look and motion come from `docs/REFERENCE-VIDEO.md`.
+> Still valid as guidance: sections 2 (hard rules), 3 (principles, except where
+> the reference video differs), 8 (SEO, AEO, GEO) and 12 (QA checklist).
+
 Development document for the full redesign. Read this before building any v3
 page. Status: **plan for review**, written 2026-10-27. `homepage1` (route
 `/homepage1/`, linked in the header) is the first design built from it.
