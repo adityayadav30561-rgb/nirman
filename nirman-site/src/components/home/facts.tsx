@@ -15,7 +15,7 @@ const dividers = (i: number) =>
 
 export function Facts() {
   return (
-    <FactsMotion aria-labelledby="facts-title" className="gs-clip-x bg-brand text-white">
+    <FactsMotion aria-labelledby="facts-title" className="gs-clip-x bg-band text-white">
       {/* heading above the figures until 1024px, beside them from there */}
       <div className="container-page grid gap-6 py-10 lg:min-h-[10.5rem] lg:grid-cols-[13rem_1fr] lg:items-center lg:gap-10 lg:py-0">
         <div className="f-head">

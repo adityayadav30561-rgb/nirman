@@ -11,8 +11,8 @@ const chIcon: Record<Channel, typeof Mail> = { whatsapp: MessageCircle, email: M
 const chTone: Record<Channel, string> = {
   whatsapp: "bg-[#ddf3e6] text-[#1f8a55]",
   email: "bg-[#ece6fc] text-[#6b4fd8]",
-  form: "bg-[#dbe9fd] text-brand",
-  call: "bg-[#fde6d9] text-accent",
+  form: "bg-[#fbe9df] text-brand",
+  call: "bg-[#fde2e7] text-[#b4234a]",
 };
 
 export function ChannelChip({ channel, label = true }: { channel: Channel; label?: boolean }) {
@@ -49,7 +49,7 @@ export function InboxScreen() {
         </div>
         <ul className="flex flex-col gap-[0.25em]">
           {inbox.map((c, i) => (
-            <li key={c.name} className={`crm-row flex gap-[0.7em] rounded-[0.8em] p-[0.65em] ${i === 0 ? "bg-[#eef4fe] ring-1 ring-brand/20" : ""}`}>
+            <li key={c.name} className={`crm-row flex gap-[0.7em] rounded-[0.8em] p-[0.65em] ${i === 0 ? "bg-[#fdf1ea] ring-1 ring-brand/20" : ""}`}>
               <span className={`grid size-[2.4em] shrink-0 place-items-center rounded-full text-[0.75em] font-semibold ${c.tone}`}>{c.initials}</span>
               <span className="min-w-0 flex-1">
                 <span className="flex items-center gap-[0.4em]">
@@ -83,7 +83,7 @@ export function InboxScreen() {
             <div
               key={m.text}
               className={`crm-msg max-w-[70%] rounded-[1em] px-[1em] py-[0.7em] text-[0.8em] leading-snug ${
-                m.from === "lead" ? "rounded-bl-[0.3em] bg-white ring-1 ring-line" : m.from === "auto" ? "ml-auto rounded-br-[0.3em] bg-[#e7effc]" : "ml-auto rounded-br-[0.3em] bg-brand text-white"
+                m.from === "lead" ? "rounded-bl-[0.3em] bg-white ring-1 ring-line" : m.from === "auto" ? "ml-auto rounded-br-[0.3em] bg-[#fdf1ea]" : "ml-auto rounded-br-[0.3em] bg-brand text-white"
               }`}
             >
               {m.text}
@@ -196,7 +196,7 @@ export function DashboardScreen() {
       <Title title="Good morning, Priya" sub="This week at a glance" />
       <div className="grid grid-cols-3 gap-[0.8em]">
         {dashboard.kpis.map((k, i) => (
-          <div key={k.label} className={`crm-card rounded-[0.9em] p-[0.9em] ${["bg-[#eef4fe]", "bg-[#eaf6ef]", "bg-[#fff1e8]"][i]}`}>
+          <div key={k.label} className={`crm-card rounded-[0.9em] p-[0.9em] ${["bg-[#fdf1ea]", "bg-[#eaf6ef]", "bg-[#fff1e8]"][i]}`}>
             <p className="text-[0.7em] text-ink/70">{k.label}</p>
             <p className="mt-[0.2em] text-[1.6em] font-semibold tracking-[-0.03em]">{k.value}</p>
             <p className="text-[0.66em] text-[#6b7079]">{k.note}</p>
@@ -208,7 +208,7 @@ export function DashboardScreen() {
           <p className="text-[0.78em] font-semibold">Leads per week</p>
           <div className="mt-[0.8em] flex h-[8em] items-end gap-[0.6em]">
             {dashboard.bars.map((b, i) => (
-              <span key={i} className={`crm-bar flex-1 origin-bottom rounded-t-[0.4em] ${i === dashboard.bars.length - 1 ? "bg-brand" : "bg-[#cfe0fb]"}`} style={{ height: `${(b / max) * 100}%` }} />
+              <span key={i} className={`crm-bar flex-1 origin-bottom rounded-t-[0.4em] ${i === dashboard.bars.length - 1 ? "bg-brand" : "bg-[#f6d3bf]"}`} style={{ height: `${(b / max) * 100}%` }} />
             ))}
           </div>
         </div>
@@ -238,7 +238,7 @@ export function PhoneInbox({ className = "" }: { className?: string }) {
   const c = inbox[0];
   return (
     <div className={`@container ${className}`}>
-      <div aria-hidden className="relative aspect-[9/19] w-full overflow-hidden rounded-[13cqw] bg-ink-2 p-[2.6cqw] shadow-[0_2em_4em_-1em_rgba(2,40,100,0.35)]">
+      <div aria-hidden className="relative aspect-[9/19] w-full overflow-hidden rounded-[13cqw] bg-ink-2 p-[2.6cqw] shadow-[0_2em_4em_-1em_rgba(18,20,24,0.35)]">
         <div className="flex h-full flex-col overflow-hidden rounded-[10.5cqw] bg-[#f7f9fb] text-[4.4cqw] text-ink">
           <div className="flex items-center justify-between px-[1.4em] pt-[0.9em] text-[0.7em] font-semibold">
             <span>9:41</span>
@@ -259,7 +259,7 @@ export function PhoneInbox({ className = "" }: { className?: string }) {
               <div
                 key={m.text}
                 className={`crm-msg max-w-[85%] rounded-[1em] px-[0.9em] py-[0.6em] text-[0.75em] leading-snug ${
-                  m.from === "lead" ? "bg-white ring-1 ring-line" : m.from === "auto" ? "ml-auto bg-[#e7effc]" : "ml-auto bg-brand text-white"
+                  m.from === "lead" ? "bg-white ring-1 ring-line" : m.from === "auto" ? "ml-auto bg-[#fdf1ea]" : "ml-auto bg-brand text-white"
                 }`}
               >
                 {m.text}

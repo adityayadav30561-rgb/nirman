@@ -25,7 +25,7 @@ export function AppFrame({ active, children, className = "" }: { active: CrmView
     <div className={`@container ${className}`}>
       <div
         aria-hidden
-        className="flex aspect-[16/10] w-full flex-col overflow-hidden rounded-[1.1em] bg-surface text-[1.18cqw] text-ink shadow-[0_2.5em_5em_-1.5em_rgba(2,40,100,0.28),0_0_0_1px_rgba(5,7,12,0.06)]"
+        className="flex aspect-[16/10] w-full flex-col overflow-hidden rounded-[1.1em] bg-surface text-[1.18cqw] text-ink shadow-[0_2.5em_5em_-1.5em_rgba(18,20,24,0.28),0_0_0_1px_rgba(5,7,12,0.06)]"
       >
         {/* window bar */}
         <div className="flex h-[2.4em] shrink-0 items-center gap-[0.45em] border-b border-line bg-[#f7f9fb] px-[1em]">
@@ -62,7 +62,7 @@ export function AppFrame({ active, children, className = "" }: { active: CrmView
               Settings
             </div>
             <div className="mt-[0.4em] flex items-center gap-[0.6em] border-t border-line px-[0.4em] pt-[0.8em]">
-              <span className="grid size-[2em] place-items-center rounded-full bg-[#dbe9fd] text-[0.75em] font-semibold text-brand">PN</span>
+              <span className="grid size-[2em] place-items-center rounded-full bg-[#fbe9df] text-[0.75em] font-semibold text-brand">PN</span>
               <span className="leading-tight">
                 <span className="block text-[0.78em] font-medium">Priya N.</span>
                 <span className="block text-[0.68em] text-[#6b7079]">Sales</span>

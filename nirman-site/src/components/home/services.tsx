@@ -19,7 +19,7 @@ export function Services() {
           <svg
             viewBox="0 0 24 24"
             aria-hidden
-            className="s-spark draw mb-2 size-6 text-[#3b82f6]"
+            className="s-spark draw mb-2 size-6 text-[#ea580c]"
             fill="none"
             stroke="currentColor"
             strokeWidth="2.4"

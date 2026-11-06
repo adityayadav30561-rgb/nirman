@@ -72,7 +72,7 @@ export function WorldMap({
   className = "",
   arcs = true,
   pins = true,
-  dotClass = "fill-[#c9dcf6]",
+  dotClass = "fill-[#dcd6d0]",
   maskId = "world-reveal",
 }: {
   className?: string;
@@ -104,7 +104,7 @@ export function WorldMap({
               d={arcPath(office, p)}
               pathLength={1}
               fill="none"
-              stroke="#025dde"
+              stroke="#c2410c"
               strokeOpacity="0.6"
               strokeWidth="0.5"
               strokeDasharray="1 2"

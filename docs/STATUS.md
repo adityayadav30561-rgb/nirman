@@ -38,6 +38,11 @@ the end of every session. Keep it under about 60 lines. Older history:
 - **Everything is on GitHub** (`origin` main); commit and push after every
   verified task so any session or account can continue.
 
+- **Colours (user, 2026-11-06): no blue anywhere.** Bands (facts, CRM,
+  footer) are ink `#121418`; accent is burnt orange `#c2410c` (DESIGN
+  tokens). Section records written before this still mention blue; the
+  code is the truth.
+
 ## Next task
 
 **H9 Whole-page review** (`docs/BUILD-PLAN.md`; DESIGN-PROTOCOL 2.9):

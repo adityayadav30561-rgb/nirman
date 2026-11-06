@@ -7,15 +7,18 @@
  */
 @theme {
   --color-page: #f5f7f9;
-  --color-wash: #ebf4f9;
+  --color-wash: #f6efe9; /* warm pale tint (was pale blue) */
   --color-surface: #ffffff;
   --color-ink: #05070c;
   --color-ink-2: #1b1f27; /* dark pill, est. */
   --color-muted: #90949b;
   --color-line: #e3e7ed; /* est. */
 
-  --color-brand: #025dde;
-  --color-brand-deep: #034fbf;
+  /* No blue anywhere (user, 2026-11-06): ink bands, burnt-orange accent. */
+  --color-brand: #c2410c; /* links, tabs, active states; 5.2:1 on white */
+  --color-brand-deep: #9a3412;
+  --color-band: #121418; /* facts band, Nirman CRM band, footer */
+  --color-band-2: #1d2027; /* lighter end of the band gradient */
   --color-accent: #f26b2b; /* orange underline, est. */
 
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;

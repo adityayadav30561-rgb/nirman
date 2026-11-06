@@ -18,7 +18,7 @@ export function Crm() {
   return (
     <CrmMotion
       aria-labelledby="crm-title"
-      className="overflow-hidden bg-[linear-gradient(160deg,#0a63e6_0%,#025dde_50%,#034fbf_100%)] pt-20 pb-28 text-white lg:pt-28 lg:pb-40"
+      className="overflow-hidden bg-[linear-gradient(160deg,var(--color-band-2)_0%,var(--color-band)_100%)] pt-20 pb-28 text-white lg:pt-28 lg:pb-40"
     >
       <div className="container-page grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
         <div>

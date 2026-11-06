@@ -14,7 +14,7 @@ export function Results() {
     <ResultsMotion aria-labelledby="results-title" className="py-20 lg:py-28">
       <div className="container-page">
         <div className="max-w-[34rem]">
-          <svg viewBox="0 0 24 24" aria-hidden className="r-spark draw mb-2 size-6 text-[#3b82f6]" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+          <svg viewBox="0 0 24 24" aria-hidden className="r-spark draw mb-2 size-6 text-[#ea580c]" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
             <path pathLength={1} d="M5 9 L10 14" />
             <path pathLength={1} d="M12 4 L13 12" />
           </svg>

@@ -16,7 +16,7 @@ function Sparks({ className = "" }: { className?: string }) {
     <svg
       viewBox="0 0 64 40"
       aria-hidden
-      className={`draw gs-draw h-spark pointer-events-none absolute -top-[0.55em] left-full ml-[0.1em] h-[0.7em] w-[1.1em] text-[#3b82f6] ${className}`}
+      className={`draw gs-draw h-spark pointer-events-none absolute -top-[0.55em] left-full ml-[0.1em] h-[0.7em] w-[1.1em] text-[#ea580c] ${className}`}
       fill="none"
       stroke="currentColor"
       strokeWidth="2.6"
@@ -97,11 +97,11 @@ function PhoneStage() {
         {/* soft rings centred on the phone, and a loose drawn line */}
         <div aria-hidden className="absolute top-[44%] left-[62%] aspect-square w-[118%] -translate-1/2 rounded-full border border-brand/[0.07]" />
         <div aria-hidden className="absolute top-[44%] left-[62%] aspect-square w-[160%] -translate-1/2 rounded-full border border-brand/[0.05]" />
-        <div aria-hidden className="absolute top-[44%] left-[62%] aspect-square w-[105%] -translate-1/2 rounded-full bg-[radial-gradient(closest-side,#dcebfb,transparent)]" />
+        <div aria-hidden className="absolute top-[44%] left-[62%] aspect-square w-[105%] -translate-1/2 rounded-full bg-[radial-gradient(closest-side,#fbe7da,transparent)]" />
         <svg
           viewBox="0 0 120 220"
           aria-hidden
-          className="draw gs-draw h-loop pointer-events-none absolute top-[10%] -right-[18%] h-[40%] text-[#3b82f6]/45"
+          className="draw gs-draw h-loop pointer-events-none absolute top-[10%] -right-[18%] h-[40%] text-[#ea580c]/45"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.4"
@@ -126,7 +126,7 @@ function PhoneStage() {
                 className="object-contain"
               />
               <div className="absolute top-[0.94%] left-[32.63%] h-[86.21%] w-[59.14%] rounded-[15%/7.4%] bg-ink p-[2.84%] shadow-[0_0_0_1.5px_#2b303a_inset]">
-                <div className="relative h-full overflow-hidden rounded-[11.3%/5.4%] bg-[#e8f1fb]">
+                <div className="relative h-full overflow-hidden rounded-[11.3%/5.4%] bg-[#faefe6]">
                   <div className="h-screen absolute top-0 left-0 h-[32.22rem] w-[15.37rem] origin-top-left [scale:var(--s)]">
                     <PhoneScreen />
                     <div aria-hidden className="absolute top-2 left-1/2 h-[1.1rem] w-[34%] -translate-x-1/2 rounded-full bg-ink" />
@@ -156,7 +156,7 @@ export function Hero() {
     <HeroMotion aria-labelledby="hero-title" className="relative overflow-hidden">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -top-[5.5rem] bg-[radial-gradient(48rem_32rem_at_0%_0%,#e3eff9,transparent_70%),radial-gradient(40rem_34rem_at_80%_45%,#e9f2fb,transparent_70%)]"
+        className="pointer-events-none absolute inset-0 -top-[5.5rem] bg-[radial-gradient(48rem_32rem_at_0%_0%,#f8ece3,transparent_70%),radial-gradient(40rem_34rem_at_80%_45%,#fbf1ea,transparent_70%)]"
       />
       <div className="container-page relative grid gap-8 pt-4 md:min-h-[32rem] md:grid-cols-[1.15fr_0.85fr] md:gap-6 md:pt-0 lg:min-h-[min(calc(100svh-5.5rem),46rem)]">
         <div className="h-text max-w-[44rem] self-center md:py-14 lg:py-10">

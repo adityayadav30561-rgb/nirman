@@ -11,16 +11,27 @@ line here.
 | Token | Value | Use |
 |---|---|---|
 | `page` | `#f5f7f9` | page background (one pale surface) |
-| `wash` | `#ebf4f9` | soft blue tint, hover backgrounds |
+| `wash` | `#f6efe9` | warm pale tint, hover backgrounds |
 | `surface` | `#ffffff` | cards, menus |
 | `ink` | `#05070c` | headings, main text |
 | `ink-2` | `#1b1f27` | dark pill buttons |
 | `muted` | `#90949b` | supporting grey text (see contrast note) |
 | `line` | `#e3e7ed` | dividers |
-| `brand` | `#025dde` | brand blue: bands, links, highlights |
-| `brand-deep` | `#034fbf` | footer blue |
+| `brand` | `#c2410c` | burnt orange: links, tabs, active states, product UI accent (5.2:1 on white) |
+| `brand-deep` | `#9a3412` | darker burnt orange |
+| `band` | `#121418` | ink bands: facts, Nirman CRM, footer |
+| `band-2` | `#1d2027` | lighter end of the band gradient (160deg, band-2 to band) |
 | `accent` | `#f26b2b` | orange, only for drawn accents |
-| drawn blue | `#3b82f6` | hand-drawn sparks and loops |
+| drawn orange | `#ea580c` | hand-drawn sparks and loops (was drawn blue) |
+
+**No blue anywhere (user, 2026-11-06).** Blue "looks very college ERP".
+Every blue was mapped: dark blues to ink `#1b1f27`, mid blues to burnt
+orange, pale blue tints to warm peach/cream (`#fbe9df`, `#fdf1ea`,
+`#f6d3bf`; hero sky `#fbe7da`), map dots to warm grey `#dcd6d0`, blue
+shadows to ink shadows. Sample avatar/channel tones: orange tint (brand),
+rose `#fde2e7`/`#b4234a`, green, purple, amber. Do not reintroduce blue
+hues; the comparison of the four options is
+`docs/sections/shots/colour-options.jpg`.
 
 **Contrast note (open):** `muted` on `page` is about 2.9:1, below the 4.5:1
 the protocol asks for body text. It matches the reference. Decide with the

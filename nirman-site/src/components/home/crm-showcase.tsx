@@ -83,7 +83,7 @@ export function CrmShowcase({ note }: { note: string }) {
           </AppFrame>
         </div>
         {/* phones: a readable crop, sidebar left out */}
-        <div className="overflow-hidden rounded-[1rem] shadow-[0_1.5rem_3rem_-1rem_rgba(2,30,80,0.45)] md:hidden" style={{ height: 300 }}>
+        <div className="overflow-hidden rounded-[1rem] shadow-[0_1.5rem_3rem_-1rem_rgba(0,0,0,0.45)] md:hidden" style={{ height: 300 }}>
           <div style={{ width: 760, marginLeft: -112 }}>
             <AppFrame active={key}>
               <AnimatePresence mode="wait" initial={false}>

@@ -24,9 +24,9 @@ export type Conversation = {
 };
 
 export const inbox: Conversation[] = [
-  { initials: "RS", name: "Riya Sharma", business: "Clinic, Pune", channel: "whatsapp", preview: "Can you share a quote for a new website?", time: "10:02", unread: true, tone: "bg-[#dbe9fd] text-brand" },
+  { initials: "RS", name: "Riya Sharma", business: "Clinic, Pune", channel: "whatsapp", preview: "Can you share a quote for a new website?", time: "10:02", unread: true, tone: "bg-[#fbe9df] text-brand" },
   { initials: "JD", name: "James Dunn", business: "Retail, London", channel: "email", preview: "Following up on the SEO proposal", time: "09:48", unread: true, tone: "bg-[#ece6fc] text-[#6b4fd8]" },
-  { initials: "AK", name: "Arjun Kapoor", business: "Café, Delhi", channel: "form", preview: "Need an app for online orders", time: "09:15", tone: "bg-[#fde6d9] text-accent" },
+  { initials: "AK", name: "Arjun Kapoor", business: "Café, Delhi", channel: "form", preview: "Need an app for online orders", time: "09:15", tone: "bg-[#fde2e7] text-[#b4234a]" },
   { initials: "SN", name: "Sara Nasser", business: "Real estate, Dubai", channel: "whatsapp", preview: "Thanks! Tuesday 4 pm works.", time: "Yesterday", tone: "bg-[#fdf3d4] text-[#a06a00]" },
   { initials: "MP", name: "Meera Pillai", business: "School, Kochi", channel: "call", preview: "Missed call · call back today", time: "Yesterday", tone: "bg-[#ddf3e6] text-[#1f8a55]" },
 ];

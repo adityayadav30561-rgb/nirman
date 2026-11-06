@@ -15,12 +15,12 @@ function Websites({ u }: { u: string }) {
     <>
       <defs>
         <linearGradient id={`${u}-web-body`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#4c95ff" />
-          <stop offset="1" stopColor="#0b4fd4" />
+          <stop offset="0" stopColor="#f07a3a" />
+          <stop offset="1" stopColor="#c2410c" />
         </linearGradient>
         <linearGradient id={`${u}-web-page`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#ffffff" />
-          <stop offset="1" stopColor="#e4eefc" />
+          <stop offset="1" stopColor="#fdeee4" />
         </linearGradient>
         <linearGradient id={`${u}-orange`} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#ffa36b" />
@@ -28,7 +28,7 @@ function Websites({ u }: { u: string }) {
         </linearGradient>
       </defs>
       <Shadow />
-      <rect x="11" y="17" width="60" height="47" rx="9" fill="#0a3a9c" />
+      <rect x="11" y="17" width="60" height="47" rx="9" fill="#1b1f27" />
       <rect x="8" y="12" width="60" height="47" rx="9" fill={`url(#${u}-web-body)`} />
       <rect x="11" y="13.5" width="34" height="4" rx="2" fill="#fff" opacity="0.32" />
       <circle cx="15" cy="19.5" r="1.7" fill="#fff" opacity="0.8" />
@@ -36,10 +36,10 @@ function Websites({ u }: { u: string }) {
       <circle cx="26" cy="19.5" r="1.7" fill="#fff" opacity="0.45" />
       <rect x="13" y="24.5" width="50" height="29" rx="4.5" fill={`url(#${u}-web-page)`} />
       <rect x="17" y="28.5" width="20" height="11" rx="2.5" fill={`url(#${u}-orange)`} />
-      <rect x="40" y="29" width="19" height="3.2" rx="1.6" fill="#b9cff3" />
-      <rect x="40" y="35" width="13" height="3.2" rx="1.6" fill="#cfdcf3" />
-      <rect x="17" y="43" width="42" height="3.2" rx="1.6" fill="#d6e2f5" />
-      <rect x="17" y="48" width="28" height="3.2" rx="1.6" fill="#d6e2f5" />
+      <rect x="40" y="29" width="19" height="3.2" rx="1.6" fill="#f5cdb4" />
+      <rect x="40" y="35" width="13" height="3.2" rx="1.6" fill="#f7d9c6" />
+      <rect x="17" y="43" width="42" height="3.2" rx="1.6" fill="#f9e2d3" />
+      <rect x="17" y="48" width="28" height="3.2" rx="1.6" fill="#f9e2d3" />
     </>
   );
 }
@@ -49,8 +49,8 @@ function Seo({ u }: { u: string }) {
     <>
       <defs>
         <linearGradient id={`${u}-seo-bar`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#5aa0ff" />
-          <stop offset="1" stopColor="#0b4fd4" />
+          <stop offset="0" stopColor="#f07a3a" />
+          <stop offset="1" stopColor="#c2410c" />
         </linearGradient>
         <linearGradient id={`${u}-seo-ring`} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#ffa36b" />
@@ -58,7 +58,7 @@ function Seo({ u }: { u: string }) {
         </linearGradient>
         <radialGradient id={`${u}-seo-glass`} cx="0.35" cy="0.3" r="0.8">
           <stop offset="0" stopColor="#ffffff" stopOpacity="0.95" />
-          <stop offset="1" stopColor="#d9e8ff" stopOpacity="0.7" />
+          <stop offset="1" stopColor="#fde4d4" stopOpacity="0.7" />
         </radialGradient>
       </defs>
       <Shadow />
@@ -68,7 +68,7 @@ function Seo({ u }: { u: string }) {
         [35, 30, 35],
       ].map(([x, y, h]) => (
         <g key={x}>
-          <rect x={x + 2.5} y={y + 3} width="10" height={h} rx="3" fill="#0a3a9c" />
+          <rect x={x + 2.5} y={y + 3} width="10" height={h} rx="3" fill="#1b1f27" />
           <rect x={x} y={y} width="10" height={h} rx="3" fill={`url(#${u}-seo-bar)`} />
           <rect x={x + 2} y={y + 1.5} width="2.5" height={h - 4} rx="1.25" fill="#fff" opacity="0.3" />
         </g>
@@ -98,8 +98,8 @@ function Software({ u }: { u: string }) {
       <rect x="12" y="16" width="54" height="46" rx="11" fill="#05070c" />
       <rect x="9" y="11" width="54" height="46" rx="11" fill={`url(#${u}-sw-tile)`} />
       <rect x="13" y="13" width="30" height="4" rx="2" fill="#fff" opacity="0.18" />
-      <path d="M26 26 L18 34 L26 42" fill="none" stroke="#6aaeff" strokeWidth="4.2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M46 26 L54 34 L46 42" fill="none" stroke="#6aaeff" strokeWidth="4.2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M26 26 L18 34 L26 42" fill="none" stroke="#ff9a5c" strokeWidth="4.2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M46 26 L54 34 L46 42" fill="none" stroke="#ff9a5c" strokeWidth="4.2" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M39 23 L33 45" stroke="#ffffff" strokeWidth="4.2" strokeLinecap="round" />
       <circle cx="59" cy="57" r="10.5" fill="none" stroke={`url(#${u}-sw-gear)`} strokeWidth="5" strokeDasharray="3.4 2.6" />
       <circle cx="59" cy="57" r="8" fill={`url(#${u}-sw-gear)`} />
@@ -113,12 +113,12 @@ function Marketing({ u }: { u: string }) {
     <>
       <defs>
         <linearGradient id={`${u}-mk-bubble`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#4c95ff" />
-          <stop offset="1" stopColor="#0b4fd4" />
+          <stop offset="0" stopColor="#f07a3a" />
+          <stop offset="1" stopColor="#c2410c" />
         </linearGradient>
         <linearGradient id={`${u}-mk-mail`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#ffffff" />
-          <stop offset="1" stopColor="#e2ebf8" />
+          <stop offset="1" stopColor="#fdeee4" />
         </linearGradient>
       </defs>
       <Shadow />
@@ -126,9 +126,9 @@ function Marketing({ u }: { u: string }) {
       <rect x="15" y="18.5" width="28" height="4" rx="2" fill="#fff" opacity="0.3" />
       <circle cx="25" cy="33" r="3" fill="#fff" opacity="0.9" />
       <circle cx="35" cy="33" r="3" fill="#fff" opacity="0.7" />
-      <rect x="38.5" y="40.5" width="34" height="25" rx="4.5" fill="#0a3a9c" opacity="0.35" />
+      <rect x="38.5" y="40.5" width="34" height="25" rx="4.5" fill="#1b1f27" opacity="0.35" />
       <rect x="36" y="37" width="34" height="25" rx="4.5" fill={`url(#${u}-mk-mail)`} />
-      <path d="M38 40 L53 51 L68 40" fill="none" stroke="#a9c3ec" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M38 40 L53 51 L68 40" fill="none" stroke="#f3c3a6" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx="69" cy="37" r="6" fill="#f26b2b" />
       <circle cx="67.5" cy="35.5" r="1.8" fill="#fff" opacity="0.6" />
     </>

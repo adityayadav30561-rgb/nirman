@@ -15,7 +15,7 @@ import { footerBlurb } from "@/content/footer";
 export function SiteFooter() {
   return (
     <FooterMotion className="overflow-hidden px-3 pt-6 pb-3 sm:px-4">
-      <div className="ft-panel rounded-[2rem] bg-[linear-gradient(160deg,#0458d4_0%,#034fbf_55%,#03449f_100%)] text-white">
+      <div className="ft-panel rounded-[2rem] bg-[linear-gradient(160deg,var(--color-band-2)_0%,var(--color-band)_100%)] text-white">
         <div className="container-page py-16 lg:py-20">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
             <div>

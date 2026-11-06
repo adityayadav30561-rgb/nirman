@@ -18,7 +18,7 @@ export const sampleQuotes: SampleQuote[] = [
     place: "Pune",
     tags: ["Website", "Nirman CRM"],
     initials: "CO",
-    tone: "bg-[#dbe9fd] text-brand",
+    tone: "bg-[#fbe9df] text-brand",
   },
   {
     quote: "Product pages load fast and search traffic is finally growing. The team explained every step in plain words.",
@@ -26,7 +26,7 @@ export const sampleQuotes: SampleQuote[] = [
     place: "Dubai",
     tags: ["E-commerce", "SEO"],
     initials: "SF",
-    tone: "bg-[#fde6d9] text-accent",
+    tone: "bg-[#fde2e7] text-[#b4234a]",
   },
   {
     quote: "Every lead from our site and WhatsApp lands in one place now. Nothing gets lost between the office and the field team.",

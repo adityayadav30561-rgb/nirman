@@ -7,7 +7,7 @@ import { Cloud } from "@/components/home/cloud";
  */
 
 const followUps = [
-  { initials: "RS", name: "Website enquiry", meta: "Chat · 10:30", tone: "bg-[#e3eefc] text-brand" },
+  { initials: "RS", name: "Website enquiry", meta: "Chat · 10:30", tone: "bg-[#fbe9df] text-brand" },
   { initials: "AK", name: "SEO audit request", meta: "Email · 11:05", tone: "bg-[#fdeadf] text-accent" },
   { initials: "MP", name: "App quote", meta: "Call back · 12:00", tone: "bg-[#e6f4ec] text-[#1f8a55]" },
 ];
@@ -16,7 +16,7 @@ const bars = [38, 62, 45, 80, 58, 92, 70];
 
 export function PhoneScreen() {
   return (
-    <div className="relative isolate flex h-full flex-col bg-[linear-gradient(180deg,#dcebfb_0%,#eef5fd_22%,#ffffff_42%)] text-ink">
+    <div className="relative isolate flex h-full flex-col bg-[linear-gradient(180deg,#fbe7da_0%,#fbf3ed_22%,#ffffff_42%)] text-ink">
       {/* the app's sky: two small clouds behind the heading */}
       <Cloud className="h-drift absolute -z-10 top-[3.4rem] right-[0.6rem] w-[3.4rem] opacity-90" data-dx={-6} data-t={9} />
       <Cloud className="h-drift absolute -z-10 top-[6.6rem] right-[3.6rem] w-[2.4rem] opacity-80" data-dx={5} data-t={11} />
