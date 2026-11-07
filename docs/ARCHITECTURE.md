@@ -205,3 +205,7 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
     calls it again after every state change (each keystroke). Never focus
     or measure in one without a guard (see `quote-form.tsx` focusedStep).
     Test forms with `page.keyboard.type`, not `fill()`, which hides this.
+44. **`notFound()` in a `[slug]` page answers 200 under Cache Components**
+    (`dynamicParams` is unavailable). For a small fixed set of pages use
+    fixed route folders sharing one component (see `app/services/*`), so
+    unknown paths are real 404s.

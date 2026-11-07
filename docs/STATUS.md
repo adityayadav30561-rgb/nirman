@@ -49,11 +49,11 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
-**P3 get-a-quote and thank-you done** (`docs/sections/p3-get-a-quote.md`).
-Next: **P1 `/services/` and the four service pages** (one template;
-PAGE-PLAN section 3). Follow the protocol per section on `/lab/`; the
-service pages end in a quote form (reuse `components/quote/quote-form.tsx`
-or link to `/get-a-quote/?service=...`).
+**P1 services done** (`docs/sections/p1-services.md`): hub and four
+service pages from one template. Next: **P4 `/contact/` and `/about/`**
+(PAGE-PLAN section 3). Contact needs the real phone, email, address and
+WhatsApp number (placeholders until the user sends them); About needs the
+team (names and photos from the client) or leaves that block out.
 
 ## Open questions for the user
 

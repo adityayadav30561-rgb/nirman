@@ -19,6 +19,7 @@ import { contactWays, fromQuoteBar, locations, serviceOptions, steps, timelines,
  *   says to press Send. No fake "sent" state.
  * - Framer Motion slides between steps (off under reduced motion); focus
  *   moves to the new step's heading; Enter in a one-line field goes on.
+ * `preset` ticks a service when the URL does not (service pages).
  * `size="big"` gives larger tiles and type for the one-step-per-screen look.
  */
 
@@ -41,7 +42,7 @@ type Data = {
 
 const empty: Data = { services: null, timeline: null, url: "", about: "", location: "", budget: "", discuss: false, name: "", business: "", email: "", phone: "", via: "WhatsApp" };
 
-export function QuoteForm({ size = "card", tone = "light" }: { size?: "card" | "big"; tone?: "light" | "dark" }) {
+export function QuoteForm({ size = "card", tone = "light", preset }: { size?: "card" | "big"; tone?: "light" | "dark"; preset?: ServiceKey }) {
   const id = useId();
   const router = useRouter();
   const reduce = useReducedMotion();
@@ -55,8 +56,8 @@ export function QuoteForm({ size = "card", tone = "light" }: { size?: "card" | "
     const p = new URLSearchParams(search);
     const s = fromQuoteBar[p.get("service") ?? ""];
     const t = p.get("timeline") ?? "";
-    return { services: s ? [s] : [], timeline: timelines.includes(t) ? t : "" };
-  }, [search]);
+    return { services: s ? [s] : preset ? [preset] : [], timeline: timelines.includes(t) ? t : "" };
+  }, [search, preset]);
   const d = { ...raw, services: raw.services ?? pre.services, timeline: raw.timeline ?? pre.timeline };
   const [error, setError] = useState("");
   const moved = useRef(false);
