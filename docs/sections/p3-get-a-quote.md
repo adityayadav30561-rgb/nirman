@@ -73,6 +73,12 @@ dislikes all-white pages, 2026-11-06), with a pale gap before the footer.
   lands on `/thank-you/?via=email`; focus on the step heading (also with
   reduced motion); 375, 768, 1440, 1920 no horizontal scroll, all reveals
   end visible, no console errors. `tsc`, `lint`, `build` pass.
+- Fix (2026-11-07, user report): typing lost focus after one letter. The
+  heading's callback ref is a new function each render, so React re-ran it
+  on every keystroke and re-focused the heading. Now it focuses once per
+  step (`focusedStep` ref). Re-verified with real key presses
+  (`keyboard.type`) in every text field on steps 2 to 4, with and without
+  reduced motion. Test forms by typing, not `fill()` (ARCHITECTURE 43).
 - Gotcha: a stale `next start` on port 3000 kept serving a deleted build
   (500s, steps not rendering). Kill `next-server` before restarting
   (ARCHITECTURE 42).

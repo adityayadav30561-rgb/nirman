@@ -200,3 +200,8 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
     EADDRINUSE and tests hit the old one (serving a deleted `.next`: 500s,
     broken client code). Run `pkill -f next-server` too and check the log
     says Ready.
+43. **Inline callback refs run on every render.** A `ref={(el) => ...}`
+    defined in the component body is a new function each render, so React
+    calls it again after every state change (each keystroke). Never focus
+    or measure in one without a guard (see `quote-form.tsx` focusedStep).
+    Test forms with `page.keyboard.type`, not `fill()`, which hides this.

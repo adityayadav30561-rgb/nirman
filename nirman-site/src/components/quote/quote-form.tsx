@@ -64,8 +64,14 @@ export function QuoteForm({ size = "card", tone = "light" }: { size?: "card" | "
 
   // focus each new step's heading as it mounts (after a move, not on first
   // load); works with and without the slide animation
+  // React calls this ref again on every re-render (each keystroke), so only
+  // focus once per step, or typing would lose focus after one letter.
+  const focusedStep = useRef(0);
   const focusHeading = (el: HTMLHeadingElement | null) => {
-    if (el && moved.current) el.focus();
+    if (el && moved.current && focusedStep.current !== step) {
+      focusedStep.current = step;
+      el.focus();
+    }
   };
 
   const set = <K extends keyof Data>(k: K, v: Data[K]) => setD((x) => ({ ...x, [k]: v }));
