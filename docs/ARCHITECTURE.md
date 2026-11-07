@@ -195,3 +195,8 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
     SVG rects, borders and positioned divs all vanished). The share image is
     a static `src/app/opengraph-image.png` made with headless Chromium:
     `NODE_PATH=$(npm root -g) node nirman-site/scripts/make-og.mjs`.
+42. **A stale `next start` can hold port 3000.** `pkill -f "next start"`
+    may leave `next-server` running; the new server then fails with
+    EADDRINUSE and tests hit the old one (serving a deleted `.next`: 500s,
+    broken client code). Run `pkill -f next-server` too and check the log
+    says Ready.

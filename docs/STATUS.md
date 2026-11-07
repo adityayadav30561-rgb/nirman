@@ -49,12 +49,11 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
-**Homepage is complete** (H9 review done: `docs/sections/00-page-review.md`).
-Next: **P2 `/nirman-crm/`** (recommended first: the CRM screens already
-exist in `src/components/crm/`, and every "Book a demo" button points
-there). Then P1 services, P3 get-a-quote. Each page follows the protocol
-(variants per section on `/lab/`). Read PAGE-PLAN section 3 for the page's
-sections first. The user may choose a different order.
+**P3 get-a-quote and thank-you done** (`docs/sections/p3-get-a-quote.md`).
+Next: **P1 `/services/` and the four service pages** (one template;
+PAGE-PLAN section 3). Follow the protocol per section on `/lab/`; the
+service pages end in a quote form (reuse `components/quote/quote-form.tsx`
+or link to `/get-a-quote/?service=...`).
 
 ## Open questions for the user
 
