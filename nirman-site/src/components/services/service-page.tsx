@@ -1,55 +1,20 @@
-import { Check, CircleCheck } from "lucide-react";
+import { CircleCheck } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { QuestionList } from "@/components/home/question-list";
 import { QuoteForm } from "@/components/quote/quote-form";
-import { serviceVisuals } from "@/components/services/service-visuals";
 import type { ServicePage } from "@/content/service-pages";
 
 /*
  * Service page template (docs/sections/p1-services.md): one layout for
- * websites, SEO, software and marketing. Chosen variants: hero B (ink split,
- * picture right), who it is for (cards), what is included C (bento, first
- * sub-service as a large ink tile), how it works B (ink band, numbered
+ * websites, SEO, software and marketing. Hero and "what is included" live in
+ * service-hero.tsx and service-tour.tsx (real screens, redo 2026-11-07); here:
+ * who it is for (cards), how it works B (ink band, numbered
  * steps, "you receive" chips), what you get + tools, questions, quote form
  * with the service preset. Entrances: GSAP via Reveal (.rv).
  */
 
 const band = "bg-[linear-gradient(160deg,var(--color-band-2),var(--color-band))] text-white";
 const h2 = "rv text-[clamp(1.7rem,3vw,2.6rem)] leading-[1.15] font-semibold tracking-[-0.025em]";
-
-export function ServiceHero({ s }: { s: ServicePage }) {
-  const V = serviceVisuals[s.slug];
-  return (
-    <Reveal aria-labelledby="svc-title" className={`overflow-hidden py-16 lg:py-24 ${band}`}>
-      <div className="container-page grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
-        <div>
-          <p className="rv text-[0.85rem] font-semibold text-[#f6a57a]">{s.eyebrow}</p>
-          <h1 id="svc-title" className="rv mt-3 text-[clamp(2.1rem,4.2vw,3.6rem)] leading-[1.07] font-semibold tracking-[-0.035em]">
-            {s.title}
-          </h1>
-          <p className="rv mt-5 max-w-[36rem] text-[1.05rem] text-white/85">{s.line}</p>
-          <a
-            href="#quote"
-            className="rv mt-8 inline-flex h-12 items-center rounded-full bg-white px-7 text-[0.9rem] font-medium text-ink transition-colors hover:bg-wash focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
-            Get a quote
-          </a>
-          <ul className="rv mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[0.88rem] text-white/85">
-            {s.points.map((p) => (
-              <li key={p} className="flex items-center gap-1.5">
-                <Check className="size-4 text-white" strokeWidth={2.6} aria-hidden />
-                {p}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="rv pb-10">
-          <V />
-        </div>
-      </div>
-    </Reveal>
-  );
-}
 
 export function ServiceAudiences({ s }: { s: ServicePage }) {
   return (
@@ -61,28 +26,6 @@ export function ServiceAudiences({ s }: { s: ServicePage }) {
             <li key={a.name} className="rv rounded-[1.25rem] bg-white p-6 ring-1 ring-line">
               <h3 className="text-[1.05rem] font-semibold">{a.name}</h3>
               <p className="mt-1.5 text-[0.9rem] text-muted">{a.line}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </Reveal>
-  );
-}
-
-export function ServiceIncluded({ s }: { s: ServicePage }) {
-  return (
-    <Reveal aria-labelledby="svc-inc" className="pb-20 lg:pb-28">
-      <div className="container-page">
-        <h2 id="svc-inc" className={`${h2} max-w-[32rem]`}>What is included</h2>
-        <ul className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-6">
-          {s.included.map((x, i) => (
-            <li
-              key={x.title}
-              className={`rv rounded-[1.5rem] p-7 ${i === 0 ? `${band} md:col-span-4 md:row-span-2 md:p-10` : `bg-white ring-1 ring-line ${s.included.length === 4 && i === 3 ? "md:col-span-6" : "md:col-span-2"}`}`}
-            >
-              {i === 0 && <p className="text-[0.8rem] font-semibold text-[#f6a57a]">Most asked for</p>}
-              <h3 className={`font-semibold ${i === 0 ? "mt-2 text-[clamp(1.4rem,2.4vw,1.9rem)] leading-tight" : "text-[1.1rem]"}`}>{x.title}</h3>
-              <p className={`mt-2 ${i === 0 ? "max-w-[28rem] text-white/85" : "text-[0.9rem] text-muted"}`}>{x.line}</p>
             </li>
           ))}
         </ul>

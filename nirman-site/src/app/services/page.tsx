@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { ServiceQuestions, ServiceSteps } from "@/components/services/service-page";
-import { serviceVisuals } from "@/components/services/service-visuals";
+import { heroShots } from "@/components/services/service-screens";
+import { ShotCrop } from "@/components/services/shot-crop";
 import { faqs } from "@/content/faq";
 import { servicePages, serviceSlugs, servicesHub } from "@/content/service-pages";
 import { site } from "@/content/site";
@@ -51,7 +52,7 @@ export default function ServicesHubPage() {
         <div className="container-page flex flex-col gap-6">
           {serviceSlugs.map((slug, i) => {
             const s = servicePages[slug];
-            const V = serviceVisuals[slug];
+            const shot = heroShots[slug];
             return (
               <article key={slug} aria-labelledby={`hub-${slug}`} className="rv grid grid-cols-1 items-center gap-10 overflow-hidden rounded-[2rem] bg-white p-7 ring-1 ring-line sm:p-10 lg:grid-cols-2 lg:gap-14">
                 <div className={i % 2 ? "lg:order-2" : ""}>
@@ -69,7 +70,10 @@ export default function ServicesHubPage() {
                     <ArrowRight className="size-4" aria-hidden />
                   </Link>
                 </div>
-                <div className="pb-8" aria-hidden><V /></div>
+                <div aria-hidden>
+                  <div className="hidden md:block">{shot.window()}</div>
+                  <div className="md:hidden"><ShotCrop shot={shot} height={240} /></div>
+                </div>
               </article>
             );
           })}

@@ -1,5 +1,37 @@
 # P1 Services hub and the four service pages
 
+## Redo, 2026-11-07 (user: "the services page doesn't look any good, no real screens, very weak sections")
+- **Real screens built in code** (`src/components/services/screens/`), in
+  `frames.tsx` (BrowserFrame and PhoneFrame, em-scaled like the CRM
+  AppFrame):
+  - SEO (`seo.tsx`): overview dashboard (visitors, top-10 keywords, calls,
+    weekly chart, keyword positions), technical audit (health ring, fixed
+    and next-week items), local maps results with calls/directions/views,
+    AI assistant answer citing the business, content plan table.
+  - Websites (`web.tsx`): full clinic homepage, mobile booking pages (phone),
+    online store product page with cart, launch check (scores, timings,
+    checklist), page editor with search preview.
+  - Software (`software.tsx`): field-service portal (jobs, statuses, live
+    job map), customer app (phone), connected apps with activity. CRM
+    development and automation reuse the Nirman CRM Pipeline and
+    Automations screens.
+  - Marketing: Nirman CRM Inbox, Campaigns, Automations, Leads.
+  Demo businesses (Sunrise Dental Clinic, Masala Box, FixIt Pro) are
+  illustrations of what we build, not clients.
+- **Hero** (`service-hero.tsx`): the CRM-page hero pattern the user chose
+  (ink, centred, big screen that flattens on scroll, phone at the corner).
+- **What is included** (`service-tour.tsx`): the CRM feature-tour pattern
+  (sticky story, the screen switches per sub-service; crops on phones).
+  `service-screens.tsx` maps each included item to its screen.
+- Hub rows show each service's hero screen.
+- Patterns reused from the CRM page because the user approved them there;
+  no new lab round. Old bento/visual code deleted.
+- Verified: five pages at 375 to 1920 (no overflow, reveals visible, one
+  h1, preset, JSON-LD, no console errors), each tour step's screen captured
+  and checked for empty space, `/services/ppc/` 404.
+
+---
+
 Status: built and verified (2026-11-07)
 Routes: `/services/`, `/services/websites/`, `/services/seo/`,
 `/services/software/`, `/services/marketing/` (fixed folders in

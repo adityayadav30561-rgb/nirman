@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { ServiceAudiences, ServiceDeliverables, ServiceHero, ServiceIncluded, ServiceQuestions, ServiceQuote, ServiceSteps } from "@/components/services/service-page";
+import { ServiceAudiences, ServiceDeliverables, ServiceQuestions, ServiceQuote, ServiceSteps } from "@/components/services/service-page";
+import { ServiceHero } from "@/components/services/service-hero";
+import { ServiceTour } from "@/components/services/service-tour";
 import { servicePages, type ServiceSlug } from "@/content/service-pages";
 import { site } from "@/content/site";
 
@@ -50,7 +52,7 @@ export function ServiceRoute({ slug }: { slug: ServiceSlug }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <ServiceHero s={s} />
       <ServiceAudiences s={s} />
-      <ServiceIncluded s={s} />
+      <ServiceTour s={s} />
       <ServiceSteps steps={s.steps} />
       <ServiceDeliverables s={s} />
       <ServiceQuestions faqs={s.faqs} title={`Questions about ${s.name === "SEO" ? "SEO" : s.name.toLowerCase()}`} />
