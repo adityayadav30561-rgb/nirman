@@ -68,3 +68,37 @@ user, so a later session can ask for the same asset again. -->
 - File name and place: crm-avatars-sheet.png; Claude splits it into
   public/images/crm/avatar-1.webp to avatar-6.webp.
 
+
+## A-P1 Photos for the website mockups on the services pages (2026-11-09)
+
+Status: **requested from the user** (download, not generation). The user
+approved free-licence photos on 2026-11-09, but unsplash.com answers
+"Access Denied" to cloud sessions (its image server `images.unsplash.com`
+is reachable), so Claude cannot search or open photo pages there. The user
+picks the photos; a local session (or Claude, given the files or the direct
+image address) adds them. Until then the mockups show drawn illustrations.
+
+### A-P1-1 Clinic photo
+- Use: the hero of the demo clinic website (services hub, websites page
+  hero, phone, design-tool tile). Shown up to about 320px wide, cropped to
+  about 4:3 landscape and also to a wide strip, so the subject should sit in
+  the middle.
+- Wanted: a bright, clean dental clinic (treatment room or reception), or a
+  dentist with a smiling patient; light colours, ideally with some teal,
+  green or white. No visible brand names or text.
+- Search: unsplash.com, "dental clinic" or "dentist", free licence, landscape.
+- File: `nirman-site/public/images/services/clinic.webp` (about 1200px wide).
+
+### A-P1-2 Spice product photo
+- Use: the product picture of the demo online store (online stores tile, and
+  a small thumbnail in the SEO product-result tile). Shown square, up to
+  about 190px.
+- Wanted: one jar, bowl or packet of red spice powder or mixed Indian spices
+  on a plain light background, centred, with space around it. No brand label.
+- Search: unsplash.com, "spice jar" or "masala powder", free licence.
+- File: `nirman-site/public/images/services/product.webp` (about 800px square).
+
+### When the files arrive
+Set the paths in `nirman-site/src/content/service-photos.ts`, credit each in
+`src/content/image-credits.ts` (page link, author, Unsplash License), check
+the crops on `/services/websites/` and `/services/`.

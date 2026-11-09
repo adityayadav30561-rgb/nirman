@@ -1,4 +1,6 @@
 import { AlignLeft, Bold, CalendarCheck, Check, ChevronDown, Clock, Frame, Heart, Image as ImageIcon, Italic, Link2, Mail, MapPin, Menu, MousePointer2, Phone as PhoneIcon, Plus, Search, ShieldCheck, ShoppingCart, Sparkles, Square, Truck, Type } from "lucide-react";
+import Image from "next/image";
+import { servicePhotos } from "@/content/service-photos";
 import { Bar, Browser, Glow, Panel, Phone, Ring, Scene, Stars, Vis } from "@/components/services/kit";
 
 /*
@@ -10,8 +12,14 @@ import { Bar, Browser, Glow, Panel, Phone, Ring, Scene, Stars, Vis } from "@/com
 
 const teal = "#0f766e";
 
-/** Clinic "photo": a drawn scene, so no stock image is needed. */
+/** Clinic photo (content/service-photos.ts); a drawn scene until the photo is added. */
 function ClinicArt({ className = "" }: { className?: string }) {
+  if (servicePhotos.clinic)
+    return (
+      <span className={`relative block overflow-hidden ${className}`}>
+        <Image src={servicePhotos.clinic} alt="" fill sizes="(min-width: 64rem) 20rem, 60vw" className="object-cover" />
+      </span>
+    );
   return (
     <svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid slice" className={`block ${className}`}>
       <defs>
@@ -205,8 +213,14 @@ function Build() {
   );
 }
 
-/** A spice jar, drawn. */
+/** Product photo (content/service-photos.ts); a drawn spice jar until the photo is added. */
 function Jar({ className = "" }: { className?: string }) {
+  if (servicePhotos.product)
+    return (
+      <span className={`relative block aspect-square overflow-hidden ${className}`}>
+        <Image src={servicePhotos.product} alt="" fill sizes="12rem" className="object-cover" />
+      </span>
+    );
   return (
     <svg viewBox="0 0 120 120" className={`block ${className}`}>
       <rect width="120" height="120" fill="#fef3c7" />

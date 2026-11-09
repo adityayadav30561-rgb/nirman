@@ -209,3 +209,7 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
     (`dynamicParams` is unavailable). For a small fixed set of pages use
     fixed route folders sharing one component (see `app/services/*`), so
     unknown paths are real 404s.
+45. **Cloud sessions cannot browse unsplash.com** ("Access Denied", also
+    in a real browser); only `images.unsplash.com` answers. To add a photo
+    from a cloud session the user must give the file or the direct image
+    address. The cloud environment "nirman" allows both hosts.
