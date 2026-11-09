@@ -70,10 +70,9 @@ team (names and photos from the client) or leaves that block out.
   placeholders: `src/content/site.ts`; footer icons are generic with `#`
   links in `src/content/footer.ts`).
 
-- **Photos for the website mockups (approved 2026-11-09, blocked):**
-  unsplash.com denies cloud sessions, so the user must supply two photos
-  (clinic, spice product; `docs/ASSET-REQUESTS.md` A-P1). The slots are
-  ready in `src/content/service-photos.ts`; drawings show until then.
+- **Photo credits:** the two photos in the services mockups (clinic,
+  coffee) came from the user without page links; add the Unsplash links and
+  authors to `src/content/image-credits.ts` (launch check).
 
 ## Half-finished work
 

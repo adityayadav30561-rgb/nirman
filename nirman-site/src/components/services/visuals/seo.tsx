@@ -1,11 +1,13 @@
 import { ArrowUp, Bookmark, Globe, Mic, Navigation, Phone as PhoneIcon, Search, Share2, Sparkles, ThumbsDown, ThumbsUp } from "lucide-react";
+import Image from "next/image";
+import { servicePhotos } from "@/content/service-photos";
 import { Bar, Browser, Glow, Panel, Ring, Scene, Stars, Vis } from "@/components/services/kit";
 
 /*
  * SEO artwork (docs/sections/p1-services.md): mockups in the look of a real
  * search page, map listing, audit tool, AI assistant and keyword tool, in
  * their usual colours (blue links, red pins). No search-engine logo.
- * Sunrise Dental Clinic and Masala Box are demo businesses, not clients.
+ * Sunrise Dental Clinic and Brew Box are demo businesses, not clients.
  */
 
 const link = "#1a0dab";
@@ -146,16 +148,20 @@ function Shop() {
     <Vis className="grid h-full place-items-center px-[1.4em]">
       <Panel className="an-pop w-full max-w-[25em] rounded-[0.7em] p-[1.1em]">
         <span className="flex items-center gap-[0.5em]">
-          <span className="grid size-[1.7em] place-items-center rounded-full bg-[#14532d] text-[#fef3c7]"><span className="text-[0.6em] font-bold">M</span></span>
-          <span><span className="block text-[0.64em] text-[#202124]">Masala Box</span><span className="block text-[0.54em] text-[#4d5156]">https://masalabox.in › spices › kolhapuri-masala</span></span>
+          <span className="grid size-[1.7em] place-items-center rounded-full bg-[#3b2414] text-[#fde9c8]"><span className="text-[0.6em] font-bold">B</span></span>
+          <span><span className="block text-[0.64em] text-[#202124]">Brew Box</span><span className="block text-[0.54em] text-[#4d5156]">https://brewbox.in › coffee › house-blend</span></span>
         </span>
         <span className="mt-[0.5em] grid grid-cols-[1fr_auto] gap-[0.8em]">
           <span>
-            <span className="block text-[0.95em] leading-snug" style={{ color: link }}>Kolhapuri Masala 200 g, stone ground | Masala Box</span>
+            <span className="block text-[0.95em] leading-snug" style={{ color: link }}>House Blend Coffee 250 g, freshly roasted | Brew Box</span>
             <span className="mt-[0.25em] flex flex-wrap items-center gap-[0.3em]"><span className="text-[0.58em] text-[#70757a]">4.8</span><Stars /><span className="text-[0.58em] text-[#70757a]">(1,240) · ₹249 · In stock</span></span>
-            <span className="mt-[0.3em] block text-[0.6em] leading-snug text-[#4d5156]">Fiery, smoky and rich. Ground in small batches for misal and curries. Free delivery above ₹499.</span>
+            <span className="mt-[0.3em] block text-[0.6em] leading-snug text-[#4d5156]">Smooth and nutty, roasted in small batches every week. Whole bean or ground. Free delivery above ₹499.</span>
           </span>
-          <svg viewBox="0 0 60 60" className="size-[4.6em] rounded-[0.5em]"><rect width="60" height="60" fill="#fef3c7" /><rect x="22" y="10" width="16" height="6" rx="1.5" fill="#14532d" /><rect x="19" y="15" width="22" height="36" rx="5" fill="#b91c1c" /><rect x="21" y="25" width="18" height="15" rx="1.5" fill="#fffbeb" /></svg>
+          {servicePhotos.product ? (
+            <span className="relative block size-[4.6em] overflow-hidden rounded-[0.5em]"><Image src={servicePhotos.product} alt="" fill sizes="5rem" className="object-cover" /></span>
+          ) : (
+            <span className="block size-[4.6em] rounded-[0.5em] bg-[#fde9c8]" />
+          )}
         </span>
         <span className="mt-[0.6em] flex gap-[0.4em]">{["Delivery in 2 to 4 days", "Free returns"].map((t) => <span key={t} className="rounded-full px-[0.7em] py-[0.2em] ring-1 ring-[#dadce0]"><span className="block text-[0.52em] text-[#3c4043]">{t}</span></span>)}</span>
       </Panel>

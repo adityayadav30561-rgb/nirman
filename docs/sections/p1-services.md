@@ -27,7 +27,7 @@ hero pictures and 18 tile pictures were redrawn (`shots/p1r-realistic-1440.jpg`)
   with app-coloured steps.
 - **Websites:** a teal clinic site in a real-looking browser (tab strip,
   address bar) with a drawn tooth illustration as its photo, its phone
-  booking page, a design tool, a page-speed report, a store product page
+  booking page, a design tool, a page-speed report, a coffee-shop product page
   (the product price is the demo shop's, not ours), a block editor, an
   uptime monitor.
 - **SEO:** a search results page with a local pack and map (blue links, red
@@ -37,8 +37,11 @@ hero pictures and 18 tile pictures were redrawn (`shots/p1r-realistic-1440.jpg`)
 - Kit: `Phone` (bezel, island, status bar) and `Browser` (tabs, toolbar) are
   now realistic; tile backdrops are neutral (mist, slate, sand) so the
   mockups carry the colour. Orange and ink remain for the site around them.
-- Not done: real photographs inside the website mockups (needs the user's
-  yes to download free-licence photos; drawn illustrations used instead).
+- Photos (user supplied, 2026-11-09): the clinic site shows a real dentist
+  photo and the demo shop a real coffee photo, set in
+  `content/service-photos.ts` (drawn fallbacks remain in the code). The demo
+  shop is now a coffee shop, Brew Box, to match the photo. Credits pending
+  the page links (`image-credits.ts`).
 - Verified again as below (five pages, five widths, reduced motion, build).
 
 ### Variants (built on `/lab/svc/` with the SEO content; lab deleted)

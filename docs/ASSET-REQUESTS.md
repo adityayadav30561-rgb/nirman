@@ -71,7 +71,14 @@ user, so a later session can ask for the same asset again. -->
 
 ## A-P1 Photos for the website mockups on the services pages (2026-11-09)
 
-Status: **requested from the user** (download, not generation). The user
+Status: **used** (2026-11-09). The user sent both files in chat: a dentist
+with a patient (`public/images/services/clinic.webp`) and three cups of
+coffee, ground coffee and beans (`product.webp`). Because the product photo
+is coffee, the demo shop was changed from a spice shop (Masala Box) to a
+coffee shop, **Brew Box**. **Still open:** the Unsplash page links, to
+complete the credits in `src/content/image-credits.ts`.
+
+Original request (download, not generation): The user
 approved free-licence photos on 2026-11-09, but unsplash.com answers
 "Access Denied" to cloud sessions (its image server `images.unsplash.com`
 is reachable), so Claude cannot search or open photo pages there. The user

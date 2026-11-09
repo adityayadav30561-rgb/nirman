@@ -14,4 +14,22 @@ export const imageCredits = [
     licence: "Unsplash License",
     processing: "scripts/cut-hand.py: white background removed, greyscale, split into back and fingertip layers",
   },
+  {
+    files: ["/images/services/clinic.webp"],
+    use: "Services pages: photo inside the demo clinic website mockup",
+    source: "Supplied by the user on 2026-11-09 (Unsplash page link to be added)",
+    unsplashId: "",
+    author: "to be added",
+    licence: "Unsplash License (to confirm with the page link)",
+    processing: "resized to 1200px wide, WebP",
+  },
+  {
+    files: ["/images/services/product.webp"],
+    use: "Services pages: product photo of the demo coffee shop (Brew Box) mockup",
+    source: "Supplied by the user on 2026-11-09 (Unsplash page link to be added)",
+    unsplashId: "",
+    author: "to be added",
+    licence: "Unsplash License (to confirm with the page link)",
+    processing: "cropped square around the three cups, 800px, WebP",
+  },
 ] as const;

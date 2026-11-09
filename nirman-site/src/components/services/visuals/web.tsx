@@ -6,7 +6,7 @@ import { Bar, Browser, Glow, Panel, Phone, Ring, Scene, Stars, Vis } from "@/com
 /*
  * Websites artwork (docs/sections/p1-services.md): mockups that look like
  * real sites and real tools, in their own colours. Sunrise Dental Clinic
- * (teal) and Masala Box (green and mustard) are demo businesses that show
+ * (teal) and Brew Box (a coffee shop, brown and amber) are demo businesses that show
  * the kind of work, not clients.
  */
 
@@ -17,7 +17,7 @@ function ClinicArt({ className = "" }: { className?: string }) {
   if (servicePhotos.clinic)
     return (
       <span className={`relative block overflow-hidden ${className}`}>
-        <Image src={servicePhotos.clinic} alt="" fill sizes="(min-width: 64rem) 20rem, 60vw" className="object-cover" />
+        <Image src={servicePhotos.clinic} alt="" fill sizes="(min-width: 64rem) 20rem, 60vw" className="object-cover object-[62%_30%]" />
       </span>
     );
   return (
@@ -213,7 +213,7 @@ function Build() {
   );
 }
 
-/** Product photo (content/service-photos.ts); a drawn spice jar until the photo is added. */
+/** Product photo (content/service-photos.ts); a drawn jar if no photo is set. */
 function Jar({ className = "" }: { className?: string }) {
   if (servicePhotos.product)
     return (
@@ -235,21 +235,21 @@ function Jar({ className = "" }: { className?: string }) {
 function Store() {
   return (
     <Vis className="h-full px-[1.4em] pt-[1.4em]">
-      <Browser url="masalabox.in/kolhapuri-masala" tab="Kolhapuri Masala · Masala Box" fav="#14532d" className="an-pop mx-auto h-[24em] max-w-[26em]">
+      <Browser url="brewbox.in/house-blend" tab="House Blend Coffee · Brew Box" fav="#3b2414" className="an-pop mx-auto h-[24em] max-w-[26em]">
         <div className="h-full bg-white">
-          <div className="bg-[#14532d] py-[0.25em] text-center text-[#fef3c7]"><span className="block text-[0.48em]">Free delivery on orders above ₹499</span></div>
+          <div className="bg-[#3b2414] py-[0.25em] text-center text-[#fde9c8]"><span className="block text-[0.48em]">Free delivery on orders above ₹499</span></div>
           <div className="flex items-center gap-[0.8em] border-b border-[#f1f1ee] px-[1em] py-[0.5em]">
-            <span className="text-[0.74em] font-bold tracking-[-0.01em] text-[#14532d]">Masala Box</span>
-            <span className="ml-auto flex items-center gap-[0.7em] text-[#3f3f46]"><Search className="size-[0.75em]" /><Heart className="size-[0.75em]" /><span className="relative"><ShoppingCart className="size-[0.8em]" /><span className="absolute -top-[0.4em] -right-[0.5em] grid size-[0.8em] place-items-center rounded-full bg-[#b91c1c] text-white"><span className="text-[0.4em] font-bold">2</span></span></span></span>
+            <span className="text-[0.74em] font-bold tracking-[-0.01em] text-[#3b2414]">Brew Box</span>
+            <span className="ml-auto flex items-center gap-[0.7em] text-[#3f3f46]"><Search className="size-[0.75em]" /><Heart className="size-[0.75em]" /><span className="relative"><ShoppingCart className="size-[0.8em]" /><span className="absolute -top-[0.4em] -right-[0.5em] grid size-[0.8em] place-items-center rounded-full bg-[#d97706] text-white"><span className="text-[0.4em] font-bold">2</span></span></span></span>
           </div>
           <div className="grid grid-cols-[1fr_1.15fr] gap-[0.9em] p-[1em]">
             <Jar className="w-full rounded-[0.6em]" />
             <div>
-              <span className="block text-[0.5em] text-[#71717a]">Spice blends</span>
-              <span className="block text-[0.9em] leading-tight font-bold text-[#18181b]">Kolhapuri Masala, 200 g</span>
+              <span className="block text-[0.5em] text-[#71717a]">Freshly roasted coffee</span>
+              <span className="block text-[0.9em] leading-tight font-bold text-[#18181b]">House Blend, 250 g</span>
               <span className="mt-[0.25em] flex items-center gap-[0.3em]"><Stars /><span className="text-[0.5em] text-[#71717a]">4.8 (1,240)</span></span>
               <span className="mt-[0.35em] flex items-baseline gap-[0.4em]"><span className="text-[1em] font-bold text-[#18181b]">₹249</span><span className="text-[0.56em] text-[#a1a1aa] line-through">₹299</span></span>
-              <span className="mt-[0.5em] block rounded-[0.4em] bg-[#14532d] py-[0.5em] text-center text-white"><span className="block text-[0.6em] font-semibold">Add to cart</span></span>
+              <span className="mt-[0.5em] block rounded-[0.4em] bg-[#3b2414] py-[0.5em] text-center text-white"><span className="block text-[0.6em] font-semibold">Add to cart</span></span>
               <span className="mt-[0.5em] flex items-center gap-[0.3em] text-[#15803d]"><Truck className="size-[0.7em]" /><span className="text-[0.5em]">Delivery in 2 to 4 days · COD</span></span>
             </div>
           </div>

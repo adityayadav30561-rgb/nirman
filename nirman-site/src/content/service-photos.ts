@@ -4,6 +4,6 @@
 // public/images/services/, set its path here (for example
 // "/images/services/clinic.webp") and credit it in image-credits.ts.
 export const servicePhotos: { clinic: string | null; product: string | null } = {
-  clinic: null,
-  product: null,
+  clinic: "/images/services/clinic.webp",
+  product: "/images/services/product.webp",
 };
