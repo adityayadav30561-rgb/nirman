@@ -49,8 +49,11 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
-**P1 services done** (`docs/sections/p1-services.md`): hub and four
-service pages from one template. Next: **P4 `/contact/` and `/about/`**
+**P1 services redesigned (2026-11-09)** after the user rejected the look:
+hub and four service pages rebuilt top to bottom with large readable
+pictures (drawing kit), new hero, bento, steps, deliverables, quote and
+cross links. Record: top of `docs/sections/p1-services.md`. Waiting for the
+user's verdict on it. Next: **P4 `/contact/` and `/about/`**
 (PAGE-PLAN section 3). Contact needs the real phone, email, address and
 WhatsApp number (placeholders until the user sends them); About needs the
 team (names and photos from the client) or leaves that block out.

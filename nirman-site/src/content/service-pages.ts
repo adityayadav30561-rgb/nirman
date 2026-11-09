@@ -17,8 +17,12 @@ export type ServicePage = {
   metaDescription: string;
   eyebrow: string;
   title: string;
+  /** part of the title drawn in the accent colour */
+  accent: string;
   line: string;
   points: string[];
+  /** heading of the "What is included" section */
+  includedTitle: string;
   audiences: { name: string; line: string }[];
   included: { title: string; line: string }[];
   steps: { title: string; line: string; receive: string }[];
@@ -39,6 +43,8 @@ export const servicePages: Record<ServiceSlug, ServicePage> = {
     metaDescription: "Fast, mobile-first websites and online stores built by Nirman, designed to turn visitors into enquiries. A typical business website goes live in 3 to 6 weeks.",
     eyebrow: "Website design and development",
     title: "Websites that load fast and turn visitors into enquiries",
+    accent: "turn visitors into enquiries",
+    includedTitle: "Everything a website needs, from design to care",
     line: "We design and build mobile-first websites and online stores, with clear pages, fast loading and enquiry forms that go straight to your team.",
     points: ["A typical business website live in 3 to 6 weeks", "Built for phones first", "You own the code, content and domain"],
     audiences: [
@@ -83,6 +89,8 @@ export const servicePages: Record<ServiceSlug, ServicePage> = {
     metaDescription: "Nirman's SEO services help customers find you on Google and in AI search: local SEO, technical audits, e-commerce SEO and AI search optimization, with plain monthly reports.",
     eyebrow: "SEO services",
     title: "SEO that helps customers find you before your competitors",
+    accent: "find you",
+    includedTitle: "Five kinds of SEO, one plan",
     line: "Local, technical, e-commerce and AI-search SEO, done in plain steps and reported every month in words you can follow.",
     points: ["A full audit to start", "Work you can see every month", "Plain monthly reports"],
     audiences: [
@@ -127,6 +135,8 @@ export const servicePages: Record<ServiceSlug, ServicePage> = {
     metaDescription: "Nirman builds custom CRMs, web apps, mobile apps and automations around the way your team works. Written plan and proposal within 48 hours of the call.",
     eyebrow: "Custom software development",
     title: "Software built around the way your team works",
+    accent: "the way your team works",
+    includedTitle: "Four kinds of software, built for your process",
     line: "Custom CRMs, web apps, mobile apps and automations that replace spreadsheets and copy-paste with one system your team actually uses.",
     points: ["Planned with your team", "Built in stages you can test", "You own the code and data"],
     audiences: [
@@ -170,6 +180,8 @@ export const servicePages: Record<ServiceSlug, ServicePage> = {
     metaDescription: "WhatsApp and email campaigns and automatic follow-ups that run through Nirman CRM, so every enquiry is answered and every customer hears from you at the right time.",
     eyebrow: "WhatsApp and email marketing",
     title: "WhatsApp and email follow-ups that run on their own",
+    accent: "run on their own",
+    includedTitle: "Campaigns and follow-ups, set up for you",
     line: "We set up campaigns, welcome messages and follow-ups in Nirman CRM, so every enquiry gets an answer and every customer hears from you at the right time.",
     points: ["Official WhatsApp Business Platform", "Campaigns and automatic follow-ups", "Read, click and reply stats"],
     audiences: [
@@ -212,6 +224,7 @@ export const serviceSlugs: ServiceSlug[] = ["websites", "seo", "software", "mark
 /** /services/ hub */
 export const servicesHub = {
   title: "Services that grow your business online",
+  accent: "grow your business",
   line: "Websites, SEO, custom software and WhatsApp and email marketing, from one team in India working with businesses in India and abroad.",
   steps: [
     { title: "A short call", line: "We learn about your business and goals." },

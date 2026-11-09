@@ -145,3 +145,8 @@ runs. `.draw path` uses `stroke-dasharray: 1 2` with `pathLength=1`. A
   `src/content/image-credits.ts`.
 - Product screens, icons, map and charts are built in code. No WhatsApp,
   Instagram or Facebook logos in our artwork.
+- Service pages (2026-11-09): pictures are drawn with the kit in
+  `src/components/services/kit.tsx` (a few large UI pieces, never a whole
+  shrunken dashboard). New pictures for inner pages should use the same kit;
+  motion hooks are listed at the top of that file and in
+  `service-motion.tsx`.

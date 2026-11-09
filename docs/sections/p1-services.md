@@ -1,5 +1,74 @@
 # P1 Services hub and the four service pages
 
+## Redesign, 2026-11-09 (user: "doesn't look even a little good; make them extremely good, top to bottom")
+Status: built and verified. This section is the truth; everything below it
+is history (the screens, tour and cards it describes were deleted).
+
+**What was wrong:** the pictures were whole dashboards shrunk until the text
+was unreadable and mostly empty; every section was a heading over plain
+cards; all four pages looked the same.
+
+**Idea:** show a few large UI pieces a visitor can read instead of whole
+screens, and give each section its own layout and motion.
+
+### Variants (built on `/lab/svc/` with the SEO content; lab deleted)
+| Section | Variants | Scores /70 | Chosen |
+|---|---|---|---|
+| Hero (`shots/p1r-hero-1440.jpg`, `-375.jpg`; A, B, C left to right) | A ink, centred, picture below; B pale warm split; C ink split with a grid, accent phrase and a running row of sub-services | A 57, B 58, **C 63** | **C**: headline, action and picture all above the fold; keeps the dark top the user chose on the CRM page |
+| What is included (`shots/p1r-included-1440.jpg`; A, B, C left to right) | A bento of pictures; B tabs with one large stage; C alternating rows | **A 62**, B 53, C 56 | **A**: everything visible at once, works on phones without interaction |
+Other sections were designed once (no competing idea worth a lab round) and
+are recorded here: who it is for, steps, what you get, quote, cross links.
+
+### Page order (service pages)
+1. **Hero C** (`service-hero.tsx`): breadcrumb, h1 with `accent` phrase in
+   orange, line, Get a quote (to `#quote`), three points as chips, the
+   service's Scene on the right, Ticker of sub-services along the bottom.
+2. **What is included** (`ServiceIncluded`): bento, one picture per item.
+   5 items: 7+5 then 4+4+4 columns; 4 items: 7+5 then 5+7. Tints warm / ink /
+   stone. Heading from `includedTitle`.
+3. **Who it is for**: warm band (`bg-wash`), four columns with big light
+   numerals and a top rule that turns orange on hover.
+4. **How it works**: ink band; numbered circles on a line that fills with
+   orange as you scroll (across on desktop, down on phones); "You receive"
+   cards.
+5. **What you get**: one white panel split 2 x 2; under it "Tools we use"
+   as an endless row of chips.
+6. **Questions** (homepage accordion). 7. **Get a quote**: ink panel with the
+   three promises and the form (service preset). 8. **Works even better
+   together**: links to the other three services (3D icons).
+
+### Hub `/services/`
+Ink hero (centred h1 with accent, Get a quote, four jump links with the 3D
+icons, the four true facts as a strip); four service panels with different
+looks (white, ink, warm, white), each with its Scene, all sub-services as
+chips and an Explore button; How we work (same steps band); Questions; ink
+call-to-action panel.
+
+### Files
+- `components/services/kit.tsx`: drawing kit (Scene, Vis, Panel, Tag, Ring,
+  Trend, Bars, Phone, Browser, ...). Sizes in em; a Scene scales with its
+  width (container units), a Vis uses a clamped readable size.
+- `components/services/visuals/{seo,web,software,marketing}.tsx`: one hero
+  Scene and one picture per included item; `service-art.tsx` maps them.
+  Demo businesses (Sunrise Dental Clinic, Masala Box, FixIt Pro) show the
+  kind of work; they are not clients. No prices, no WhatsApp logo (messages
+  are plain chat bubbles).
+- `components/services/service-motion.tsx`: all motion (GSAP). `gs-hide`
+  calm load fade-up; `.rv` batched scroll reveal; `[data-depth]` parallax
+  inside `.sv-stage`; `.sv-anim` starts `.an-pop`, `.an-bar`, `.an-grow`,
+  `.an-ring`, `.an-wipe` when it enters; `.sp-track` steps line (scrub);
+  `Ticker` endless rows. Reduced motion: everything in its final state.
+- Copy: `content/service-pages.ts` gained `accent` and `includedTitle`.
+
+### Verified (Playwright, production build)
+Five pages at 375, 768, 1024, 1440 and 1920: no horizontal scroll, one h1,
+every reveal ends visible, JSON-LD present, service preset ticked; reduced
+motion shows everything; `/services/ppc/` and `/lab/svc/` are 404. `tsc`,
+`lint`, `build` pass. Final sheets: `shots/p1r-seo-1440.jpg`,
+`p1r-seo-375.jpg`, `p1r-hub-1440.jpg`.
+
+---
+
 ## Redo, 2026-11-07 (user: "the services page doesn't look any good, no real screens, very weak sections")
 - **Real screens built in code** (`src/components/services/screens/`), in
   `frames.tsx` (BrowserFrame and PhoneFrame, em-scaled like the CRM
