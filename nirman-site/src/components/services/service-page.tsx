@@ -22,24 +22,25 @@ const h2 = "rv text-[clamp(1.8rem,3.2vw,2.8rem)] leading-[1.12] font-semibold tr
 const eyebrow = "rv text-[0.78rem] font-semibold tracking-[0.08em] uppercase";
 const label = (s: ServicePage) => (s.name === "SEO" ? "SEO" : s.name.toLowerCase());
 
+// Neutral backdrops, like a desk under a screenshot: the mockups bring the colour.
 const tints = {
-  warm: "bg-[linear-gradient(160deg,#fbf1e8,#f5e1d2)]",
-  ink: "bg-[linear-gradient(160deg,#262a33,#121418)]",
-  stone: "bg-[linear-gradient(160deg,#eef1f4,#e4e8ed)]",
+  mist: "bg-[linear-gradient(160deg,#f1f3f6,#e6e9ee)]",
+  slate: "bg-[linear-gradient(160deg,#2b3140,#161a23)]",
+  sand: "bg-[linear-gradient(160deg,#f4f1ec,#e9e4dc)]",
 };
 const layout: Record<number, { span: string; tint: keyof typeof tints }[]> = {
   5: [
-    { span: "md:col-span-2 lg:col-span-7", tint: "warm" },
-    { span: "lg:col-span-5", tint: "ink" },
-    { span: "lg:col-span-4", tint: "stone" },
-    { span: "lg:col-span-4", tint: "stone" },
-    { span: "lg:col-span-4", tint: "warm" },
+    { span: "md:col-span-2 lg:col-span-7", tint: "mist" },
+    { span: "lg:col-span-5", tint: "slate" },
+    { span: "lg:col-span-4", tint: "sand" },
+    { span: "lg:col-span-4", tint: "mist" },
+    { span: "lg:col-span-4", tint: "sand" },
   ],
   4: [
-    { span: "lg:col-span-7", tint: "warm" },
-    { span: "lg:col-span-5", tint: "ink" },
-    { span: "lg:col-span-5", tint: "stone" },
-    { span: "lg:col-span-7", tint: "warm" },
+    { span: "lg:col-span-7", tint: "mist" },
+    { span: "lg:col-span-5", tint: "slate" },
+    { span: "lg:col-span-5", tint: "sand" },
+    { span: "lg:col-span-7", tint: "mist" },
   ],
 };
 
@@ -61,7 +62,7 @@ export function ServiceIncluded({ s }: { s: ServicePage }) {
             const V = tiles[i];
             return (
               <li key={x.title} className={`rv sv-anim group @container flex flex-col overflow-hidden rounded-[1.75rem] bg-white ring-1 ring-line transition-shadow duration-300 hover:shadow-[0_2rem_3.5rem_-2rem_rgba(18,20,24,0.3)] ${cells[i].span}`}>
-                <div className={`relative h-[17rem] overflow-hidden ${tints[cells[i].tint]}`}>
+                <div className={`relative h-[19rem] overflow-hidden ${tints[cells[i].tint]}`}>
                   <V />
                 </div>
                 <div className="flex flex-1 flex-col p-6 lg:p-7">

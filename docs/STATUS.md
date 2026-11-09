@@ -52,8 +52,10 @@ the end of every session. Keep it under about 60 lines. Older history:
 **P1 services redesigned (2026-11-09)** after the user rejected the look:
 hub and four service pages rebuilt top to bottom with large readable
 pictures (drawing kit), new hero, bento, steps, deliverables, quote and
-cross links. Record: top of `docs/sections/p1-services.md`. Waiting for the
-user's verdict on it. Next: **P4 `/contact/` and `/about/`**
+cross links; then, at the user's request, every picture redrawn as a
+realistic mockup in its real colours (WhatsApp-look chat, real Nirman CRM
+screens, real-looking site, search page). Record: top of
+`docs/sections/p1-services.md`. Waiting for the user's verdict. Next: **P4 `/contact/` and `/about/`**
 (PAGE-PLAN section 3). Contact needs the real phone, email, address and
 WhatsApp number (placeholders until the user sends them); About needs the
 team (names and photos from the client) or leaves that block out.
@@ -67,6 +69,9 @@ team (names and photos from the client) or leaves that block out.
 - Real contact details, domain, and which social profiles exist (all
   placeholders: `src/content/site.ts`; footer icons are generic with `#`
   links in `src/content/footer.ts`).
+
+- May Claude download free-licence photos (Unsplash/Pexels, credited) for
+  the website mockups on the services pages? They use drawn illustrations now.
 
 ## Half-finished work
 

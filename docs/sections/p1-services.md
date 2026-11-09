@@ -11,6 +11,36 @@ cards; all four pages looked the same.
 **Idea:** show a few large UI pieces a visitor can read instead of whole
 screens, and give each section its own layout and motion.
 
+### Round 2, same day: realistic mockups (user)
+User on seeing the redesign: the pictures should be **realistic screens in
+their real colours**, not orange-and-black drawings ("a phone that is green
+and looks like the WhatsApp chat app, the CRM should look like the CRM
+screen, a website that looks like a real screenshot"), on every page. All 4
+hero pictures and 18 tile pictures were redrawn (`shots/p1r-realistic-1440.jpg`):
+- **Marketing:** a chat phone in the WhatsApp look (`visuals/whatsapp.tsx`:
+  green header, beige wallpaper, pale green bubbles, blue ticks; **no logo**,
+  client rule), the **real Nirman CRM** screens cropped large
+  (`visuals/crm-shot.tsx`: Campaigns, Inbox, Automations, Leads), an email
+  open in a mail app.
+- **Software:** FixIt Pro job app in its own blue brand (browser + phone with
+  a map), the real Nirman CRM Pipeline, a reports web app, a workflow canvas
+  with app-coloured steps.
+- **Websites:** a teal clinic site in a real-looking browser (tab strip,
+  address bar) with a drawn tooth illustration as its photo, its phone
+  booking page, a design tool, a page-speed report, a store product page
+  (the product price is the demo shop's, not ours), a block editor, an
+  uptime monitor.
+- **SEO:** a search results page with a local pack and map (blue links, red
+  pins, no search-engine logo), a search performance chart, a maps place
+  card, a site-audit report, a rich result, an AI answer with its source, a
+  keyword table.
+- Kit: `Phone` (bezel, island, status bar) and `Browser` (tabs, toolbar) are
+  now realistic; tile backdrops are neutral (mist, slate, sand) so the
+  mockups carry the colour. Orange and ink remain for the site around them.
+- Not done: real photographs inside the website mockups (needs the user's
+  yes to download free-licence photos; drawn illustrations used instead).
+- Verified again as below (five pages, five widths, reduced motion, build).
+
 ### Variants (built on `/lab/svc/` with the SEO content; lab deleted)
 | Section | Variants | Scores /70 | Chosen |
 |---|---|---|---|

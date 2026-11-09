@@ -1,28 +1,55 @@
-import { Check, CheckCheck, Clock, Filter, Mail, MessageSquare, Send, UserPlus } from "lucide-react";
-import { Avatar, Bar, Glow, Panel, Phone, Scene, Tag, Vis } from "@/components/services/kit";
+import { Archive, ChevronDown, CornerUpLeft, Mail, Star as StarIcon, Trash2 } from "lucide-react";
+import { InboxScreen } from "@/components/crm/screens";
+import { AutomationsScreen, CampaignsScreen, LeadsScreen } from "@/components/crm/screens-more";
+import { Bar, Glow, Panel, Scene, Vis } from "@/components/services/kit";
+import { CrmShot } from "@/components/services/visuals/crm-shot";
+import { In, Out, Template, WaPhone } from "@/components/services/visuals/whatsapp";
 
 /*
- * Marketing automation artwork (docs/sections/p1-services.md). No
- * WhatsApp logo (client rule): messages are drawn as plain chat bubbles.
- * Sunrise Dental is a demo business, not a client.
+ * Marketing automation artwork (docs/sections/p1-services.md): a chat phone
+ * in the look of WhatsApp (no logo: client rule), the real Nirman CRM
+ * screens, and an email as it looks in a mail app. Sunrise Dental is a demo
+ * business, not a client.
  */
 
-function Meter({ label, value }: { label: string; value: number }) {
+function Chat() {
   return (
-    <span className="flex items-center gap-[0.6em]">
-      <span className="w-[4.4em] text-[0.64em] text-muted">{label}</span>
-      <span className="h-[0.5em] flex-1 overflow-hidden rounded-full bg-[#f1f3f6]"><span className="an-grow block h-full origin-left rounded-full bg-brand" style={{ width: `${value}%` }} /></span>
-      <span className="w-[2.4em] text-right text-[0.66em] font-semibold">{value}%</span>
-    </span>
+    <>
+      <In time="10:02">Hi, do you have a slot for a check-up this week?</In>
+      <Out time="10:02">Hi Riya! Yes, we do. Pick a time below.</Out>
+      <Template time="10:02" title="Book your check-up" line="Slots open Monday to Saturday." buttons={["Book a visit", "Call the clinic"]} />
+      <In time="10:04">Booked for Saturday. Thank you!</In>
+    </>
   );
 }
 
-function FlowStep({ icon: I, title, sub, first = false }: { icon: typeof Clock; title: string; sub: string; first?: boolean }) {
+/** An email open in a mail app. */
+function EmailCard({ className = "", depth }: { className?: string; depth?: number }) {
   return (
-    <span className="an-pop flex items-center gap-[0.6em]">
-      <span className={`grid size-[1.9em] shrink-0 place-items-center rounded-[0.55em] ${first ? "bg-brand text-white" : "bg-[#fdeee4] text-brand"}`}><I className="size-[0.9em]" /></span>
-      <span><span className="block text-[0.7em] font-semibold">{title}</span><span className="block text-[0.58em] text-muted">{sub}</span></span>
-    </span>
+    <Panel depth={depth} className={`overflow-hidden ${className}`}>
+      <span className="flex items-center gap-[0.7em] border-b border-[#e8eaed] px-[0.9em] py-[0.55em] text-[#5f6368]">
+        <Archive className="size-[0.85em]" /><Trash2 className="size-[0.85em]" /><Mail className="size-[0.85em]" />
+        <span className="ml-auto text-[0.56em]">1 of 248</span>
+      </span>
+      <span className="block px-[0.9em] pt-[0.7em]">
+        <span className="flex items-center gap-[0.5em]"><span className="text-[0.86em] font-medium text-[#202124]">Your smile, this month</span><span className="rounded-[0.3em] bg-[#e8eaed] px-[0.4em] py-[0.1em]"><span className="block text-[0.5em] text-[#5f6368]">Inbox</span></span></span>
+        <span className="mt-[0.5em] flex items-center gap-[0.5em]">
+          <span className="grid size-[1.9em] shrink-0 place-items-center rounded-full bg-[#0f766e] text-white"><span className="text-[0.6em] font-semibold">S</span></span>
+          <span className="min-w-0 flex-1"><span className="block text-[0.64em] font-semibold text-[#202124]">Sunrise Dental</span><span className="flex items-center text-[#5f6368]"><span className="text-[0.54em]">to me</span><ChevronDown className="size-[0.6em]" /></span></span>
+          <span className="text-[0.52em] text-[#5f6368]">9:00 AM</span><StarIcon className="size-[0.8em] text-[#5f6368]" /><CornerUpLeft className="size-[0.8em] text-[#5f6368]" />
+        </span>
+      </span>
+      <span className="m-[0.9em] mt-[0.7em] block overflow-hidden rounded-[0.5em] ring-1 ring-[#e8eaed]">
+        <span className="flex h-[4.2em] flex-col justify-end bg-[linear-gradient(120deg,#0f766e,#14b8a6)] p-[0.7em] text-white">
+          <span className="text-[0.5em] font-semibold tracking-[0.1em] uppercase opacity-80">Sunrise Dental · Newsletter</span>
+          <span className="text-[0.9em] leading-tight font-semibold">Three tips for healthy teeth</span>
+        </span>
+        <span className="block p-[0.7em]">
+          <span className="flex flex-col gap-[0.35em]"><Bar w="100%" /><Bar w="94%" /><Bar w="70%" /></span>
+          <span className="mt-[0.6em] inline-block rounded-[0.35em] bg-[#0f766e] px-[0.9em] py-[0.4em] text-white"><span className="block text-[0.58em] font-medium">Book a check-up</span></span>
+        </span>
+      </span>
+    </Panel>
   );
 }
 
@@ -30,123 +57,47 @@ export function MarketingScene({ className = "" }: { className?: string }) {
   return (
     <Scene w={36} h={27} className={className}>
       <Glow className="-top-[10%] left-[0%] h-[120%] w-[100%]" />
-      <Phone depth={0.4} className="absolute top-[0.6em] left-[4.6em] h-[25.6em] w-[13em]">
-        <div className="flex h-full flex-col">
-          <div className="flex items-center gap-[0.5em] border-b border-line px-[0.8em] pb-[0.6em]">
-            <Avatar className="!size-[1.9em]">SD</Avatar>
-            <span><span className="block text-[0.72em] font-semibold">Sunrise Dental</span><span className="block text-[0.52em] text-muted">Business account</span></span>
-          </div>
-          <div className="flex flex-1 flex-col gap-[0.5em] bg-[#f6f1ec] p-[0.7em]">
-            <span className="max-w-[85%] self-start rounded-[0.8em] rounded-bl-[0.2em] bg-white px-[0.7em] py-[0.5em]"><span className="block text-[0.62em] leading-snug">Hi, do you have a slot for a check-up this week?</span></span>
-            <span className="max-w-[88%] self-end rounded-[0.8em] rounded-br-[0.2em] bg-[#fbd9c4] px-[0.7em] py-[0.5em]">
-              <span className="block text-[0.62em] leading-snug">Hi Riya! Yes, we do. Pick a time below and we will confirm at once.</span>
-              <span className="mt-[0.2em] flex items-center justify-end gap-[0.2em] text-brand-deep"><span className="text-[0.48em]">10:02</span><CheckCheck className="size-[0.7em]" /></span>
-            </span>
-            <span className="self-end"><Tag tone="ink">Instant reply</Tag></span>
-            <span className="w-[88%] self-end overflow-hidden rounded-[0.8em] bg-white">
-              <span className="block px-[0.7em] py-[0.5em]"><span className="block text-[0.62em] font-semibold">Book your check-up</span><span className="block text-[0.54em] text-muted">Slots open Mon to Sat</span></span>
-              <span className="block border-t border-line py-[0.45em] text-center text-brand"><span className="block text-[0.6em] font-medium">Book a visit</span></span>
-            </span>
-          </div>
-        </div>
-      </Phone>
-      <Panel depth={1} className="absolute top-[1.6em] right-0 w-[16.5em] p-[1em]">
-        <span className="flex items-center justify-between"><span className="text-[0.76em] font-semibold">Check-up reminder</span><Tag tone="good">Sent</Tag></span>
-        <span className="mt-[0.2em] block text-[0.6em] text-muted">Campaign · 420 customers</span>
-        <span className="mt-[0.8em] flex flex-col gap-[0.55em]"><Meter label="Delivered" value={98} /><Meter label="Read" value={81} /><Meter label="Replied" value={24} /></span>
-      </Panel>
-      <Panel depth={1.3} className="absolute right-[1em] bottom-[1.2em] flex w-[14.5em] flex-col gap-[0.7em] p-[1em]">
-        <span className="text-[0.62em] font-medium text-muted">Automatic follow-up</span>
-        <FlowStep first icon={UserPlus} title="New lead arrives" sub="From the website form" />
-        <FlowStep icon={Clock} title="Wait 2 days" sub="Only if there is no reply" />
-        <FlowStep icon={Send} title="Send a follow-up" sub="Message, then email" />
-      </Panel>
-      <Panel depth={0.7} className="absolute bottom-[1.6em] left-0 flex items-center gap-[0.7em] p-[0.8em] pr-[1.2em]">
-        <span className="grid size-[2.1em] place-items-center rounded-[0.6em] bg-ink-2 text-white"><Mail className="size-[1em]" /></span>
-        <span><span className="block text-[0.74em] font-semibold">Welcome email</span><span className="block text-[0.62em] text-muted">Sent to every new lead</span></span>
-      </Panel>
+      {/* the real Nirman CRM Campaigns screen, cropped like a zoomed screenshot (sidebar off the left edge) */}
+      <div data-depth={0.3} className="absolute top-[0.6em] right-0 left-[11.6em] h-[16em] overflow-hidden rounded-[1em] bg-white shadow-[0_1.6em_3.2em_-1.2em_rgba(18,20,24,0.4)]">
+        <div className="-mt-[1.3em] -ml-[5.2em] w-[46em]"><CrmShot active="campaigns" className="!static !w-full"><CampaignsScreen /></CrmShot></div>
+      </div>
+      <WaPhone depth={0.9} name="Sunrise Dental" initials="SD" className="absolute bottom-0 left-0 h-[25.6em] w-[12.8em]"><Chat /></WaPhone>
+      <EmailCard depth={1.3} className="absolute right-[0.8em] bottom-0 w-[14.6em]" />
     </Scene>
   );
 }
 
-function Chat() {
-  const inbox: [string, string, string, string][] = [["RS", "Riya Sharma", "Can I book for Saturday?", "Priya"], ["JD", "James Dunn", "Thanks, see you at 4.", "Rohan"], ["AK", "Arjun Kapoor", "Please share the details", "Priya"]];
+function WhatsApp() {
   return (
-    <Vis className="flex h-full items-center justify-center gap-[1em] px-[1.4em]">
-      <Panel className="an-pop w-[14em] shrink-0 overflow-hidden">
-        <span className="flex items-center justify-between px-[0.9em] pt-[0.8em]"><span className="text-[0.62em] text-muted">Message template</span><Tag tone="good"><Check className="size-[0.9em]" strokeWidth={3} />Approved</Tag></span>
-        <span className="block px-[0.9em] py-[0.6em]">
-          <span className="block text-[0.74em] leading-snug">Hi <b className="rounded-[0.3em] bg-[#fdeee4] px-[0.25em] font-medium text-brand-deep">name</b>, your check-up is due this month. Shall we book a time?</span>
-        </span>
-        {["Yes, book it", "Remind me later"].map((t) => <span key={t} className="block border-t border-line py-[0.5em] text-center text-brand"><span className="block text-[0.68em] font-medium">{t}</span></span>)}
-      </Panel>
-      <Panel className="an-pop hidden w-[17em] overflow-hidden @lg:block">
-        <span className="flex items-center gap-[0.5em] border-b border-line px-[0.9em] py-[0.65em]"><MessageSquare className="size-[0.9em] text-brand" /><span className="text-[0.74em] font-semibold">Team inbox</span><Tag className="ml-auto">3 open</Tag></span>
-        {inbox.map(([i, n, m, who]) => (
-          <span key={n} className="flex items-center gap-[0.6em] border-b border-line px-[0.9em] py-[0.55em] last:border-0">
-            <Avatar>{i}</Avatar>
-            <span className="min-w-0 flex-1"><span className="block text-[0.7em] font-semibold">{n}</span><span className="block truncate text-[0.6em] text-muted">{m}</span></span>
-            <Tag tone="brand">{who}</Tag>
-          </span>
-        ))}
-      </Panel>
+    <Vis className="relative h-full">
+      <CrmShot active="inbox" className="top-[1.6rem] left-[42%] hidden @lg:block"><InboxScreen /></CrmShot>
+      <WaPhone name="Sunrise Dental" initials="SD" className="an-pop absolute top-[1.4em] left-1/2 h-[26em] w-[13em] -translate-x-1/2 @lg:left-[8%] @lg:translate-x-0"><Chat /></WaPhone>
     </Vis>
   );
 }
 
 function Email() {
   return (
-    <Vis className="grid h-full place-items-center px-[1.4em]">
-      <Panel className="w-full max-w-[21em] overflow-hidden">
-        <span className="flex items-center gap-[0.6em] border-b border-line px-[1em] py-[0.7em]">
-          <Avatar>SD</Avatar>
-          <span className="min-w-0 flex-1"><span className="block text-[0.72em] font-semibold">Your smile, this month</span><span className="block text-[0.58em] text-muted">Sunrise Dental · newsletter</span></span>
-          <Mail className="size-[0.95em] text-muted" />
-        </span>
-        <span className="block p-[1em]">
-          <span className="an-pop flex h-[4.4em] items-end rounded-[0.7em] bg-[linear-gradient(120deg,#f6b48d,#d95f27)] p-[0.7em] text-white"><span className="text-[0.86em] leading-tight font-semibold">Three tips for healthy teeth</span></span>
-          <span className="mt-[0.7em] flex flex-col gap-[0.4em]"><Bar w="100%" /><Bar w="78%" /></span>
-          <span className="mt-[0.7em] inline-block rounded-full bg-ink-2 px-[1em] py-[0.45em] text-white"><span className="block text-[0.62em] font-medium">Book a check-up</span></span>
-        </span>
-      </Panel>
+    <Vis className="grid h-full place-items-center px-[1.4em] pt-[1.4em]">
+      <EmailCard className="an-pop w-full max-w-[21em] self-start" />
     </Vis>
   );
 }
 
 function FollowUps() {
   return (
-    <Vis className="grid h-full place-items-center px-[1.4em]">
-      <Panel className="relative flex w-full max-w-[19em] flex-col gap-[0.85em] p-[1.1em]">
-        <span className="absolute top-[2em] bottom-[2em] left-[2.02em] w-px bg-[#f3b592]" />
-        <span className="relative"><FlowStep first icon={UserPlus} title="A lead goes quiet" sub="No reply to your quote" /></span>
-        <span className="relative"><FlowStep icon={Clock} title="Wait 2 days" sub="Stops if they answer" /></span>
-        <span className="relative"><FlowStep icon={Send} title="Follow-up message" sub="Written in your voice" /></span>
-        <span className="relative"><FlowStep icon={Check} title="Your team is told" sub="When the lead replies" /></span>
-      </Panel>
+    <Vis className="relative h-full">
+      <CrmShot active="automations" className="-top-[5.6rem] -left-[13rem] max-md:-left-[17.5rem]"><AutomationsScreen /></CrmShot>
     </Vis>
   );
 }
 
 function Segments() {
-  const segs: [string, number, boolean][] = [["Asked for a check-up", 124, true], ["Repeat customers", 210, false], ["No reply in 30 days", 58, false], ["Kothrud, Pune", 96, true]];
   return (
-    <Vis className="flex h-full items-center justify-center gap-[1em] px-[1.4em]">
-      <div className="grid w-[15em] shrink-0 grid-cols-1 gap-[0.45em]">
-        {segs.map(([name, n, on]) => (
-          <Panel key={name} className={`an-pop flex items-center gap-[0.6em] rounded-[0.8em] px-[0.8em] py-[0.55em] ${on ? "ring-2 ring-brand/60" : ""}`}>
-            <span className={`grid size-[1.1em] place-items-center rounded-[0.3em] ${on ? "bg-brand text-white" : "ring-1 ring-ink/25"}`}>{on && <Check className="size-[0.75em]" strokeWidth={3.5} />}</span>
-            <span className="flex-1 text-[0.7em] font-medium">{name}</span>
-            <span className="text-[0.62em] text-muted">{n}</span>
-          </Panel>
-        ))}
-      </div>
-      <Panel className="an-pop hidden w-[14em] p-[1em] @lg:block">
-        <span className="flex items-center gap-[0.5em]"><Filter className="size-[0.9em] text-brand" /><span className="text-[0.74em] font-semibold">Who gets this message</span></span>
-        <span className="mt-[0.7em] flex flex-wrap gap-[0.35em]"><Tag tone="brand">Asked for a check-up</Tag><Tag>and</Tag><Tag tone="brand">Kothrud, Pune</Tag></span>
-        <span className="mt-[0.9em] block border-t border-line pt-[0.7em]"><span className="block text-[1.5em] leading-none font-semibold">41</span><span className="mt-[0.3em] block text-[0.62em] text-muted">people will receive it</span></span>
-      </Panel>
+    <Vis className="relative h-full">
+      <CrmShot active="leads" className="top-[1.6rem] left-[1.6rem] max-md:-top-[4rem] max-md:-left-[8.4rem]"><LeadsScreen /></CrmShot>
     </Vis>
   );
 }
 
-export const marketingTiles = [Chat, Email, FollowUps, Segments];
+export const marketingTiles = [WhatsApp, Email, FollowUps, Segments];
