@@ -6,14 +6,15 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 import { heroGrid } from "@/components/services/service-hero";
 import { ServiceMotion } from "@/components/services/service-motion";
 import { AppCard, SeoCard, SiteCard } from "@/components/work/cards";
-import { AppMedia, BrowserShot, SeoMedia, SiteMedia, siteHome } from "@/components/work/shots";
+import { AppStory, BrowserShot, SeoStory, SiteStory, siteHome } from "@/components/work/shots";
 import { site } from "@/content/site";
 import { apps, categories, seoCases, sites, type WorkCategory } from "@/content/work";
 
 /*
  * Project pages and category pages of /work/ (docs/sections/p5-work.md).
- * Project layout: variant A (ink hero, the main picture hanging over the
- * band, facts in a row, then every screenshot). One template, three kinds.
+ * Project layout: ink hero with the main picture hanging over the band, then
+ * the story of the project (components/work/shots.tsx: overview, numbered
+ * walk, dark band), more projects of the kind, Get a quote. Three kinds.
  * Routes are fixed folders (a [slug] route answers 200 for unknown slugs
  * under Cache Components): to add a project, add it to content/work.ts, put
  * its images in public/images/work/ and add a folder with a page.tsx like
@@ -27,14 +28,29 @@ const one = { websites: "Website", seo: "SEO project", apps: "App" } as const;
 function describe(cat: WorkCategory, slug: string) {
   if (cat === "websites") {
     const s = sites.find((x) => x.slug === slug)!;
-    return { name: s.name, h1: `${s.name} website`, sub: [s.kind, s.place].filter(Boolean).join(" · "), facts: [["Client", s.name], ["Business", s.kind], ...(s.place ? [["Where", s.place]] : []), ["What we did", "Website design and development"]], desc: `Screenshots of the ${s.name} website (${s.kind.toLowerCase()}), designed and built by Nirman, on desktop and on phones.` };
+    return { name: s.name, h1: `${s.name} website`, sub: [s.kind, s.place].filter(Boolean).join(" · "), facts: [["Client", s.name], ["Business", s.kind], ...(s.place ? [["Where", s.place]] : []), ["What we did", "Website design and development"]], desc: `How Nirman designed and built the ${s.name} website (${s.kind.toLowerCase()}): a walk through its screens on desktop and on phones.` };
   }
   if (cat === "seo") {
     const c = seoCases.find((x) => x.slug === slug)!;
-    return { name: c.name, h1: `${c.name}: SEO results`, sub: `${c.headline.value} ${c.headline.label}. ${c.source}.`, facts: [["Client", c.name], ["What we did", "SEO"], ["Sources", "Google Analytics and Search Console"]], desc: `SEO results for ${c.name}: ${c.headline.value} ${c.headline.label}, with screenshots from Google Analytics and Search Console.` };
+    return { name: c.name, h1: `${c.name}: SEO results`, sub: `${c.headline.value} ${c.headline.label}. ${c.source}.`, facts: [["Client", c.name], ["What we did", "SEO"], ["Sources", c.shots.some((x) => x.file === "ga") ? "Google Analytics and Search Console" : "Google Search Console"], ["Measured", c.shots[0].period]], desc: `SEO results for ${c.name}: ${c.headline.value} ${c.headline.label}, with screenshots from Google Analytics and Search Console.` };
   }
   const a = apps.find((x) => x.slug === slug)!;
   return { name: a.name, h1: `${a.name} app`, sub: a.line, facts: [["App", a.name], ["Kind", a.kind], ["Built with", a.built.join(", ")], ["What we did", "App design and development"]], desc: `Screens of the ${a.name} app (${a.kind.toLowerCase()}), designed and built by Nirman.` };
+}
+
+/** Small card picture and line for "More <kind>" at the foot of a project page. */
+function thumb(cat: WorkCategory, slug: string) {
+  if (cat === "websites") return siteHome(sites.find((x) => x.slug === slug)!);
+  if (cat === "seo") return `/images/work/seo-${seoCases.find((x) => x.slug === slug)!.key}.webp`;
+  return `/images/work/app-${apps.find((x) => x.slug === slug)!.key}.webp`;
+}
+function blurb(cat: WorkCategory, slug: string) {
+  if (cat === "websites") return sites.find((x) => x.slug === slug)!.kind;
+  if (cat === "seo") {
+    const c = seoCases.find((x) => x.slug === slug)!;
+    return `${c.headline.value} ${c.headline.label}`;
+  }
+  return apps.find((x) => x.slug === slug)!.kind;
 }
 
 export function projectMetadata(cat: WorkCategory, slug: string): Metadata {
@@ -87,13 +103,14 @@ export function ProjectPage({ cat, slug }: { cat: WorkCategory; slug: string }) 
   const d = describe(cat, slug);
   const list = lists[cat];
   const at = list.findIndex((x) => x.slug === slug);
-  const next = list[(at + 1) % list.length];
+  const more = [1, 2, 3].map((n) => list[(at + n) % list.length]).filter((x, i, all) => x.slug !== slug && all.indexOf(x) === i).slice(0, cat === "apps" ? 2 : 3);
+  const allOf = cat === "seo" ? "SEO projects" : categories[cat].label.toLowerCase();
   let lead: ReactNode;
   let media: ReactNode;
   if (cat === "websites") {
     const s = sites[at];
     lead = <BrowserShot src={siteHome(s)} name={s.name} alt={`${s.name}: homepage`} priority sizes="(min-width: 64rem) 62rem, 100vw" />;
-    media = <SiteMedia s={s} />;
+    media = <SiteStory s={s} facts={d.facts} />;
   } else if (cat === "seo") {
     const c = seoCases[at];
     lead = (
@@ -106,11 +123,11 @@ export function ProjectPage({ cat, slug }: { cat: WorkCategory; slug: string }) 
         ))}
       </dl>
     );
-    media = <SeoMedia c={c} />;
+    media = <SeoStory c={c} facts={d.facts} />;
   } else {
     const a = apps[at];
     lead = <Image src={`/images/work/app-${a.key}.webp`} alt={`${a.name}: main screens`} width={1680} height={960} sizes="(min-width: 64rem) 62rem, 100vw" priority className="w-full rounded-[1.75rem] shadow-[0_2rem_4rem_-2rem_rgba(18,20,24,0.6)]" />;
-    media = <AppMedia a={a} />;
+    media = <AppStory a={a} facts={d.facts} />;
   }
   return (
     <ServiceMotion>
@@ -125,26 +142,34 @@ export function ProjectPage({ cat, slug }: { cat: WorkCategory; slug: string }) 
           <div className="gs-hide mt-10 -mb-24 w-full max-w-[64rem] lg:-mb-36">{lead}</div>
         </div>
       </section>
-      <section aria-label="Project details" className="pt-36 pb-20 lg:pt-52 lg:pb-28">
+      {media}
+      <section aria-labelledby="proj-more" className="py-16 lg:py-24">
         <div className="container-page">
-          <dl className="rv mx-auto grid max-w-[64rem] grid-cols-2 gap-x-8 gap-y-6 md:grid-cols-4">
-            {d.facts.map(([a, b]) => (
-              <div key={a} className="border-t-2 border-ink/15 pt-4">
-                <dt className="text-[0.75rem] font-semibold tracking-[0.08em] text-muted uppercase">{a}</dt>
-                <dd className="mt-1.5 font-medium">{b}</dd>
-              </div>
-            ))}
-          </dl>
-          <div className="mt-14">{media}</div>
-          <div className="rv mt-14 flex flex-col gap-3 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
-            <Link href={`/work/${cat}/`} className="inline-flex h-12 items-center self-start rounded-full border border-ink-2/80 bg-white/70 px-6 text-[0.9rem] font-medium transition-colors hover:border-brand hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">All {categories[cat].label === "SEO" ? "SEO projects" : categories[cat].label.toLowerCase()}</Link>
-            {next.slug !== slug && (
-              <Link href={`/work/${cat}/${next.slug}/`} className="group inline-flex h-12 items-center gap-2 self-start rounded-full bg-ink-2 px-6 text-[0.9rem] font-medium text-white transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">
-                Next: {next.name}
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
-              </Link>
-            )}
+          <div className="rv flex flex-wrap items-end justify-between gap-4">
+            <h2 id="proj-more" className="text-[clamp(1.7rem,3vw,2.5rem)] leading-[1.12] font-semibold tracking-[-0.03em]">More {allOf}</h2>
+            <Link href={`/work/${cat}/`} className="inline-flex h-12 items-center gap-2 rounded-full border border-ink-2/80 bg-white/70 px-6 text-[0.9rem] font-medium transition-colors hover:border-brand hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">
+              All {allOf}
+              <ArrowRight className="size-4" aria-hidden />
+            </Link>
           </div>
+          <ul className={`mt-8 grid gap-4 ${cat === "apps" ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
+            {more.map((x) => (
+              <li key={x.slug} className="rv">
+                <Link href={`/work/${cat}/${x.slug}/`} className="group flex h-full flex-col overflow-hidden rounded-[1.5rem] bg-white ring-1 ring-line transition-shadow duration-300 hover:shadow-[0_2rem_3.5rem_-2rem_rgba(18,20,24,0.3)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">
+                  <span className="block overflow-hidden bg-[linear-gradient(160deg,#f1f3f6,#e6e9ee)]">
+                    <Image src={thumb(cat, x.slug)} alt="" width={800} height={500} sizes="(min-width: 64rem) 26rem, (min-width: 40rem) 50vw, 100vw" className={`aspect-[16/10] w-full transition-transform duration-700 ease-out group-hover:scale-[1.03] ${cat === "seo" ? "object-contain p-4" : "object-cover object-top"}`} />
+                  </span>
+                  <span className="flex flex-1 items-center justify-between gap-4 p-5">
+                    <span>
+                      <span className="block font-semibold tracking-[-0.01em]">{x.name}</span>
+                      <span className="mt-0.5 block text-[0.85rem] text-muted">{blurb(cat, x.slug)}</span>
+                    </span>
+                    <span aria-hidden className="flex size-10 shrink-0 items-center justify-center rounded-full bg-ink-2 text-white transition-colors group-hover:bg-brand"><ArrowRight className="size-4" /></span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
       <Quote />

@@ -1,5 +1,72 @@
 # P5 Our work
 
+## Round 3, 2026-11-10 (user): project pages are case studies, not galleries
+Status: built and verified. This section is the truth for the project pages
+(`/work/<kind>/<project>/`); round 2 below still holds for the structure.
+
+User on the project pages: "it just looks like it only contains screens and
+not good thought has been put on those pages". Each page was a hero, a row
+of facts and a dump of screenshots.
+
+### Variants (built on `/lab/proj2/` with AshVille Homes; deleted)
+Sheets: `shots/p5-case-1440.jpg`, `p5-case-375.jpg` (A, B, C left to right).
+
+| Variant | Idea | Score /70 |
+|---|---|---|
+| **A** | overview with a "what is in it" card, then a numbered walk: each screenshot beside a note on what it shows, sides swapping; phones on an ink band | **62** |
+| B | project text fixed on the left while captioned screenshots scroll on the right | 55 |
+| C | centred intro, then a bento grid of captioned screenshots | 50 |
+**A chosen:** it is the only one that reads as a story and has rhythm (pale,
+warm band, ink band). B leaves the left column empty for most of the page;
+C is still a gallery with captions.
+
+### What each project page shows now
+Hero unchanged (ink, main picture hanging over the band). Then:
+- **Website:** "What we built" (intro, facts, card "What is in the site"),
+  "A walk through the site" (every screenshot numbered, with a title and
+  two lines on what it shows and why), "On a phone" ink band (three phone
+  views with a note, slight GSAP parallax).
+- **SEO:** "What the numbers say" (one or two sentences made only of the
+  figures; card "Where the figures come from"), "The evidence" (each Google
+  screenshot beside what that report is, its period and its figures), ink
+  band "Six terms, in plain words" (how to read the figures).
+- **App:** "What the app does" (line, facts, card "Main features"), "How
+  the app flows" (screens grouped into four or five steps a user takes,
+  each with a note), ink band "What it is built with" with the second
+  collage.
+- Then "More <kind>" (two or three small cards and an "All" button) and
+  Get a quote. The old "Next: <project>" button is gone.
+Code: `src/components/work/shots.tsx` (`SiteStory`, `SeoStory`, `AppStory`)
+and `project.tsx`. Motion: `ServiceMotion` (`.rv` reveals, `[data-depth]`
+on the phones). Final sheet: `shots/p5-case-final-1440.jpg` (website, SEO,
+app).
+
+### Content rule for these pages
+All text is in `src/content/work.ts`: `intro`, `tour`, `phone`, `has`
+(sites); `summary` (SEO; plus shared `seoShotAbout`, `seoTerms`); `flow`
+(apps). **Every sentence describes what a screenshot shows or restates a
+supplied figure.** Nothing about a client's goals, our process on that
+project or its results is invented; do not add such claims unless the user
+supplies them.
+
+### Adding a project (adds to step 1 of round 2)
+In `content/work.ts` also write: for a site `intro`, `tour` (one entry per
+screenshot; `shot: 0` is the homepage; this replaces `more`), `phone`,
+`has`; for SEO `summary`; for an app `flow` (screen file names grouped
+into steps). Steps 2 and 3 of round 2 are unchanged.
+
+### Verified
+Production build, all 15 project pages at 375, 768 and 1440: no horizontal
+scroll, one h1, reveals end visible, no outside links, no broken images,
+JSON-LD present. `tsc`, `lint`, `build` pass.
+
+### To confirm with the user
+- The walk-through texts (written from the screenshots).
+- Phone screenshots of EasyWebSolns and Blue Orbit Digi show those
+  clients' own prices (already so in round 2).
+
+---
+
 ## Round 2, 2026-11-10 (user): screenshots only, more pages, room to grow
 Status: built and verified. This section is the truth; below it is the
 first version's record (its figures table and sources are still right).

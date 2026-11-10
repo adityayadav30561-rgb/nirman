@@ -40,7 +40,7 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 - [x] P2 `/nirman-crm/` (`docs/sections/p2-crm-page.md`; real CRM design, 8 screens)
 - [x] P3 `/get-a-quote/` multi-step form and `/thank-you/` (`docs/sections/p3-get-a-quote.md`)
 - [x] P4 `/contact/`, `/about/` (`docs/sections/p4-contact-about.md`; team, address and booking wait for the client)
-- [x] P5a `/work/` with real work from the user: selected work, three list pages, fifteen project pages (`docs/sections/p5-work.md`)
+- [x] P5a `/work/` with real work from the user: selected work, three list pages, fifteen project pages, redone as case studies in round 3 (`docs/sections/p5-work.md`)
 - [ ] P5b `/industries/`
 - [ ] P6 `/tools/`, `/tools/seo-audit/`
 - [ ] P7 `/blog/`, `/privacy-policy/`, `/terms/`

@@ -49,6 +49,13 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
+**Project pages redone as case studies (2026-11-10, round 3):** the user
+found the 15 `/work/<kind>/<project>/` pages to be bare screenshot dumps.
+Each now has an overview, a numbered walk through the screenshots with a
+note per screen, a dark band (phones / how to read the figures / tech) and
+"More <kind>" cards (`docs/sections/p5-work.md` round 3; text in
+`content/work.ts`). Awaiting the user's verdict.
+
 **P5a done (2026-11-10):** `/work/` with the user's real websites, SEO
 figures and apps, as screenshots only (no outside links): selected work,
 a list page per kind and a page per project, 19 pages; the user will send
