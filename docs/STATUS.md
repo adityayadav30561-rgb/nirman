@@ -49,6 +49,11 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
+**Hero phone screen redone (2026-11-10):** a real-looking Nirman CRM app
+screen instead of the orange one (`docs/sections/01-hero.md`, end). The
+user asked what else to improve on the homepage; suggestions were given in
+chat and wait for the user's pick.
+
 **Project pages redone as case studies (2026-11-10, round 3):** the user
 found the 15 `/work/<kind>/<project>/` pages to be bare screenshot dumps.
 Each now has an overview, a numbered walk through the screenshots with a

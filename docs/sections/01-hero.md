@@ -59,3 +59,15 @@ and the header's `useGSAP`):
 - Scroll (ScrollTrigger, scrubbed over the hero's height): text rises 60px,
   phone rises 10% and straightens 4deg, back clouds 50px, front clouds 140px.
 - The measured "overshoot" entrance (REFERENCE-VIDEO 4.2) is no longer used.
+
+## Phone screen redone (2026-11-10, user request)
+User: "the phone in the hand has an orange screen, it should feel a real
+screen, like we did in our services pages". The old screen had an orange
+wash, a slogan, clouds inside the app and an empty lower half. Now
+(`phone-screen.tsx`): a neutral app surface like `components/crm/`: status
+bar, app bar with the Nirman mark, date, search and alerts, three figures
+(new, replied, due), average first reply with a week of bars, filter chips,
+a list of seven leads with status pills, and a tab bar. Demo data. One
+design, no variants (a direct instruction on one element). The front cloud
+`f2` moved right so it no longer covers the screen. Shot:
+`shots/01-hero-phone-screen.jpg` (1440 and 375).

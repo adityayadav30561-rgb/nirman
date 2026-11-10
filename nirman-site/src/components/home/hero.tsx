@@ -69,7 +69,7 @@ const cloudsBack: CloudSpec[] = [
 ];
 const cloudsFront: CloudSpec[] = [
   { key: "f1", left: 27, top: 3, width: 24, dx: 10, t: 8 },
-  { key: "f2", left: 79, top: 21, width: 16, dx: 8, t: 9 },
+  { key: "f2", left: 91, top: 24, width: 16, dx: 8, t: 9 },
 ];
 function CloudLayer({ clouds, className }: { clouds: CloudSpec[]; className: string }) {
   return (
@@ -126,7 +126,7 @@ function PhoneStage() {
                 className="object-contain"
               />
               <div className="absolute top-[0.94%] left-[32.63%] h-[86.21%] w-[59.14%] rounded-[15%/7.4%] bg-ink p-[2.84%] shadow-[0_0_0_1.5px_#2b303a_inset]">
-                <div className="relative h-full overflow-hidden rounded-[11.3%/5.4%] bg-[#faefe6]">
+                <div className="relative h-full overflow-hidden rounded-[11.3%/5.4%] bg-[#f4f6f9]">
                   <div className="h-screen absolute top-0 left-0 h-[32.22rem] w-[15.37rem] origin-top-left [scale:var(--s)]">
                     <PhoneScreen />
                     <div aria-hidden className="absolute top-2 left-1/2 h-[1.1rem] w-[34%] -translate-x-1/2 rounded-full bg-ink" />
