@@ -5,6 +5,7 @@ from the client are in `docs/handoff.md` §1 and are not repeated here.
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-11-10 | Work is shown **as screenshots only, with no links** to client sites or apps. `/work/` is "selected work" and must take many more projects, so it now has list pages per kind and one page per project (19 pages; the 18-page plan grows). Project layout A (61/70) | User, on seeing the first work page; layout chosen by Claude per protocol |
 | 2026-11-10 | `/work/` shows real work supplied by the user: seven live websites, SEO figures for five clients from their Google Analytics and Search Console, three apps. Layout B (a section per kind of work; 63/70). Figures are shown exactly as in the screenshots, with source and period | User sent the material and asked for a professional work section; layout chosen by Claude per protocol |
 | 2026-11-10 | Contact: variant B (ink stage, channels left, form right; 62/70). About: hero A (centred, the four kinds of work as pictures; 60/70). No team, address, office hours or booking embed until the client sends them | Chosen by Claude per protocol; nothing invented |
 | 2026-11-09 | Free-licence photos (Unsplash or Pexels, credited) may be downloaded for the website mockups on the services pages | User: "yes, download the photos and use them" |

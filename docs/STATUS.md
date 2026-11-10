@@ -50,7 +50,9 @@ the end of every session. Keep it under about 60 lines. Older history:
 ## Next task
 
 **P5a done (2026-11-10):** `/work/` with the user's real websites, SEO
-figures and apps (`docs/sections/p5-work.md`). P4 (`/contact/`, `/about/`)
+figures and apps, as screenshots only (no outside links): selected work,
+a list page per kind and a page per project, 19 pages; the user will send
+more projects (how to add one: `docs/sections/p5-work.md`). P4 (`/contact/`, `/about/`)
 and the realistic-mockup redesign of the services pages were done just
 before; the user has not yet given a verdict on those. Next: **P5b
 `/industries/`**, then P6 `/tools/` and `/tools/seo-audit/`. Also worth

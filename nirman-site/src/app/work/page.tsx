@@ -7,13 +7,13 @@ import { AppCard, SeoCard, SiteCard } from "@/components/work/cards";
 import { site } from "@/content/site";
 import { apps, seoCases, sites, workIntro } from "@/content/work";
 
-// /work/ (PAGE-PLAN section 3; docs/sections/p5-work.md, variant B): ink hero
-// with counts and jump links, then three sections, each with the card that
-// suits it: websites (real screenshots in browser frames), SEO (figures from
-// Google's tools with the client's own chart), apps (their real screens).
+// /work/ (docs/sections/p5-work.md, variant B): ink hero with jump links,
+// then a selection per kind of work, each with the card that suits it and a
+// button to the full list (/work/websites/, /work/seo/, /work/apps/). Every
+// card opens its project page; no links to client sites (user, 2026-11-10).
 
-const title = "Our work: websites, SEO results and apps by Nirman";
-const description = "Real projects by Nirman: seven live websites, SEO figures from Google Analytics and Search Console for five businesses, and three mobile apps you can try.";
+const title = "Our work: selected websites, SEO results and apps by Nirman";
+const description = "Selected work by Nirman, shown as screenshots: websites we designed and built, SEO figures from Google Analytics and Search Console, and mobile apps.";
 
 export const metadata: Metadata = {
   title,
@@ -32,7 +32,7 @@ const jsonLd = {
       about: { "@id": `${site.url}/#organization` },
       mainEntity: {
         "@type": "ItemList",
-        itemListElement: [...sites.map((s) => ({ name: s.name, url: s.url })), ...apps.map((a) => ({ name: a.name, url: a.url }))].map((x, i) => ({ "@type": "ListItem", position: i + 1, name: x.name, url: x.url })),
+        itemListElement: [...sites.map((s) => ({ name: s.name, path: `/work/websites/${s.slug}/` })), ...seoCases.map((c) => ({ name: c.name, path: `/work/seo/${c.slug}/` })), ...apps.map((a) => ({ name: a.name, path: `/work/apps/${a.slug}/` }))].map((x, i) => ({ "@type": "ListItem", position: i + 1, name: x.name, url: `${site.url}${x.path}` })),
       },
     },
     {
@@ -48,9 +48,9 @@ const jsonLd = {
 const h2 = "rv text-[clamp(1.8rem,3.2vw,2.8rem)] leading-[1.12] font-semibold tracking-[-0.03em]";
 const eyebrow = "rv text-[0.78rem] font-semibold tracking-[0.08em] text-brand uppercase";
 const groups = [
-  { id: "websites", n: sites.length, label: "Websites" },
-  { id: "seo", n: seoCases.length, label: "SEO projects" },
-  { id: "apps", n: apps.length, label: "Apps" },
+  { id: "websites", label: "Websites" },
+  { id: "seo", label: "SEO" },
+  { id: "apps", label: "Apps" },
 ];
 
 function Head({ id, kicker, title, line }: { id: string; kicker: string; title: string; line: string }) {
@@ -61,6 +61,17 @@ function Head({ id, kicker, title, line }: { id: string; kicker: string; title: 
         <h2 id={`${id}-title`} className={`${h2} mt-3`}>{title}</h2>
       </div>
       <p className="rv max-w-[26rem] text-[0.95rem] text-muted">{line}</p>
+    </div>
+  );
+}
+
+function More({ href, label }: { href: string; label: string }) {
+  return (
+    <div className="rv mt-10 flex justify-center">
+      <Link href={href} className="group inline-flex h-12 items-center gap-2 rounded-full bg-ink-2 px-7 text-[0.9rem] font-medium text-white transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">
+        {label}
+        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
+      </Link>
     </div>
   );
 }
@@ -78,15 +89,12 @@ export default function WorkPage() {
             <AccentTitle title={workIntro.title} accent={workIntro.accent} />
           </h1>
           <p className="gs-hide mt-6 max-w-[40rem] text-[1.05rem] text-white/75">{workIntro.line}</p>
-          <ul className="gs-hide mt-10 grid w-full max-w-[44rem] grid-cols-3 gap-3">
+          <ul className="gs-hide mt-8 flex flex-wrap justify-center gap-2">
             {groups.map((g) => (
               <li key={g.id}>
-                <a href={`#${g.id}`} className="group block rounded-[1.25rem] bg-white/6 p-4 ring-1 ring-white/12 transition-colors hover:bg-white/12 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:p-5">
-                  <span className="block text-[clamp(2rem,4vw,2.8rem)] leading-none font-light tracking-[-0.03em] text-[#ff9a62]">{g.n}</span>
-                  <span className="mt-2 flex items-center justify-center gap-1.5 text-[0.88rem]">
-                    {g.label}
-                    <ArrowRight className="size-3.5 rotate-90 opacity-60" aria-hidden />
-                  </span>
+                <a href={`#${g.id}`} className="inline-flex h-11 items-center gap-2 rounded-full bg-white/8 px-5 text-[0.88rem] font-medium ring-1 ring-white/12 transition-colors hover:bg-white/14 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                  {g.label}
+                  <ArrowRight className="size-3.5 rotate-90 opacity-60" aria-hidden />
                 </a>
               </li>
             ))}
@@ -96,28 +104,31 @@ export default function WorkPage() {
 
       <section id="websites" aria-labelledby="websites-title" className="scroll-mt-24 py-20 lg:py-28">
         <div className="container-page">
-          <Head id="websites" kicker="Websites" title="Seven sites, live right now" line="Each picture is the real homepage, taken from the live site. Open any of them and look around." />
+          <Head id="websites" kicker="Websites" title="Sites we have designed and built" line="Each picture is the real homepage. Open a project to see more of the site, on desktop and on phones." />
           <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2">
-            {sites.map((s, i) => <SiteCard key={s.key} s={s} big={i === 0} />)}
+            {sites.slice(0, 3).map((s, i) => <SiteCard key={s.key} s={s} big={i === 0} />)}
           </div>
+          <More href="/work/websites/" label="See all websites" />
         </div>
       </section>
 
       <section id="seo" aria-labelledby="seo-title" className="scroll-mt-24 bg-wash py-20 lg:py-28">
         <div className="container-page">
-          <Head id="seo" kicker="SEO" title="Search results, in Google's own numbers" line="Every figure is read from the client's Google Analytics or Search Console, with its period. The charts are screenshots from those accounts." />
+          <Head id="seo" kicker="SEO" title="Search results, in Google's own numbers" line="Every figure is read from the client's Google Analytics or Search Console, with its period. Open a project for the full screenshots." />
           <div className="mt-12 grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {seoCases.map((c, i) => <SeoCard key={c.key} c={c} big={i === 0} />)}
+            {seoCases.slice(0, 3).map((c, i) => <SeoCard key={c.key} c={c} big={i === 0} />)}
           </div>
+          <More href="/work/seo/" label="See all SEO projects" />
         </div>
       </section>
 
       <section id="apps" aria-labelledby="apps-title" className="scroll-mt-24 py-20 lg:py-28">
         <div className="container-page">
-          <Head id="apps" kicker="Apps" title="Three apps you can open and try" line="Built once for Android, iPhone and the web. The screens below are the apps themselves, running with demo data." />
+          <Head id="apps" kicker="Apps" title="Apps for Android, iPhone and the web" line="The screens below are the apps themselves, running with demo data. Open a project to see every screen." />
           <div className="mt-12 flex flex-col gap-5">
-            {apps.map((a) => <AppCard key={a.key} a={a} />)}
+            {apps.slice(0, 2).map((a) => <AppCard key={a.key} a={a} />)}
           </div>
+          <More href="/work/apps/" label="See all apps" />
         </div>
       </section>
 

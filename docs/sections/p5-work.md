@@ -1,5 +1,75 @@
 # P5 Our work
 
+## Round 2, 2026-11-10 (user): screenshots only, more pages, room to grow
+Status: built and verified. This section is the truth; below it is the
+first version's record (its figures table and sources are still right).
+
+User on seeing the first version: (1) show the work **as screenshots, with
+no links** to the client sites or apps; (2) this is **selected** work and
+much more will be added, so the section must be built for that; (3) it
+needs **more pages**.
+
+### Structure (19 pages)
+- `/work/`: selected work. Three websites, three SEO projects, two apps,
+  each section with a "See all" button.
+- `/work/websites/`, `/work/seo/`, `/work/apps/`: every project of a kind,
+  with tabs to switch kind.
+- `/work/<kind>/<project>/`: one page per project (7 + 5 + 3).
+No links to client sites or apps anywhere; the browser frame shows the
+business name instead of an address. Cards say "View project".
+
+### Project page: variants (built on `/lab/proj/` with AshVille Homes; deleted)
+Sheets: `shots/p5-project-1440.jpg`, `p5-project-375.jpg` (A, B, C).
+
+| Variant | Idea | Score /70 |
+|---|---|---|
+| **A** | ink hero, centred, the main picture hanging over the band; facts in a row; then every screenshot | **61** |
+| B | pale page; facts fixed on the left while the screenshots scroll on the right | 59 |
+| C | ink split hero with a phone; the rest as a sideways strip | 52 |
+**A chosen:** strongest first screen and the same hero language as the
+rest of the site; B's large pictures were kept by letting A's gallery use
+the full page width. C hides most screenshots off-screen.
+
+### What each project page shows
+- **Website:** homepage in a browser frame, up to four more sections of the
+  site, three phone views. Facts: client, business, where, what we did.
+- **SEO:** four headline figures on a card, then each Google screenshot in
+  full (Analytics, Search Console, AI answers) with its period and the
+  figures typed out above it.
+- **App:** the app's collage, every screen in order in phone frames with a
+  label, the second collage. Facts: kind, built with, what we did.
+- Then "All <kind>" and "Next: <project>", and Get a quote.
+JSON-LD: CreativeWork + BreadcrumbList (project), CollectionPage + ItemList
+(lists).
+
+### Adding a project (this is how the section grows)
+1. Add it to `src/content/work.ts` (`sites`, `seoCases` or `apps`; the
+   first three, three and two of each list are the "selected" ones on
+   `/work/`).
+2. Put its images in `public/images/work/` using the same file names as the
+   others (`site-<key>.webp`, `site-<key>-<n>.webp`, `site-<key>-m<n>.webp`;
+   `seo-<key>.webp` and `seo-<key>-{ga,gsc,ai}.webp`; `app-<key>.webp`,
+   `app-<key>-2.webp`, `app-<key>/<screen>.webp`). Tools: `tools/work/`.
+3. Add a folder `src/app/work/<kind>/<slug>/page.tsx` copied from a
+   neighbour (two lines differ). Fixed folders are deliberate: unknown
+   addresses give a real 404 (ARCHITECTURE: a `[slug]` route answers 200).
+When a list passes about twelve projects, add paging or filters to the
+category page.
+
+### Screenshots left out on purpose
+Extra shots that show a client's own prices or services we do not offer
+(Blue Orbit Digi's pricing and its social media and ads list;
+EasyWebSolns' care-plan prices) and one blurred transition frame (Vana).
+`more` in `content/work.ts` lists what is used.
+
+### Verified
+Production build: 19 pages at 375, 1024 and 1440: no horizontal scroll, one
+h1, all reveals end visible, JSON-LD present; reduced motion shows
+everything; `/work/websites/nope/` is 404; no outside links in the HTML.
+`tsc`, `lint`, `build` pass. Sheet: `shots/p5-projects-1440.jpg`.
+
+---
+
 Status: built and verified (2026-11-10)
 Route: `/work/` (`src/app/work/page.tsx`). Data: `src/content/work.ts`.
 Cards: `src/components/work/cards.tsx`. Images: `public/images/work/`.

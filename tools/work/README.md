@@ -10,3 +10,10 @@ the environment's allowed hosts.
 
 After replacing an image under the same name, delete
 `nirman-site/.next/cache/images` (the dev server keeps serving the old one).
+
+`capture-sections.cjs <outDir>`: scrolls each site slowly so scroll-in
+content appears, then saves four desktop and two phone screenshots at set
+depths (`<key>-d2..d5.png`, `<key>-m2..m3.png`). Look at each before using
+it: leave out shots that show a client's prices or services we do not
+offer. It takes about twelve minutes for seven sites; run it in the
+background.
