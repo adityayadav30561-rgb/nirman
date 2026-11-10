@@ -9,5 +9,7 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.example.com", // placeholder until the domain is shared
   email: "hello@example.com", // placeholder
   phone: "+91 00000 00000", // placeholder
+  whatsapp: "910000000000", // placeholder: digits only, for wa.me links
+  address: "India", // placeholder: the full office address comes from the client
   copyrightYear: 2026,
 } as const;

@@ -5,6 +5,7 @@ from the client are in `docs/handoff.md` §1 and are not repeated here.
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-11-10 | Contact: variant B (ink stage, channels left, form right; 62/70). About: hero A (centred, the four kinds of work as pictures; 60/70). No team, address, office hours or booking embed until the client sends them | Chosen by Claude per protocol; nothing invented |
 | 2026-11-09 | Free-licence photos (Unsplash or Pexels, credited) may be downloaded for the website mockups on the services pages | User: "yes, download the photos and use them" |
 | 2026-11-09 | Service-page pictures must be **realistic product mockups in their real colours**, not orange-and-black drawings: a green WhatsApp-style chat on a phone (no logo), the real Nirman CRM screens, a website that looks like a real site screenshot, search results that look like a search page, and so on, on every services page. Orange and ink stay for the site around the pictures. This allows blue and other colours inside mockups (narrows "no blue anywhere" to the site itself) | User, on seeing the 2026-11-09 redesign |
 | 2026-11-09 | Services hub and the four service pages redesigned top to bottom: pictures are large readable UI pieces (drawing kit), hero variant C, bento for "What is included", new steps, deliverables, quote and cross-link sections (`docs/sections/p1-services.md`) | User: the pages "do not look even a little good"; chosen by Claude per protocol (hero C 63/70, bento A 62/70) |

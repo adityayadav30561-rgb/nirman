@@ -49,16 +49,13 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
-**P1 services redesigned (2026-11-09)** after the user rejected the look:
-hub and four service pages rebuilt top to bottom with large readable
-pictures (drawing kit), new hero, bento, steps, deliverables, quote and
-cross links; then, at the user's request, every picture redrawn as a
-realistic mockup in its real colours (WhatsApp-look chat, real Nirman CRM
-screens, real-looking site, search page). Record: top of
-`docs/sections/p1-services.md`. Waiting for the user's verdict. Next: **P4 `/contact/` and `/about/`**
-(PAGE-PLAN section 3). Contact needs the real phone, email, address and
-WhatsApp number (placeholders until the user sends them); About needs the
-team (names and photos from the client) or leaves that block out.
+**P4 done (2026-11-10):** `/contact/` and `/about/`
+(`docs/sections/p4-contact-about.md`). Before it, the services hub and four
+service pages were redesigned and every picture redrawn as a realistic
+mockup (top of `docs/sections/p1-services.md`); the user has not yet given
+a verdict on those. Next: **P5 `/work/` and `/industries/`** (PAGE-PLAN
+section 3). `/work/` has no real case studies and "SAMPLE" labels are not
+allowed, so ask the user how to fill it before building.
 
 ## Open questions for the user
 
@@ -73,6 +70,10 @@ team (names and photos from the client) or leaves that block out.
 - **Photo credits:** the two photos in the services mockups (clinic,
   coffee) came from the user without page links; add the Unsplash links and
   authors to `src/content/image-credits.ts` (launch check).
+
+- **For Contact and About from the client:** phone, WhatsApp number,
+  email, office address, team (names, roles, photos), booking link, and a
+  check of the About story (`src/content/pages.ts`).
 
 ## Half-finished work
 
