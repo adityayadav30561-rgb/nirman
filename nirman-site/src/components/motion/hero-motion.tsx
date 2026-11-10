@@ -37,6 +37,7 @@ export function HeroMotion(props: ComponentPropsWithoutRef<"section">) {
         tl.fromTo(q(".h-screen"), { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.35);
         tl.fromTo(q(".h-btn"), { autoAlpha: 0, backgroundColor: "#c9ced6" }, { autoAlpha: 1, duration: 0.15 }, 0.2);
         tl.to(q(".h-btn"), { backgroundColor: "#1b1f27", duration: 0.5, clearProps: "backgroundColor" }, 0.25);
+        tl.fromTo(q(".h-btn2"), { autoAlpha: 0, x: -10 }, { autoAlpha: 1, x: 0, duration: 0.5, ease: "power2.out" }, 0.45);
         tl.fromTo(q(".h-sub"), { autoAlpha: 0, y: 6 }, { autoAlpha: 1, y: 0, duration: 0.5 }, 0.3);
         tl.fromTo(q(".h-clouds-back, .h-clouds-front"), { autoAlpha: 0, x: -14 }, { autoAlpha: 1, x: 0, duration: 0.8, stagger: 0.1 }, 0.5);
         // sparks: three strokes 0.1 s apart, then the curl; underline; loop by the phone

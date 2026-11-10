@@ -1,4 +1,44 @@
-# 06 Results (sample testimonials)
+# 06 Results
+
+## Round 2, 2026-11-10 (user): real figures instead of placeholder quotes
+Status: built and verified. This section is the truth; the testimonial
+version below is history (its code and `content/results.ts` are deleted).
+
+The user approved naming the SEO clients on the homepage. Data: `seoCases`
+in `src/content/work.ts` (figures table in `p5-work.md`); texts in
+`src/content/home-proof.ts`. Never round, rename or add a figure.
+
+### Variants (built on `/lab/home2/`; deleted)
+Sheets: `shots/06-results-r2-1440.jpg`, `06-results-r2-375.jpg` (A, B, C).
+
+| Variant | Idea | Score /70 |
+|---|---|---|
+| A | client names as tabs, one client's figure and chart in the panel (the old spotlight) | 54 |
+| **B** | one client leads (figure, three more, real Search Console chart), the other four beside it with figure, source and period | **63** |
+| C | ink band with five big figures in a row | 52 |
+**B chosen:** every client is visible at once (the user has rejected hidden
+tab content before), the lead card carries real evidence (the chart), and
+each figure keeps its source. A hides four of five; C has no evidence and
+would be a third ink band on the page.
+
+### Built
+`src/components/home/results.tsx` on the warm `bg-wash` band. Lead card:
+Badowl (first in `seoCases`). Rows: the other four, each a link to its
+project page. Buttons: "All SEO projects" (outline, in the heading),
+"See the project", and "Get a quote" (the section's main action) beside
+the source note. Motion (`components/motion/proof-motion.tsx`): heading
+lines rise, cards fade up, every figure counts up once from zero keeping
+its sign, commas and unit, the chart wipes in. Reduced motion: final state.
+
+### Verified
+Production build at 375, 768, 1024x700, 1440, 1920, with and without
+reduced motion: no horizontal scroll, one h1, all figures end on their
+exact text, nothing left hidden. `tsc`, `lint`, `build` pass. Final shot:
+`shots/09-work-06-results-final-1440.jpg`.
+
+---
+
+# (history) 06 Results (sample testimonials)
 
 Status: built and verified (2026-11-06), variant B
 Page: / (homepage), under Nirman CRM

@@ -85,9 +85,9 @@ DESIGN-PROTOCOL section 5; code in `nirman-site/src/components/motion/`.
 - Every Nirman CRM call to action is **"Book a demo"** (no signup, no trial).
 - Do not invent clients, results or stats. **No "SAMPLE" labels on the site**
   (user, 2026-11-06): the Nirman CRM screens are the real CRM design (the
-  CRM will be updated to match), with demo data; the homepage testimonials
-  are unlabelled placeholders the user replaces with real reviews when the
-  site is complete (launch blocker, BUILD-PLAN S4).
+  CRM will be updated to match), with demo data. The homepage has no
+  testimonials since 2026-11-10: Results and Selected work show real
+  projects and figures from `nirman-site/src/content/work.ts` only.
 - URLs: lowercase, hyphens, trailing slash.
 - Assets: build in code first; ask before downloading images and credit
   them in `nirman-site/src/content/image-credits.ts`; anything you cannot

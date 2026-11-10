@@ -44,10 +44,19 @@ the end of every session. Keep it under about 60 lines. Older history:
   code is the truth.
 
 - **No "SAMPLE" labels (user, 2026-11-06).** CRM screens = the real CRM
-  design. Testimonials are unlabelled placeholders: replace before launch
-  (S4 blocker).
+  design. The placeholder testimonials were removed on 2026-11-10 (Results
+  now shows real SEO figures).
 
 ## Next task
+
+**Homepage proof (2026-11-10):** hero has a second button ("See our work");
+new **Selected work** section after What we do (a row of six real projects
+that moves sideways on scroll, `docs/sections/09-work.md`); **Results**
+now shows real SEO figures for five named clients instead of placeholder
+quotes (`docs/sections/06-results.md` round 2). Homepage order: hero,
+facts, services, work, map, CRM, results, questions. Other homepage ideas
+offered and not yet picked: pictures in the services list, a larger map,
+a "How we work" strip.
 
 **Hero phone screen redone (2026-11-10):** a real-looking Nirman CRM app
 screen instead of the orange one (`docs/sections/01-hero.md`, end). The

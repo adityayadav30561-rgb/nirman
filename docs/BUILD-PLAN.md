@@ -24,6 +24,7 @@ best). Tick a task only when it is built, verified, recorded and pushed.
       variant B, scroll-played conversation)
 - [x] H5b Nirman CRM redo (user: "no screens"): blue product band with real
       product screens in code, tabs + phone (`05-crm.md` round 2, variant C)
+- [x] H6b Results redone with real SEO figures, and H9 Selected work added (2026-11-10; `06-results.md` round 2, `09-work.md`)
 - [x] H6 Results: SAMPLE testimonials (`06-results.md`, variant B,
       spotlight with business-type tabs)
 - [x] H7 Questions: email + Submit, FAQ rows with FAQ markup
@@ -52,6 +53,5 @@ best). Tick a task only when it is built, verified, recorded and pushed.
       sitemap, llms.txt, JSON-LD (see `docs/REDESIGN.md` sections 8 and 12)
 - [ ] S3 Accessibility and performance pass (Lighthouse at least 95)
 - [ ] S4 Launch checklist (domain, analytics, real contact details).
-      **Blocker:** replace the placeholder testimonials in
-      `nirman-site/src/content/results.ts` with the user's real reviews
-      (they are unlabelled since 2026-11-06); never launch with them
+      (The placeholder testimonials are gone since 2026-11-10: Results now
+      shows real SEO figures. Still to confirm: each named client agrees.)

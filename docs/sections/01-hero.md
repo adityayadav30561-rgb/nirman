@@ -71,3 +71,8 @@ a list of seven leads with status pills, and a tab bar. Demo data. One
 design, no variants (a direct instruction on one element). The front cloud
 `f2` moved right so it no longer covers the screen. Shot:
 `shots/01-hero-phone-screen.jpg` (1440 and 375).
+
+## Second button (2026-11-10, user request)
+"See our work" (outline, arrow) beside "Get a quote", to `/work/`. It
+fades in from the left just after the main button (`.h-btn2` in
+`hero-motion.tsx`). The buttons sit above the clouds (`z-10`).

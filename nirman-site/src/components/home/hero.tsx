@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { PhoneScreen } from "@/components/home/phone-screen";
 import { Cloud } from "@/components/home/cloud";
@@ -187,9 +188,15 @@ export function Hero() {
             Nirman is a digital agency in India. We build websites, run SEO, develop custom software and automate
             follow-ups with Nirman CRM, for businesses in India and abroad.
           </p>
-          <ButtonLink href="/get-a-quote/" className="h-btn gs-hide mt-8 md:mt-10">
-            Get a quote
-          </ButtonLink>
+          <div className="relative z-10 mt-8 flex flex-wrap items-center gap-3 md:mt-10">
+            <ButtonLink href="/get-a-quote/" className="h-btn gs-hide">
+              Get a quote
+            </ButtonLink>
+            <ButtonLink href="/work/" variant="outline" className="h-btn2 gs-hide group">
+              See our work
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
+            </ButtonLink>
+          </div>
         </div>
 
         <PhoneStage />
