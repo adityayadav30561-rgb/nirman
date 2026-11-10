@@ -49,13 +49,13 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
-**P4 done (2026-11-10):** `/contact/` and `/about/`
-(`docs/sections/p4-contact-about.md`). Before it, the services hub and four
-service pages were redesigned and every picture redrawn as a realistic
-mockup (top of `docs/sections/p1-services.md`); the user has not yet given
-a verdict on those. Next: **P5 `/work/` and `/industries/`** (PAGE-PLAN
-section 3). `/work/` has no real case studies and "SAMPLE" labels are not
-allowed, so ask the user how to fill it before building.
+**P5a done (2026-11-10):** `/work/` with the user's real websites, SEO
+figures and apps (`docs/sections/p5-work.md`). P4 (`/contact/`, `/about/`)
+and the realistic-mockup redesign of the services pages were done just
+before; the user has not yet given a verdict on those. Next: **P5b
+`/industries/`**, then P6 `/tools/` and `/tools/seo-audit/`. Also worth
+doing now that real work exists: replace the homepage "Results"
+placeholders with figures from `content/work.ts` (ask the user first).
 
 ## Open questions for the user
 
@@ -74,6 +74,10 @@ allowed, so ask the user how to fill it before building.
 - **For Contact and About from the client:** phone, WhatsApp number,
   email, office address, team (names, roles, photos), booking link, and a
   check of the About story (`src/content/pages.ts`).
+
+- **Work page:** confirm each client may be named with its figures; real
+  domains for the two `vercel.app` sites; see the list at the end of
+  `docs/sections/p5-work.md`.
 
 ## Half-finished work
 

@@ -213,3 +213,6 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
     in a real browser); only `images.unsplash.com` answers. To add a photo
     from a cloud session the user must give the file or the direct image
     address. The cloud environment "nirman" allows both hosts.
+46. **Replaced image, old picture still shows:** the image optimiser caches
+    by file name. After overwriting a file in `public/images/`, delete
+    `nirman-site/.next/cache/images` and restart.
