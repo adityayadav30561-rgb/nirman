@@ -49,6 +49,13 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
+**Blog built on Sanity (2026-11-10), not yet connected.** `/blog/`,
+category and article pages, the editor at `/studio/` and the publish hook
+are built and tested with sample articles. **Waiting for the user:** create
+a Sanity project and send the project ID; then follow "To connect it" in
+`docs/sections/p7-blog.md` (env values, allowed hosts, CORS, webhook).
+After that: add "Blog" to the header menu.
+
 **Homepage proof (2026-11-10):** hero has a second button ("See our work");
 new **Selected work** section after What we do (a row of six real projects
 that moves sideways on scroll, `docs/sections/09-work.md`); **Results**

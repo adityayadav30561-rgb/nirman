@@ -44,7 +44,8 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 - [x] P5a `/work/` with real work from the user: selected work, three list pages, fifteen project pages, redone as case studies in round 3 (`docs/sections/p5-work.md`)
 - [ ] P5b `/industries/`
 - [ ] P6 `/tools/`, `/tools/seo-audit/`
-- [ ] P7 `/blog/`, `/privacy-policy/`, `/terms/`
+- [x] P7a `/blog/` on Sanity: list, category and article pages, the editor at `/studio/`, publish hook (`docs/sections/p7-blog.md`). **Waits for the user's Sanity project ID to go live.**
+- [ ] P7b `/privacy-policy/`, `/terms/`
 
 ## S: Systems and launch
 

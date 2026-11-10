@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { ButtonLink } from "@/components/ui/button";
@@ -78,8 +78,25 @@ function ServicesMenu({ active }: { active: boolean }) {
   );
 }
 
+/*
+ * usePathname cannot be resolved while Next prerenders the shell of a page
+ * whose address is not known at build time (a blog article published after
+ * the build; ARCHITECTURE gotcha 47), so it must sit inside Suspense. The
+ * fallback is the same header with no menu item marked.
+ */
 export function SiteHeader() {
-  const pathname = usePathname();
+  return (
+    <Suspense fallback={<Header pathname="" />}>
+      <HeaderAtPath />
+    </Suspense>
+  );
+}
+
+function HeaderAtPath() {
+  return <Header pathname={usePathname()} />;
+}
+
+function Header({ pathname }: { pathname: string }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 

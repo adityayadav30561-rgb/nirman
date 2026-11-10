@@ -5,6 +5,7 @@ from the client are in `docs/handoff.md` §1 and are not repeated here.
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-11-10 | Blog publishing on **Sanity** (hosted editor inside the site at `/studio/`), not Markdown files in the repo. List layout A (62/70), article layout B (63/70) | User chose Sanity when offered both; layouts chosen by Claude per protocol |
 | 2026-11-10 | Homepage: a second hero button "See our work"; a **Selected work** section (variant B, sideways row pinned on scroll, 62/70); **Results** shows real SEO figures of five named clients instead of placeholder testimonials (variant B, lead client plus four, 63/70). Clients may be named on the homepage | User asked for all three and gave the go-ahead on naming clients; layouts chosen by Claude per protocol |
 | 2026-11-10 | Hero phone shows a real-looking Nirman CRM app screen (neutral, list of leads), not the orange one | User request |
 | 2026-11-10 | Project pages under `/work/` are **case studies, not galleries**: overview, a numbered walk through every screenshot with a note on what it shows, a dark band, more projects. Layout A (62/70). All text describes the screenshots or restates supplied figures; nothing invented | User: the pages "only contain screens"; layout chosen by Claude per protocol |

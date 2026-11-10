@@ -216,3 +216,21 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
 46. **Replaced image, old picture still shows:** the image optimiser caches
     by file name. After overwriting a file in `public/images/`, delete
     `nirman-site/.next/cache/images` and restart.
+47. **`usePathname` needs Suspense on pages whose address is not known at
+    build time** (blog articles, the editor). Without it the build fails
+    with "client rendering was requested outside a Suspense boundary"
+    (reason "Render in Browser"). The header reads the path inside
+    Suspense for this reason (`site-header.tsx`).
+48. **Real 404s for dynamic addresses come from `src/proxy.ts`**, not from
+    `notFound()` (gotcha 44). The proxy checks the address and, if it does
+    not exist, rewrites to a placeholder address that was built as a 404
+    page (`/blog/none-yet/`). `generateStaticParams` must return at least
+    one address, so that placeholder is also what it returns when there
+    are no articles.
+49. **An error thrown inside a `"use cache"` function fails the page and
+    the build**, even if the caller catches it. Catch inside, return
+    `{ ok: false }`, and give the failure a short `cacheLife("minutes")`
+    ("seconds" is too short to prerender and also fails the build). See
+    `src/sanity/blog.ts`.
+50. **Function props to `next/image` (a `loader`) need a client component**
+    (`components/blog/picture.tsx`).
