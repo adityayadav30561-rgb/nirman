@@ -6,15 +6,19 @@ import type { BlogCategory, Post, PostCard } from "@/sanity/types";
 /*
  * Reading the blog from Sanity (docs/sections/p7-blog.md).
  * - Plain HTTPS requests to Sanity's query API (GROQ); no client library.
- * - Results are cached with the tag "blog" for a day. Publishing in the
- *   editor calls /api/revalidate/ (a Sanity webhook), which clears the tag,
- *   so a new article shows within about a minute. Without the webhook it
- *   shows within a day.
+ * - Results are cached with the tag "blog" and refreshed every 10 minutes.
+ *   Publishing in the editor can also call /api/revalidate/ (a Sanity
+ *   webhook), which clears the tag at once. Without the webhook a new
+ *   article shows within about 10 minutes (a day was too long: the first
+ *   article stayed hidden, 2026-11-11).
  * - If Sanity cannot be reached the blog shows as empty for about a minute
  *   and tries again; the site and its build never fail because of it.
  * - BLOG_FIXTURE=1 returns the sample articles (design work and checks).
  */
 export const BLOG_TAG = "blog";
+// How long a good answer from Sanity is kept: refreshed in the background
+// after 10 minutes, dropped after a day.
+const fresh = { stale: 300, revalidate: 600, expire: 86400 };
 const useFixture = process.env.BLOG_FIXTURE === "1";
 
 async function groq<T>(query: string, params: Record<string, string> = {}): Promise<T> {
@@ -57,7 +61,7 @@ async function cachedPosts(): Promise<Read<PostCard[]>> {
   "use cache";
   cacheTag(BLOG_TAG);
   const result = await read<PostCard[]>(`*[${live}] | order(publishedAt desc) { ${card} }`);
-  if (result.ok) cacheLife("days");
+  if (result.ok) cacheLife(fresh);
   else cacheLife("minutes");
   return result;
 }
@@ -65,7 +69,7 @@ async function cachedCategories(): Promise<Read<BlogCategory[]>> {
   "use cache";
   cacheTag(BLOG_TAG);
   const result = await read<BlogCategory[]>(`*[_type == "category" && defined(slug.current)] | order(order asc, title asc) { title, "slug": slug.current, description }`);
-  if (result.ok) cacheLife("days");
+  if (result.ok) cacheLife(fresh);
   else cacheLife("minutes");
   return result;
 }
@@ -77,7 +81,7 @@ async function cachedPost(slug: string): Promise<Read<Post | null>> {
       body[]{ ..., _type == "figure" => { ..., "url": asset->url, "w": asset->metadata.dimensions.width, "h": asset->metadata.dimensions.height, "lqip": asset->metadata.lqip } } }`,
     { slug },
   );
-  if (result.ok) cacheLife("days");
+  if (result.ok) cacheLife(fresh);
   else cacheLife("minutes");
   return result;
 }
