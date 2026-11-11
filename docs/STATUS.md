@@ -49,6 +49,17 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
+**Live (2026-11-11):** the site is on Vercel (project `nirman-site`, Hobby
+plan, deploys from `main`) at **https://www.nirmandigital.com** (apex
+redirects to www; DNS at GoDaddy). `NEXT_PUBLIC_SITE_URL` is set there.
+Sanity CORS allows the domain, so `/studio/` can log in. Checked live: main
+pages 200 with the right canonical, blog empty state, unknown blog address
+404, `/studio/` shows Sanity's login. **Still broken for visitors:** forms
+only open the email app (S1); `/industries/`, `/tools/`,
+`/tools/seo-audit/` (header button), `/privacy-policy/`, `/terms/` are 404;
+no `robots.txt` or sitemap (S2); contact details are placeholders. Not set
+yet on Vercel: `SANITY_REVALIDATE_SECRET` and the Sanity webhook.
+
 **Blog on Sanity, connected (2026-11-11)** to the user's project
 `iymga1c7`; no articles yet, so `/blog/` shows its empty state.
 **Waiting for the user** (steps 3 to 6 in `docs/sections/p7-blog.md`): add
