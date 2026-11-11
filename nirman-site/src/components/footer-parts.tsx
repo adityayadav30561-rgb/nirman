@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/content/site";
+import { CookieSettingsButton } from "@/components/cookie-consent";
 import { contactNote, footerColumns, legalLinks, servedNote, socialLinks, type SocialIcon } from "@/content/footer";
 
 /* Footer pieces (docs/sections/08-footer.md, variant A). Links are quiet pill buttons (DESIGN-PROTOCOL principle 9). */
@@ -108,7 +109,7 @@ export function BottomBar() {
       <p>
         © {site.copyrightYear} {site.name}. All rights reserved.
       </p>
-      <ul className="-ml-3 flex gap-2 sm:ml-0 sm:-mr-3">
+      <ul className="-ml-3 flex flex-wrap gap-x-2 sm:ml-0 sm:-mr-3">
         {legalLinks.map((l) => (
           <li key={l.href}>
             <Link href={l.href} className={quiet.replace("-ml-3 ", "").replace("text-[0.9rem]", "text-[0.85rem]")}>
@@ -116,6 +117,11 @@ export function BottomBar() {
             </Link>
           </li>
         ))}
+        {site.gtmId && (
+          <li>
+            <CookieSettingsButton className={`${quiet.replace("-ml-3 ", "").replace("text-[0.9rem]", "text-[0.85rem]")} cursor-pointer`} />
+          </li>
+        )}
       </ul>
     </div>
   );

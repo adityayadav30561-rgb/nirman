@@ -58,8 +58,9 @@ live audit returned speed scores and the screenshot.
 
 **Tracking (2026-11-11):** Google Tag Manager `GTM-5H9HWP85` and the Search
 Console verification tag are in the root layout (ids in `content/site.ts`;
-from the user's SEO person). The privacy policy says so. There is no cookie
-consent banner yet (matters for EU and UK visitors).
+from the user's SEO person). The privacy policy says so. A cookie consent banner
+(Consent Mode v2) holds measurement cookies until the visitor agrees
+(`docs/sections/s5-consent.md`).
 
 **Live (2026-11-11):** the site is on Vercel (project `nirman-site`, Hobby
 plan, deploys from `main`) at **https://www.nirmandigital.com** (apex

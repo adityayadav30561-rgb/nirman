@@ -53,6 +53,7 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 - [x] S2a sitemap, robots, llms.txt, 404 page (2026-11-11; `docs/sections/p7b-legal.md`)
 - [ ] S2 SEO infrastructure (rest): page registry, metadata, OG image, robots,
       sitemap, llms.txt, JSON-LD (see `docs/REDESIGN.md` sections 8 and 12)
+- [x] S5 Cookie consent banner with Google Consent Mode v2 (`docs/sections/s5-consent.md`)
 - [ ] S3 Accessibility and performance pass (Lighthouse at least 95)
 - [ ] S4 Launch checklist (domain, analytics, real contact details).
       (The placeholder testimonials are gone since 2026-11-10: Results now

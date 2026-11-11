@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import Script from "next/script";
+import { Suspense } from "react";
 import { site } from "@/content/site";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { CookieConsent } from "@/components/cookie-consent";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -34,13 +36,17 @@ export const metadata: Metadata = {
 };
 
 /*
- * Google Tag Manager, Google's standard install for the container in
- * content/site.ts: the data layer with its start event (the event that
- * "All Pages" tags in the container wait for), then gtm.js. `gtag` is
- * defined too, as in the snippet the SEO person sent. Loaded after the page
- * is interactive so it does not slow the first paint.
+ * Google Tag Manager with Consent Mode v2 (docs/sections/s5-consent.md).
+ * Order matters and everything is in one script so it cannot be reordered:
+ * 1. the data layer and gtag;
+ * 2. the consent default: measurement and advertising are "denied" unless
+ *    this browser has a saved choice (components/cookie-consent.tsx), so no
+ *    such cookie is set before the visitor agrees;
+ * 3. Google's standard container start (the gtm.js event that "All Pages"
+ *    tags wait for) and the container itself.
+ * Loaded after the page is interactive so it does not slow the first paint.
  */
-const gtm = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=${site.gtmId}';document.head.appendChild(s);`;
+const gtm = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}var c=null;try{c=JSON.parse(localStorage.getItem('nirman-consent'));if(!c||Date.now()-c.t>15552000000)c=null}catch(e){}var g=function(v){return v?'granted':'denied'};gtag('consent','default',{analytics_storage:g(c&&c.analytics),ad_storage:g(c&&c.ads),ad_user_data:g(c&&c.ads),ad_personalization:g(c&&c.ads),functionality_storage:'granted',security_storage:'granted',wait_for_update:c?0:500});gtag('js',new Date());dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=${site.gtmId}';document.head.appendChild(s);`;
 
 export const viewport: Viewport = {
   themeColor: "#f5f7f9",
@@ -74,6 +80,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
+        {/* usePathname inside: Suspense for pages whose address is not known at build time (ARCHITECTURE gotcha 47) */}
+        {site.gtmId && (
+          <Suspense fallback={null}>
+            <CookieConsent />
+          </Suspense>
+        )}
       </body>
     </html>
   );
