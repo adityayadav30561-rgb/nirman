@@ -177,7 +177,7 @@ export function ServiceDeliverables({ s }: { s: ServicePage }) {
   );
 }
 
-export function ServiceQuestions({ faqs, title }: { faqs: { q: string; a: string }[]; title: string }) {
+export function ServiceQuestions({ faqs, title, tool }: { faqs: { q: string; a: string }[]; title: string; tool?: { label: string; href: string } }) {
   return (
     <section aria-labelledby="svc-faq" className="py-20 lg:py-28">
       <div className="container-page grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
@@ -185,6 +185,12 @@ export function ServiceQuestions({ faqs, title }: { faqs: { q: string; a: string
           <p className={`${eyebrow} text-brand`}>Questions</p>
           <h2 id="svc-faq" className={`${h2} mt-3`}>{title}</h2>
           <p className="rv mt-4 max-w-[24rem] text-[0.95rem] text-muted">Short, straight answers. Anything else, ask us in the form below.</p>
+          {tool && (
+            <Link href={tool.href} className="rv group mt-6 inline-flex h-12 items-center gap-2 rounded-full border border-ink-2/80 bg-white/70 px-6 text-[0.9rem] font-medium transition-colors hover:border-brand hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">
+              {tool.label}
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
+            </Link>
+          )}
         </div>
         <div className="rv">
           <QuestionList faqs={faqs} />

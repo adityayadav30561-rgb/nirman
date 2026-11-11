@@ -11,6 +11,13 @@ export type CatScore = { key: CatKey; label: string; score: number | null; pass:
 /** Facts about the page that the scanning animation and the report cover use. */
 export type PageFacts = { host: string; finalUrl: string; title: string; description: string; h1: string; favicon: string; ogImage: string; themeColor: string };
 
+/**
+ * A raw observation shown while the audit runs (scanning animation): what was
+ * read, never a verdict or a fix; those stay in the report. `zone` says which
+ * part of the page sketch it belongs to.
+ */
+export type Signal = { id: string; cat: CatKey; label: string; value: string; zone?: "bar" | "picture" | "heading" | "text" | "button" | "lines" | "tiles" | "page" };
+
 export type SpeedData = {
   /** false when Google's PageSpeed service could not be used; the report says so */
   available: boolean;

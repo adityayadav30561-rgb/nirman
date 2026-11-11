@@ -49,6 +49,13 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
+**SEO audit round 2 (2026-11-11):** a much richer scanning stage (site in
+a tilting phone inside a radar, a frame and tag over what is being read, a
+live log, six area rings; all from real observations) and the page
+rewritten for "free SEO audit tool, no signup, no login"
+(`docs/sections/p6-seo-audit.md` round 2). Ranking for that phrase needs
+links and time, not only the page.
+
 **Free SEO audit built (2026-11-11):** `/tools/seo-audit/` audits any
 address (about 40 checks, six areas), shows the visitor's site being
 scanned, then the score, and gives the PDF report in exchange for email

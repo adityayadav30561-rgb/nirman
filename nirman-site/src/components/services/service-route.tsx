@@ -56,7 +56,7 @@ export function ServiceRoute({ slug }: { slug: ServiceSlug }) {
         <ServiceAudiences s={s} />
         <ServiceSteps steps={s.steps} title="Five clear steps, and something in your hands after each" line="No surprises: you know what happens next and what you receive at every step." />
         <ServiceDeliverables s={s} />
-        <ServiceQuestions faqs={s.faqs} title={`Questions about ${s.name === "SEO" ? "SEO" : s.name.toLowerCase()}`} />
+        <ServiceQuestions faqs={s.faqs} title={`Questions about ${s.name === "SEO" ? "SEO" : s.name.toLowerCase()}`} tool={s.slug === "seo" ? { label: "Try the free SEO audit tool", href: "/tools/seo-audit/" } : undefined} />
         <ServiceQuote s={s} />
         <ServiceOthers s={s} />
       </ServiceMotion>

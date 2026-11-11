@@ -1,5 +1,5 @@
 import type { Crawl } from "@/lib/audit/crawl";
-import { CATS, type CatKey, type CatScore, type Check, type PageFacts, type Report, type SpeedData, type Status, type Summary } from "@/lib/audit/types";
+import { CATS, type CatKey, type CatScore, type Check, type PageFacts, type Report, type Signal, type SpeedData, type Status, type Summary } from "@/lib/audit/types";
 
 /*
  * Judging what the crawl found (docs/sections/p6-seo-audit.md). Every check
@@ -152,6 +152,36 @@ export function scoreCats(checks: Check[], speedMeasured = true): { cats: CatSco
 
 export function factsOf(c: Crawl): PageFacts {
   return { host: c.host, finalUrl: c.finalUrl, title: c.page.title, description: c.page.description, h1: c.page.h1[0] || "", favicon: c.page.favicon, ogImage: c.page.og.image, themeColor: /^#[0-9a-f]{3,8}$/i.test(c.page.themeColor) ? c.page.themeColor : "" };
+}
+
+/** Raw observations for the scanning animation, in the order the areas are checked. No verdicts. */
+export function signalsOf(c: Crawl): Signal[] {
+  const p = c.page;
+  const short = (t: string, n = 44) => (t.length > n ? `${t.slice(0, n)}…` : t);
+  const out: Signal[] = [
+    { id: "status", cat: "index", label: "Server", value: `${c.status} in ${s(c.ms)}`, zone: "bar" },
+    { id: "https", cat: "index", label: "Connection", value: c.finalUrl.startsWith("https://") ? "HTTPS, secure" : "HTTP, not secure", zone: "bar" },
+    { id: "redirects", cat: "index", label: "Redirects", value: c.chain.length ? `${c.chain.length} before the page` : "none", zone: "bar" },
+    { id: "robots", cat: "index", label: "robots.txt", value: c.robots.exists ? "found" : "not found" },
+    { id: "sitemap", cat: "index", label: "Sitemap", value: c.sitemap.exists && c.sitemap.valid ? (c.sitemap.isIndex ? "index of sitemaps" : `${c.sitemap.urls} addresses`) : "not found" },
+    { id: "canonical", cat: "index", label: "Canonical", value: p.canonical ? short(p.canonical.replace(/^https?:\/\//, ""), 36) : "not set", zone: "page" },
+    { id: "title", cat: "content", label: "Title", value: p.title ? `${p.title.length} characters` : "missing", zone: "bar" },
+    { id: "description", cat: "content", label: "Description", value: p.description ? `${p.description.length} characters` : "missing", zone: "text" },
+    { id: "h1", cat: "content", label: "Main heading", value: p.h1.length ? short(p.h1[0], 34) : "none found", zone: "heading" },
+    { id: "headings", cat: "content", label: "Headings", value: `${p.headings.length} found`, zone: "lines" },
+    { id: "words", cat: "content", label: "Visible text", value: `${p.words} words`, zone: "lines" },
+    { id: "images", cat: "content", label: "Images", value: `${p.images.total} found`, zone: "tiles" },
+    { id: "links", cat: "content", label: "Links", value: `${p.links.internal} internal, ${p.links.external} external`, zone: "button" },
+    { id: "viewport", cat: "mobile", label: "Mobile viewport", value: p.viewport ? "declared" : "not declared", zone: "page" },
+    { id: "lang", cat: "mobile", label: "Language", value: p.lang || "not declared", zone: "page" },
+    { id: "icon", cat: "mobile", label: "Site icon", value: p.favicon ? "found" : "not found", zone: "bar" },
+    { id: "jsonld", cat: "rich", label: "Structured data", value: p.jsonLd.blocks ? `${p.jsonLd.blocks} block${p.jsonLd.blocks > 1 ? "s" : ""}` : "none", zone: "page" },
+    { id: "og", cat: "rich", label: "Link preview", value: p.og.image ? "picture set" : "no picture", zone: "picture" },
+    { id: "ai-bots", cat: "ai", label: "AI crawlers", value: c.robots.blockedAi.length ? `${c.robots.blockedAi.length} blocked` : "allowed" },
+    { id: "llms", cat: "ai", label: "llms.txt", value: c.llms ? "found" : "not found" },
+    { id: "raw", cat: "ai", label: "Text without JavaScript", value: `${p.words} words`, zone: "lines" },
+  ];
+  return out;
 }
 
 export function buildReport(c: Crawl, sp: SpeedData, date: string): Report {

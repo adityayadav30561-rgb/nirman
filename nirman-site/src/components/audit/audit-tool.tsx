@@ -4,16 +4,18 @@ import { useCallback, useEffect, useId, useRef, useState, type FormEvent } from 
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRight, Check, CircleAlert, Download, LoaderCircle, RotateCcw, Search, X } from "lucide-react";
-import { CatBars, ReportPreview, ScoreRing, SitePhone } from "@/components/audit/pieces";
+import { CatBars, ReportPreview, ScoreRing } from "@/components/audit/pieces";
+import { auditPage } from "@/content/audit-page";
 import { Trap } from "@/lib/lead";
-import { CATS, STAGE_CHECKS, verdictOf, type PageFacts, type Summary } from "@/lib/audit/types";
+import { ScanStage } from "@/components/audit/scan-stage";
+import { CATS, verdictOf, type PageFacts, type Signal, type Summary } from "@/lib/audit/types";
 
 /*
  * The free SEO audit, in the page's hero (docs/sections/p6-seo-audit.md).
  * Three phases:
  * - idle: the address box.
- * - scanning: the visitor's own site in a phone under a scan beam, with the
- *   six areas ticking off. Step 1 (/api/audit/) reads the site; step 2
+ * - scanning (scan-stage.tsx): the visitor's own site in a phone with a
+ *   frame over the part being read, a live log and the six areas. Step 1 (/api/audit/) reads the site; step 2
  *   (/api/audit/finish/) runs Google's speed test, which is the long wait.
  *   When Google's screenshot arrives it replaces the sketch in the phone.
  * - done: the score, the score by area, and the PDF behind a short form
@@ -41,6 +43,8 @@ export function AuditTool() {
   const [url, setUrl] = useState("");
   const [error, setError] = useState("");
   const [facts, setFacts] = useState<PageFacts | null>(null);
+  const [signals, setSignals] = useState<Signal[]>([]);
+  const [speedDone, setSpeedDone] = useState(false);
   const [stage, setStage] = useState(0);
   const [shot, setShot] = useState<string | undefined>();
   const [summary, setSummary] = useState<Summary | null>(null);
@@ -67,6 +71,8 @@ export function AuditTool() {
       const pace = reduce ? 0.25 : 1;
       setError("");
       setFacts(null);
+      setSignals([]);
+      setSpeedDone(false);
       setShot(undefined);
       setSummary(null);
       setStage(0);
@@ -79,12 +85,16 @@ export function AuditTool() {
         setPhase("idle");
         return setError(String(first.data?.error || "We could not reach the audit service. Please try again."));
       }
+      const found = (first.data.signals as Signal[]) || [];
       setFacts(first.data.facts as PageFacts);
+      setSignals(found);
       const finishing = post("/api/audit/finish/", { ticket: first.data.ticket });
-      await wait(1700 * pace);
+      // each area stays on screen long enough to show what was read in it (see ScanStage)
+      const hold = (key: string, per: number) => (found.filter((x) => x.cat === key).length * per + 500) * pace;
+      await wait(hold("index", 620));
       if (!alive()) return;
       setStage(1);
-      await wait(1900 * pace);
+      await wait(hold("content", 620));
       if (!alive()) return;
       setStage(2);
       const second = await finishing;
@@ -95,12 +105,16 @@ export function AuditTool() {
       }
       const sum = second.data.summary as Summary;
       setShot(sum.screenshot);
-      await wait((sum.screenshot ? 2200 : 600) * pace);
-      for (const next of [3, 4, 5, 6]) {
+      setSpeedDone(true);
+      await wait((sum.screenshot ? 2600 : 1100) * pace);
+      for (const [next, key] of [[3, "mobile"], [4, "rich"], [5, "ai"]] as const) {
         if (!alive()) return;
         setStage(next);
-        await wait(750 * pace);
+        await wait(hold(key, 430));
       }
+      if (!alive()) return;
+      setStage(CATS.length);
+      await wait(900 * pace);
       if (!alive()) return;
       setSummary(sum);
       setSealed(String(second.data.report));
@@ -121,9 +135,11 @@ export function AuditTool() {
       <AnimatePresence mode="wait" initial={false}>
         {phase === "idle" && (
           <motion.div key="idle" {...(reduce ? {} : fade)} className="mx-auto flex max-w-[46rem] flex-col items-center text-center">
-            <p className="text-[0.78rem] font-semibold tracking-[0.08em] text-[#ff9a62] uppercase">Free tool</p>
-            <h1 id="audit-title" className="mt-4 text-[clamp(2.3rem,4.6vw,4rem)] leading-[1.06] font-semibold tracking-[-0.035em]">Free SEO audit for your website</h1>
-            <p className="mt-5 max-w-[38rem] text-[1.05rem] text-white/75">Enter your address. In about a minute you get a score out of 100 across six areas, from around 40 checks and Google&rsquo;s own speed test on a phone.</p>
+            <p className="text-[0.78rem] font-semibold tracking-[0.08em] text-[#ff9a62] uppercase">Website SEO checker</p>
+            <h1 id="audit-title" className="mt-4 text-[clamp(2.2rem,4.4vw,3.8rem)] leading-[1.06] font-semibold tracking-[-0.035em]">
+              Free SEO audit tool. <span className="text-[#ff9a62]">No signup, no login.</span>
+            </h1>
+            <p className="mt-5 max-w-[40rem] text-[1.05rem] text-white/75">{auditPage.intro}</p>
             <form onSubmit={start} noValidate className="mt-9 w-full max-w-[36rem]">
               <label htmlFor={`${id}-url`} className="sr-only">Your website address</label>
               <div className="flex h-16 items-center rounded-full bg-white p-2 pl-6 text-ink ring-1 ring-white/20 transition-shadow focus-within:ring-4 focus-within:ring-[#ff9a62]/50">
@@ -136,13 +152,13 @@ export function AuditTool() {
                 </button>
               </div>
               <p id={`${id}-note`} className={`mt-3 text-[0.85rem] ${error ? "font-medium text-[#ffb89a]" : "text-white/60"}`} aria-live="polite">
-                {error ? <span className="inline-flex items-center gap-1.5"><CircleAlert className="size-4" aria-hidden />{error}</span> : "No sign-up needed to see your score."}
+                {error ? <span className="inline-flex items-center gap-1.5"><CircleAlert className="size-4" aria-hidden />{error}</span> : auditPage.note}
               </p>
             </form>
           </motion.div>
         )}
 
-        {phase === "scanning" && <Scanning key="scan" facts={facts} host={url} stage={stage} shot={shot} onCancel={reset} reduce={!!reduce} />}
+        {phase === "scanning" && <ScanStage key="scan" facts={facts} host={url} signals={signals} stage={stage} shot={shot} speedDone={speedDone} onCancel={reset} reduce={!!reduce} />}
 
         {phase === "done" && summary && (
           <motion.div key="done" {...(reduce ? {} : fade)}>
@@ -153,58 +169,6 @@ export function AuditTool() {
 
       <AnimatePresence>{dialog && summary && <DownloadDialog summary={summary} sealed={sealed} onClose={() => setDialog(false)} reduce={!!reduce} />}</AnimatePresence>
     </div>
-  );
-}
-
-function Scanning({ facts, host, stage, shot, onCancel, reduce }: { facts: PageFacts | null; host: string; stage: number; shot?: string; onCancel: () => void; reduce: boolean }) {
-  const [tick, setTick] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setTick((n) => n + 1), 900);
-    return () => clearInterval(t);
-  }, []);
-  const current = CATS[Math.min(stage, CATS.length - 1)];
-  const names = STAGE_CHECKS[current.key];
-  const shown = (facts?.host || host).replace(/^https?:\/\//, "").replace(/\/.*$/, "");
-  const pct = Math.min(100, Math.round((stage / CATS.length) * 100));
-  return (
-    <motion.div {...(reduce ? {} : fade)} className="mx-auto grid max-w-[60rem] items-center gap-10 md:grid-cols-[auto_minmax(0,1fr)] md:gap-16">
-      <div className="relative mx-auto w-[13.5rem] sm:w-[15.5rem]">
-        <div aria-hidden className="absolute -inset-10 rounded-full bg-[radial-gradient(closest-side,rgba(242,107,43,0.28),transparent)]" />
-        <SitePhone facts={facts} screenshot={shot} scanning className="relative" />
-        <AnimatePresence mode="wait">
-          <motion.span key={`${stage}-${tick % names.length}`} initial={reduce ? false : { opacity: 0, x: 10, scale: 0.9 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={reduce ? undefined : { opacity: 0, x: -6 }} transition={{ duration: 0.3 }} aria-hidden className={`absolute z-10 hidden items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[0.72rem] font-medium whitespace-nowrap text-ink shadow-[0_1rem_2rem_-0.75rem_rgba(0,0,0,0.6)] sm:flex ${tick % 2 ? "top-[24%] -right-20" : "bottom-[22%] -right-14"}`}>
-            <span className="size-1.5 rounded-full bg-brand" />
-            {names[tick % names.length]}
-          </motion.span>
-        </AnimatePresence>
-      </div>
-
-      <div>
-        <p className="text-[0.78rem] font-semibold tracking-[0.08em] text-[#ff9a62] uppercase">Auditing now</p>
-        <h1 id="audit-title" className="mt-3 text-[clamp(1.7rem,3.2vw,2.6rem)] leading-[1.12] font-semibold tracking-[-0.03em] break-words">{shown}</h1>
-        <p className="mt-2 min-h-6 text-[0.95rem] text-white/70" aria-live="polite">
-          {stage >= CATS.length ? "Working out your score" : stage === 2 ? "Google is loading the site on a phone. This is the slow part: up to a minute." : `Checking: ${names[tick % names.length]}`}
-        </p>
-        <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-white/10" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct} aria-label="Audit progress">
-          <motion.div className="h-full origin-left rounded-full bg-[#ff9a62]" animate={{ width: `${Math.max(pct, 6)}%` }} transition={{ duration: reduce ? 0 : 0.6, ease: "easeOut" }} />
-        </div>
-        <ol className="mt-6 flex flex-col">
-          {CATS.map((c, i) => {
-            const state = i < stage ? "done" : i === stage ? "now" : "wait";
-            return (
-              <li key={c.key} className={`flex items-center gap-3 border-b border-white/10 py-3 text-[0.95rem] transition-colors ${state === "wait" ? "text-white/40" : "text-white"}`}>
-                <span className={`grid size-6 shrink-0 place-items-center rounded-full ${state === "done" ? "bg-[#1f8a55]" : state === "now" ? "bg-white/10" : "ring-1 ring-white/20"}`} aria-hidden>
-                  {state === "done" ? <Check className="size-3.5" strokeWidth={3} /> : state === "now" ? <LoaderCircle className={`size-4 text-[#ff9a62] ${reduce ? "" : "animate-spin"}`} /> : null}
-                </span>
-                <span className={state === "now" ? "font-medium" : ""}>{c.label}</span>
-                <span className="sr-only">{state === "done" ? "done" : state === "now" ? "in progress" : "waiting"}</span>
-              </li>
-            );
-          })}
-        </ol>
-        <button type="button" onClick={onCancel} className="mt-5 inline-flex min-h-11 items-center text-[0.85rem] text-white/60 underline-offset-4 hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Cancel</button>
-      </div>
-    </motion.div>
   );
 }
 

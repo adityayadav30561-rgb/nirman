@@ -1,5 +1,5 @@
 import { crawl, type Crawl } from "@/lib/audit/crawl";
-import { factsOf } from "@/lib/audit/checks";
+import { factsOf, signalsOf } from "@/lib/audit/checks";
 import { AuditError, normaliseInput } from "@/lib/audit/safe-fetch";
 import { seal } from "@/lib/audit/seal";
 import { clientIp, rateLimiter } from "@/lib/send-email";
@@ -7,7 +7,8 @@ import { clientIp, rateLimiter } from "@/lib/send-email";
 /*
  * Step 1 of the free SEO audit (docs/sections/p6-seo-audit.md): reads the
  * site (page, redirects, robots.txt, sitemap, llms.txt). Fast, a few
- * seconds. Answers with the page's public facts for the scanning animation
+ * seconds. Answers with the page's public facts and raw observations
+ * ("signals": what was read, never a verdict) for the scanning animation,
  * and a sealed ticket for step 2 (/api/audit/finish/), which runs the slow
  * Google speed test. Limited to 6 audits per visitor per 10 minutes.
  * The address must end in a slash: /api/audit/
@@ -25,7 +26,7 @@ export async function POST(request: Request) {
   if (tooMany(clientIp(request))) return Response.json({ ok: false, error: "You have run several audits in a short time. Please try again in a few minutes." }, { status: 429 });
   try {
     const data = await crawl(normaliseInput(input));
-    return Response.json({ ok: true, facts: factsOf(data), status: data.status, ticket: seal({ crawl: data } satisfies Ticket) });
+    return Response.json({ ok: true, facts: factsOf(data), signals: data.status >= 200 && data.status < 300 ? signalsOf(data) : signalsOf(data).filter((x) => ["status", "https", "redirects", "robots", "sitemap"].includes(x.id)), status: data.status, ticket: seal({ crawl: data } satisfies Ticket) });
   } catch (e) {
     if (e instanceof AuditError) return Response.json({ ok: false, error: e.message }, { status: e.code === "invalid" || e.code === "private" ? 400 : 422 });
     console.error("Audit: crawl failed.", e);

@@ -29,7 +29,7 @@ export const footerColumns: { title: string; links: NavLink[] }[] = [
   {
     title: "Resources",
     links: [
-      { label: "Free SEO audit", href: "/tools/seo-audit/" },
+      { label: "Free SEO audit tool", href: "/tools/seo-audit/" },
       { label: "Blog", href: "/blog/" },
       { label: "Book a demo", href: "/nirman-crm/#book-a-demo" },
       { label: "Get a quote", href: "/get-a-quote/" },

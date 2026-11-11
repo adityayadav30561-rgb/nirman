@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Bot, FileSearch, Gauge, Network, Share2, Smartphone } from "lucide-react";
+import { ArrowRight, Bot, Check, FileSearch, Gauge, Network, Share2, Smartphone } from "lucide-react";
 import { AuditTool } from "@/components/audit/audit-tool";
 import { heroGrid } from "@/components/services/service-hero";
 import { ServiceMotion } from "@/components/services/service-motion";
@@ -11,26 +11,41 @@ import { CATS } from "@/lib/audit/types";
 /*
  * /tools/seo-audit/ (docs/sections/p6-seo-audit.md): the free SEO audit.
  * The tool lives in the ink hero (components/audit/audit-tool.tsx) and owns
- * the page's h1 in each of its phases. Below it: what is checked, how it
- * works, questions (FAQPage JSON-LD) and Get a quote.
+ * the page's h1 in each of its phases. Below it, written for people looking
+ * for a free SEO audit tool with no signup: every check by area, what is
+ * free with and without contact details, the three steps, how the score is
+ * worked out, questions (FAQPage JSON-LD) and Get a quote.
  */
 const url = "/tools/seo-audit/";
 export const metadata: Metadata = {
-  title: auditPage.title,
+  title: auditPage.metaTitle,
   description: auditPage.description,
   alternates: { canonical: url },
-  openGraph: { type: "website", siteName: site.name, locale: "en_IN", url, title: `${auditPage.title} for your website`, description: auditPage.description },
+  openGraph: { type: "website", siteName: site.name, locale: "en_IN", url, title: auditPage.metaTitle, description: auditPage.description },
 };
 
 const icons = { index: Network, content: FileSearch, speed: Gauge, mobile: Smartphone, rich: Share2, ai: Bot } as const;
 const h2 = "text-[clamp(1.7rem,3vw,2.5rem)] leading-[1.12] font-semibold tracking-[-0.03em]";
 const eyebrow = "text-[0.78rem] font-semibold tracking-[0.08em] text-brand uppercase";
+const inline = "font-medium text-brand underline decoration-brand/40 underline-offset-[3px] transition-colors hover:decoration-brand";
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
-    { "@type": "WebApplication", name: `${site.name} free SEO audit`, url: `${site.url}${url}`, applicationCategory: "BusinessApplication", operatingSystem: "Any", description: auditPage.description, isAccessibleForFree: true, provider: { "@id": `${site.url}/#organization` } },
-    { "@type": "BreadcrumbList", itemListElement: [["Home", "/"], [auditPage.title, url]].map(([name, href], i) => ({ "@type": "ListItem", position: i + 1, name, item: `${site.url}${href}` })) },
+    {
+      "@type": "WebApplication",
+      name: `${site.name} free SEO audit tool`,
+      alternateName: ["Free SEO audit tool", "Website SEO checker"],
+      url: `${site.url}${url}`,
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Any",
+      browserRequirements: "Requires JavaScript",
+      description: auditPage.description,
+      isAccessibleForFree: true,
+      featureList: CATS.map((c) => c.label),
+      provider: { "@id": `${site.url}/#organization` },
+    },
+    { "@type": "BreadcrumbList", itemListElement: [["Home", "/"], ["Free SEO audit tool", url]].map(([name, href], i) => ({ "@type": "ListItem", position: i + 1, name, item: `${site.url}${href}` })) },
     { "@type": "FAQPage", mainEntity: auditPage.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) },
   ],
 };
@@ -58,10 +73,15 @@ export default function SeoAuditPage() {
             {CATS.map((c) => {
               const Icon = icons[c.key];
               return (
-                <li key={c.key} className="rv rounded-[1.5rem] bg-white p-7 ring-1 ring-line">
+                <li key={c.key} className="rv flex flex-col rounded-[1.5rem] bg-white p-7 ring-1 ring-line">
                   <span className="grid size-12 place-items-center rounded-2xl bg-[#fdeee4] text-brand"><Icon className="size-6" aria-hidden /></span>
                   <h3 className="mt-5 text-[1.15rem] font-semibold tracking-[-0.015em]">{c.label}</h3>
                   <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">{c.line}</p>
+                  <ul className="mt-5 flex flex-col gap-2 border-t border-line pt-5 text-[0.9rem]">
+                    {auditPage.checks[c.key].map((k) => (
+                      <li key={k} className="flex gap-2.5"><Check className="mt-1 size-3.5 shrink-0 text-brand" strokeWidth={3} aria-hidden />{k}</li>
+                    ))}
+                  </ul>
                 </li>
               );
             })}
@@ -69,9 +89,37 @@ export default function SeoAuditPage() {
         </div>
       </section>
 
-      <section aria-labelledby="audit-steps" className="bg-wash py-20 lg:py-28">
+      <section aria-labelledby="audit-free" className="bg-band py-20 text-white lg:py-28">
         <div className="container-page">
-          <p className={`rv ${eyebrow}`}>From address to report</p>
+          <div className="max-w-[42rem]">
+            <p className="rv text-[0.78rem] font-semibold tracking-[0.08em] text-[#ff9a62] uppercase">No account, ever</p>
+            <h2 id="audit-free" className={`rv ${h2} mt-3`}>{auditPage.freeTitle}</h2>
+            <p className="rv mt-4 text-white/75">{auditPage.freeLine}</p>
+          </div>
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
+            {[auditPage.free, auditPage.gated].map((g, i) => (
+              <div key={g.title} className={`rv rounded-[1.75rem] p-8 ring-1 ${i === 0 ? "bg-white text-ink ring-white" : "bg-white/6 ring-white/12"}`}>
+                <h3 className="text-[1.3rem] leading-tight font-semibold tracking-[-0.02em]">{g.title}</h3>
+                <ul className="mt-5 flex flex-col gap-3 text-[0.98rem]">
+                  {g.points.map((p) => (
+                    <li key={p} className="flex gap-3"><Check className={`mt-1 size-4 shrink-0 ${i === 0 ? "text-brand" : "text-[#ff9a62]"}`} strokeWidth={3} aria-hidden />{p}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="rv mt-10">
+            <a href="#audit-title" className="group inline-flex h-13 items-center gap-2 rounded-full bg-white px-8 text-[0.95rem] font-medium text-ink transition-colors hover:bg-[#ffe3d1] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+              Run a free SEO audit
+              <ArrowRight className="size-4 -rotate-90 transition-transform group-hover:-translate-y-1" aria-hidden />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="audit-steps" className="py-20 lg:py-28">
+        <div className="container-page">
+          <p className={`rv ${eyebrow}`}>Three steps</p>
           <h2 id="audit-steps" className={`rv ${h2} mt-3`}>{auditPage.stepsTitle}</h2>
           <ol className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
             {auditPage.steps.map((s, i) => (
@@ -85,7 +133,22 @@ export default function SeoAuditPage() {
         </div>
       </section>
 
-      <section aria-labelledby="audit-faq" className="py-20 lg:py-28">
+      <section aria-labelledby="audit-score" className="py-20 lg:py-28">
+        <div className="container-page grid gap-10 lg:grid-cols-[19rem_1fr] lg:gap-14">
+          <div>
+            <p className={`rv ${eyebrow}`}>The method</p>
+            <h2 id="audit-score" className={`rv ${h2} mt-3`}>{auditPage.scoreTitle}</h2>
+          </div>
+          <div className="rv max-w-[46rem]">
+            {auditPage.scoreText.map((t) => <p key={t} className="mb-4 text-[1.02rem] leading-[1.8] text-ink/85">{t}</p>)}
+            <p className="text-[1.02rem] leading-[1.8] text-ink/85">
+              An automated audit is a starting point. For what it cannot see, read about our <Link href="/services/seo/" className={inline}>SEO service</Link> or look at <Link href="/work/seo/" className={inline}>SEO results for our clients</Link>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="audit-faq" className="bg-wash py-20 lg:py-28">
         <div className="container-page grid gap-10 lg:grid-cols-[19rem_1fr] lg:gap-14">
           <div>
             <p className={`rv ${eyebrow}`}>Good to know</p>
@@ -102,7 +165,7 @@ export default function SeoAuditPage() {
         </div>
       </section>
 
-      <section aria-labelledby="audit-cta" className="pb-20 lg:pb-28">
+      <section aria-labelledby="audit-cta" className="py-20 lg:py-28">
         <div className="container-page">
           <div className="rv relative flex flex-col items-start gap-8 overflow-hidden rounded-[2.25rem] bg-band p-8 text-white sm:p-12 md:flex-row md:items-center md:justify-between lg:p-16">
             <div aria-hidden className="absolute -right-32 -bottom-48 size-[34rem] rounded-full bg-[radial-gradient(closest-side,rgba(242,107,43,0.32),transparent)]" />

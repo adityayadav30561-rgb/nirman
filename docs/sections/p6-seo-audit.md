@@ -6,6 +6,50 @@ screenshot in about 20 seconds, and a PDF was downloaded from the live
 site. Without the key the audit still runs but marks speed "not measured". `/tools/` redirects here
 (one tool for now).
 
+## Round 2, 2026-11-11 (user): a far richer scan, and a page written for search
+User: the first scanning animation was "basic"; the page should be found
+for "free SEO audit tool" and "free SEO audit tool no signup / no login".
+
+### Scanning stage (`components/audit/scan-stage.tsx`)
+Three parts that all show the same real work:
+- **The site** in a phone that tilts slowly inside a radar (rings, a sweep,
+  orbiting dots, pulses). A frame glides over the part of the page being
+  read (address bar, picture, heading, text, button, images, whole page)
+  and a tag beside it types what was found there.
+- **A live log**: every observation with the second it was made.
+- **The six areas**: a ring spins while an area is read ("reading 3 of 7")
+  and closes with a tick when done.
+What is shown are **signals**: raw observations from step 1
+(`signalsOf` in `lib/audit/checks.ts`: "Title: 65 characters", "Sitemap:
+index of sitemaps"), never a verdict or a fix; those stay in the PDF.
+During Google's speed test the log and the frame narrate what Lighthouse
+does (simulated phone, slow 4G, LCP, CLS, TBT, accessibility, real-visitor
+data), then the real screenshot replaces the sketch. Each area stays on
+screen long enough to show its signals (`hold` in `audit-tool.tsx`).
+One design, built directly on the user's brief (no variants). GSAP: tilt,
+radar, rings, typing. Framer Motion: frame, tag, log lines. Reduced motion:
+no tilt, radar or typing; the log still fills. Shot:
+`shots/p6-audit-scan-r2.jpg`.
+
+### Page content for search (`content/audit-page.ts`, `app/tools/seo-audit/`)
+- Title "Free SEO Audit Tool: No Signup, No Login | Nirman" (49
+  characters), description 157 characters, h1 "Free SEO audit tool. No
+  signup, no login."
+- Sections: every check by area (about 40, named), "No signup, no login:
+  what you get free" (free with no details / free for email and phone),
+  "How to run a free SEO audit", "How the SEO score is worked out", twelve
+  questions (FAQPage JSON-LD), Get a quote. About 1,450 words.
+- JSON-LD: WebApplication (free, feature list), BreadcrumbList, FAQPage.
+- Internal links: header button, footer ("Free SEO audit tool"), the SEO
+  service page's questions section, sitemap and llms.txt.
+**Keep it honest:** "no signup, no login" is true of running the audit and
+seeing the score; the copy says everywhere that the PDF asks for an email
+and a phone number. Do not remove that sentence, and do not claim results.
+**Ranking cannot be promised from the page alone.** "Free SEO audit tool"
+is contested by large, long-established tools; what moves a new domain is
+links to this page, time and use. The long-tail "no signup / no login"
+searches are the realistic first target.
+
 ## What the visitor does (user brief, 2026-11-11)
 1. Enters a website address.
 2. Watches it being audited: their own site in a phone under a scan beam,
