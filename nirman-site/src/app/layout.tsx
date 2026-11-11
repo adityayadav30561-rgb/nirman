@@ -43,10 +43,11 @@ export const metadata: Metadata = {
  *    this browser has a saved choice (components/cookie-consent.tsx), so no
  *    such cookie is set before the visitor agrees;
  * 3. Google's standard container start (the gtm.js event that "All Pages"
- *    tags wait for) and the container itself.
+ *    tags wait for) and each container in site.gtmIds (they share the one
+ *    data layer, so the consent default applies to all of them).
  * Loaded after the page is interactive so it does not slow the first paint.
  */
-const gtm = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}var c=null;try{c=JSON.parse(localStorage.getItem('nirman-consent'));if(!c||Date.now()-c.t>15552000000)c=null}catch(e){}var g=function(v){return v?'granted':'denied'};gtag('consent','default',{analytics_storage:g(c&&c.analytics),ad_storage:g(c&&c.ads),ad_user_data:g(c&&c.ads),ad_personalization:g(c&&c.ads),functionality_storage:'granted',security_storage:'granted',wait_for_update:c?0:500});gtag('js',new Date());dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=${site.gtmId}';document.head.appendChild(s);`;
+const gtm = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}var c=null;try{c=JSON.parse(localStorage.getItem('nirman-consent'));if(!c||Date.now()-c.t>15552000000)c=null}catch(e){}var g=function(v){return v?'granted':'denied'};gtag('consent','default',{analytics_storage:g(c&&c.analytics),ad_storage:g(c&&c.ads),ad_user_data:g(c&&c.ads),ad_personalization:g(c&&c.ads),functionality_storage:'granted',security_storage:'granted',wait_for_update:c?0:500});gtag('js',new Date());dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});${JSON.stringify(site.gtmIds)}.forEach(function(id){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id='+id;document.head.appendChild(s)});`;
 
 export const viewport: Viewport = {
   themeColor: "#f5f7f9",
@@ -61,14 +62,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Script id="js-flag" strategy="beforeInteractive">
           {"document.documentElement.classList.add('js')"}
         </Script>
-        {site.gtmId && (
+        {site.gtmIds.length > 0 && (
           <>
             <Script id="gtm" strategy="afterInteractive">
               {gtm}
             </Script>
-            <noscript>
-              <iframe src={`https://www.googletagmanager.com/ns.html?id=${site.gtmId}`} height="0" width="0" style={{ display: "none", visibility: "hidden" }} title="Google Tag Manager" />
-            </noscript>
+            {site.gtmIds.map((id) => (
+              <noscript key={id}>
+                <iframe src={`https://www.googletagmanager.com/ns.html?id=${id}`} height="0" width="0" style={{ display: "none", visibility: "hidden" }} title="Google Tag Manager" />
+              </noscript>
+            ))}
           </>
         )}
         <a
@@ -81,7 +84,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main id="main">{children}</main>
         <SiteFooter />
         {/* usePathname inside: Suspense for pages whose address is not known at build time (ARCHITECTURE gotcha 47) */}
-        {site.gtmId && (
+        {site.gtmIds.length > 0 && (
           <Suspense fallback={null}>
             <CookieConsent />
           </Suspense>

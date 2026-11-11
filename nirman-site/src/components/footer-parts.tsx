@@ -117,7 +117,7 @@ export function BottomBar() {
             </Link>
           </li>
         ))}
-        {site.gtmId && (
+        {site.gtmIds.length > 0 && (
           <li>
             <CookieSettingsButton className={`${quiet.replace("-ml-3 ", "").replace("text-[0.9rem]", "text-[0.85rem]")} cursor-pointer`} />
           </li>
