@@ -41,8 +41,9 @@ accounts are added to the site, update the matching section and the
   Free SEO audit (BUILD-PLAN P6). The header's second button is now
   "Book a demo" (`/nirman-crm/#book-a-demo`); it becomes "Free SEO audit"
   again when the tool is built.
-- Hidden until real: the WhatsApp row on Contact (`site.whatsapp` is
-  empty) and the three footer social icons (their `href` is `#`).
+- The WhatsApp row on Contact is back (user confirmed the phone number is
+  also on WhatsApp). Hidden until real: the three footer social icons
+  (their `href` is `#`).
 
 ## Verified
 Production build: a crawl from the homepage follows every internal link

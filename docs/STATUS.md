@@ -58,8 +58,8 @@ pages 200 with the right canonical, blog empty state, unknown blog address
 policy and terms, sitemap, robots, llms.txt, a 404 page, and no link to an
 unbuilt page (`docs/sections/p7b-legal.md`). **Forms (S1) live 2026-11-11:** they send through
 `/api/lead/` and Resend to contact@nirmandigital.com
-(`docs/sections/s1-forms.md`); the user is confirming the test email
-arrived. **Still open:** the SEO audit tool
+(`docs/sections/s1-forms.md`); the user confirmed a test email arrived.
+WhatsApp on Contact is on (same number as the phone). **Still open:** the SEO audit tool
 (P6; the header button is "Book a demo" until then); office address,
 WhatsApp number and social profiles (hidden until given); legal review of
 the two legal pages. Not set

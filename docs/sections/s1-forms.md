@@ -2,8 +2,8 @@
 
 Status: **live (2026-11-11).** nirmandigital.com is verified in Resend and
 `RESEND_API_KEY` is set on Vercel; a test enquiry sent through the live
-`/api/lead/` was accepted by Resend. Still to confirm by the user: that the
-test email arrived in the contact@nirmandigital.com inbox. If sending ever
+`/api/lead/` was accepted by Resend. The user confirmed the test email arrived
+in the contact@nirmandigital.com inbox. If sending ever
 fails, a form falls back to opening the visitor's email app.
 
 ## How it works
