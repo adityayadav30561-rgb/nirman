@@ -1,17 +1,18 @@
 "use client";
 
 import { useId, useState, type FormEvent } from "react";
-import { site } from "@/content/site";
+import { mailtoLead, sendLead, Trap } from "@/lib/lead";
 
 /*
- * Email field joined to a dark Submit pill (reference FAQ). There is no lead
- * API yet (BUILD-PLAN S1), so Submit opens the visitor's email app with a
- * prepared message to Nirman, and the note under the field says so. No fake
- * success state.
+ * Email field joined to a dark Submit pill (reference FAQ). Submit sends the
+ * address through /api/lead/ (lib/lead.tsx, docs/sections/s1-forms.md) and
+ * confirms in place; if sending is not possible it opens the visitor's email
+ * app with a prepared message.
  */
 export function EmailAsk() {
   const id = useId();
   const [error, setError] = useState("");
+  const [state, setState] = useState<"idle" | "sending" | "sent">("idle");
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,13 +23,19 @@ export function EmailAsk() {
       return;
     }
     setError("");
-    const subject = encodeURIComponent("A question for Nirman");
-    const body = encodeURIComponent(`Please reply to: ${input.value}\n\nMy question:\n`);
-    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
+    if (state !== "idle") return;
+    const email = input.value;
+    setState("sending");
+    void sendLead("question", { email, lines: [`Email: ${email}`, "", "This visitor left their email on the homepage (Questions section) and would like us to write to them."] }).then((sent) => {
+      if (sent) return setState("sent");
+      mailtoLead("A question for Nirman", [`Please reply to: ${email}`, "", "My question:", ""]);
+      setState("idle");
+    });
   };
 
   return (
-    <form onSubmit={onSubmit} noValidate className="w-full max-w-[28rem]">
+    <form onSubmit={onSubmit} noValidate className="relative w-full max-w-[28rem]">
+      <Trap />
       <label htmlFor={id} className="sr-only">
         Your email
       </label>
@@ -48,13 +55,15 @@ export function EmailAsk() {
         />
         <button
           type="submit"
-          className="h-11 shrink-0 rounded-full px-6 text-[0.9rem] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand bg-ink-2 text-white hover:bg-brand"
+          disabled={state !== "idle"}
+          aria-busy={state === "sending" || undefined}
+          className="h-11 shrink-0 rounded-full px-6 disabled:opacity-60 text-[0.9rem] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand bg-ink-2 text-white hover:bg-brand"
         >
-          Submit
+          {state === "sending" ? "Sending" : state === "sent" ? "Sent" : "Submit"}
         </button>
       </div>
       <p id={`${id}-note`} className="mt-2.5 pl-5 text-[0.78rem] text-[#6b7079]" aria-live="polite">
-        {error || "Opens your email app for now; an online form is coming."}
+        {error || (state === "sent" ? "Thank you. We will write to you within 2 working hours (IST)." : "We will write back within 2 working hours (IST).")}
       </p>
     </form>
   );

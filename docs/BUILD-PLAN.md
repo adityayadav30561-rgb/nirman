@@ -49,7 +49,7 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 
 ## S: Systems and launch
 
-- [ ] S1 Lead capture (form API, email), spam protection
+- [x] S1 Lead capture: `/api/lead/` emails every form through Resend, with spam protection and an email-app fallback (`docs/sections/s1-forms.md`). **Live once `RESEND_API_KEY` is set on Vercel.**
 - [x] S2a sitemap, robots, llms.txt, 404 page (2026-11-11; `docs/sections/p7b-legal.md`)
 - [ ] S2 SEO infrastructure (rest): page registry, metadata, OG image, robots,
       sitemap, llms.txt, JSON-LD (see `docs/REDESIGN.md` sections 8 and 12)

@@ -4,7 +4,7 @@ import { useId, useMemo, useRef, useState, useSyncExternalStore, type FormEvent,
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
-import { site } from "@/content/site";
+import { mailtoLead, sendLead, Trap } from "@/lib/lead";
 import { contactWays, fromQuoteBar, locations, serviceOptions, steps, timelines, type ServiceKey } from "@/content/quote";
 
 /*
@@ -14,9 +14,10 @@ import { contactWays, fromQuoteBar, locations, serviceOptions, steps, timelines,
  * - Pre-fills service and timeline from the homepage quote bar
  *   (?service=...&timeline=...), read once in the browser so the page stays
  *   static.
- * - No lead API yet (BUILD-PLAN S1): Submit opens the visitor's email app
- *   with everything filled in, then goes to /thank-you/?via=email, which
- *   says to press Send. No fake "sent" state.
+ * - Submit sends through /api/lead/ (lib/lead.tsx, docs/sections/
+ *   s1-forms.md) and goes to /thank-you/. If sending is not possible it
+ *   opens the visitor's email app instead and goes to /thank-you/?via=email,
+ *   which says to press Send. Never a false "sent".
  * - Framer Motion slides between steps (off under reduced motion); focus
  *   moves to the new step's heading; Enter in a one-line field goes on.
  * `preset` ticks a service when the URL does not (service pages).
@@ -60,6 +61,7 @@ export function QuoteForm({ size = "card", tone = "light", preset }: { size?: "c
   }, [search, preset]);
   const d = { ...raw, services: raw.services ?? pre.services, timeline: raw.timeline ?? pre.timeline };
   const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
   const moved = useRef(false);
   const big = size === "big";
 
@@ -98,6 +100,7 @@ export function QuoteForm({ size = "card", tone = "light", preset }: { size?: "c
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
+    if (sending) return;
     if (step < steps.length - 1) return go(step + 1);
     const err = check(step);
     setError(err);
@@ -116,8 +119,12 @@ export function QuoteForm({ size = "card", tone = "light", preset }: { size?: "c
       `WhatsApp / phone: ${d.phone || "-"}`,
       `Reply by: ${d.via}`,
     ];
-    window.location.assign(`mailto:${site.email}?subject=${encodeURIComponent(`Quote request from ${d.name}`)}&body=${encodeURIComponent(lines.join("\n"))}`);
-    setTimeout(() => router.push("/thank-you/?via=email"), 600);
+    setSending(true);
+    void sendLead("quote", { name: d.name, email: d.email, lines }).then((sent) => {
+      if (sent) return router.push("/thank-you/");
+      mailtoLead(`Quote request from ${d.name}`, lines);
+      setTimeout(() => router.push("/thank-you/?via=email"), 600);
+    });
   };
 
   const onEnter = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -136,7 +143,8 @@ export function QuoteForm({ size = "card", tone = "light", preset }: { size?: "c
   const S = steps[step];
 
   return (
-    <form onSubmit={submit} noValidate aria-labelledby={`${id}-h`}>
+    <form onSubmit={submit} noValidate aria-labelledby={`${id}-h`} className="relative">
+      <Trap />
       {/* progress */}
       <div className="flex items-center justify-between gap-4">
         <p className={`text-[0.8rem] font-semibold ${dark ? "text-white/80" : "text-brand"}`}>
@@ -297,11 +305,13 @@ export function QuoteForm({ size = "card", tone = "light", preset }: { size?: "c
         )}
         <button
           type="submit"
-          className={`inline-flex h-12 items-center gap-2 rounded-full px-7 text-[0.9rem] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
+          disabled={sending}
+          aria-busy={sending || undefined}
+          className={`inline-flex h-12 items-center gap-2 rounded-full px-7 disabled:opacity-60 text-[0.9rem] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
             dark ? "bg-white text-ink hover:bg-wash focus-visible:outline-white" : "bg-ink-2 text-white hover:bg-brand focus-visible:outline-brand"
           }`}
         >
-          {step < steps.length - 1 ? "Next" : "Get a quote"}
+          {step < steps.length - 1 ? "Next" : sending ? "Sending" : "Get a quote"}
           <ArrowRight className="size-4" aria-hidden />
         </button>
         {step === 2 && (
@@ -311,7 +321,7 @@ export function QuoteForm({ size = "card", tone = "light", preset }: { size?: "c
         )}
       </div>
       {step === steps.length - 1 && (
-        <p className={`mt-3 text-[0.78rem] ${dark ? "text-white/75" : "text-muted"}`}>Opens your email app with your answers filled in; online sending is coming.</p>
+        <p className={`mt-3 text-[0.78rem] ${dark ? "text-white/75" : "text-muted"}`}>We reply within 2 working hours (IST) and never share your details.</p>
       )}
     </form>
   );

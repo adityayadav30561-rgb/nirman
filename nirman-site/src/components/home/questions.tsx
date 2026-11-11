@@ -7,8 +7,8 @@ import { faqIntro, faqs } from "@/content/faq";
  * Questions (docs/sections/07-questions.md, variant A chosen per the design
  * protocol): left, heading with an orange spark, a sentence and the email
  * pill; right, a sentence and question rows that open short answers. Outputs
- * FAQPage JSON-LD from the same list. The email form has no backend yet
- * (lead API, BUILD-PLAN S1): it opens the visitor's email app and says so.
+ * FAQPage JSON-LD from the same list. The email form sends through /api/lead/
+ * (components/home/email-ask.tsx).
  */
 const jsonLd = {
   "@context": "https://schema.org",
