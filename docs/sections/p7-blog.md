@@ -1,8 +1,10 @@
 # P7 Blog (Sanity)
 
-Status: built and verified with sample articles (2026-11-10). **Not yet
-connected to a Sanity project**: the user creates it and sends the project
-ID (steps below). Until then `/blog/` shows its empty state.
+Status: built, and **connected to the user's Sanity project `iymga1c7`**
+(dataset `production`, public) on 2026-11-11: the site reads from it
+without errors. It has no articles yet, so `/blog/` shows its empty state.
+Still for the user: steps 3 to 6 of "To connect it" below (CORS origin,
+webhook, writers, first categories and articles).
 Routes: `/blog/`, `/blog/category/<name>/`, `/blog/<article>/`, the editor
 at `/studio/`, the publish hook `/api/revalidate/`.
 `/privacy-policy/` and `/terms/` (the rest of P7) are not built.
@@ -83,10 +85,11 @@ pass. **Not tested:** a real Sanity project end to end (needs the ID).
 1. User: create a free account at sanity.io, then a project (name
    "Nirman", dataset `production`, public). Send Claude the **project ID**
    (8 letters and digits, on sanity.io/manage; it is not a secret).
-2. Claude: set `NEXT_PUBLIC_SANITY_PROJECT_ID` (and
-   `NEXT_PUBLIC_SANITY_DATASET=production`) in `nirman-site/.env.local`
-   and on the host; allow `<id>.apicdn.sanity.io`, `<id>.api.sanity.io`
-   and `cdn.sanity.io` for cloud sessions; test with a real article.
+2. Done 2026-11-11: the project ID `iymga1c7` is the default in
+   `src/sanity/env.ts` (it is public), so no host or session needs
+   setup. Cloud sessions reach `iymga1c7.apicdn.sanity.io`,
+   `iymga1c7.api.sanity.io` and `cdn.sanity.io` without changes. Still to
+   do once an article exists: look at a real article on the site.
 3. User, on sanity.io/manage, API, CORS origins: add the site's address
    (and `http://localhost:3000` for local work), with "Allow credentials"
    on. Without this the editor cannot log in.
