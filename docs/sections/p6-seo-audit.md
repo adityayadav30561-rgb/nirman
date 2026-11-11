@@ -26,6 +26,11 @@ During Google's speed test the log and the frame narrate what Lighthouse
 does (simulated phone, slow 4G, LCP, CLS, TBT, accessibility, real-visitor
 data), then the real screenshot replaces the sketch. Each area stays on
 screen long enough to show its signals (`hold` in `audit-tool.tsx`).
+**Bug fixed the same day:** the phone's 3D depth was being animated with
+the tilt and the phone stretched across the screen every few seconds (the
+user reported it). Depth is now a fixed CSS perspective; the phone's box
+was sampled about 220 times through a whole audit at 1440, 1261 and 375
+wide and stays phone-sized (`tools/shots/audit-tilt.cjs`).
 One design, built directly on the user's brief (no variants). GSAP: tilt,
 radar, rings, typing. Framer Motion: frame, tag, log lines. Reduced motion:
 no tilt, radar or typing; the log still fills. Shot:

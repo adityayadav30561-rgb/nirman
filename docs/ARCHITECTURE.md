@@ -252,3 +252,10 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
     managed in the GTM container, not in code. When a tag that sets cookies
     is added there, keep the privacy policy's "Cookies and measurement"
     section true.
+55. **Never tween `transformPerspective` (or CSS `perspective`).** Put
+    it in a GSAP `fromTo` "to" block and it animates from 0: near zero the
+    element stretches across the whole screen (the audit phone did this
+    live, every few seconds). Give the parent a fixed CSS `perspective` and
+    tween only the rotation. Still screenshots miss this kind of bug:
+    sample the element's box through the whole cycle
+    (`tools/shots/audit-tilt.cjs`).

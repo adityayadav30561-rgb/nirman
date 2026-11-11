@@ -151,7 +151,9 @@ export function ScanStage({ facts, host, signals, stage, shot, speedDone, onCanc
     () => {
       gsap.matchMedia().add(MOTION_OK, () => {
         const q = gsap.utils.selector(root);
-        gsap.fromTo(q(".sc-tilt"), { rotateY: -6, rotateX: 2 }, { rotateY: 6, rotateX: -1.5, duration: 5.5, ease: "sine.inOut", repeat: -1, yoyo: true, transformPerspective: 1100 });
+        // Depth comes from CSS perspective on the parent and is never tweened: animating it passes through
+        // near-zero values, where the phone stretches across the whole screen (seen live, 2026-11-11).
+        gsap.fromTo(q(".sc-tilt"), { rotateY: -6, rotateX: 2 }, { rotateY: 6, rotateX: -1.5, duration: 5.5, ease: "sine.inOut", repeat: -1, yoyo: true });
         gsap.to(q(".sc-sweep"), { rotate: 360, duration: 4.5, ease: "none", repeat: -1 });
         gsap.to(q(".sc-orbit-a"), { rotate: 360, duration: 9, ease: "none", repeat: -1 });
         gsap.to(q(".sc-orbit-b"), { rotate: -360, duration: 14, ease: "none", repeat: -1 });
@@ -179,7 +181,7 @@ export function ScanStage({ facts, host, signals, stage, shot, speedDone, onCanc
 
       <div className="mt-8 grid items-center gap-8 lg:grid-cols-[minmax(0,19rem)_minmax(0,1fr)_minmax(0,19rem)] lg:gap-6">
         {/* the site */}
-        <div className="relative mx-auto flex w-full max-w-[30rem] items-center justify-center py-6 lg:order-2 lg:py-10">
+        <div className="relative mx-auto flex w-full max-w-[30rem] items-center justify-center py-6 [perspective:1100px] lg:order-2 lg:py-10">
           <div aria-hidden className="absolute top-1/2 left-1/2 aspect-square w-[118%] max-w-[34rem] -translate-x-1/2 -translate-y-1/2">
             {[100, 76, 52].map((d) => <span key={d} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/8" style={{ width: `${d}%`, height: `${d}%` }} />)}
             <span className="sc-sweep absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,transparent_0deg,transparent_318deg,rgba(242,107,43,0.12)_350deg,rgba(255,154,98,0.42)_360deg)] [mask-image:radial-gradient(closest-side,transparent_30%,black_31%,black_99%,transparent_100%)]" />
