@@ -234,3 +234,7 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
     `src/sanity/blog.ts`.
 50. **Function props to `next/image` (a `loader`) need a client component**
     (`components/blog/picture.tsx`).
+51. **Never cache Sanity answers longer than the editor will wait.** With
+    `cacheLife("days")` and no publish webhook, an empty blog stayed empty
+    for a day after the first article was published (2026-11-11). Blog data
+    now uses an inline profile that revalidates every 10 minutes.

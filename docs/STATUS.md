@@ -66,7 +66,10 @@ the two legal pages. Not set
 yet on Vercel: `SANITY_REVALIDATE_SECRET` and the Sanity webhook.
 
 **Blog on Sanity, connected (2026-11-11)** to the user's project
-`iymga1c7`; no articles yet, so `/blog/` shows its empty state.
+`iymga1c7`. **First article published (2026-11-11)**, "How to Choose an SEO
+Company for UK Photography Websites"; it was hidden because blog data was
+cached for a day and the webhook is not set up. Fixed: blog data now
+refreshes every 10 minutes (`src/sanity/blog.ts`), webhook optional.
 **Waiting for the user** (steps 3 to 6 in `docs/sections/p7-blog.md`): add
 the site's address under CORS origins so `/studio/` can log in, write the
 first categories and an article, and (once the site has a public address)
