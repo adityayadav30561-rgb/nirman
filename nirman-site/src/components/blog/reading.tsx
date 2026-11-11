@@ -26,7 +26,7 @@ export function ReadProgress({ target }: { target: string }) {
   );
 }
 
-export function Contents({ items }: { items: { id: string; title: string }[] }) {
+export function Contents({ items, label = "In this article" }: { items: { id: string; title: string }[]; label?: string }) {
   const [active, setActive] = useState(items[0]?.id);
   useEffect(() => {
     const heads = items.map((i) => document.getElementById(i.id)).filter((el): el is HTMLElement => !!el);
@@ -44,8 +44,8 @@ export function Contents({ items }: { items: { id: string; title: string }[] }) 
   }, [items]);
   if (items.length < 2) return null;
   return (
-    <nav aria-label="In this article">
-      <p className="text-[0.75rem] font-semibold tracking-[0.08em] text-muted uppercase">In this article</p>
+    <nav aria-label={label}>
+      <p className="text-[0.75rem] font-semibold tracking-[0.08em] text-muted uppercase">{label}</p>
       <ol className="mt-3 flex flex-col border-l border-line">
         {items.map((t) => (
           <li key={t.id}>

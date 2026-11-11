@@ -1,5 +1,5 @@
-// Site footer (docs/sections/08-footer.md). Links follow PAGE-PLAN option B
-// (18 pages). Social profiles are placeholders with generic icons (no brand
+// Site footer (docs/sections/08-footer.md). Only pages that exist are linked
+// (user, 2026-11-11: Industries removed; tools return with P6). Social profiles are placeholders with generic icons (no brand
 // logos: client rule) until the client says which profiles exist.
 
 import type { NavLink } from "@/content/nav";
@@ -13,7 +13,6 @@ export const footerColumns: { title: string; links: NavLink[] }[] = [
     links: [
       { label: "About", href: "/about/" },
       { label: "Our work", href: "/work/" },
-      { label: "Industries", href: "/industries/" },
       { label: "Contact", href: "/contact/" },
     ],
   },
@@ -30,9 +29,9 @@ export const footerColumns: { title: string; links: NavLink[] }[] = [
   {
     title: "Resources",
     links: [
-      { label: "Free tools", href: "/tools/" },
-      { label: "Free SEO audit", href: "/tools/seo-audit/" },
+      // "Free tools" and "Free SEO audit" come back with BUILD-PLAN P6 (pages not built yet).
       { label: "Blog", href: "/blog/" },
+      { label: "Book a demo", href: "/nirman-crm/#book-a-demo" },
       { label: "Get a quote", href: "/get-a-quote/" },
     ],
   },
@@ -43,7 +42,7 @@ export const legalLinks: NavLink[] = [
   { label: "Terms", href: "/terms/" },
 ];
 
-/** Placeholder profiles: generic icons, replace href and label when real profiles exist. */
+/** Placeholder profiles: generic icons. An entry is shown only once its href is a real address (not "#"). */
 export type SocialIcon = "network" | "video" | "articles";
 export const socialLinks: { label: string; href: string; icon: SocialIcon }[] = [
   { label: "Nirman on a professional network (placeholder)", href: "#", icon: "network" },

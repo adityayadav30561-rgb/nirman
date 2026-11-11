@@ -42,15 +42,16 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 - [x] P3 `/get-a-quote/` multi-step form and `/thank-you/` (`docs/sections/p3-get-a-quote.md`)
 - [x] P4 `/contact/`, `/about/` (`docs/sections/p4-contact-about.md`; team, address and booking wait for the client)
 - [x] P5a `/work/` with real work from the user: selected work, three list pages, fifteen project pages, redone as case studies in round 3 (`docs/sections/p5-work.md`)
-- [ ] P5b `/industries/`
+- [ ] P5b `/industries/` (**dropped for now**, user 2026-11-11: links removed)
 - [ ] P6 `/tools/`, `/tools/seo-audit/`
 - [x] P7a `/blog/` on Sanity: list, category and article pages, the editor at `/studio/`, publish hook (`docs/sections/p7-blog.md`). **Waits for the user's Sanity project ID to go live.**
-- [ ] P7b `/privacy-policy/`, `/terms/`
+- [x] P7b `/privacy-policy/`, `/terms/` (general texts, not lawyer-reviewed; `docs/sections/p7b-legal.md`)
 
 ## S: Systems and launch
 
 - [ ] S1 Lead capture (form API, email), spam protection
-- [ ] S2 SEO infrastructure: page registry, metadata, OG image, robots,
+- [x] S2a sitemap, robots, llms.txt, 404 page (2026-11-11; `docs/sections/p7b-legal.md`)
+- [ ] S2 SEO infrastructure (rest): page registry, metadata, OG image, robots,
       sitemap, llms.txt, JSON-LD (see `docs/REDESIGN.md` sections 8 and 12)
 - [ ] S3 Accessibility and performance pass (Lighthouse at least 95)
 - [ ] S4 Launch checklist (domain, analytics, real contact details).

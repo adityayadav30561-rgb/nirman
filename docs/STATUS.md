@@ -54,10 +54,14 @@ plan, deploys from `main`) at **https://www.nirmandigital.com** (apex
 redirects to www; DNS at GoDaddy). `NEXT_PUBLIC_SITE_URL` is set there.
 Sanity CORS allows the domain, so `/studio/` can log in. Checked live: main
 pages 200 with the right canonical, blog empty state, unknown blog address
-404, `/studio/` shows Sanity's login. **Still broken for visitors:** forms
-only open the email app (S1); `/industries/`, `/tools/`,
-`/tools/seo-audit/` (header button), `/privacy-policy/`, `/terms/` are 404;
-no `robots.txt` or sitemap (S2); contact details are placeholders. Not set
+404, `/studio/` shows Sanity's login. **Fixed 2026-11-11:** real email and phone, privacy
+policy and terms, sitemap, robots, llms.txt, a 404 page, and no link to an
+unbuilt page (`docs/sections/p7b-legal.md`). **Still open:** forms only
+open the visitor's email app, now addressed to contact@nirmandigital.com
+(S1: needs an email-sending account from the user); the SEO audit tool
+(P6; the header button is "Book a demo" until then); office address,
+WhatsApp number and social profiles (hidden until given); legal review of
+the two legal pages. Not set
 yet on Vercel: `SANITY_REVALIDATE_SECRET` and the Sanity webhook.
 
 **Blog on Sanity, connected (2026-11-11)** to the user's project

@@ -4,18 +4,20 @@ import { site } from "@/content/site";
 /*
  * Ways to reach us (docs/sections/p4-contact-about.md). The WhatsApp row is
  * a plain chat icon: no WhatsApp logo in our artwork (client rule). Phone,
- * WhatsApp number, email and address are placeholders in content/site.ts.
+ * The address is still a placeholder in content/site.ts.
  */
-export const channels = [
+const allChannels = [
   { key: "call", Icon: Phone, label: "Call us", value: site.phone, href: `tel:${site.phone.replace(/\s/g, "")}`, note: "Working hours, IST" },
   { key: "wa", Icon: MessageCircle, label: "WhatsApp", value: "Chat with us", href: `https://wa.me/${site.whatsapp}`, note: "Usually the quickest" },
   { key: "mail", Icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}`, note: "Reply within 2 working hours" },
   { key: "office", Icon: MapPin, label: "Office", value: site.address, href: undefined, note: "We work with clients remotely" },
 ] as const;
+/** Rows without a real value are left out (WhatsApp until a number is confirmed). */
+export const channels = allChannels.filter((c) => c.key !== "wa" || site.whatsapp);
 
 export function Channels({ dark = false, grid = false }: { dark?: boolean; grid?: boolean }) {
   return (
-    <ul className={grid ? "grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4" : "flex flex-col"}>
+    <ul className={grid ? `grid grid-cols-1 gap-3 sm:grid-cols-2 ${channels.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}` : "flex flex-col"}>
       {channels.map(({ key, Icon, label, value, href, note }) => {
         const inner = (
           <>

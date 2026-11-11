@@ -36,9 +36,11 @@ function Glyph({ icon }: { icon: SocialIcon }) {
 }
 
 export function Socials({ className = "" }: { className?: string }) {
+  const real = socialLinks.filter((s) => s.href !== "#");
+  if (!real.length) return null;
   return (
     <ul className={`flex gap-3 ${className}`} aria-label="Social profiles">
-      {socialLinks.map((s) => (
+      {real.map((s) => (
         <li key={s.icon} className="ft-in">
           <a
             href={s.href}
