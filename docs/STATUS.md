@@ -49,6 +49,14 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
+**Free SEO audit built (2026-11-11):** `/tools/seo-audit/` audits any
+address (about 40 checks, six areas), shows the visitor's site being
+scanned, then the score, and gives the PDF report in exchange for email
+and phone (lead emailed to contact@nirmandigital.com).
+`docs/sections/p6-seo-audit.md`. **Waiting for the user:** a free Google
+PageSpeed key as `PAGESPEED_API_KEY` on Vercel; until then speed shows
+"not measured" and there is no phone screenshot.
+
 **Live (2026-11-11):** the site is on Vercel (project `nirman-site`, Hobby
 plan, deploys from `main`) at **https://www.nirmandigital.com** (apex
 redirects to www; DNS at GoDaddy). `NEXT_PUBLIC_SITE_URL` is set there.

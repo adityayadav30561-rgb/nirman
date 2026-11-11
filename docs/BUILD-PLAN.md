@@ -43,7 +43,7 @@ best). Tick a task only when it is built, verified, recorded and pushed.
 - [x] P4 `/contact/`, `/about/` (`docs/sections/p4-contact-about.md`; team, address and booking wait for the client)
 - [x] P5a `/work/` with real work from the user: selected work, three list pages, fifteen project pages, redone as case studies in round 3 (`docs/sections/p5-work.md`)
 - [ ] P5b `/industries/` (**dropped for now**, user 2026-11-11: links removed)
-- [ ] P6 `/tools/`, `/tools/seo-audit/`
+- [x] P6 `/tools/seo-audit/`: free SEO audit with scanning animation, score, gated PDF report (`docs/sections/p6-seo-audit.md`); `/tools/` redirects to it. Needs `PAGESPEED_API_KEY` on Vercel for the speed part.
 - [x] P7a `/blog/` on Sanity: list, category and article pages, the editor at `/studio/`, publish hook (`docs/sections/p7-blog.md`). **Waits for the user's Sanity project ID to go live.**
 - [x] P7b `/privacy-policy/`, `/terms/` (general texts, not lawyer-reviewed; `docs/sections/p7b-legal.md`)
 

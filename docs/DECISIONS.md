@@ -5,6 +5,7 @@ from the client are in `docs/handoff.md` §1 and are not repeated here.
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-11-11 | Free SEO audit: scan animation with the visitor's own site, score shown free, full PDF report only after a short form (email and phone, name optional). Findings are sealed on the server so the blur cannot be bypassed. Result layout A (63/70) | User brief; technical design and layout by Claude per protocol |
 | 2026-11-11 | Industries page and links removed; general privacy policy and terms pages; email contact@nirmandigital.com and phone +91 88583 49017; links to unbuilt tools hidden and the header's second button is "Book a demo" until the SEO audit tool exists | User request (Industries, legal pages, details); the tools links and header button decided by Claude so the live site has no dead links |
 | 2026-11-11 | Domain **www.nirmandigital.com** (apex redirects to www), hosted on Vercel from `main` | User connected their domain and Vercel project |
 | 2026-11-10 | Blog publishing on **Sanity** (hosted editor inside the site at `/studio/`), not Markdown files in the repo. List layout A (62/70), article layout B (63/70) | User chose Sanity when offered both; layouts chosen by Claude per protocol |

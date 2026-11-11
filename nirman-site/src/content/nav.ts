@@ -20,6 +20,5 @@ export const mainNav: (NavLink & { children?: NavLink[] })[] = [
 
 export const headerCtas = {
   primary: { label: "Get a quote", href: "/get-a-quote/" },
-  // "Free SEO audit" (/tools/seo-audit/) returns here with BUILD-PLAN P6; the page is not built yet.
-  secondary: { label: "Book a demo", href: "/nirman-crm/#book-a-demo" },
+  secondary: { label: "Free SEO audit", href: "/tools/seo-audit/" },
 } as const;

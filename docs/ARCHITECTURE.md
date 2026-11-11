@@ -234,3 +234,11 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
     `src/sanity/blog.ts`.
 50. **Function props to `next/image` (a `loader`) need a client component**
     (`components/blog/picture.tsx`).
+51. **Server code that fetches an address a visitor typed must use
+    `lib/audit/safe-fetch.ts`** (public IPs only, checked again on every
+    redirect, size and time limits). A plain `fetch` there would let the
+    site be used to reach private machines.
+52. **`@react-pdf/renderer` is in `serverExternalPackages`** (next.config)
+    and loads its fonts over HTTP from the site's own `/fonts/`. In
+    react-pdf, big numbers need a `lineHeight` of about 1.25 or the next
+    line overlaps them.

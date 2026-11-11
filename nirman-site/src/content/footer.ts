@@ -29,7 +29,7 @@ export const footerColumns: { title: string; links: NavLink[] }[] = [
   {
     title: "Resources",
     links: [
-      // "Free tools" and "Free SEO audit" come back with BUILD-PLAN P6 (pages not built yet).
+      { label: "Free SEO audit", href: "/tools/seo-audit/" },
       { label: "Blog", href: "/blog/" },
       { label: "Book a demo", href: "/nirman-crm/#book-a-demo" },
       { label: "Get a quote", href: "/get-a-quote/" },

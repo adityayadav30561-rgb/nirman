@@ -35,6 +35,7 @@ export const privacy: LegalDoc = {
       text: [
         "Information you give us. When you ask for a quote, book a demo, send a message or ask a question, we receive what you enter:",
         ["Your name, email address and phone number", "Your business name and website address, if you give them", "What you tell us about your project, timeline and needs"],
+        "The free SEO audit. When you run an audit we read the public pages of the website address you enter (the page, its robots.txt and its sitemap) and send that address to Google's PageSpeed Insights service to measure its speed. To download the PDF report you give us your email address and phone number, and optionally your name; we receive these together with the address audited and its score.",
         "Information collected automatically. Like most websites, the servers that deliver this site record basic technical details of each visit, such as the IP address, browser and device type, the pages requested and the time. We use these records to keep the site secure and working.",
         "Cookies. At the date of this policy the site sets no advertising or tracking cookies. If we add analytics or similar tools, we will update this section before we do.",
       ],
@@ -44,7 +45,7 @@ export const privacy: LegalDoc = {
       title: "How we use it",
       text: [
         "We use personal information to:",
-        ["Reply to your enquiry and prepare a proposal", "Arrange and run a demo of Nirman CRM", "Deliver the services you have engaged us for", "Keep the website secure and improve it", "Meet our legal and accounting duties"],
+        ["Reply to your enquiry and prepare a proposal", "Contact you about an audit report you downloaded", "Arrange and run a demo of Nirman CRM", "Deliver the services you have engaged us for", "Keep the website secure and improve it", "Meet our legal and accounting duties"],
         "We do not sell personal information, and we do not use it for anything unrelated to these purposes.",
       ],
     },
@@ -60,7 +61,7 @@ export const privacy: LegalDoc = {
       title: "Who we share it with",
       text: [
         "We share personal information only where it is needed:",
-        ["Service providers that run parts of our business for us, such as website hosting, email delivery and content management, who may only use it to provide that service", "Professional advisers such as accountants and lawyers", "Authorities, where the law requires it"],
+        ["Service providers that run parts of our business for us, such as website hosting, email delivery, content management and, for the SEO audit, Google's PageSpeed Insights, who may only use it to provide that service", "Professional advisers such as accountants and lawyers", "Authorities, where the law requires it"],
         "These providers may store information on servers outside your country. Where that happens we rely on providers that apply recognised security and data protection standards.",
       ],
     },
