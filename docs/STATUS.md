@@ -63,7 +63,8 @@ and phone (lead emailed to contact@nirmandigital.com).
 `docs/sections/p6-seo-audit.md`. The Google PageSpeed key is set on Vercel and a
 live audit returned speed scores and the screenshot.
 
-**Tracking (2026-11-11):** Google Tag Manager `GTM-5H9HWP85` and the Search
+**Tracking (2026-11-11):** Google Tag Manager `GTM-5H9HWP85` and `GTM-5PBWGV8Z` (second
+container, added the same day) and the Search
 Console verification tag are in the root layout (ids in `content/site.ts`;
 from the user's SEO person). The privacy policy says so. A cookie consent banner
 (Consent Mode v2) holds measurement cookies until the visitor agrees
