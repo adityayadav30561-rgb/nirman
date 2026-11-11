@@ -56,10 +56,10 @@ Sanity CORS allows the domain, so `/studio/` can log in. Checked live: main
 pages 200 with the right canonical, blog empty state, unknown blog address
 404, `/studio/` shows Sanity's login. **Fixed 2026-11-11:** real email and phone, privacy
 policy and terms, sitemap, robots, llms.txt, a 404 page, and no link to an
-unbuilt page (`docs/sections/p7b-legal.md`). **Forms (S1) built 2026-11-11:** they send through
-`/api/lead/` and Resend once the user sets `RESEND_API_KEY` on Vercel and
-verifies the domain in Resend (in progress; `docs/sections/s1-forms.md`);
-until then they open the visitor's email app. **Still open:** the SEO audit tool
+unbuilt page (`docs/sections/p7b-legal.md`). **Forms (S1) live 2026-11-11:** they send through
+`/api/lead/` and Resend to contact@nirmandigital.com
+(`docs/sections/s1-forms.md`); the user is confirming the test email
+arrived. **Still open:** the SEO audit tool
 (P6; the header button is "Book a demo" until then); office address,
 WhatsApp number and social profiles (hidden until given); legal review of
 the two legal pages. Not set

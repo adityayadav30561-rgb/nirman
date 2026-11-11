@@ -1,9 +1,10 @@
 # S1 Forms: sending enquiries
 
-Status: built and tested with a stand-in email service (2026-11-11). **Goes
-live when the user has verified nirmandigital.com in Resend and set
-`RESEND_API_KEY` on Vercel.** Until then every form falls back to opening
-the visitor's email app (the old behaviour), so nothing is lost.
+Status: **live (2026-11-11).** nirmandigital.com is verified in Resend and
+`RESEND_API_KEY` is set on Vercel; a test enquiry sent through the live
+`/api/lead/` was accepted by Resend. Still to confirm by the user: that the
+test email arrived in the contact@nirmandigital.com inbox. If sending ever
+fails, a form falls back to opening the visitor's email app.
 
 ## How it works
 - All four forms (Get a quote, Contact, Book a demo, the homepage email
