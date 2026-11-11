@@ -246,3 +246,8 @@ Gotchas 3-29 come from the old v2 site; some mention code that is now in
     and loads its fonts over HTTP from the site's own `/fonts/`. In
     react-pdf, big numbers need a `lineHeight` of about 1.25 or the next
     line overlaps them.
+54. **Google Tag Manager is in `app/layout.tsx`** (`site.gtmId`), loaded
+    with `next/script` after the page is interactive. Tags themselves are
+    managed in the GTM container, not in code. When a tag that sets cookies
+    is added there, keep the privacy policy's "Cookies and measurement"
+    section true.

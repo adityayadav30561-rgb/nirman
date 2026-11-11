@@ -12,4 +12,7 @@ export const site = {
   whatsapp: "918858349017", // digits only, for wa.me links; same number as the phone (user, 2026-11-11). Empty hides the WhatsApp row on Contact
   address: "India", // placeholder: the full office address comes from the client
   copyrightYear: 2026,
+  /** Google Tag Manager container and Search Console verification, from the user's SEO person (2026-11-11). Empty turns either off. */
+  gtmId: "GTM-5H9HWP85",
+  googleVerification: "yo7NVCj8c66j_BmCXgnJmVF5DRIpN-8sRqruqbikKe0",
 } as const;

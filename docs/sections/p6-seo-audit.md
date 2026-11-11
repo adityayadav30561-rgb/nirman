@@ -1,9 +1,9 @@
 # P6 Free SEO audit (`/tools/seo-audit/`)
 
-Status: built and tested with stand-ins for Google and the email service
-(2026-11-11). **Speed, Core Web Vitals and the phone screenshot need the
-user to add `PAGESPEED_API_KEY` on Vercel** (free Google key); without it
-the audit runs but marks speed "not measured". `/tools/` redirects here
+Status: **live with Google PageSpeed (2026-11-11).** `PAGESPEED_API_KEY`
+is set on Vercel; a live audit returned speed scores and the phone
+screenshot in about 20 seconds, and a PDF was downloaded from the live
+site. Without the key the audit still runs but marks speed "not measured". `/tools/` redirects here
 (one tool for now).
 
 ## What the visitor does (user brief, 2026-11-11)
@@ -94,7 +94,8 @@ lead email content); findings do not appear anywhere in the page before
 download; refusals for private, local, odd-port and non-existent
 addresses, forged tickets and the rate limit; the no-speed path; link
 crawl (35 pages, none broken). `tsc`, `lint`, `build` pass.
-**Not tested:** a real Google PageSpeed response (needs the key).
+After the key was added, a live audit confirmed the real Google response
+(speed scored, screenshot returned).
 
 ## Settings on Vercel
 - `PAGESPEED_API_KEY`: Google Cloud console, enable "PageSpeed Insights

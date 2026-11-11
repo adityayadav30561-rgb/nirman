@@ -37,7 +37,7 @@ export const privacy: LegalDoc = {
         ["Your name, email address and phone number", "Your business name and website address, if you give them", "What you tell us about your project, timeline and needs"],
         "The free SEO audit. When you run an audit we read the public pages of the website address you enter (the page, its robots.txt and its sitemap) and send that address to Google's PageSpeed Insights service to measure its speed. To download the PDF report you give us your email address and phone number, and optionally your name; we receive these together with the address audited and its score.",
         "Information collected automatically. Like most websites, the servers that deliver this site record basic technical details of each visit, such as the IP address, browser and device type, the pages requested and the time. We use these records to keep the site secure and working.",
-        "Cookies. At the date of this policy the site sets no advertising or tracking cookies. If we add analytics or similar tools, we will update this section before we do.",
+        "Cookies and measurement. This site uses Google Tag Manager to load measurement tools such as Google Analytics. These tools set cookies and record how the site is used (for example which pages are viewed, roughly where visitors are and what device they use) so that we can understand and improve it. You can block these cookies in your browser settings, or with Google's Analytics opt-out browser add-on, and the site will still work.",
       ],
     },
     {
@@ -61,7 +61,7 @@ export const privacy: LegalDoc = {
       title: "Who we share it with",
       text: [
         "We share personal information only where it is needed:",
-        ["Service providers that run parts of our business for us, such as website hosting, email delivery, content management and, for the SEO audit, Google's PageSpeed Insights, who may only use it to provide that service", "Professional advisers such as accountants and lawyers", "Authorities, where the law requires it"],
+        ["Service providers that run parts of our business for us, such as website hosting, email delivery, content management, measurement (Google Tag Manager and the tools it loads) and, for the SEO audit, Google's PageSpeed Insights, who may only use it to provide that service", "Professional advisers such as accountants and lawyers", "Authorities, where the law requires it"],
         "These providers may store information on servers outside your country. Where that happens we rely on providers that apply recognised security and data protection standards.",
       ],
     },

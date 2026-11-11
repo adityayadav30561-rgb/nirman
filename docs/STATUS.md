@@ -53,9 +53,13 @@ the end of every session. Keep it under about 60 lines. Older history:
 address (about 40 checks, six areas), shows the visitor's site being
 scanned, then the score, and gives the PDF report in exchange for email
 and phone (lead emailed to contact@nirmandigital.com).
-`docs/sections/p6-seo-audit.md`. **Waiting for the user:** a free Google
-PageSpeed key as `PAGESPEED_API_KEY` on Vercel; until then speed shows
-"not measured" and there is no phone screenshot.
+`docs/sections/p6-seo-audit.md`. The Google PageSpeed key is set on Vercel and a
+live audit returned speed scores and the screenshot.
+
+**Tracking (2026-11-11):** Google Tag Manager `GTM-5H9HWP85` and the Search
+Console verification tag are in the root layout (ids in `content/site.ts`;
+from the user's SEO person). The privacy policy says so. There is no cookie
+consent banner yet (matters for EU and UK visitors).
 
 **Live (2026-11-11):** the site is on Vercel (project `nirman-site`, Hobby
 plan, deploys from `main`) at **https://www.nirmandigital.com** (apex
