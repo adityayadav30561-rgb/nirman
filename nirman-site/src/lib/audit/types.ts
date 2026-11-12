@@ -9,7 +9,18 @@ export type Check = { id: string; cat: CatKey; title: string; status: Status; we
 export type CatScore = { key: CatKey; label: string; score: number | null; pass: number; warn: number; fail: number };
 
 /** Facts about the page that the scanning animation and the report cover use. */
-export type PageFacts = { host: string; finalUrl: string; title: string; description: string; h1: string; favicon: string; ogImage: string; themeColor: string };
+export type PageFacts = {
+  host: string;
+  finalUrl: string;
+  title: string;
+  description: string;
+  h1: string;
+  favicon: string;
+  ogImage: string;
+  themeColor: string;
+  /** the site lets other pages show it in a frame (no X-Frame-Options, no frame-ancestors rule) and is on https: the scan can show it live */
+  frameable?: boolean;
+};
 
 /**
  * A raw observation shown while the audit runs (scanning animation): what was

@@ -26,6 +26,20 @@ During Google's speed test the log and the frame narrate what Lighthouse
 does (simulated phone, slow 4G, LCP, CLS, TBT, accessibility, real-visitor
 data), then the real screenshot replaces the sketch. Each area stays on
 screen long enough to show its signals (`hold` in `audit-tool.tsx`).
+**The real site from the start (2026-11-12, user: "why doesn't the
+animation show the site in the starting").** The real screenshot comes from
+Google's speed test, so it only arrived near the end. Now the phone loads
+the **live site itself** in a frame as soon as step 1 answers (about 2.5
+to 3.5 s after pressing the button), when the site allows framing:
+`frameable` in `crawl.ts` is true when the final page is https, answers
+200, and has no `X-Frame-Options` header and no CSP `frame-ancestors`
+rule. The frame is 390 px wide and scaled to the phone, cannot be clicked
+and is sandboxed (`allow-scripts allow-same-origin` only, so it cannot
+navigate our page). Sites that forbid framing (most Shopify stores, for
+example) keep the sketch and then Google's screenshot. The caption under
+the phone says which one is showing. The PDF always uses Google's
+screenshot.
+
 **Bug fixed the same day:** the phone's 3D depth was being animated with
 the tilt and the phone stretched across the screen every few seconds (the
 user reported it). Depth is now a fixed CSS perspective; the phone's box

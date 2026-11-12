@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Lock } from "lucide-react";
 import { gsap, MOTION_OK, useGSAP } from "@/components/motion/gsap";
 import { CATS, scoreColour, verdictOf, type CatScore, type PageFacts, type Summary } from "@/lib/audit/types";
@@ -72,13 +72,58 @@ export function CatBars({ cats, tone = "light" }: { cats: CatScore[]; tone?: "li
   );
 }
 
+/** The audited site itself, loaded at phone width and scaled to fit. It cannot be clicked, typed into or navigate the page it sits in. */
+function LiveSite({ url, host, onShown }: { url: string; host: string; onShown: () => void }) {
+  const box = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  const W = 390; // a common phone width, so the site lays itself out for phones
+  useEffect(() => {
+    const el = box.current;
+    if (!el) return;
+    const fit = () => setScale(el.clientWidth / W);
+    const ro = new ResizeObserver(fit);
+    ro.observe(el);
+    fit();
+    return () => ro.disconnect();
+  }, []);
+  return (
+    <div ref={box} className={`absolute inset-0 overflow-hidden bg-white transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}>
+      {scale > 0 && (
+        <iframe
+          src={url}
+          title={`${host}, live`}
+          aria-hidden
+          tabIndex={-1}
+          sandbox="allow-scripts allow-same-origin"
+          referrerPolicy="no-referrer"
+          loading="eager"
+          scrolling="no"
+          onLoad={() => {
+            setLoaded(true);
+            onShown();
+          }}
+          className="pointer-events-none origin-top-left border-0"
+          style={{ width: W, height: `${100 / scale}%`, transform: `scale(${scale})` }}
+        />
+      )}
+    </div>
+  );
+}
+
 /**
- * The visitor's site in a phone. Until Google's screenshot arrives it is a
- * sketch built from the page's own title, heading, description and preview
- * picture; then the real screenshot fades in over it.
+ * The visitor's site in a phone. In order of preference:
+ * 1. the live site itself in a frame, about two seconds after the audit
+ *    starts, when the site allows being framed (`facts.frameable`);
+ * 2. Google's screenshot, which only arrives when the speed test ends;
+ * 3. until either is ready, a sketch built from the page's own title,
+ *    heading, description and preview picture.
+ * `onReal` reports which one is showing, for the caption.
  */
-export function SitePhone({ facts, screenshot, scanning = false, className = "" }: { facts: PageFacts | null; screenshot?: string; scanning?: boolean; className?: string }) {
+export function SitePhone({ facts, screenshot, scanning = false, className = "", onReal }: { facts: PageFacts | null; screenshot?: string; scanning?: boolean; className?: string; onReal?: (kind: "live") => void }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [liveShown, setLiveShown] = useState(false);
+  const live = facts?.frameable ? facts.finalUrl : "";
   useGSAP(
     () => {
       if (!scanning) return;
@@ -120,8 +165,19 @@ export function SitePhone({ facts, screenshot, scanning = false, className = "" 
             </div>
           </div>
         </div>
-        {/* the real page, once Google has loaded it */}
-        {screenshot && (
+        {/* the live site, when it may be framed */}
+        {live && (
+          <LiveSite
+            url={live}
+            host={facts?.host || ""}
+            onShown={() => {
+              setLiveShown(true);
+              onReal?.("live");
+            }}
+          />
+        )}
+        {/* otherwise the real page as Google loaded it, once the speed test ends */}
+        {screenshot && !liveShown && (
           // eslint-disable-next-line @next/next/no-img-element -- a data: screenshot from Google PageSpeed
           <img src={screenshot} alt={facts ? `${facts.host} on a phone` : "The site on a phone"} className="absolute inset-0 size-full object-cover object-top transition-opacity duration-700" />
         )}

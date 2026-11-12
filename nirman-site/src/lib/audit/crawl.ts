@@ -20,6 +20,8 @@ export type Crawl = {
   truncated: boolean;
   chain: { url: string; status: number }[];
   headers: { contentType: string; encoding: string; xRobots: string; hsts: boolean; cacheControl: string };
+  /** may the page be shown inside a frame on another site? (X-Frame-Options and CSP frame-ancestors) */
+  frameable: boolean;
   /** does http:// end on https://? null: could not tell */
   httpUpgrades: boolean | null;
   /** the www / non-www twin of the host: where it ends up */
@@ -224,6 +226,7 @@ export async function crawl(requested: string): Promise<Crawl> {
     truncated: page.truncated,
     chain: page.chain,
     headers: { contentType: page.headers["content-type"] || "", encoding: page.headers["content-encoding"] || "", xRobots: (page.headers["x-robots-tag"] || "").toLowerCase(), hsts: !!page.headers["strict-transport-security"], cacheControl: page.headers["cache-control"] || "" },
+    frameable: final.protocol === "https:" && page.status >= 200 && page.status < 300 && isHtml && !page.headers["x-frame-options"] && !/frame-ancestors/i.test(page.headers["content-security-policy"] || "") && !/http-equiv=["']?content-security-policy["']?[^>]*frame-ancestors/i.test(page.body.slice(0, 20_000)),
     httpUpgrades: final.protocol !== "https:" ? false : http ? http.url.startsWith("https://") : null,
     twin: twin ? { host: twinHost, reachable: twin.status < 500, sameSite: new URL(twin.url).hostname === final.hostname } : final.hostname.split(".").length <= 3 ? { host: twinHost, reachable: false, sameSite: false } : null,
     page: isHtml ? readPage(page.body, page.url) : readPage("<html><head></head><body></body></html>", page.url),

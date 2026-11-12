@@ -151,7 +151,7 @@ export function scoreCats(checks: Check[], speedMeasured = true): { cats: CatSco
 }
 
 export function factsOf(c: Crawl): PageFacts {
-  return { host: c.host, finalUrl: c.finalUrl, title: c.page.title, description: c.page.description, h1: c.page.h1[0] || "", favicon: c.page.favicon, ogImage: c.page.og.image, themeColor: /^#[0-9a-f]{3,8}$/i.test(c.page.themeColor) ? c.page.themeColor : "" };
+  return { host: c.host, finalUrl: c.finalUrl, title: c.page.title, description: c.page.description, h1: c.page.h1[0] || "", favicon: c.page.favicon, ogImage: c.page.og.image, themeColor: /^#[0-9a-f]{3,8}$/i.test(c.page.themeColor) ? c.page.themeColor : "", frameable: c.frameable };
 }
 
 /** Raw observations for the scanning animation, in the order the areas are checked. No verdicts. */

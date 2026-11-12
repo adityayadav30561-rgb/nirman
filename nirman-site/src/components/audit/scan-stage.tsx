@@ -10,8 +10,9 @@ import { CATS, type CatKey, type PageFacts, type Signal } from "@/lib/audit/type
 /*
  * The audit while it runs (docs/sections/p6-seo-audit.md, round 2). Three
  * parts that all show the same real work:
- * - the visitor's site in a phone (a sketch from its own tags, then Google's
- *   screenshot), tilting slowly inside a radar. A frame glides over the part
+ * - the visitor's site in a phone, tilting slowly inside a radar: the live
+ *   site itself within a couple of seconds when it allows framing,
+ *   otherwise a sketch from its own tags and then Google's screenshot. A frame glides over the part
  *   of the page being read and a tag beside it types what was found there;
  * - a live log of every observation, with the time it was made;
  * - the six areas, each with a ring that spins while it is being checked and
@@ -91,6 +92,7 @@ export function ScanStage({ facts, host, signals, stage, shot, speedDone, onCanc
   const [log, setLog] = useState<Line[]>([]);
   const [probe, setProbe] = useState<Probe | null>(null);
   const [seen, setSeen] = useState<Partial<Record<CatKey, number>>>({});
+  const [live, setLive] = useState(false);
   const started = useRef(0);
   const nextId = useRef(0);
   const shown = (facts?.host || host).replace(/^https?:\/\//, "").replace(/\/.*$/, "");
@@ -192,7 +194,7 @@ export function ScanStage({ facts, host, signals, stage, shot, speedDone, onCanc
           </div>
 
           <div className="sc-tilt relative w-[12.5rem] sm:w-[14.5rem]" style={{ transformStyle: "preserve-3d" }}>
-            <SitePhone facts={facts} screenshot={shot} scanning={!!cat} />
+            <SitePhone facts={facts} screenshot={shot} scanning={!!cat} onReal={() => setLive(true)} />
             {/* the frame over the part being read */}
             <AnimatePresence>
               {probe?.at && cat && (
@@ -214,7 +216,7 @@ export function ScanStage({ facts, host, signals, stage, shot, speedDone, onCanc
               )}
             </AnimatePresence>
           </div>
-          <p className="absolute bottom-0 left-1/2 -translate-x-1/2 text-[0.7rem] whitespace-nowrap text-white/45">{shot ? "Screenshot from Google Lighthouse" : facts ? "Sketch from the page's own tags" : "Connecting"}</p>
+          <p className="absolute bottom-0 left-1/2 -translate-x-1/2 text-[0.7rem] whitespace-nowrap text-white/45">{live ? "Your live site, at phone width" : shot ? "Screenshot from Google Lighthouse" : facts?.frameable ? "Loading your site" : facts ? "Sketch from the page's own tags" : "Connecting"}</p>
         </div>
 
         {/* the log */}
