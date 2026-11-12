@@ -25,7 +25,8 @@ export async function GET() {
     "",
     "## Contact",
     `- Email: ${site.email}`,
-    `- Phone: ${site.phone}`,
+    `- Phone: ${site.phones.join(", ")}`,
+    `- WhatsApp: +${site.whatsapp}`,
     "",
   ].join("\n");
   return new Response(body, { headers: { "content-type": "text/plain; charset=utf-8" } });

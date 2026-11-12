@@ -20,7 +20,7 @@ export function SiteFooter() {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
             <div>
               <Link href="/" aria-label="Nirman home" className="ft-in inline-flex min-h-11 items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
-                <Logo tone="light" />
+                <Logo tone="light" className="h-[4.5rem]" />
               </Link>
               <p className="ft-in mt-5 max-w-[22rem] text-[0.95rem] leading-relaxed text-white/85">{footerBlurb}</p>
               <Socials className="mt-7" />

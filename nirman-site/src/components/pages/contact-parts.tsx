@@ -7,7 +7,7 @@ import { site } from "@/content/site";
  * The address is still a placeholder in content/site.ts.
  */
 const allChannels = [
-  { key: "call", Icon: Phone, label: "Call us", value: site.phone, href: `tel:${site.phone.replace(/\s/g, "")}`, note: "Working hours, IST" },
+  ...site.phones.map((p, i) => ({ key: `call-${i}`, Icon: Phone, label: site.phones.length > 1 ? `Call us (line ${i + 1})` : "Call us", value: p, href: `tel:${p.replace(/\s/g, "")}` as string | undefined, note: "Working hours, IST" })),
   { key: "wa", Icon: MessageCircle, label: "WhatsApp", value: "Chat with us", href: `https://wa.me/${site.whatsapp}`, note: "Usually the quickest" },
   { key: "mail", Icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}`, note: "Reply within 2 working hours" },
   { key: "office", Icon: MapPin, label: "Office", value: site.address, href: undefined, note: "We work with clients remotely" },

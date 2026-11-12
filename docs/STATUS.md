@@ -49,6 +49,11 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
+**Logo, numbers, WhatsApp chat (2026-11-12):** the user's logo is in the
+header, footer, PDF and as the browser icon (a monogram); a second calling
+number (+91 79052 04380); a floating WhatsApp chat that opens WhatsApp with
+the typed message (`docs/sections/s6-brand-contact.md`).
+
 **SEO audit round 3 (2026-11-12):** AEO and GEO are now two scored areas
 (15% each) with their own checks in the PDF, plus SEO / AEO / GEO scores on
 the result and the PDF cover (`docs/sections/p6-seo-audit.md` round 3).

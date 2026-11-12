@@ -1,4 +1,4 @@
-import { Circle, Document, Font, Image, Link, Page, Path, StyleSheet, Svg, Text, View, renderToBuffer } from "@react-pdf/renderer";
+import { Circle, Document, Font, Image, Link, Page, StyleSheet, Svg, Text, View, renderToBuffer } from "@react-pdf/renderer";
 import { pillarsOf, priorities, verdict } from "@/lib/audit/checks";
 import { CATS, scoreColour, type Check, type Report, type Status } from "@/lib/audit/types";
 import { site } from "@/content/site";
@@ -82,14 +82,6 @@ function Bar({ label, score }: { label: string; score: number | null }) {
   );
 }
 
-function Mark() {
-  return (
-    <Svg viewBox="0 0 32 32" width={20} height={20}>
-      <Path d="M9 0h14a9 9 0 0 1 9 9v14a9 9 0 0 1-9 9H9a9 9 0 0 1-9-9V9a9 9 0 0 1 9-9z" fill="#ffffff" />
-      <Path d="M9 24V11.5A3.5 3.5 0 0 1 12.5 8h7a3.5 3.5 0 0 1 3.5 3.5V24" fill="none" stroke={INK} strokeWidth={3} />
-    </Svg>
-  );
-}
 
 function Footer({ host }: { host: string }) {
   return (
@@ -121,7 +113,7 @@ function CheckRow({ k }: { k: Check }) {
   );
 }
 
-function ReportDoc({ r }: { r: Report }) {
+function ReportDoc({ r, origin }: { r: Report; origin: string }) {
   const host = r.facts.host;
   const date = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Kolkata" }).format(new Date(r.date));
   const count = (s: Status) => r.checks.filter((k) => k.status === s).length;
@@ -133,10 +125,8 @@ function ReportDoc({ r }: { r: Report }) {
       <Page size="A4" style={[st.page, { paddingTop: 0, paddingHorizontal: 0 }]}>
         <View style={{ backgroundColor: INK, color: "#ffffff", paddingHorizontal: 44, paddingTop: 40, paddingBottom: 36 }}>
           <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Mark />
-              <Text style={{ marginLeft: 8, fontSize: 15, fontWeight: 600, letterSpacing: -0.4 }}>{site.name.toLowerCase()}</Text>
-            </View>
+            {/* eslint-disable-next-line jsx-a11y/alt-text -- a PDF image, not an HTML one */}
+            <Image src={`${origin}/images/brand/nirman-logo-light.png`} style={{ height: 40, width: 60 }} />
             <Text style={{ fontSize: 8, color: "#aab0bb" }}>{date}</Text>
           </View>
           <View style={{ flexDirection: "row", alignItems: "center", marginTop: 34 }}>
@@ -264,7 +254,7 @@ function ReportDoc({ r }: { r: Report }) {
           </Text>
           <View style={{ flexDirection: "row", marginTop: 12, alignItems: "center" }}>
             <Link src={`${site.url}/get-a-quote/`} style={{ backgroundColor: "#ffffff", color: INK, fontSize: 9.5, fontWeight: 600, paddingVertical: 7, paddingHorizontal: 16, borderRadius: 14, textDecoration: "none" }}>Get a quote</Link>
-            <Text style={{ marginLeft: 14, color: "#c9ced6", fontSize: 9 }}>{site.email} · {site.phone}</Text>
+            <Text style={{ marginLeft: 14, color: "#c9ced6", fontSize: 9 }}>{site.email} · {site.phones.join(" · ")}</Text>
           </View>
         </View>
         <Text style={[st.muted, { fontSize: 8, marginTop: 14 }]}>
@@ -278,5 +268,5 @@ function ReportDoc({ r }: { r: Report }) {
 
 export async function renderReportPdf(report: Report, origin: string): Promise<Buffer> {
   fonts(origin);
-  return renderToBuffer(<ReportDoc r={report} />);
+  return renderToBuffer(<ReportDoc r={report} origin={origin} />);
 }

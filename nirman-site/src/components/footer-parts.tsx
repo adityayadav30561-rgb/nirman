@@ -88,11 +88,13 @@ export function Contact() {
             {site.email}
           </a>
         </li>
-        <li>
-          <a href={`tel:${site.phone.replace(/\s/g, "")}`} className={quiet}>
-            {site.phone}
-          </a>
-        </li>
+        {site.phones.map((p) => (
+          <li key={p}>
+            <a href={`tel:${p.replace(/\s/g, "")}`} className={quiet}>
+              {p}
+            </a>
+          </li>
+        ))}
       </ul>
       <p className="mt-2 text-[0.85rem] leading-relaxed text-white/85">
         {contactNote}

@@ -6,6 +6,7 @@ import { site } from "@/content/site";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { CookieConsent } from "@/components/cookie-consent";
+import { WhatsAppChat } from "@/components/whatsapp-chat";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -83,7 +84,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
-        {/* usePathname inside: Suspense for pages whose address is not known at build time (ARCHITECTURE gotcha 47) */}
+        <Suspense fallback={null}>
+          <WhatsAppChat />
+        </Suspense>
+        {/* usePathname inside both: Suspense for pages whose address is not known at build time (ARCHITECTURE gotcha 47) */}
         {site.gtmIds.length > 0 && (
           <Suspense fallback={null}>
             <CookieConsent />

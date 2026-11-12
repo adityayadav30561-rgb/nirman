@@ -5,6 +5,8 @@ from the client are in `docs/handoff.md` §1 and are not repeated here.
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-11-12 | The user's logo (wordmark over a gold mandala) replaces the code-built one; browser icon is a monogram from it. Two calling numbers (+91 88583 49017, +91 79052 04380); WhatsApp stays on the first. Floating WhatsApp chat at the bottom right that opens WhatsApp with the typed message | User request; monogram icon and chat design by Claude |
+| 2026-11-12 | The WhatsApp chat button uses a generic chat bubble, not the WhatsApp logo | Client rule (no WhatsApp logos in our artwork) and the user's own reference; the user can choose the official logo |
 | 2026-11-12 | SEO audit scores AEO and GEO as two areas, 15% each (30% together), with SEO / AEO / GEO shown separately | User: AEO and GEO must be audited, in the PDF, and the score based on them; weights by Claude |
 | 2026-11-11 | Google Tag Manager (GTM-5H9HWP85) and Search Console verification added site-wide. Installed as Google's standard GTM snippet (with the gtm.js start event and the noscript frame) rather than the shortened snippet sent, so "All Pages" tags fire | User, from their SEO person; install form chosen by Claude |
 | 2026-11-11 | Second Google Tag Manager container GTM-5PBWGV8Z added next to GTM-5H9HWP85 (both load on every page, same consent banner). Installed through the existing consent-aware loader, not as the shortened snippet sent (which lacks the gtm.js start event) | User |

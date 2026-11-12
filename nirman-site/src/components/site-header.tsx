@@ -123,7 +123,7 @@ function Header({ pathname }: { pathname: string }) {
     <header ref={headerRef} className="relative z-30">
       <div className="container-page flex h-[5.5rem] items-center justify-between gap-6">
         <Link href="/" aria-label="Nirman home" className="hd-logo gs-hide shrink-0">
-          <Logo />
+          <Logo priority />
         </Link>
 
         <nav aria-label="Main" className="hidden lg:block">
