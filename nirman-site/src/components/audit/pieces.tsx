@@ -44,7 +44,7 @@ export function ScoreRing({ score, size = "11rem", tone = "light" }: { score: nu
   );
 }
 
-/** Score for each of the six areas; bars grow in order. */
+/** Score for each of the seven areas; bars grow in order. */
 export function CatBars({ cats, tone = "light" }: { cats: CatScore[]; tone?: "light" | "dark" }) {
   const ref = useRef<HTMLUListElement>(null);
   useGSAP(

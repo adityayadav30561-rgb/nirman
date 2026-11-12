@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Bot, Check, FileSearch, Gauge, Network, Share2, Smartphone } from "lucide-react";
+import { ArrowRight, Check, FileSearch, Gauge, MessageCircleQuestion, Network, Share2, Smartphone, Sparkles } from "lucide-react";
 import { AuditTool } from "@/components/audit/audit-tool";
 import { heroGrid } from "@/components/services/service-hero";
 import { ServiceMotion } from "@/components/services/service-motion";
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: { type: "website", siteName: site.name, locale: "en_IN", url, title: auditPage.metaTitle, description: auditPage.description },
 };
 
-const icons = { index: Network, content: FileSearch, speed: Gauge, mobile: Smartphone, rich: Share2, ai: Bot } as const;
+const icons = { index: Network, content: FileSearch, speed: Gauge, mobile: Smartphone, rich: Share2, aeo: MessageCircleQuestion, geo: Sparkles } as const;
 const h2 = "text-[clamp(1.7rem,3vw,2.5rem)] leading-[1.12] font-semibold tracking-[-0.03em]";
 const eyebrow = "text-[0.78rem] font-semibold tracking-[0.08em] text-brand uppercase";
 const inline = "font-medium text-brand underline decoration-brand/40 underline-offset-[3px] transition-colors hover:decoration-brand";
@@ -70,7 +70,7 @@ export default function SeoAuditPage() {
             <p className="rv mt-4 text-muted">{auditPage.checksLine}</p>
           </div>
           <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {CATS.map((c) => {
+            {CATS.filter((c) => c.key !== "aeo" && c.key !== "geo").map((c) => {
               const Icon = icons[c.key];
               return (
                 <li key={c.key} className="rv flex flex-col rounded-[1.5rem] bg-white p-7 ring-1 ring-line">
@@ -85,7 +85,54 @@ export default function SeoAuditPage() {
                 </li>
               );
             })}
+            <li className="rv">
+              <a href="#aeo-geo" className="group flex h-full flex-col justify-between rounded-[1.5rem] bg-band p-7 text-white transition-colors hover:bg-ink-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">
+                <span className="flex gap-2">
+                  <span className="grid size-12 place-items-center rounded-2xl bg-white/8 text-[#ff9a62] ring-1 ring-white/12"><MessageCircleQuestion className="size-6" aria-hidden /></span>
+                  <span className="grid size-12 place-items-center rounded-2xl bg-white/8 text-[#ff9a62] ring-1 ring-white/12"><Sparkles className="size-6" aria-hidden /></span>
+                </span>
+                <span className="mt-8 block">
+                  <span className="block text-[1.15rem] font-semibold tracking-[-0.015em]">Plus AEO and GEO</span>
+                  <span className="mt-2 block text-[0.95rem] leading-relaxed text-white/70">Two more areas for answer engines and AI assistants, 30% of the score.</span>
+                  <span className="mt-5 inline-flex items-center gap-2 text-[0.9rem] font-medium text-[#ff9a62]">See what they check<ArrowRight className="size-4 rotate-90 transition-transform group-hover:translate-y-0.5" aria-hidden /></span>
+                </span>
+              </a>
+            </li>
           </ul>
+        </div>
+      </section>
+
+      <section id="aeo-geo" aria-labelledby="audit-aeo-geo" className="scroll-mt-24 bg-wash py-20 lg:py-28">
+        <div className="container-page">
+          <div className="max-w-[44rem]">
+            <p className={`rv ${eyebrow}`}>Answer engines and AI assistants</p>
+            <h2 id="audit-aeo-geo" className={`rv ${h2} mt-3`}>{auditPage.aeoGeoTitle}</h2>
+            <p className="rv mt-4 text-muted">{auditPage.aeoGeoLine}</p>
+          </div>
+          <div className="mt-12 grid gap-4 lg:grid-cols-2">
+            {auditPage.aeoGeo.map((g) => {
+              const cat = CATS.find((c) => c.key === g.key)!;
+              const Icon = icons[cat.key];
+              return (
+                <article key={g.key} className="rv rounded-[1.75rem] bg-white p-8 ring-1 ring-line">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <span className="grid size-12 place-items-center rounded-2xl bg-[#fdeee4] text-brand"><Icon className="size-6" aria-hidden /></span>
+                      <h3 className="mt-5 text-[1.5rem] leading-tight font-semibold tracking-[-0.02em]">{g.name}<span className="block text-[1rem] font-medium text-muted">{g.full}</span></h3>
+                    </div>
+                    <span className="shrink-0 rounded-full bg-wash px-3 py-1 text-[0.8rem] font-semibold text-brand">{cat.weight}% of the score</span>
+                  </div>
+                  <p className="mt-4 leading-relaxed text-ink/80">{g.text}</p>
+                  <ul className="mt-6 grid gap-2.5 border-t border-line pt-6 text-[0.93rem] sm:grid-cols-2">
+                    {auditPage.checks[g.key].map((k) => (
+                      <li key={k} className="flex gap-2.5"><Check className="mt-1 size-3.5 shrink-0 text-brand" strokeWidth={3} aria-hidden />{k}</li>
+                    ))}
+                  </ul>
+                </article>
+              );
+            })}
+          </div>
+          <p className="rv mt-6 text-[0.88rem] text-muted">{auditPage.aeoGeoNote}</p>
         </div>
       </section>
 

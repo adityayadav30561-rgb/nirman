@@ -49,6 +49,10 @@ the end of every session. Keep it under about 60 lines. Older history:
 
 ## Next task
 
+**SEO audit round 3 (2026-11-12):** AEO and GEO are now two scored areas
+(15% each) with their own checks in the PDF, plus SEO / AEO / GEO scores on
+the result and the PDF cover (`docs/sections/p6-seo-audit.md` round 3).
+
 **SEO audit round 2 (2026-11-11):** a much richer scanning stage (site in
 a tilting phone inside a radar, a frame and tag over what is being read, a
 live log, six area rings; all from real observations) and the page

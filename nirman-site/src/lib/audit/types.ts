@@ -1,6 +1,6 @@
 // Shapes used by the free SEO audit (docs/sections/p6-seo-audit.md).
 
-export type CatKey = "index" | "content" | "speed" | "mobile" | "rich" | "ai";
+export type CatKey = "index" | "content" | "speed" | "mobile" | "rich" | "aeo" | "geo";
 export type Status = "pass" | "warn" | "fail" | "info";
 
 /** One thing the audit looked at. `found` is what we saw on the site; `fix` is what to do about it. */
@@ -53,7 +53,8 @@ export type SpeedData = {
 };
 
 export type Report = {
-  v: 1;
+  /** 2: AEO and GEO areas (2026-11-12). Older sealed reports are refused and the visitor runs the audit again. */
+  v: 2;
   url: string;
   facts: PageFacts;
   date: string;
@@ -64,15 +65,20 @@ export type Report = {
 };
 
 /** What the browser is shown before the form: scores and counts, never the findings. */
-export type Summary = { facts: PageFacts; date: string; overall: number; cats: CatScore[]; totals: { pass: number; warn: number; fail: number; checks: number }; speedAvailable: boolean; screenshot?: string };
+/** The overall score split three ways: classic search (the first five areas), answer engines and generative engines. null: not measured. */
+export type Pillars = { seo: number | null; aeo: number | null; geo: number | null };
 
+export type Summary = { facts: PageFacts; date: string; overall: number; pillars: Pillars; cats: CatScore[]; totals: { pass: number; warn: number; fail: number; checks: number }; speedAvailable: boolean; screenshot?: string };
+
+/** Weights add up to 100. AEO and GEO together are 30 (user, 2026-11-12: the score should be based on them). */
 export const CATS: { key: CatKey; label: string; weight: number; line: string }[] = [
-  { key: "index", label: "Crawling and indexing", weight: 25, line: "Can Google reach the site, read it and list it?" },
-  { key: "content", label: "On-page content", weight: 20, line: "Titles, descriptions, headings, text and image descriptions." },
-  { key: "speed", label: "Speed and Core Web Vitals", weight: 25, line: "How fast the page loads on a phone, measured by Google Lighthouse." },
-  { key: "mobile", label: "Mobile and experience", weight: 10, line: "Phone layout, accessibility and safe loading." },
-  { key: "rich", label: "Structured data and sharing", weight: 10, line: "What search results and shared links can show about you." },
-  { key: "ai", label: "AI search readiness", weight: 10, line: "Whether AI assistants can read and quote the site." },
+  { key: "index", label: "Crawling and indexing", weight: 20, line: "Can Google reach the site, read it and list it?" },
+  { key: "content", label: "On-page content", weight: 15, line: "Titles, descriptions, headings, text and image descriptions." },
+  { key: "speed", label: "Speed and Core Web Vitals", weight: 20, line: "How fast the page loads on a phone, measured by Google Lighthouse." },
+  { key: "mobile", label: "Mobile and experience", weight: 8, line: "Phone layout, accessibility and safe loading." },
+  { key: "rich", label: "Structured data and sharing", weight: 7, line: "What search results and shared links can show about you." },
+  { key: "aeo", label: "Answer engines (AEO)", weight: 15, line: "Can Google's answer boxes, AI Overviews and voice assistants lift a direct answer from the page?" },
+  { key: "geo", label: "Generative engines (GEO)", weight: 15, line: "Can ChatGPT, Claude, Perplexity and Gemini read the site, trust it and cite it?" },
 ];
 
 /** Green from 90, amber from 50, red below: Lighthouse's own bands. */
@@ -86,5 +92,6 @@ export const STAGE_CHECKS: Record<CatKey, string[]> = {
   speed: ["Google Lighthouse on a phone", "Largest Contentful Paint", "Layout shift", "Blocking time", "Real-visitor data", "Page weight"],
   mobile: ["Viewport", "Accessibility", "Best practices", "Insecure resources"],
   rich: ["JSON-LD", "Business identity", "Link previews"],
-  ai: ["AI crawler access", "Readable without JavaScript", "llms.txt", "Questions and answers"],
+  aeo: ["Questions people ask", "Direct answers", "FAQ data", "Lists and tables", "Sentence length", "Snippet rules"],
+  geo: ["AI search crawlers", "Readable without JavaScript", "Business identity", "Authorship", "Freshness", "Facts and figures", "Cited sources"],
 };

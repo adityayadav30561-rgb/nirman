@@ -6,6 +6,46 @@ screenshot in about 20 seconds, and a PDF was downloaded from the live
 site. Without the key the audit still runs but marks speed "not measured". `/tools/` redirects here
 (one tool for now).
 
+## Round 3, 2026-11-12 (user): AEO and GEO audited, in the PDF and in the score
+The single "AI search readiness" area (10%) is replaced by two scored
+areas. Weights now: crawling 20, speed 20, content 15, **AEO 15, GEO 15**,
+mobile 8, structured data 7 (`CATS` in `lib/audit/types.ts`). The result
+and the PDF cover also show three scores: **SEO** (weighted average of the
+five classic areas), **AEO** and **GEO** (`pillarsOf` in `checks.ts`).
+Report version is 2; older sealed reports are refused (run again).
+
+**AEO, answer engines** (featured snippets, People Also Ask, AI Overviews,
+voice): question headings (a "?" or a question word followed by a verb;
+"What you can count on" is not a question), a 15 to 120 word answer after
+each, FAQPage / QAPage / HowTo data, content lists and tables (menus not
+counted), average sentence length (20 words or fewer), nosnippet /
+max-snippet:0 / data-nosnippet (Google applies these to AI Overviews too),
+breadcrumb data.
+
+**GEO, generative engines** (ChatGPT, Claude, Perplexity, Gemini, Copilot):
+AI search crawlers allowed (OAI-SearchBot, ChatGPT-User, Claude-SearchBot,
+Claude-User, PerplexityBot, Perplexity-User, bingbot), AI training
+crawlers (GPTBot, ClaudeBot, Google-Extended, Applebot-Extended, CCBot;
+blocking is a legitimate choice, so a warning, not a failure), text without
+JavaScript, business identity completeness (logo, contact, address,
+sameAs), author or About page, a date within 12 months, sentences with
+figures, links to sources, llms.txt, semantic HTML.
+
+Everything is measured on the main content (nav, header, footer and
+asides excluded). The PDF method page explains AEO and GEO and says plainly
+that there is no published formula: these are readiness checks based on
+Google's snippet and AI-feature documentation, the crawler documentation of
+OpenAI, Anthropic, Perplexity and Microsoft, and the GEO paper (Aggarwal
+and others, 2024). They do not measure actual citations.
+
+Tested on real pages before shipping: an Ahrefs blog article (AEO 79, GEO
+90), nirmandigital.com (AEO 96, GEO 85), badowl.in (AEO 38: no questions
+or lists), example.com (AEO 40, GEO 40). The tool page has a new "AEO and
+GEO audit" section and updated copy ("around 50 checks", "seven areas").
+Full flow re-tested at 1440 and 375 (`tools/shots/audit-flow.cjs`).
+Our own pages lose GEO points for: no Organization data outside the
+homepage, no visible dates, no links to sources.
+
 ## Round 2, 2026-11-11 (user): a far richer scan, and a page written for search
 User: the first scanning animation was "basic"; the page should be found
 for "free SEO audit tool" and "free SEO audit tool no signup / no login".

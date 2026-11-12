@@ -1,5 +1,5 @@
 import { Circle, Document, Font, Image, Link, Page, Path, StyleSheet, Svg, Text, View, renderToBuffer } from "@react-pdf/renderer";
-import { priorities, verdict } from "@/lib/audit/checks";
+import { pillarsOf, priorities, verdict } from "@/lib/audit/checks";
 import { CATS, scoreColour, type Check, type Report, type Status } from "@/lib/audit/types";
 import { site } from "@/content/site";
 
@@ -126,6 +126,7 @@ function ReportDoc({ r }: { r: Report }) {
   const date = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Kolkata" }).format(new Date(r.date));
   const count = (s: Status) => r.checks.filter((k) => k.status === s).length;
   const first = priorities(r, 5);
+  const pillars = pillarsOf(r.cats);
   return (
     <Document title={`SEO audit of ${host}`} author={site.name} subject="SEO audit report" creator={`${site.name} free SEO audit`}>
       {/* cover */}
@@ -150,7 +151,26 @@ function ReportDoc({ r }: { r: Report }) {
           </View>
         </View>
 
-        <View style={{ paddingHorizontal: 44, paddingTop: 28, flexDirection: "row" }}>
+        {/* three scores in one */}
+        <View style={{ paddingHorizontal: 44, paddingTop: 22, flexDirection: "row" }}>
+          {(
+            [
+              ["SEO", "Search engines", pillars.seo],
+              ["AEO", "Answer engines", pillars.aeo],
+              ["GEO", "Generative engines (AI)", pillars.geo],
+            ] as const
+          ).map(([k, label, v], i) => (
+            <View key={k} style={{ flex: 1, marginLeft: i ? 8 : 0, borderWidth: 0.8, borderColor: LINE, borderRadius: 10, paddingVertical: 10, paddingHorizontal: 12, flexDirection: "row", alignItems: "center" }}>
+              <Text style={{ fontSize: 22, fontWeight: 300, letterSpacing: -1, lineHeight: 1.25, color: v === null ? MUTED : scoreColour(v), width: 40 }}>{v === null ? "–" : v}</Text>
+              <View style={{ marginLeft: 6 }}>
+                <Text style={{ fontSize: 10, fontWeight: 600, lineHeight: 1.2 }}>{k}</Text>
+                <Text style={{ fontSize: 7, color: MUTED, lineHeight: 1.2 }}>{label}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+
+        <View style={{ paddingHorizontal: 44, paddingTop: 20, flexDirection: "row" }}>
           <View style={{ flex: 1, paddingRight: r.speed.screenshot ? 26 : 0 }}>
             <Text style={st.eyebrow}>Score by area</Text>
             <View style={{ marginTop: 12 }}>
@@ -226,7 +246,15 @@ function ReportDoc({ r }: { r: Report }) {
           This report covers one page, {r.facts.finalUrl}, as it was on {date}. Our crawler loaded the page the way a search engine does, followed its redirects, and read its robots.txt, sitemap and llms.txt.{r.speed.available ? ` Speed, accessibility and best-practice scores come from Google PageSpeed Insights (Lighthouse${r.speed.lighthouseVersion ? ` ${r.speed.lighthouseVersion}` : ""}) on a simulated mid-range phone; real-visitor figures, where shown, are Google's own 28-day Chrome data.` : ""}
         </Text>
         <Text style={{ marginTop: 6 }}>
-          Each check is scored as passed (full marks), to improve (half) or to fix (none), weighted by how much it matters, and the six areas are combined into the overall score. An automated audit cannot judge everything: it does not read your other pages, your competitors, your backlinks or how well your text answers what people search for.
+          Each check is scored as passed (full marks), to improve (half) or to fix (none), weighted by how much it matters inside its area. The seven areas are then combined into the overall score: crawling and indexing 20%, speed 20%, on-page content 15%, answer engines (AEO) 15%, generative engines (GEO) 15%, mobile 8% and structured data 7%. An automated audit cannot judge everything: it does not read your other pages, your competitors, your backlinks or how well your text answers what people search for.
+        </Text>
+
+        <Text style={[st.h2, { marginTop: 20, fontSize: 13 }]}>AEO and GEO</Text>
+        <Text style={{ marginTop: 6 }}>
+          Answer engine optimisation (AEO) is about being the direct answer: in Google’s featured snippets, People Also Ask, AI Overviews and voice assistants. Generative engine optimisation (GEO) is about being read, trusted and cited by AI assistants such as ChatGPT, Claude, Perplexity and Gemini.
+        </Text>
+        <Text style={{ marginTop: 6 }}>
+          Neither has a published formula. These checks follow Google’s documentation on snippets and AI features, the crawler documentation of OpenAI, Anthropic, Perplexity and Microsoft, and published research on generative engines (Aggarwal and others, 2024), which found that statistics, quotations and cited sources make a page more likely to be cited. Treat the AEO and GEO scores as a readiness check, not a measure of how often you are cited today.
         </Text>
 
         <View style={[st.card, { marginTop: 22, backgroundColor: INK, borderColor: INK }]}>

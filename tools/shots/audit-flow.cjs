@@ -1,0 +1,28 @@
+const { chromium } = require('playwright');
+(async () => {
+  const [w, tag] = [Number(process.argv[2] || 1440), process.argv[3] || 'd'];
+  const b = await chromium.launch();
+  const ctx = await b.newContext({ viewport: { width: w, height: w < 500 ? 800 : 900 }, acceptDownloads: true });
+  const p = await ctx.newPage(); const errs = []; p.on('pageerror', (e) => errs.push(e.message.slice(0, 200)));
+  await p.goto('http://localhost:3000/tools/seo-audit/', { waitUntil: 'networkidle' }); await p.waitForTimeout(1200);
+  await p.screenshot({ path: `a-${tag}-1idle.png` });
+  await p.locator('input[name="url"]').click(); await p.keyboard.type(process.env.SITE || 'badowl.in'); await p.keyboard.press('Enter');
+  await p.waitForTimeout(3200); await p.screenshot({ path: `a-${tag}-2scan.png` });
+  await p.waitForFunction(() => !!document.querySelector('img[alt$="on a phone"], .sc-tilt iframe'), null, { timeout: 30000 }); await p.waitForTimeout(1200);
+  await p.screenshot({ path: `a-${tag}-3shot.png` });
+  await p.getByRole('button', { name: /Download the audit report/ }).waitFor({ timeout: 20000 }); await p.waitForTimeout(2600);
+  await p.screenshot({ path: `a-${tag}-4result.png` });
+  const leaked = await p.evaluate(() => /invalid JSON|structured data blocks/.test(document.documentElement.innerHTML));
+  await p.getByRole('button', { name: /Download the audit report/ }).click(); await p.waitForTimeout(700);
+  await p.screenshot({ path: `a-${tag}-5dialog.png` });
+  await p.getByRole('button', { name: /^Download the report/ }).click(); await p.waitForTimeout(400);
+  const err1 = await p.locator('[role=dialog] [aria-live]').innerText();
+  await p.locator('input[name="email"]').click(); await p.keyboard.type('owner@example.org');
+  await p.locator('input[name="phone"]').click(); await p.keyboard.type('+91 98000 00000');
+  await p.waitForTimeout(2500);
+  const [dl] = await Promise.all([p.waitForEvent('download', { timeout: 20000 }), p.getByRole('button', { name: /^Download the report/ }).click()]);
+  await dl.saveAs(`a-${tag}.pdf`); await p.waitForTimeout(800);
+  await p.screenshot({ path: `a-${tag}-6done.png` });
+  console.log(JSON.stringify({ w, errs, leaked, err1, file: dl.suggestedFilename(), sw: await p.evaluate(() => document.documentElement.scrollWidth), h1: await p.evaluate(() => document.querySelectorAll('h1').length) }));
+  await b.close();
+})();

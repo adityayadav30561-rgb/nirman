@@ -8,7 +8,44 @@ import { AuditError, safeFetch, type Fetched } from "@/lib/audit/safe-fetch";
  * checks.ts.
  */
 
-export const AI_BOTS = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "PerplexityBot", "Google-Extended"] as const;
+/** Crawlers that fetch pages to answer or cite them live (AI search). Bing's index also feeds ChatGPT search and Copilot. */
+export const SEARCH_BOTS = ["OAI-SearchBot", "ChatGPT-User", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Perplexity-User", "bingbot"] as const;
+/** Crawlers that collect pages to train models. Blocking them is a legitimate choice; it does not stop AI search. */
+export const TRAINING_BOTS = ["GPTBot", "ClaudeBot", "Google-Extended", "Applebot-Extended", "CCBot"] as const;
+export const AI_BOTS = [...SEARCH_BOTS.filter((b) => b !== "bingbot"), ...TRAINING_BOTS] as const;
+
+/** Answer engine signals (AEO): what an answer box, AI Overview or voice assistant can lift from the page. */
+export type Aeo = {
+  /** headings (and summary / dt elements) phrased as questions */
+  questions: number;
+  /** of those, how many are followed by an answer of 15 to 120 words */
+  answered: number;
+  /** question-answer pairs in FAQPage / QAPage structured data */
+  faqPairs: number;
+  examples: string[];
+  lists: number;
+  tables: number;
+  sentences: number;
+  avgSentence: number;
+  nosnippet: boolean;
+  maxSnippetZero: boolean;
+  dataNosnippet: number;
+  breadcrumbs: boolean;
+};
+/** Generative engine signals (GEO): whether AI assistants can read, trust and cite the page. */
+export type Geo = {
+  hasMain: boolean;
+  sections: number;
+  author: boolean;
+  aboutLink: boolean;
+  /** newest date the page states about itself (ISO), "" if none */
+  newestDate: string;
+  /** sentences in the main text that contain a figure */
+  figures: number;
+  /** links in the main text to other sites (sources) */
+  citations: number;
+  org: { found: boolean; logo: boolean; contact: boolean; address: boolean; sameAs: number };
+};
 
 export type Crawl = {
   requested: string;
@@ -46,8 +83,10 @@ export type Crawl = {
     jsonLd: { blocks: number; invalid: number; types: string[] };
     hreflang: number;
     mixed: string[];
+    aeo: Aeo;
+    geo: Geo;
   };
-  robots: { exists: boolean; status: number; sitemaps: string[]; googlebotAllowed: boolean; blockedAi: string[]; mentionsAi: boolean };
+  robots: { exists: boolean; status: number; sitemaps: string[]; googlebotAllowed: boolean; blockedSearch: string[]; blockedTraining: string[]; mentionsAi: boolean };
   sitemap: { url: string; exists: boolean; urls: number; isIndex: boolean; valid: boolean };
   llms: boolean;
 };
@@ -103,12 +142,27 @@ function readPage(html: string, finalUrl: string): Crawl["page"] {
 
   const jsonLd = { blocks: 0, invalid: 0, types: [] as string[] };
   const types = new Set<string>();
+  const ld = { faqPairs: 0, breadcrumbs: false, author: false, dates: [] as string[], org: { found: false, logo: false, contact: false, address: false, sameAs: 0 } };
+  const ORG = /Organization|LocalBusiness|Corporation|Store|Restaurant|ProfessionalService|MedicalBusiness|Hotel|LodgingBusiness|Dentist|Physician|Attorney|AutoDealer|RealEstateAgent|EducationalOrganization|NGO/i;
   const walk = (node: unknown) => {
     if (Array.isArray(node)) return node.forEach(walk);
     if (!node || typeof node !== "object") return;
     const o = node as Record<string, unknown>;
     const t = o["@type"];
-    (Array.isArray(t) ? t : [t]).forEach((x) => typeof x === "string" && types.add(x));
+    const ts = (Array.isArray(t) ? t : [t]).filter((x): x is string => typeof x === "string");
+    ts.forEach((x) => types.add(x));
+    if (ts.includes("Question") && o.acceptedAnswer) ld.faqPairs++;
+    if (ts.includes("BreadcrumbList")) ld.breadcrumbs = true;
+    if (o.author) ld.author = true;
+    for (const k of ["dateModified", "datePublished", "uploadDate"]) if (typeof o[k] === "string") ld.dates.push(o[k] as string);
+    if (ts.some((x) => ORG.test(x))) {
+      ld.org.found = true;
+      if (o.logo || o.image) ld.org.logo = true;
+      if (o.telephone || o.email || o.contactPoint) ld.org.contact = true;
+      if (o.address || o.areaServed) ld.org.address = true;
+      const same = o.sameAs;
+      ld.org.sameAs = Math.max(ld.org.sameAs, Array.isArray(same) ? same.length : typeof same === "string" ? 1 : 0);
+    }
     Object.values(o).forEach((v) => typeof v === "object" && walk(v));
   };
   for (const s of root.querySelectorAll('script[type="application/ld+json"]')) {
@@ -153,6 +207,76 @@ function readPage(html: string, finalUrl: string): Crawl["page"] {
     }
   }
 
+  // ---------- AEO and GEO: read from the main content, without menus, header, footer and asides
+  const CHROME = "nav,header,footer,aside,[role=navigation],[role=banner],[role=contentinfo]";
+  const inChrome = (el: HTMLElement) => !!el.closest(CHROME);
+  const scope = root.querySelector("main") || root.querySelector("body") || root;
+  const count = (t: string) => t.split(" ").filter((w) => /[\p{L}\p{N}]/u.test(w)).length;
+  // A question: ends with "?", or reads as one without the mark ("How to fix a slow site", "What is local SEO").
+  // "What you can count on" is not a question: a question word must be followed by a verb or "to".
+  const QWORD = /^(what|how|why|when|where|who|which)\s+(is|are|was|were|do|does|did|can|could|should|will|would|to|much|many|long|often|makes|happens)\b/i;
+  const AUX = /^(can|could|does|do|did|is|are|should|will|would)\s+(i|you|we|it|my|your|the|a|an|this|they|there)\b/i;
+  const isQuestion = (t: string) => t.length >= 6 && t.length <= 200 && (/\?\s*$/.test(t) || QWORD.test(t) || AUX.test(t));
+  /** text of what follows a heading: its next siblings (climbing up to three levels) until the next heading */
+  const after = (el: HTMLElement) => {
+    let node: HTMLElement | null = el;
+    for (let up = 0; up < 3 && node; up++) {
+      let sib = node.nextElementSibling;
+      const parts: string[] = [];
+      while (sib && parts.join(" ").length < 1500) {
+        if (/^H[1-6]$/.test(sib.tagName) || sib.querySelector("h1,h2,h3,h4")) break;
+        parts.push(txt(sib.textContent));
+        sib = sib.nextElementSibling;
+      }
+      if (parts.join("").length) return parts.join(" ");
+      node = node.parentNode as HTMLElement | null;
+      if (!node || node === scope) break;
+    }
+    return "";
+  };
+  let questions = 0;
+  let answered = 0;
+  const examples: string[] = [];
+  for (const el of scope.querySelectorAll("h2,h3,h4,summary,dt")) {
+    if (inChrome(el)) continue;
+    const q = txt(el.textContent);
+    if (!isQuestion(q)) continue;
+    questions++;
+    if (examples.length < 3) examples.push(q.slice(0, 90));
+    const a = el.tagName === "SUMMARY" ? txt((el.parentNode as HTMLElement)?.textContent).slice(q.length) : el.tagName === "DT" ? txt(el.nextElementSibling?.textContent) : after(el);
+    const n = count(txt(a));
+    if (n >= 15 && n <= 120) answered++;
+  }
+  // a content list: at least three items of two or more words, and not a menu (items that are only a link)
+  const lists = scope.querySelectorAll("ul,ol").filter((l) => {
+    if (inChrome(l)) return false;
+    const items = l.childNodes.filter((n): n is HTMLElement => (n as HTMLElement).tagName === "LI");
+    const real = items.filter((li) => count(txt(li.textContent)) >= 2 && txt(li.textContent) !== txt(li.querySelector("a")?.textContent));
+    return real.length >= 3;
+  }).length;
+  const tables = scope.querySelectorAll("table").filter((t) => !inChrome(t) && t.querySelectorAll("tr").length >= 2).length;
+  const blocks = scope.querySelectorAll("p,li,td,dd,blockquote").filter((b) => !inChrome(b) && !b.querySelector("p,li")).map((b) => txt(b.textContent)).filter(Boolean);
+  const sentences = blocks.join(" ").split(/(?<=[.!?])\s+(?=[A-Z0-9"“(])/).map((x) => x.trim()).filter((x) => count(x) >= 4);
+  const avgSentence = sentences.length ? Math.round(sentences.reduce((n, x) => n + count(x), 0) / sentences.length) : 0;
+  const figures = sentences.filter((x) => /\d/.test(x.replace(/\b(19|20)\d{2}\b/g, ""))).length;
+  const host = origin.hostname.replace(/^www\./, "");
+  const SOCIAL = /(facebook|instagram|twitter|x\.com|linkedin|youtube|wa\.me|whatsapp|t\.me|pinterest|threads)/i;
+  const citations = scope.querySelectorAll("a[href]").filter((a) => {
+    if (inChrome(a)) return false;
+    const to = absolute(a.getAttribute("href") || "", finalUrl);
+    if (!/^https?:/.test(to)) return false;
+    const h = new URL(to).hostname;
+    return h !== host && !h.endsWith(`.${host}`) && !SOCIAL.test(h);
+  }).length;
+  const robotsMeta = [meta(head, 'meta[name="robots" i]'), meta(head, 'meta[name="googlebot" i]')].join(",").toLowerCase();
+  const pageDates = [...ld.dates, meta(head, 'meta[property="article:modified_time"]'), meta(head, 'meta[property="article:published_time"]'), meta(head, 'meta[property="og:updated_time"]'), ...root.querySelectorAll("time[datetime]").map((t) => t.getAttribute("datetime") || "")]
+    .map((d) => Date.parse(d))
+    .filter((d) => Number.isFinite(d) && d <= Date.now() + 86_400_000 && d > Date.parse("2000-01-01"));
+  const author = ld.author || !!meta(head, 'meta[name="author" i]') || !!root.querySelector('[rel~="author"],[itemprop="author"],.author,.byline');
+  const aboutLink = root.querySelectorAll("a[href]").some((a) => /\/(about|about-us|team|who-we-are)(\/|$|\.)/i.test(absolute(a.getAttribute("href") || "", finalUrl).replace(/^https?:\/\/[^/]+/, "")));
+  const aeo: Aeo = { questions, answered, faqPairs: ld.faqPairs, examples, lists, tables, sentences: sentences.length, avgSentence, nosnippet: /(^|[\s,])nosnippet/.test(robotsMeta), maxSnippetZero: /max-snippet\s*:\s*0\b/.test(robotsMeta), dataNosnippet: root.querySelectorAll("[data-nosnippet]").length, breadcrumbs: ld.breadcrumbs };
+  const geo: Geo = { hasMain: !!root.querySelector("main,[role=main]"), sections: root.querySelectorAll("article,section").length, author, aboutLink, newestDate: pageDates.length ? new Date(Math.max(...pageDates)).toISOString() : "", figures, citations, org: ld.org };
+
   const icon = head.querySelector('link[rel~="icon"],link[rel="shortcut icon"],link[rel="apple-touch-icon"]')?.getAttribute("href");
   const headings = root.querySelectorAll("h1,h2,h3,h4,h5,h6").map((h) => ({ level: Number(h.tagName[1]), text: txt(h.textContent).slice(0, 120) }));
   return {
@@ -175,6 +299,8 @@ function readPage(html: string, finalUrl: string): Crawl["page"] {
     jsonLd,
     hreflang: head.querySelectorAll('link[rel="alternate"][hreflang]').length,
     mixed,
+    aeo,
+    geo,
   };
 }
 
@@ -230,7 +356,7 @@ export async function crawl(requested: string): Promise<Crawl> {
     httpUpgrades: final.protocol !== "https:" ? false : http ? http.url.startsWith("https://") : null,
     twin: twin ? { host: twinHost, reachable: twin.status < 500, sameSite: new URL(twin.url).hostname === final.hostname } : final.hostname.split(".").length <= 3 ? { host: twinHost, reachable: false, sameSite: false } : null,
     page: isHtml ? readPage(page.body, page.url) : readPage("<html><head></head><body></body></html>", page.url),
-    robots: { exists: robotsOk, status: robots?.status ?? 0, sitemaps, googlebotAllowed: robotsOk ? robotsAllows(robotsBody, "googlebot", path) : true, blockedAi: robotsOk ? AI_BOTS.filter((b) => !robotsAllows(robotsBody, b, path)) : [], mentionsAi },
+    robots: { exists: robotsOk, status: robots?.status ?? 0, sitemaps, googlebotAllowed: robotsOk ? robotsAllows(robotsBody, "googlebot", path) : true, blockedSearch: robotsOk ? SEARCH_BOTS.filter((b) => !robotsAllows(robotsBody, b, path)) : [], blockedTraining: robotsOk ? TRAINING_BOTS.filter((b) => !robotsAllows(robotsBody, b, path)) : [], mentionsAi },
     sitemap: { url: sitemapUrl, exists: !!sm?.ok, urls: (smBody.match(/<loc>/gi) || []).length, isIndex: /<sitemapindex[\s>]/i.test(smBody), valid: smValid },
     llms: !!llms && llms.ok && !/<html|<!doctype/i.test(llms.body.slice(0, 300)) && llms.body.trim().length > 20,
   };

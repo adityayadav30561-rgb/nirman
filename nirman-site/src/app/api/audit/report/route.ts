@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     body = (await request.json()) as Record<string, unknown>;
   } catch {}
   const report = unseal<Report>(body.report);
-  if (!report || report.v !== 1) return Response.json({ ok: false, error: "This audit has expired. Please run it again." }, { status: 400 });
+  if (!report || report.v !== 2) return Response.json({ ok: false, error: "This audit has expired. Please run it again." }, { status: 400 });
   const email = cleanText(body.email, 200);
   const phone = cleanText(body.phone, 30);
   const name = cleanText(body.name, 120).replace(/[\r\n]/g, " ");

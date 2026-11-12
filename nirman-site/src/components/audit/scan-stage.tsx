@@ -15,7 +15,7 @@ import { CATS, type CatKey, type PageFacts, type Signal } from "@/lib/audit/type
  *   otherwise a sketch from its own tags and then Google's screenshot. A frame glides over the part
  *   of the page being read and a tag beside it types what was found there;
  * - a live log of every observation, with the time it was made;
- * - the six areas, each with a ring that spins while it is being checked and
+ * - the seven areas, each with a ring that spins while it is being checked and
  *   closes when it is done.
  * What is shown are raw observations ("signals" from /api/audit/: "Title, 65
  * characters"), never verdicts or fixes. During Google's speed test, which
@@ -234,7 +234,7 @@ export function ScanStage({ facts, host, signals, stage, shot, speedDone, onCanc
           </ol>
         </div>
 
-        {/* the six areas */}
+        {/* the seven areas */}
         <ol className="grid grid-cols-2 gap-2 lg:order-3 lg:grid-cols-1">
           {CATS.map((c, i) => {
             const state = i < stage ? "done" : i === stage ? "now" : "wait";

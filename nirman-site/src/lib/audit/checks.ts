@@ -1,5 +1,5 @@
 import type { Crawl } from "@/lib/audit/crawl";
-import { CATS, type CatKey, type CatScore, type Check, type PageFacts, type Report, type Signal, type SpeedData, type Status, type Summary } from "@/lib/audit/types";
+import { CATS, type CatKey, type CatScore, type Check, type PageFacts, type Pillars, type Report, type Signal, type SpeedData, type Status, type Summary } from "@/lib/audit/types";
 
 /*
  * Judging what the crawl found (docs/sections/p6-seo-audit.md). Every check
@@ -122,14 +122,40 @@ export function runChecks(c: Crawl, sp: SpeedData): Check[] {
   add("rich", "og-image", 6, "Link preview picture", p.og.image ? "pass" : "warn", p.og.image ? "A preview picture (og:image) is set." : "No preview picture (og:image) is set.", "A shared link with a picture gets far more attention than a bare address.", "Add an og:image of 1200 by 630 pixels.");
   add("rich", "twitter", 2, "Large preview card", p.twitterCard ? "pass" : "warn", p.twitterCard ? `twitter:card is "${p.twitterCard}".` : "No twitter:card tag.", "Some apps use this tag to decide between a small and a large preview.", 'Add <meta name="twitter:card" content="summary_large_image">.');
 
-  // ---------- AI search readiness
-  add("ai", "ai-bots", 8, "AI assistants may read the site", c.robots.blockedAi.length ? "warn" : "pass", c.robots.blockedAi.length ? `robots.txt blocks: ${c.robots.blockedAi.join(", ")}.` : c.robots.mentionsAi ? "robots.txt names AI crawlers and allows them." : "robots.txt does not block any of the main AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended).", "ChatGPT, Claude, Perplexity and Google's AI answers can only recommend a business whose pages they are allowed to read.", "If the block is not deliberate, remove those Disallow rules so AI assistants can read and cite the site.");
-  add("ai", "ai-html", 8, "Readable without JavaScript", rawText >= 150 ? "pass" : rawText >= 40 ? "warn" : "fail", `${rawText} words are available to crawlers that do not run JavaScript.`, "AI crawlers fetch the raw HTML and do not run scripts; text that only appears after JavaScript is invisible to them.", "Server-render or pre-render the page so its text is in the HTML.");
-  add("ai", "llms", 3, "llms.txt guide", c.llms ? "pass" : "warn", c.llms ? "An llms.txt file is present." : "No llms.txt file was found.", "llms.txt is a new, optional convention: a plain-text summary of the site for AI assistants. It is cheap to add and not yet a ranking factor.", "Add /llms.txt with a short description of the business and links to the main pages.");
-  const faq = ld.types.some((t) => /FAQPage|QAPage|HowTo/i.test(t));
-  const qHeads = p.headings.filter((h) => /\?\s*$/.test(h.text)).length;
-  add("ai", "answers", 5, "Question-and-answer content", faq || qHeads >= 2 ? "pass" : "warn", faq ? "The page has FAQ structured data." : qHeads >= 2 ? `${qHeads} headings are phrased as questions.` : "No FAQ data and no headings phrased as questions were found.", "AI answers and Google's question boxes quote pages that state a question and answer it directly.", "Add a short questions section answering what customers ask, with each question as a heading and FAQ structured data.");
-  add("ai", "entity", 4, "Clear business description", org && dl >= 70 ? "pass" : "warn", org && dl >= 70 ? "The page has both a description and business structured data for assistants to quote." : `Missing: ${[!org && "business structured data", dl < 70 && "a full meta description"].filter(Boolean).join(" and ")}.`, "Assistants summarise a business from its description and structured data; without them they guess or skip it.", "Add a clear meta description and Organization structured data.");
+  // ---------- Answer engines (AEO): being the direct answer
+  const ae = p.aeo;
+  const qa = ae.questions + ae.faqPairs;
+  add("aeo", "aeo-questions", 6, "Questions people ask", qa >= 3 ? "pass" : qa >= 1 ? "warn" : "fail", ae.questions ? `${ae.questions} heading${ae.questions > 1 ? "s are" : " is"} phrased as a question, for example ${quote(ae.examples[0], 70)}${ae.faqPairs ? `, plus ${ae.faqPairs} in FAQ data` : ""}.` : ae.faqPairs ? `No question headings in the text, but ${ae.faqPairs} questions in FAQ data.` : "No headings are phrased as the questions people ask.", "Answer boxes, People Also Ask, AI Overviews and voice assistants all start from a question. A page that states the question in a heading is far easier to match.", "Add a questions section with the three to six things customers ask most, each as its own heading.");
+  if (ae.questions) {
+    const share = ae.answered / ae.questions;
+    add("aeo", "aeo-answers", 8, "Direct answers under each question", share >= 0.6 ? "pass" : ae.answered ? "warn" : "fail", `${ae.answered} of ${ae.questions} question headings are followed by an answer of 15 to 120 words.`, "Engines quote the short paragraph straight after a question. Google's featured snippets are typically 40 to 60 words.", "Answer each question in the first sentence under it, in 40 to 60 words, then add detail below.");
+  } else add("aeo", "aeo-answers", ae.faqPairs ? 8 : 0, "Direct answers under each question", ae.faqPairs ? "warn" : "info", ae.faqPairs ? `The answers exist only in FAQ data (${ae.faqPairs}), not as visible text under a heading.` : "There are no question headings to answer yet (see the item above).", "Engines quote the short paragraph straight after a question.", "Show each question as a heading with its answer in the visible text, not only in structured data.");
+  const faqLd = ld.types.some((t) => /FAQPage|QAPage|HowTo/i.test(t));
+  add("aeo", "aeo-faq", 5, "Question-and-answer structured data", faqLd ? "pass" : "warn", faqLd ? `The page has ${ld.types.filter((t) => /FAQPage|QAPage|HowTo/i.test(t)).join(" and ")} data${ae.faqPairs ? ` with ${ae.faqPairs} questions` : ""}.` : "No FAQPage, QAPage or HowTo data was found.", "It hands engines the questions and answers in their own vocabulary. Google now shows FAQ rich results for few sites, but Bing and AI assistants still read this data.", "Add FAQPage JSON-LD that matches the visible questions and answers.");
+  const struct = ae.lists + ae.tables;
+  add("aeo", "aeo-lists", 5, "Lists and tables", struct >= 2 ? "pass" : struct === 1 ? "warn" : "fail", `${ae.lists} content list${ae.lists === 1 ? "" : "s"} and ${ae.tables} table${ae.tables === 1 ? "" : "s"} (menus are not counted).`, "Steps, comparisons and key points are lifted as list and table answers. Plain paragraphs only offer one kind of answer.", "Put steps in a numbered list, features or options in a bulleted list, and comparisons in a table.");
+  if (ae.sentences >= 5) add("aeo", "aeo-readability", 5, "Short, clear sentences", band(ae.avgSentence, 20, 26), `Sentences average ${ae.avgSentence} words across ${ae.sentences} sentences (aim for 20 or fewer).`, "Short sentences are easier to quote whole and to read aloud. Long ones get cut or skipped.", "Split long sentences; one idea per sentence, with the key fact first.");
+  else add("aeo", "aeo-readability", 0, "Short, clear sentences", "info", `Only ${ae.sentences} full sentences were found in the main text, too few to judge.`, "Short sentences are easier to quote whole and to read aloud.");
+  add("aeo", "aeo-snippet", 6, "Snippets allowed", ae.nosnippet || ae.maxSnippetZero ? "fail" : ae.dataNosnippet ? "warn" : "pass", ae.nosnippet ? "The robots tag says nosnippet." : ae.maxSnippetZero ? "The robots tag sets max-snippet:0." : ae.dataNosnippet ? `${ae.dataNosnippet} parts of the page are marked data-nosnippet.` : "Nothing stops search engines quoting the page.", "Google uses the same snippet rules for AI Overviews and AI Mode: a page that forbids snippets cannot be quoted as an answer.", "Remove nosnippet and max-snippet:0 unless hiding the text from results is intended, and keep data-nosnippet to what really must not be quoted.");
+  add("aeo", "aeo-breadcrumbs", 3, "Breadcrumb data", ae.breadcrumbs ? "pass" : "warn", ae.breadcrumbs ? "The page has BreadcrumbList data." : "No BreadcrumbList data was found.", "Breadcrumbs tell engines where the answer sits in the site, and replace the address in results.", "Add BreadcrumbList JSON-LD that matches the page's place in the site.");
+
+  // ---------- Generative engines (GEO): being read, trusted and cited
+  const ge = p.geo;
+  const blockedS = c.robots.blockedSearch;
+  add("geo", "geo-search-bots", 8, "AI search crawlers allowed", blockedS.length ? "fail" : "pass", blockedS.length ? `robots.txt blocks: ${blockedS.join(", ")}.` : !c.robots.exists ? "There is no robots.txt, so nothing blocks the AI search crawlers." : `robots.txt lets the AI search crawlers in (${["OAI-SearchBot", "Claude-SearchBot", "PerplexityBot", "bingbot"].join(", ")} and others).`, "These crawlers fetch pages to answer questions in ChatGPT, Claude, Perplexity and Copilot (which uses Bing). Blocked pages cannot be cited.", "Remove the Disallow rules for these crawlers so AI search can read and cite the site.");
+  const blockedT = c.robots.blockedTraining;
+  add("geo", "geo-training-bots", 3, "AI training crawlers", blockedT.length ? "warn" : "pass", blockedT.length ? `robots.txt blocks: ${blockedT.join(", ")}.` : !c.robots.exists ? "There is no robots.txt, so no AI training crawler is blocked." : "No AI training crawler is blocked.", "Blocking training crawlers (GPTBot, ClaudeBot, Google-Extended) is a legitimate choice and does not stop AI search; it can make assistants know less about your business.", "Keep the block if it is deliberate; otherwise allow these crawlers so assistants learn who you are.");
+  add("geo", "geo-html", 8, "Readable without JavaScript", rawText >= 150 ? "pass" : rawText >= 40 ? "warn" : "fail", `${rawText} words are in the HTML, available to crawlers that do not run JavaScript.`, "AI crawlers fetch the raw HTML and mostly do not run scripts; text that appears only after JavaScript is invisible to them.", "Server-render or pre-render the page so its text is in the first HTML response.");
+  const o = ge.org;
+  const parts = [o.logo && "logo", o.contact && "contact details", o.address && "address or area served", o.sameAs > 0 && `${o.sameAs} profile link${o.sameAs > 1 ? "s" : ""} (sameAs)`].filter(Boolean) as string[];
+  add("geo", "geo-entity", 7, "Business identity assistants can verify", !o.found ? "fail" : parts.length >= 3 ? "pass" : "warn", !o.found ? "No Organization or LocalBusiness data was found." : `Business data found, with ${parts.length ? parts.join(", ") : "only a name"}.`, "Assistants recommend businesses they can identify and cross-check. Profile links (sameAs) connect the site to the same business elsewhere.", !o.found ? "Add Organization or LocalBusiness JSON-LD with name, logo, contact details, address and sameAs links to your profiles." : `Complete the business data: add ${[!o.logo && "a logo", !o.contact && "contact details (telephone or email)", !o.address && "an address or area served", !o.sameAs && "sameAs links to your profiles (Google Business Profile, LinkedIn and others)"].filter(Boolean).join(", ")}.`);
+  add("geo", "geo-author", 4, "Who is behind the content", ge.author || ge.aboutLink ? "pass" : "warn", ge.author ? "The page names its author." : ge.aboutLink ? "The page links to an About page." : "No author and no link to an About page were found.", "Assistants favour sources that show who wrote them and why they can be trusted (Google calls this experience, expertise and trust).", "Name the author on articles, and link every page to an About page about the people and the business.");
+  const ageDays = ge.newestDate ? Math.round((Date.now() - Date.parse(ge.newestDate)) / 86_400_000) : -1;
+  add("geo", "geo-fresh", 4, "Freshness date", ageDays < 0 ? "warn" : ageDays <= 365 ? "pass" : "warn", ageDays < 0 ? "The page states no publish or update date." : `The newest date on the page is ${ge.newestDate.slice(0, 10)} (${ageDays} days ago).`, "AI answers prefer recent sources, and a visible date is how they tell.", ageDays < 0 ? "Show a publish or last-updated date, and add dateModified to the page's structured data." : "Review the page and update its date when you make a real change.");
+  add("geo", "geo-facts", 5, "Specific facts and figures", ge.figures >= 5 ? "pass" : ge.figures >= 1 ? "warn" : "fail", `${ge.figures} sentence${ge.figures === 1 ? "" : "s"} in the main text contain${ge.figures === 1 ? "s" : ""} a figure (years alone are not counted).`, "Research on generative engines (Aggarwal and others, 2024) found that adding statistics raised how often a page was cited. Assistants quote specifics, not adjectives.", "State concrete figures you can stand behind: years in business, customers served, delivery times, sizes and results.");
+  add("geo", "geo-sources", 3, "Cited sources", ge.citations >= 2 ? "pass" : "warn", `${ge.citations} link${ge.citations === 1 ? "" : "s"} in the main text point to other sites (social profiles are not counted).`, "The same research found that citing sources raised visibility in AI answers. Links to standards, studies or official pages back up claims.", "Link claims to their sources: official guidelines, studies, certifications or the press.");
+  add("geo", "geo-llms", 2, "llms.txt guide", c.llms ? "pass" : "warn", c.llms ? "An llms.txt file is present." : "No llms.txt file was found.", "llms.txt is a new, optional plain-text summary of the site for AI assistants. It is cheap to add; no major engine has confirmed using it yet.", "Add /llms.txt with a short description of the business and links to the main pages.");
+  add("geo", "geo-semantic", 3, "Clear page structure (semantic HTML)", ge.hasMain && ge.sections > 0 ? "pass" : "warn", `${ge.hasMain ? "A main element marks the content" : "No main element"}; ${ge.sections} article or section element${ge.sections === 1 ? "" : "s"}.`, "Main, article and section elements tell parsers where the content is and where each part begins, so the right passage is quoted.", "Wrap the content in <main> and each part in <section> (or <article> for a self-contained piece).");
 
   return out;
 }
@@ -177,9 +203,20 @@ export function signalsOf(c: Crawl): Signal[] {
     { id: "icon", cat: "mobile", label: "Site icon", value: p.favicon ? "found" : "not found", zone: "bar" },
     { id: "jsonld", cat: "rich", label: "Structured data", value: p.jsonLd.blocks ? `${p.jsonLd.blocks} block${p.jsonLd.blocks > 1 ? "s" : ""}` : "none", zone: "page" },
     { id: "og", cat: "rich", label: "Link preview", value: p.og.image ? "picture set" : "no picture", zone: "picture" },
-    { id: "ai-bots", cat: "ai", label: "AI crawlers", value: c.robots.blockedAi.length ? `${c.robots.blockedAi.length} blocked` : "allowed" },
-    { id: "llms", cat: "ai", label: "llms.txt", value: c.llms ? "found" : "not found" },
-    { id: "raw", cat: "ai", label: "Text without JavaScript", value: `${p.words} words`, zone: "lines" },
+    { id: "questions", cat: "aeo", label: "Question headings", value: `${p.aeo.questions} found`, zone: "heading" },
+    { id: "answers", cat: "aeo", label: "Direct answers", value: `${p.aeo.answered} of ${p.aeo.questions}`, zone: "text" },
+    { id: "faq", cat: "aeo", label: "FAQ data", value: p.aeo.faqPairs ? `${p.aeo.faqPairs} questions` : "none", zone: "page" },
+    { id: "lists", cat: "aeo", label: "Lists and tables", value: `${p.aeo.lists + p.aeo.tables} found`, zone: "lines" },
+    { id: "sentences", cat: "aeo", label: "Sentence length", value: p.aeo.sentences ? `${p.aeo.avgSentence} words on average` : "too little text", zone: "text" },
+    { id: "snippet", cat: "aeo", label: "Snippets", value: p.aeo.nosnippet || p.aeo.maxSnippetZero ? "blocked" : "allowed", zone: "page" },
+    { id: "search-bots", cat: "geo", label: "AI search crawlers", value: c.robots.blockedSearch.length ? `${c.robots.blockedSearch.length} blocked` : "allowed" },
+    { id: "raw", cat: "geo", label: "Text without JavaScript", value: `${p.words} words`, zone: "lines" },
+    { id: "entity", cat: "geo", label: "Business identity", value: p.geo.org.found ? `${p.geo.org.sameAs} profile links` : "not found", zone: "bar" },
+    { id: "author", cat: "geo", label: "Author or About page", value: p.geo.author ? "author named" : p.geo.aboutLink ? "About page linked" : "not found", zone: "button" },
+    { id: "fresh", cat: "geo", label: "Date on the page", value: p.geo.newestDate ? p.geo.newestDate.slice(0, 10) : "none", zone: "page" },
+    { id: "figures", cat: "geo", label: "Facts and figures", value: `${p.geo.figures} sentences`, zone: "lines" },
+    { id: "sources", cat: "geo", label: "Cited sources", value: `${p.geo.citations} links`, zone: "lines" },
+    { id: "llms", cat: "geo", label: "llms.txt", value: c.llms ? "found" : "not found" },
   ];
   return out;
 }
@@ -189,12 +226,23 @@ export function buildReport(c: Crawl, sp: SpeedData, date: string): Report {
   const all = runChecks(c, sp);
   const checks = c.status >= 200 && c.status < 300 ? all : all.filter((k) => k.cat === "index" && ["status", "https", "http-redirect", "www", "redirects", "robots", "sitemap"].includes(k.id));
   const { cats, overall } = scoreCats(checks, sp.available);
-  return { v: 1, url: c.requested, facts: factsOf(c), date, overall: c.status >= 200 && c.status < 300 ? overall : Math.min(overall, 20), cats, checks, speed: sp };
+  return { v: 2, url: c.requested, facts: factsOf(c), date, overall: c.status >= 200 && c.status < 300 ? overall : Math.min(overall, 20), cats, checks, speed: sp };
+}
+
+/** SEO is the weighted average of the five classic areas; AEO and GEO are their own areas. */
+export function pillarsOf(cats: CatScore[]): Pillars {
+  const classic = cats.filter((c) => c.key !== "aeo" && c.key !== "geo" && c.score !== null);
+  const w = classic.reduce((n, c) => n + CATS.find((x) => x.key === c.key)!.weight, 0);
+  return {
+    seo: w ? Math.round(classic.reduce((n, c) => n + (c.score as number) * CATS.find((x) => x.key === c.key)!.weight, 0) / w) : null,
+    aeo: cats.find((c) => c.key === "aeo")?.score ?? null,
+    geo: cats.find((c) => c.key === "geo")?.score ?? null,
+  };
 }
 
 export function summarise(r: Report): Summary {
   const count = (st: Status) => r.checks.filter((k) => k.status === st).length;
-  return { facts: r.facts, date: r.date, overall: r.overall, cats: r.cats, totals: { pass: count("pass"), warn: count("warn"), fail: count("fail"), checks: r.checks.filter((k) => k.status !== "info").length }, speedAvailable: r.speed.available, screenshot: r.speed.screenshot };
+  return { facts: r.facts, date: r.date, overall: r.overall, pillars: pillarsOf(r.cats), cats: r.cats, totals: { pass: count("pass"), warn: count("warn"), fail: count("fail"), checks: r.checks.filter((k) => k.status !== "info").length }, speedAvailable: r.speed.available, screenshot: r.speed.screenshot };
 }
 
 /** What to fix first: failures before warnings, heavier checks first. */

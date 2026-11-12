@@ -8,14 +8,14 @@ import { CatBars, ReportPreview, ScoreRing } from "@/components/audit/pieces";
 import { auditPage } from "@/content/audit-page";
 import { Trap } from "@/lib/lead";
 import { ScanStage } from "@/components/audit/scan-stage";
-import { CATS, verdictOf, type PageFacts, type Signal, type Summary } from "@/lib/audit/types";
+import { CATS, scoreColour, verdictOf, type PageFacts, type Signal, type Summary } from "@/lib/audit/types";
 
 /*
  * The free SEO audit, in the page's hero (docs/sections/p6-seo-audit.md).
  * Three phases:
  * - idle: the address box.
  * - scanning (scan-stage.tsx): the visitor's own site in a phone with a
- *   frame over the part being read, a live log and the six areas. Step 1 (/api/audit/) reads the site; step 2
+ *   frame over the part being read, a live log and the seven areas. Step 1 (/api/audit/) reads the site; step 2
  *   (/api/audit/finish/) runs Google's speed test, which is the long wait.
  *   When Google's screenshot arrives it replaces the sketch in the phone.
  * - done: the score, the score by area, and the PDF behind a short form
@@ -107,7 +107,7 @@ export function AuditTool() {
       setShot(sum.screenshot);
       setSpeedDone(true);
       await wait((sum.screenshot ? 2600 : 1100) * pace);
-      for (const [next, key] of [[3, "mobile"], [4, "rich"], [5, "ai"]] as const) {
+      for (const [next, key] of [[3, "mobile"], [4, "rich"], [5, "aeo"], [6, "geo"]] as const) {
         if (!alive()) return;
         setStage(next);
         await wait(hold(key, 430));
@@ -173,7 +173,7 @@ export function AuditTool() {
 }
 
 function Result({ summary, onAgain, onDownload }: { summary: Summary; onAgain: () => void; onDownload: () => void }) {
-  const { facts, overall, cats, totals } = summary;
+  const { facts, overall, cats, totals, pillars } = summary;
   return (
     <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-14">
       <div>
@@ -193,6 +193,22 @@ function Result({ summary, onAgain, onDownload }: { summary: Summary; onAgain: (
             </ul>
           </div>
         </div>
+        {/* three scores in one: classic search, answer engines, generative engines */}
+        <ul className="mt-8 grid max-w-[34rem] grid-cols-3 gap-2">
+          {(
+            [
+              ["SEO", "Search engines", pillars?.seo],
+              ["AEO", "Answer engines", pillars?.aeo],
+              ["GEO", "AI assistants", pillars?.geo],
+            ] as const
+          ).map(([k, label, v]) => (
+            <li key={k} className="rounded-2xl bg-white/6 px-4 py-3 ring-1 ring-white/12">
+              <span className="block text-[1.7rem] leading-none font-light tracking-[-0.04em] tabular-nums" style={{ color: typeof v === "number" ? scoreColour(v) : undefined }}>{typeof v === "number" ? v : "–"}</span>
+              <span className="mt-1.5 block text-[0.82rem] font-semibold">{k}</span>
+              <span className="block text-[0.72rem] text-white/55">{label}</span>
+            </li>
+          ))}
+        </ul>
         <div className="mt-8 max-w-[34rem]"><CatBars cats={cats} tone="dark" /></div>
         {!summary.speedAvailable && <p className="mt-4 max-w-[34rem] text-[0.82rem] text-white/55">Google&rsquo;s speed test could not be run this time, so speed is not part of the score. Run the audit again later to include it.</p>}
       </div>

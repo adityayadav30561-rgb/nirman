@@ -5,6 +5,7 @@ from the client are in `docs/handoff.md` §1 and are not repeated here.
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-11-12 | SEO audit scores AEO and GEO as two areas, 15% each (30% together), with SEO / AEO / GEO shown separately | User: AEO and GEO must be audited, in the PDF, and the score based on them; weights by Claude |
 | 2026-11-11 | Google Tag Manager (GTM-5H9HWP85) and Search Console verification added site-wide. Installed as Google's standard GTM snippet (with the gtm.js start event and the noscript frame) rather than the shortened snippet sent, so "All Pages" tags fire | User, from their SEO person; install form chosen by Claude |
 | 2026-11-11 | Second Google Tag Manager container GTM-5PBWGV8Z added next to GTM-5H9HWP85 (both load on every page, same consent banner). Installed through the existing consent-aware loader, not as the shortened snippet sent (which lacks the gtm.js start event) | User |
 | 2026-11-11 | Free SEO audit: scan animation with the visitor's own site, score shown free, full PDF report only after a short form (email and phone, name optional). Findings are sealed on the server so the blur cannot be bypassed. Result layout A (63/70) | User brief; technical design and layout by Claude per protocol |

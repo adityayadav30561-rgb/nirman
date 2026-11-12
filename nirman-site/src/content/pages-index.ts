@@ -21,7 +21,7 @@ export const fixedPages: PageEntry[] = [
   { path: "/work/websites/", title: "Websites we built", line: "Every website project.", priority: 0.7 },
   { path: "/work/seo/", title: "SEO projects", line: "Every SEO project, with figures from Google's own tools.", priority: 0.7 },
   { path: "/work/apps/", title: "Apps we built", line: "Every app project.", priority: 0.7 },
-  { path: "/tools/seo-audit/", title: "Free SEO audit tool", line: "Audit any website free, with no signup or login: an SEO score out of 100 across six areas and a PDF report of what to fix.", priority: 0.8 },
+  { path: "/tools/seo-audit/", title: "Free SEO audit tool", line: "Audit any website free, with no signup or login: a score for SEO, AEO and GEO from around 50 checks, and a PDF report of what to fix.", priority: 0.8 },
   { path: "/about/", title: "About", line: "Who Nirman is and how it works.", priority: 0.6 },
   { path: "/contact/", title: "Contact", line: "Email, phone and a message form.", priority: 0.6 },
   { path: "/get-a-quote/", title: "Get a quote", line: "Tell us about a project; a written proposal follows within 48 hours of a call.", priority: 0.8 },
